@@ -1,0 +1,225 @@
+<div class="mx-10 mb-10">
+  <app-progress-stepper (progressStepIndexChanged)="handleProgressStepIndexChanged($event)"
+                        [progressSteps]="progressSteps()" />
+</div>
+<ng-container [ngSwitch]="currentStepPath">
+  <form [formGroup]="clientCreationFormGroup">
+    <div class="mx-10" *ngSwitchCase="'client'">
+      <div class="space-y-12">
+        <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3">
+          <div>
+            <h2 class="text-base/7 font-semibold text-gray-900">Client</h2>
+            <p class="mt-1 text-sm/6 text-gray-600">This information will be displayed to all team members so do
+              consider what you share.</p>
+          </div>
+
+          <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
+            <div class="sm:col-span-4">
+              <label for="website" class="block text-sm/6 font-medium text-gray-900">Custom Subdomain</label>
+              <div class="mt-2">
+                <div
+                  class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                  <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm">https://</span>
+                  <input type="text" name="website" id="website" autocomplete="off"
+                         [ngClass]="((clientCreationFormGroup.get(subdomainKey)?.invalid && clientCreationFormGroup.get(subdomainKey)?.dirty) || (clientCreationFormGroup.get(subdomainKey)?.valid && !clientStore.isLoading() && clientStore.isSubdomainAvailable() === false)) ? 'text-red-500' : 'text-gray-900'"
+                         class="block flex-1 border-0 bg-transparent py-1.5 pl-1 placeholder:text-gray-400 focus:ring-0 sm:text-sm/6"
+                         placeholder="subdomain" formControlName="subdomain">
+                  <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm mr-2">.kavindra.io</span>
+                  <p-progress-spinner *ngIf="clientStore.isLoading()" class="mt-2 pr-2" styleClass="w-5 h-5" />
+                </div>
+                <div class="my-1 py-1">
+                  <p class="text-red-500 text-sm"
+                     *ngIf="clientCreationFormGroup.get(subdomainKey)?.dirty && clientCreationFormGroup.get(subdomainKey)?.invalid && !clientStore.isLoading() && clientStore.isSubdomainAvailable() === null">
+                    <i class="pi pi-exclamation-triangle mr-2"></i>Invalid subdomain</p>
+                  <p class="text-red-500 text-sm"
+                     *ngIf="clientCreationFormGroup.get(subdomainKey)?.dirty && clientCreationFormGroup.get(subdomainKey)?.valid && !clientStore.isLoading() && clientStore.isSubdomainAvailable() === false">
+                    <i class="pi pi-exclamation-triangle mr-2"></i>Subdomain unavailable</p>
+                  <p class="text-green-500 text-sm"
+                     *ngIf="(clientCreationFormGroup.get(subdomainKey)?.valid || clientCreationFormGroup.get(subdomainKey)?.disabled) && !clientStore.isLoading() && clientStore.isSubdomainAvailable()">
+                    <i class="pi pi-check mr-2"></i>Subdomain is available</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-span-full">
+              <label for="about" class="block text-sm/6 font-medium text-gray-900">Description</label>
+              <div class="mt-2">
+              <textarea id="about" name="description" rows="3"
+                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                        formControlName="clientDescription" [formGroup]="clientCreationFormGroup"></textarea>
+              </div>
+              <p class="mt-3 text-sm/6 text-gray-600">This is the introduction to the domain people will see when they
+                first join the team.</p>
+              <div class="my-1 py-1">
+                <p class="text-red-500 text-sm"
+                   *ngIf="clientCreationFormGroup.get(clientDescriptionKey)?.dirty && clientCreationFormGroup.get(clientDescriptionKey)?.invalid">
+                  <i class="pi pi-exclamation-triangle mr-2"></i>Description must be between 10 and 255 characters in
+                  length.</p>
+                <p class="text-green-500 text-sm"
+                   *ngIf="clientCreationFormGroup.get(clientDescriptionKey)?.valid || clientCreationFormGroup.get(clientDescriptionKey)?.disabled">
+                  <i class="pi pi-check mr-2"></i>Valid description</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="my-6 flex items-center justify-end gap-x-6">
+        <button type="button" class="text-sm/6 font-semibold text-gray-900">Cancel</button>
+        <button (click)="nextStep()"
+                [disabled]="!clientStore.isSubdomainAvailable() || clientStore.isLoading() || clientCreationFormGroup.get(subdomainKey)?.invalid || clientCreationFormGroup.get(clientDescriptionKey)?.invalid"
+                class="disabled:bg-gray-500 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+          Next
+        </button>
+      </div>
+    </div>
+    <div class="mx-10" *ngSwitchCase="'project'">
+      <div class="bg-white shadow sm:rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+          <h3 class="text-base font-semibold text-gray-900">Create a Project</h3>
+          <div class="mt-2 max-w-xl text-sm text-gray-500">
+            <p>Give your project a suitable name.</p>
+          </div>
+          <div class="mt-5 sm:flex sm:items-center">
+            <div class="w-full sm:max-w-xs">
+              <label for="name" class="sr-only">Name</label>
+              <input autocomplete="off" type="text" name="name" id="name"
+                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                     placeholder="Best New Thing"
+                     formControlName="projectName">
+            </div>
+          </div>
+          <div class="my-1 py-1">
+            <p class="text-red-500 text-sm"
+               *ngIf="clientCreationFormGroup.get(projectNameKey)?.dirty && clientCreationFormGroup.get(projectNameKey)?.invalid">
+              <i class="pi pi-exclamation-triangle mr-2"></i>Project name must be between 5 and 100 characters in
+              length.</p>
+            <p class="text-green-500 text-sm" *ngIf="clientCreationFormGroup.get(projectNameKey)?.valid || clientCreationFormGroup.get(projectNameKey)?.disabled">
+              <i class="pi pi-check mr-2"></i>Valid project name</p>
+          </div>
+        </div>
+      </div>
+      <div class="my-6 flex items-center justify-end gap-x-6">
+        <button (click)="previousStep()" type="button" class="text-sm/6 font-semibold text-gray-900">Previous</button>
+        <button (click)="nextStep()"
+                [disabled]="clientStore.isLoading() || clientCreationFormGroup.get(projectNameKey)?.invalid"
+                class="disabled:bg-gray-500 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+          Next
+        </button>
+      </div>
+    </div>
+    <div class="mx-10" *ngSwitchCase="'review'">
+      <div class="bg-white">
+
+        <div class="relative mx-auto grid max-w-7xl grid-cols-1 gap-x-16 lg:grid-cols-2 lg:px-8 xl:gap-x-48">
+          <h1 class="sr-only">Order information</h1>
+
+          <section aria-labelledby="summary-heading"
+                   class="bg-gray-50 px-4 pb-10 pt-16 sm:px-6 lg:col-start-2 lg:row-start-1 lg:bg-transparent lg:px-0 lg:pb-16">
+            <div class="mx-auto max-w-lg lg:max-w-none">
+              <h2 id="summary-heading" class="text-lg font-medium text-gray-900">Order summary</h2>
+
+              <ul role="list" class="divide-y divide-gray-200 text-sm font-medium text-gray-900">
+                <li class="flex items-start space-x-4 py-6">
+                  <div class="flex-auto space-y-1">
+                    <h3>Private Subdomain: <span class="italic">{{ clientCreationFormGroup.get(subdomainKey)?.getRawValue() }}</span>.kavindra.io</h3>
+                  </div>
+                  <p class="flex-none text-base font-medium">Free</p>
+                </li>
+                <li class="flex items-start space-x-4 py-6">
+                  <div class="flex-auto space-y-1">
+                    <h3>{{ clientCreationFormGroup.get(selectPlanKey)?.getRawValue()?.name }} Plan</h3>
+                    <p class="text-gray-500">Monthly cost per Team Member</p>
+                  </div>
+                  <p
+                    class="flex-none text-base font-medium">{{ clientCreationFormGroup.get(selectPlanKey)?.getRawValue()?.monthlyTotal }}</p>
+                </li>
+
+                <!-- More products... -->
+              </ul>
+              <dl class="hidden space-y-6 border-t border-gray-200 pt-6 text-sm font-medium text-gray-900 lg:block">
+                <div class="flex items-center justify-between border-t border-gray-200 pt-6">
+                  <dt class="text-base">Total to Pay Today</dt>
+                  <dd class="text-base font-bold">$0.00</dd>
+                </div>
+              </dl>
+
+              <div class="fixed inset-x-0 bottom-0 flex flex-col-reverse text-sm font-medium text-gray-900 lg:hidden">
+                <div class="relative z-10 border-t border-gray-200 bg-white px-4 sm:px-6">
+                  <div class="mx-auto max-w-lg">
+                    <button type="button" class="flex w-full items-center py-6 font-medium" aria-expanded="false">
+                      <span class="mr-auto text-base">Total to Pay Today</span>
+                      <span class="mr-2 text-base font-bold">$0.00</span>
+                      <svg class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+                           data-slot="icon">
+                        <path fill-rule="evenodd"
+                              d="M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z"
+                              clip-rule="evenodd" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="fixed inset-0 bg-black bg-opacity-25" aria-hidden="true"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="px-4 pb-36 pt-16 sm:px-6 lg:col-start-1 lg:row-start-1 lg:px-0 lg:pb-16">
+            <div class="mx-auto max-w-lg lg:max-w-none">
+              <div>
+                <form>
+                  <p-select formControlName="selectPlan" [options]="plans" optionLabel="name"
+                            placeholder="Select a plan" />
+                </form>
+              </div>
+              <div class="mt-5">
+                <h3>Max Team Members: <span
+                  class="font-bold">{{ clientCreationFormGroup.get(selectPlanKey)?.getRawValue()?.maxTeamMembers }}</span>
+                </h3>
+              </div>
+              <div class="mt-5">
+                <h3>Max Number of Projects: <span
+                  class="font-bold">{{ clientCreationFormGroup.get(selectPlanKey)?.getRawValue()?.maxProjects }}</span>
+                </h3>
+              </div>
+              @for (feature of clientCreationFormGroup.get(selectPlanKey)?.getRawValue()?.features; track $index; ) {
+                <div class="mt-5">
+                  <h3><i class="pi pi-check"></i><span class="ml-2 font-bold">{{ feature }}</span></h3>
+                </div>
+              }
+              <div class="mt-10 border-t border-gray-200 pt-6 sm:flex sm:items-center sm:justify-between">
+                <p-button
+                  (click)="previousStep()"
+                  [loading]="clientStore.isLoading()"
+                  class="w-full rounded-md border border-transparent bg-indigo-200 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:order-last sm:ml-6 sm:w-auto">
+                  Previous
+                </p-button>
+                <p class="mt-4 text-center text-sm text-gray-500 sm:mt-0 sm:text-left">Start your free trial using the Stripe checkout link below, if you log out and come back you can resume the creation of this client.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="clientCreationFormGroup.valid && clientStore.currentlyCreatingClientId() !== null">
+        <div [ngSwitch]="clientCreationFormGroup.get(selectPlanKey)?.getRawValue()?.stripePricingTableId">
+          <div *ngSwitchCase="'prctbl_1QNQf2Ctqipjj4SBOOWyi4wy'">
+            <stripe-pricing-table pricing-table-id="prctbl_1QNQf2Ctqipjj4SBOOWyi4wy"
+                                  publishable-key="pk_test_51QLq5wCtqipjj4SBEPU29LCPwZUPBXkrpmjhNYCjqBtAMjNiIzf718UNPLPEPbCokgs3ZXe7BV0plqmiiFQLiwkm00WAQxjvwc">
+            </stripe-pricing-table>
+          </div>
+          <div *ngSwitchCase="'prctbl_1QNQmHCtqipjj4SB8UV3onnl'">
+            <stripe-pricing-table pricing-table-id="prctbl_1QNQmHCtqipjj4SB8UV3onnl"
+                                  publishable-key="pk_test_51QLq5wCtqipjj4SBEPU29LCPwZUPBXkrpmjhNYCjqBtAMjNiIzf718UNPLPEPbCokgs3ZXe7BV0plqmiiFQLiwkm00WAQxjvwc">
+            </stripe-pricing-table>
+          </div>
+          <div *ngSwitchDefault>
+            <p>No stripe pricing table found</p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </form>
+</ng-container>

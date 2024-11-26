@@ -1,0 +1,71 @@
+name: Verify Node.js
+
+on:
+  push:
+    branches: [ staging ]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  lint-backend:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [ 20.x ]
+    name: Lint Backend (v${{ matrix.node-version }})
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci --force
+      - name: Lint (v${{ matrix.node-version }})
+        run: npm run lint
+
+  build-backend:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [ 20.x ]
+    name: Build Backend (v${{ matrix.node-version }})
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci --force
+      - name: Build (v${{ matrix.node-version }})
+        run: npm run build
+
+  test-backend:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [ 20.x ]
+    name: Test Backend (v${{ matrix.node-version }})
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci --force
+      - name: Test (v${{ matrix.node-version }})
+        run: npm run test
+        env:
+          STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
+          NODE_ENV: development
+          FRONT_END_URLS: http://localhost:4200
+          DATABASE_URL: secret
+          SUPABASE_URL: https://auth.kavindra.io
+          SUPABASE_PUBLIC_KEY: secret
+          SUPABASE_SECRET_KEY: secret
+          SUPABASE_JWT_SECRET: secret
+          EMAIL_PASSWORD: password

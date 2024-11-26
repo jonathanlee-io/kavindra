@@ -1,0 +1,65 @@
+{
+  "name": "kavindra-ui",
+  "version": "0.0.0",
+  "scripts": {
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint \"{src,test}/**/*.ts\" --fix",
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build --configuration production",
+    "build:prod": "ng build --configuration production",
+    "build:stage": "ng build --configuration stage",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^19.0.0",
+    "@angular/common": "^19.0.0",
+    "@angular/compiler": "^19.0.0",
+    "@angular/core": "^19.0.0",
+    "@angular/forms": "^19.0.0",
+    "@angular/platform-browser": "^19.0.0",
+    "@angular/platform-browser-dynamic": "^19.0.0",
+    "@angular/router": "^19.0.0",
+    "@ngneat/bind-query-params": "^6.0.0",
+    "@ngrx/signals": "^18.1.1",
+    "@tailwindcss/forms": "^0.5.9",
+    "animate.css": "^4.1.1",
+    "flagsmith": "^7.0.2",
+    "primeicons": "^7.0.0",
+    "primeng": "18.0.0-beta.3",
+    "rxjs": "~7.8.1",
+    "tailwindcss-primeui": "^0.3.4",
+    "tslib": "^2.8.1",
+    "zone.js": "~0.15.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^19.0.0",
+    "@angular/cli": "^19.0.0",
+    "@angular/compiler-cli": "^19.0.0",
+    "@supabase/supabase-js": "^2.46.1",
+    "@types/jasmine": "~5.1.4",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.42.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "jasmine-core": "~5.4.0",
+    "karma": "~6.4.4",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.1",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "typescript": "~5.6.3"
+  },
+  "resolutions": {
+    "@supabase/auth-js": "2.61.0"
+  },
+  "overrides": {
+    "@supabase/auth-js": "2.61.0"
+  }
+}

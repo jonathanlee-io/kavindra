@@ -1,0 +1,141 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String        @id @default(uuid())
+  supabaseUserId     String        @unique
+  displayName        String
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @default(now())
+  Issue              Issue[]
+  Release            Release?      @relation(fields: [releaseId], references: [id])
+  releaseId          String?
+  ClientCreated      Client[]      @relation(name: "createdByUser")
+  IssueSection       IssueSection? @relation(fields: [issueSectionId], references: [id])
+  issueSectionId     String?
+  Project            Project[]
+  ClientsWhereMember Client[]      @relation(name: "membersOfClient")
+  ClientsWhereAdmin  Client[]      @relation(name: "adminsOfClient")
+  clientId           String?
+}
+
+model Client {
+  id            String      @id @default(uuid())
+  displayName   String
+  description   String
+  paymentPlan   PaymentPlan @relation(fields: [paymentPlanId], references: [id])
+  createdBy     User        @relation(fields: [userId], references: [id], name: "createdByUser")
+  members       User[]      @relation(name: "membersOfClient")
+  admins        User[]      @relation(name: "adminsOfClient")
+  subdomains    Subdomain[]
+  hostnames     Hostname[]
+  projects      Project[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @default(now())
+  userId        String
+  paymentPlanId String
+}
+
+model PaymentPlan {
+  id                   String   @id @default(uuid())
+  name                 String
+  monthlyTotal         String
+  maxTeamMembers       String
+  maxProjects          String
+  features             String[]
+  stripePricingTableId String
+  stripePublishableKey String
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @default(now())
+  Client               Client[]
+}
+
+model Subdomain {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  subdomain String   @unique
+  client    Client?  @relation(fields: [clientId], references: [id])
+  clientId  String?
+}
+
+model Hostname {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  client    Client?  @relation(fields: [clientId], references: [id])
+  clientId  String?
+}
+
+model Project {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  createdBy User     @relation(fields: [userId], references: [id])
+  epics     Epic[]
+  client    Client?  @relation(fields: [clientId], references: [id])
+  clientId  String?
+  userId    String
+}
+
+model Epic {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  issues    Issue[]
+  project   Project? @relation(fields: [projectId], references: [id])
+  projectId String?
+}
+
+model Sprint {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  issues    Issue[]
+}
+
+model Release {
+  id          String   @id @default(uuid())
+  releaseDate DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  assignees   User[]
+  issues      Issue[]
+}
+
+model Issue {
+  id             String        @id @default(uuid())
+  title          String
+  iconClass      String
+  type           String
+  color          String
+  dueDate        DateTime
+  assignee       User          @relation(fields: [userId], references: [id])
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @default(now())
+  epic           Epic?         @relation(fields: [epicId], references: [id])
+  epicId         String?
+  userId         String
+  sprint         Sprint?       @relation(fields: [sprintId], references: [id])
+  sprintId       String?
+  Release        Release?      @relation(fields: [releaseId], references: [id])
+  releaseId      String?
+  IssueSection   IssueSection? @relation(fields: [issueSectionId], references: [id])
+  issueSectionId String?
+}
+
+model IssueSection {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  issues    Issue[]
+  admins    User[]
+  isOpen    Boolean
+}
