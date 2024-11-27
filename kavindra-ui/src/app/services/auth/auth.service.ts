@@ -18,7 +18,7 @@ export class AuthService {
   private readonly tenantStore = inject(TenantStore);
 
   checkIn() {
-    return this.httpClient.post<{ success: boolean; isCreatedNew: boolean }>(
+    return this.httpClient.post<{ isSuccessful: boolean; isCreatedNew: boolean }>(
       this.tenantStore.getFullRequestUrl('v1/users/authenticated/check-in'),
       {},
     );

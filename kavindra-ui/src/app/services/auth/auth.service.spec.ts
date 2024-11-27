@@ -28,15 +28,12 @@ describe('AuthService', () => {
   it('should check in via HTTP', inject(
     [AuthService],
     async (service: AuthService) => {
-      const mockResponse: { isAcknowledged: boolean } = {
-        isAcknowledged: true,
-      };
-      const mockUserProfile: UserProfile = {
-        displayName: 'Test',
-        email: 'Test@test.com',
+      const mockResponse: { isSuccessful: boolean; isCreatedNew: boolean } = {
+        isSuccessful: true,
+        isCreatedNew: false,
       };
 
-      const response$ = service.checkIn(mockUserProfile);
+      const response$ = service.checkIn();
       const responsePromise = firstValueFrom(response$);
 
       const req = httpTestingController.expectOne(
