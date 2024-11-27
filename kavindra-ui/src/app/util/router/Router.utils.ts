@@ -1,5 +1,6 @@
 import { NgZone } from '@angular/core';
 import { Router, UrlSegment } from '@angular/router';
+import {RoutePath} from '../../app.routes';
 
 export const RouterUtils = {
   navigateCatchErrorCallback: (reason: string) => {
@@ -25,3 +26,8 @@ export const RouterUtils = {
     return nextParam;
   },
 } as const;
+
+export const rebaseRoutePath = (routePath: RoutePath) => `/${routePath}`;
+
+export const rebaseRoutePathAsString = (routePathAsString: string) =>
+  `/${routePathAsString}`;

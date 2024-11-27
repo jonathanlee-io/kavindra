@@ -3,8 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { delay, take, tap } from 'rxjs';
 
 import { UserAuthenticationStore } from '../../../+state/auth/user-auth.store';
-import { rebaseRoutePath, RoutePath } from '../../../app.routes';
-import { RouterUtils } from '../../../util/router/Router.utils';
 import { SuccessCheckmarkComponent } from '../../lib/success-checkmark/success-checkmark.component';
 
 @Component({
@@ -26,11 +24,6 @@ export class LoginSuccessComponent implements OnInit {
         delay(2500),
         tap(() => {
           if (this.userAuthenticationStore.isLoggedIn()) {
-            this.router
-              .navigate([
-                rebaseRoutePath(RoutePath.SETUP).replace(':step', 'client'),
-              ])
-              .catch(RouterUtils.navigateCatchErrorCallback);
           }
         }),
       )

@@ -11,10 +11,10 @@ import {
 import { MessageService } from 'primeng/api';
 import { take } from 'rxjs';
 
-import { rebaseRoutePath, RoutePath } from '../../app.routes';
+import {  RoutePath } from '../../app.routes';
 import { AuthService } from '../../services/auth/auth.service';
 import { SupabaseService } from '../../services/supabase/supabase.service';
-import { RouterUtils } from '../../util/router/Router.utils';
+import {rebaseRoutePath, RouterUtils} from '../../util/router/Router.utils';
 import { NotificationsStore } from '../notifications/notifications.store';
 
 export type LoggedInState = 'INIT' | 'NOT_LOGGED_IN' | 'LOADING' | 'LOGGED_IN';

@@ -4,7 +4,8 @@ import { SharedModule } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 
-import { rebaseRoutePath, RoutePath } from '../../../app.routes';
+import { RoutePath } from '../../../app.routes';
+import { rebaseRoutePath } from '../../../util/router/Router.utils';
 
 @Component({
   selector: 'app-landing-page',

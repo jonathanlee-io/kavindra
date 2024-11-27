@@ -3,9 +3,9 @@ import { inject, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 
-import { rebaseRoutePath, RoutePath } from '../../../app.routes';
+import {  RoutePath } from '../../../app.routes';
 import { HttpStatus } from '../../../common/enums/HttpStatus';
-import { RouterUtils } from '../../../util/router/Router.utils';
+import {rebaseRoutePath, RouterUtils} from '../../../util/router/Router.utils';
 
 export const notFoundInterceptor: HttpInterceptorFn = (req, next) => {
   const ngZone = inject(NgZone);

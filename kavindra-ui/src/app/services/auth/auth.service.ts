@@ -3,8 +3,8 @@ import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { TenantStore } from '../../+state/tenant/tenant.store';
-import { rebaseRoutePath, RoutePath } from '../../app.routes';
-import { RouterUtils } from '../../util/router/Router.utils';
+import { RoutePath } from '../../app.routes';
+import {rebaseRoutePath, RouterUtils} from '../../util/router/Router.utils';
 
 @Injectable({
   providedIn: 'root',

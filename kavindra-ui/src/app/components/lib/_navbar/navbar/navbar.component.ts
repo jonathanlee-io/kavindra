@@ -5,8 +5,9 @@ import { ToggleSwitchModule } from 'primeng/toggleswitch';
 
 import { UserAuthenticationStore } from '../../../../+state/auth/user-auth.store';
 import { ClientStore } from '../../../../+state/client/client.store';
-import { rebaseRoutePath, RoutePath } from '../../../../app.routes';
+import {  RoutePath } from '../../../../app.routes';
 import { ProductsDropdownComponent } from '../products-dropdown/products-dropdown.component';
+import { rebaseRoutePath } from '../../../../util/router/Router.utils';
 
 @Component({
   selector: 'app-navbar',
