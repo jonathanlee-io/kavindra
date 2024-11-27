@@ -1,5 +1,5 @@
-import { NgIf } from '@angular/common';
-import { Component, input } from '@angular/core';
+import {NgIf} from '@angular/common';
+import {Component, input} from '@angular/core';
 
 @Component({
   selector: 'app-products-dropdown',

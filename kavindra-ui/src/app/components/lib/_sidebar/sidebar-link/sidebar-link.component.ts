@@ -1,6 +1,6 @@
-import { NgClass } from '@angular/common';
-import { Component, input, WritableSignal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import {NgClass} from '@angular/common';
+import {Component, input, WritableSignal} from '@angular/core';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-sidebar-link',

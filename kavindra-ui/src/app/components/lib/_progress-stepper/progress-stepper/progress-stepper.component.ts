@@ -1,8 +1,8 @@
-import { NgClass } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import {NgClass} from '@angular/common';
+import {Component, input, output} from '@angular/core';
 
-import { rebaseRoutePath, RoutePath } from '../../../../app.routes';
-import { ProgressStepDto } from '../ProgressStep.dto';
+import {rebaseRoutePath, RoutePath} from '../../../../app.routes';
+import {ProgressStepDto} from '../ProgressStep.dto';
 
 @Component({
   selector: 'app-progress-stepper',

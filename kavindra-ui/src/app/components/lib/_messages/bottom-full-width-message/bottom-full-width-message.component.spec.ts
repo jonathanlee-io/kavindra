@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BottomFullWidthMessageComponent } from './bottom-full-width-message.component';
+import {BottomFullWidthMessageComponent} from './bottom-full-width-message.component';
 
 describe('BottomFullWidthMessageComponent', () => {
   let component: BottomFullWidthMessageComponent;

@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {inject, Injectable} from '@angular/core';
 
-import { TenantStore } from '../../+state/tenant/tenant.store';
-import { POSTSuccessDto } from '../../dtos/POSTSuccess.dto';
-import { ClientDto } from '../../dtos/client/Client.dto';
-import { PaymentPlanDto } from '../../dtos/payments/PaymentPlan.dto';
+import {TenantStore} from '../../+state/tenant/tenant.store';
+import {POSTSuccessDto} from '../../dtos/POSTSuccess.dto';
+import {ClientDto} from '../../dtos/client/Client.dto';
+import {PaymentPlanDto} from '../../dtos/payments/PaymentPlan.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -18,31 +18,31 @@ export class ClientService {
       isSubdomainAvailable: boolean;
       subdomain: string;
     }>(
-      this.tenantStore.getFullRequestUrl('v1/clients/is-subdomain-available'),
-      { subdomain },
+        this.tenantStore.getFullRequestUrl('v1/clients/is-subdomain-available'),
+        {subdomain},
     );
   }
 
   registerNewClientAndProjectWithPlan(
-    subdomain: string,
-    clientDescription: string,
-    projectName: string,
-    paymentPlan: PaymentPlanDto,
+      subdomain: string,
+      clientDescription: string,
+      projectName: string,
+      paymentPlan: PaymentPlanDto,
   ) {
     return this.httpClient.post<POSTSuccessDto & { clientId: string }>(
-      this.tenantStore.getFullRequestUrl('v1/clients/create'),
-      {
-        subdomain,
-        clientDescription,
-        projectName,
-        paymentPlanId: paymentPlan.id,
-      },
+        this.tenantStore.getFullRequestUrl('v1/clients/create'),
+        {
+          subdomain,
+          clientDescription,
+          projectName,
+          paymentPlanId: paymentPlan.id,
+        },
     );
   }
 
   fetchClientsWhereInvolved() {
     return this.httpClient.get<ClientDto[]>(
-      this.tenantStore.getFullRequestUrl('v1/clients/where-involved'),
+        this.tenantStore.getFullRequestUrl('v1/clients/where-involved'),
     );
   }
 }

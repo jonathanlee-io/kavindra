@@ -1,9 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
+import {Component, inject, OnInit} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {RouterLink} from '@angular/router';
+import {ButtonModule} from 'primeng/button';
 
-import { UserAuthenticationStore } from '../../../+state/auth/user-auth.store';
+import {UserAuthenticationStore} from '../../../+state/auth/user-auth.store';
 
 @Component({
   selector: 'app-register-page',

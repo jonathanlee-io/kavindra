@@ -1,4 +1,4 @@
-import { StripeCheckoutSessionQueryResponseStatus } from './StripeCheckoutSessionQueryResponseStatus';
+import {StripeCheckoutSessionQueryResponseStatus} from './StripeCheckoutSessionQueryResponseStatus';
 
 export interface StripeCheckoutSessionQueryResponse {
   status: StripeCheckoutSessionQueryResponseStatus;

@@ -1,9 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { delay, take, tap } from 'rxjs';
+import {Component, inject, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {delay, take, tap} from 'rxjs';
 
-import { UserAuthenticationStore } from '../../../+state/auth/user-auth.store';
-import { SuccessCheckmarkComponent } from '../../lib/success-checkmark/success-checkmark.component';
+import {UserAuthenticationStore} from '../../../+state/auth/user-auth.store';
+import {SuccessCheckmarkComponent} from '../../lib/success-checkmark/success-checkmark.component';
 
 @Component({
   selector: 'app-login-success',
@@ -19,14 +19,15 @@ export class LoginSuccessComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.url
-      .pipe(
-        take(1),
-        delay(2500),
-        tap(() => {
-          if (this.userAuthenticationStore.isLoggedIn()) {
-          }
-        }),
-      )
-      .subscribe();
+        .pipe(
+            take(1),
+            delay(2500),
+            tap(() => {
+              if (this.userAuthenticationStore.isLoggedIn()) {
+                return;
+              }
+            }),
+        )
+        .subscribe();
   }
 }

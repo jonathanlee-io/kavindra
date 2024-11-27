@@ -1,9 +1,9 @@
-import { PropertyAdministratorDto } from './PropertyAdministrator.dto';
-import { PropertyRulesDto } from './PropertyRules.dto';
-import { PropertyTenantDto } from './PropertyTenant.dto';
-import { Dto } from '../Dto';
-import { PaymentStatusDto } from '../payments/PaymentStatus.dto';
-import { UserDto } from '../users/User.dto';
+import {PropertyAdministratorDto} from './PropertyAdministrator.dto';
+import {PropertyRulesDto} from './PropertyRules.dto';
+import {PropertyTenantDto} from './PropertyTenant.dto';
+import {Dto} from '../Dto';
+import {PaymentStatusDto} from '../payments/PaymentStatus.dto';
+import {UserDto} from '../users/User.dto';
 
 export interface PropertyDto extends Dto {
   name: string;

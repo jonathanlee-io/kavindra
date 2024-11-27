@@ -1,10 +1,10 @@
-import { ExpenseApprovalDto } from './ExpenseApproval.dto';
-import { ExpenseCommentDto } from './ExpenseComment.dto';
-import { ExpenseDisputeDto } from './ExpenseDispute.dto';
-import { Currency } from '../../types';
-import { Dto } from '../Dto';
-import { UserProfile } from '../auth/UserProfile';
-import { UserDto } from '../users/User.dto';
+import {ExpenseApprovalDto} from './ExpenseApproval.dto';
+import {ExpenseCommentDto} from './ExpenseComment.dto';
+import {ExpenseDisputeDto} from './ExpenseDispute.dto';
+import {Currency} from '../../types';
+import {Dto} from '../Dto';
+import {UserProfile} from '../auth/UserProfile';
+import {UserDto} from '../users/User.dto';
 
 export type ExpenseStateEnum = 'APPROVED' | 'PENDING' | 'DISPUTED';
 

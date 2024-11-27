@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ProgressStepperComponent } from './progress-stepper.component';
+import {ProgressStepperComponent} from './progress-stepper.component';
 
 describe('ProgressStepperComponent', () => {
   let component: ProgressStepperComponent;
@@ -8,9 +8,9 @@ describe('ProgressStepperComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProgressStepperComponent]
+      imports: [ProgressStepperComponent],
     })
-    .compileComponents();
+        .compileComponents();
 
     fixture = TestBed.createComponent(ProgressStepperComponent);
     component = fixture.componentInstance;

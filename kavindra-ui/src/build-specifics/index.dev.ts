@@ -1,3 +1,3 @@
-import { EnvironmentProviders } from '@angular/core';
+import {EnvironmentProviders} from '@angular/core';
 
 export const extModules: EnvironmentProviders[] = [];

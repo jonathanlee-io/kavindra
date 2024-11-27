@@ -1,13 +1,13 @@
-import { NgClass, NgIf } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { ToggleSwitchModule } from 'primeng/toggleswitch';
+import {NgClass, NgIf} from '@angular/common';
+import {Component, inject, signal} from '@angular/core';
+import {RouterLink} from '@angular/router';
+import {ToggleSwitchModule} from 'primeng/toggleswitch';
 
-import { UserAuthenticationStore } from '../../../../+state/auth/user-auth.store';
-import { ClientStore } from '../../../../+state/client/client.store';
-import {  RoutePath } from '../../../../app.routes';
-import { ProductsDropdownComponent } from '../products-dropdown/products-dropdown.component';
-import { rebaseRoutePath } from '../../../../util/router/Router.utils';
+import {UserAuthenticationStore} from '../../../../+state/auth/user-auth.store';
+import {ClientStore} from '../../../../+state/client/client.store';
+import {RoutePath} from '../../../../app.routes';
+import {rebaseRoutePath} from '../../../../util/router/Router.utils';
+import {ProductsDropdownComponent} from '../products-dropdown/products-dropdown.component';
 
 @Component({
   selector: 'app-navbar',

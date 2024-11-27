@@ -1,4 +1,4 @@
-import { Dto } from '../Dto';
+import {Dto} from '../Dto';
 
 export interface ExpenseDistributionDto extends Dto {
   expenseId: string;

@@ -1,5 +1,5 @@
-import { UserProfile } from '../auth/UserProfile';
-import { UserDto } from '../users/User.dto';
+import {UserProfile} from '../auth/UserProfile';
+import {UserDto} from '../users/User.dto';
 
 export interface ExpenseDisputeDto {
   expenseId: string;

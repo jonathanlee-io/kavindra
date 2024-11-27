@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {inject, Injectable} from '@angular/core';
+import {Router} from '@angular/router';
 
-import { TenantStore } from '../../+state/tenant/tenant.store';
-import { RoutePath } from '../../app.routes';
+import {TenantStore} from '../../+state/tenant/tenant.store';
+import {RoutePath} from '../../app.routes';
 import {rebaseRoutePath, RouterUtils} from '../../util/router/Router.utils';
 
 @Injectable({
@@ -19,8 +19,8 @@ export class AuthService {
 
   checkIn() {
     return this.httpClient.post<{ isSuccessful: boolean; isCreatedNew: boolean }>(
-      this.tenantStore.getFullRequestUrl('v1/users/authenticated/check-in'),
-      {},
+        this.tenantStore.getFullRequestUrl('v1/users/authenticated/check-in'),
+        {},
     );
   }
 
@@ -28,8 +28,8 @@ export class AuthService {
     if (this.router.url !== '/') {
       // Don't redirect to login page on anonymous pages (first-time visit etc.)
       this.router
-        .navigate([rebaseRoutePath(RoutePath.LOGIN)])
-        .catch(RouterUtils.navigateCatchErrorCallback);
+          .navigate([rebaseRoutePath(RoutePath.LOGIN)])
+          .catch(RouterUtils.navigateCatchErrorCallback);
     }
   }
 

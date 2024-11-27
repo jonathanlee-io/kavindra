@@ -1,5 +1,6 @@
-import { NgZone } from '@angular/core';
-import { Router, UrlSegment } from '@angular/router';
+import {NgZone} from '@angular/core';
+import {Router, UrlSegment} from '@angular/router';
+
 import {RoutePath} from '../../app.routes';
 
 export const RouterUtils = {
@@ -7,15 +8,15 @@ export const RouterUtils = {
     console.error(reason);
   },
   ngZoneRedirect(
-    ngZone: NgZone,
-    router: Router,
-    path: string,
-    replaceUrl: boolean,
+      ngZone: NgZone,
+      router: Router,
+      path: string,
+      replaceUrl: boolean,
   ) {
     ngZone.run(() => {
       router
-        .navigate([path], { replaceUrl })
-        .catch(RouterUtils.navigateCatchErrorCallback);
+          .navigate([path], {replaceUrl})
+          .catch(RouterUtils.navigateCatchErrorCallback);
     });
   },
   buildNextParam: (urlSegments: UrlSegment[]) => {

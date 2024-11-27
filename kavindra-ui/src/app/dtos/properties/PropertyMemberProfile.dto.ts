@@ -1,4 +1,4 @@
-import { Dto } from '../Dto';
+import {Dto} from '../Dto';
 
 export interface PropertyMemberProfileDto extends Dto {
   userId: string;

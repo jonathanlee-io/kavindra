@@ -1,10 +1,10 @@
-import { NgIf } from '@angular/common';
-import { Component, inject, input } from '@angular/core';
-import { DragDropModule } from 'primeng/dragdrop';
+import {NgIf} from '@angular/common';
+import {Component, inject, input} from '@angular/core';
+import {DragDropModule} from 'primeng/dragdrop';
 
-import { DemoStore } from '../../../../+state/demo/demo.store';
-import { IssueDto } from '../../../../dtos/issues/Issue.dto';
-import { IssueCardComponent } from '../issue-card/issue-card.component';
+import {DemoStore} from '../../../../+state/demo/demo.store';
+import {IssueDto} from '../../../../dtos/issues/Issue.dto';
+import {IssueCardComponent} from '../issue-card/issue-card.component';
 
 @Component({
   selector: 'app-issue-section',

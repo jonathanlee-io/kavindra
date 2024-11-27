@@ -1,8 +1,8 @@
-import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import {inject} from '@angular/core';
+import {CanActivateFn, Router} from '@angular/router';
 
-import { UserAuthenticationStore } from '../+state/auth/user-auth.store';
-import { RoutePath } from '../app.routes';
+import {UserAuthenticationStore} from '../+state/auth/user-auth.store';
+import {RoutePath} from '../app.routes';
 import {rebaseRoutePath, RouterUtils} from '../util/router/Router.utils';
 
 export const authGuard: CanActivateFn = (route) => {
@@ -12,11 +12,11 @@ export const authGuard: CanActivateFn = (route) => {
     return true;
   }
   router
-    .navigate([rebaseRoutePath(RoutePath.LOGIN)], {
-      queryParams: {
-        next: RouterUtils.buildNextParam(route.url),
-      },
-    })
-    .catch(RouterUtils.navigateCatchErrorCallback);
+      .navigate([rebaseRoutePath(RoutePath.LOGIN)], {
+        queryParams: {
+          next: RouterUtils.buildNextParam(route.url),
+        },
+      })
+      .catch(RouterUtils.navigateCatchErrorCallback);
   return false;
 };

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ProductsDropdownComponent } from './products-dropdown.component';
+import {ProductsDropdownComponent} from './products-dropdown.component';
 
 describe('ProductsDropdownComponent', () => {
   let component: ProductsDropdownComponent;

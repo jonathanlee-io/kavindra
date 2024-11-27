@@ -1,10 +1,10 @@
-import { NgClass } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
-import { DragDropModule } from 'primeng/dragdrop';
+import {NgClass} from '@angular/common';
+import {Component, inject} from '@angular/core';
+import {ButtonModule} from 'primeng/button';
+import {DragDropModule} from 'primeng/dragdrop';
 
-import { DemoStore } from '../../../../+state/demo/demo.store';
-import { IssueSectionComponent } from '../issue-section/issue-section.component';
+import {DemoStore} from '../../../../+state/demo/demo.store';
+import {IssueSectionComponent} from '../issue-section/issue-section.component';
 
 @Component({
   selector: 'app-full-issue-board',

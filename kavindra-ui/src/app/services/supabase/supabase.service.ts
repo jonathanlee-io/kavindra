@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
   AuthChangeEvent,
   AuthSession,
@@ -6,9 +6,9 @@ import {
   Session,
   SupabaseClient,
 } from '@supabase/supabase-js';
-import { uuid } from '@supabase/supabase-js/dist/main/lib/helpers';
+import {uuid} from '@supabase/supabase-js/dist/main/lib/helpers';
 
-import { environment } from '../../../environments/environment';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -18,15 +18,15 @@ export class SupabaseService {
 
   constructor() {
     this._supabaseClient = createClient(
-      environment.SUPABASE_URL,
-      environment.SUPABASE_KEY,
+        environment.SUPABASE_URL,
+        environment.SUPABASE_KEY,
     );
   }
 
   _session: AuthSession | null = null;
 
   get session() {
-    this._supabaseClient.auth.getSession().then(({ data }) => {
+    this._supabaseClient.auth.getSession().then(({data}) => {
       this._session = data.session;
     });
     return this._session;
@@ -37,7 +37,7 @@ export class SupabaseService {
   }
 
   authChanges(
-    callback: (event: AuthChangeEvent, session: Session | null) => void,
+      callback: (event: AuthChangeEvent, session: Session | null) => void,
   ) {
     return this._supabaseClient.auth.onAuthStateChange(callback);
   }
@@ -68,9 +68,9 @@ export class SupabaseService {
   }
 
   async uploadPhoto(bucketName: string, file: File) {
-    const { data, error } = await this._supabaseClient.storage
-      .from(bucketName)
-      .upload(`${this.session?.user.id}/${uuid()}`, file);
-    return { data, error };
+    const {data, error} = await this._supabaseClient.storage
+        .from(bucketName)
+        .upload(`${this.session?.user.id}/${uuid()}`, file);
+    return {data, error};
   }
 }

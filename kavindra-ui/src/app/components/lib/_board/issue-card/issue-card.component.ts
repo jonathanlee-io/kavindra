@@ -1,8 +1,8 @@
-import { NgClass } from '@angular/common';
-import { Component, input } from '@angular/core';
-import { TagModule } from 'primeng/tag';
+import {NgClass} from '@angular/common';
+import {Component, input} from '@angular/core';
+import {TagModule} from 'primeng/tag';
 
-import { IssueDto } from '../../../../dtos/issues/Issue.dto';
+import {IssueDto} from '../../../../dtos/issues/Issue.dto';
 
 @Component({
   selector: 'app-issue-card',

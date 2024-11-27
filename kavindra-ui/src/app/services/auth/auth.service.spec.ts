@@ -1,14 +1,13 @@
-import { provideHttpClient } from '@angular/common/http';
+import {provideHttpClient} from '@angular/common/http';
 import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import { inject, TestBed } from '@angular/core/testing';
-import { firstValueFrom } from 'rxjs';
+import {inject, TestBed} from '@angular/core/testing';
+import {firstValueFrom} from 'rxjs';
 
-import { AuthService } from './auth.service';
-import { environment } from '../../../environments/environment';
-import { UserProfile } from '../../dtos/auth/UserProfile';
+import {AuthService} from './auth.service';
+import {environment} from '../../../environments/environment';
 
 describe('AuthService', () => {
   let httpTestingController: HttpTestingController;
@@ -26,24 +25,24 @@ describe('AuthService', () => {
   }));
 
   it('should check in via HTTP', inject(
-    [AuthService],
-    async (service: AuthService) => {
-      const mockResponse: { isSuccessful: boolean; isCreatedNew: boolean } = {
-        isSuccessful: true,
-        isCreatedNew: false,
-      };
+      [AuthService],
+      async (service: AuthService) => {
+        const mockResponse: { isSuccessful: boolean; isCreatedNew: boolean } = {
+          isSuccessful: true,
+          isCreatedNew: false,
+        };
 
-      const response$ = service.checkIn();
-      const responsePromise = firstValueFrom(response$);
+        const response$ = service.checkIn();
+        const responsePromise = firstValueFrom(response$);
 
-      const req = httpTestingController.expectOne(
-        `${environment.USERS_SERVICE_BASE_URL}/authenticated/check-in`,
-      );
-      expect(req.request.method).toBe('POST');
-      req.flush(mockResponse);
+        const req = httpTestingController.expectOne(
+            `${environment.USERS_SERVICE_BASE_URL}/authenticated/check-in`,
+        );
+        expect(req.request.method).toBe('POST');
+        req.flush(mockResponse);
 
-      expect(await responsePromise).toEqual(mockResponse);
-      httpTestingController.verify();
-    },
+        expect(await responsePromise).toEqual(mockResponse);
+        httpTestingController.verify();
+      },
   ));
 });
