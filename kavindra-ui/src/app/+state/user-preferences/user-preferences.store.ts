@@ -1,11 +1,5 @@
 import {inject} from '@angular/core';
-import {
-  patchState,
-  signalStore,
-  withHooks,
-  withMethods,
-  withState,
-} from '@ngrx/signals';
+import {patchState, signalStore, withHooks, withMethods, withState} from '@ngrx/signals';
 
 import {AuthService} from '../../services/auth/auth.service';
 
@@ -30,18 +24,14 @@ export const UserPreferencesStore = signalStore(
           patchState(store, {isSidebarOpen});
         },
         setDarkModeEnabled: () => {
-          const linkElement = document.getElementById(
-              'app-theme',
-          ) as unknown as HTMLLinkElement;
-          linkElement.href = 'theme-dark.css';
+          const rootElement = document.getElementById('root')! as unknown as HTMLElement;
+          rootElement.classList.add('dark');
           authService.setDarkModeSettingInLocalStorage(true);
           patchState(store, {isDarkMode: true});
         },
         setLightModeEnabled: () => {
-          const linkElement = document.getElementById(
-              'app-theme',
-          ) as unknown as HTMLLinkElement;
-          linkElement.href = 'theme-light.css';
+          const rootElement = document.getElementById('root')! as unknown as HTMLElement;
+          rootElement.classList.remove('dark');
           authService.setDarkModeSettingInLocalStorage(false);
           patchState(store, {isDarkMode: false});
         },
