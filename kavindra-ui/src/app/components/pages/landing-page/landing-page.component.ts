@@ -6,11 +6,12 @@ import {DialogModule} from 'primeng/dialog';
 
 import {RoutePath} from '../../../app.routes';
 import {rebaseRoutePath} from '../../../util/router/Router.utils';
+import {FeatureDisplayComponent} from '../../lib/_landing-page/feature-display/feature-display.component';
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [ButtonModule, DialogModule, SharedModule, RouterLink],
+  imports: [ButtonModule, DialogModule, SharedModule, RouterLink, FeatureDisplayComponent],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
 })
