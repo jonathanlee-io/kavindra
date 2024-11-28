@@ -15,11 +15,11 @@ export class PaymentsRepositoryService {
     await this.prismaService.paymentPlan.create({
       data: {
         id: paymentPlan.id,
-        features: paymentPlan.features,
         name: paymentPlan.name,
-        maxProjects: paymentPlan.maxProjects,
-        maxTeamMembers: paymentPlan.maxTeamMembers,
-        monthlyTotal: paymentPlan.monthlyTotal,
+        description: paymentPlan.description,
+        monthlyPrice: paymentPlan.monthlyPrice,
+        features: paymentPlan.features,
+        tag: paymentPlan.tag,
         stripePricingTableId: paymentPlan.stripePricingTableId,
         stripePublishableKey: paymentPlan.stripePublishableKey,
       },

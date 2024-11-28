@@ -45,10 +45,10 @@ model Client {
 model PaymentPlan {
   id                   String   @id @default(uuid())
   name                 String
-  monthlyTotal         String
-  maxTeamMembers       String
-  maxProjects          String
+  description          String   @default("")
+  monthlyPrice         String   @default("$9999.99")
   features             String[]
+  tag                  String?
   stripePricingTableId String
   stripePublishableKey String
   createdAt            DateTime @default(now())

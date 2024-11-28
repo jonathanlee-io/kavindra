@@ -1,10 +1,10 @@
 export class PaymentPlanDto {
   id: string;
   name: string;
-  monthlyTotal: string;
-  maxTeamMembers: string;
-  maxProjects: string;
+  description: string;
+  monthlyPrice: string;
   features: string[];
+  tag?: string;
   stripePricingTableId: string;
   stripePublishableKey: string;
 }
