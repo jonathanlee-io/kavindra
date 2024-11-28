@@ -12,7 +12,11 @@ export class PaymentsService implements OnModuleInit {
       name: 'Freelancer',
       description: 'The essentials to provide your best work for your clients',
       monthlyPrice: '$19.99',
-      features: ['Up to 2 projects', 'Up to 10 team members', 'Custom subdomain'],
+      features: [
+        'Up to 2 projects',
+        'Up to 10 team members',
+        'Custom subdomain',
+      ],
       stripePricingTableId: 'prctbl_1QNQf2Ctqipjj4SBOOWyi4wy',
       stripePublishableKey:
         'pk_test_51QLq5wCtqipjj4SBEPU29LCPwZUPBXkrpmjhNYCjqBtAMjNiIzf718UNPLPEPbCokgs3ZXe7BV0plqmiiFQLiwkm00WAQxjvwc',
@@ -22,7 +26,11 @@ export class PaymentsService implements OnModuleInit {
       name: 'Startup',
       description: 'A plan that scales with your rapidly growing business.',
       monthlyPrice: '$39.99',
-      features: ['Up to 10 projects', 'Up to 100 team members', 'Custom subdomain'],
+      features: [
+        'Up to 10 projects',
+        'Up to 100 team members',
+        'Custom subdomain',
+      ],
       tag: 'Most Popular',
       stripePricingTableId: 'prctbl_1QNQmHCtqipjj4SB8UV3onnl',
       stripePublishableKey:
@@ -33,7 +41,11 @@ export class PaymentsService implements OnModuleInit {
       name: 'Enterprise',
       description: 'Dedicated support and infrastructure for your company.',
       monthlyPrice: '$99.99',
-      features: ['Unlimited projects', 'Unlimited team members', 'Custom hostname'],
+      features: [
+        'Unlimited projects',
+        'Unlimited team members',
+        'Custom hostname',
+      ],
       stripePricingTableId: 'enterprise',
       stripePublishableKey: 'enterprise',
     },
