@@ -4,8 +4,6 @@ export const environment = {
   SNACKBAR_DURATION_MS: 5000,
   TOAST_DURATION_MS: 5000,
   API_ENVIRONMENT: 'dev',
-  FRONT_END_URL: 'http://localhost:4200',
-  MAIN_API_URL: 'https://api.staging.roomyledger.com/v1',
   SUPABASE_URL: 'https://auth.releaseminder.io',
   SUPABASE_KEY:
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhYXd3YWp5d2xoY2Jhd3hpenJqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjc0MDM3MDIsImV4cCI6MjA0Mjk3OTcwMn0.sKs-_ZaXBsjPw2O8xJAgnAua1JVQpbs4BG54PKpbuw8',

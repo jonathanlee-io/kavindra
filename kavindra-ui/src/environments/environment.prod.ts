@@ -4,8 +4,6 @@ export const environment = {
   SNACKBAR_DURATION_MS: 5000,
   TOAST_DURATION_MS: 5000,
   API_ENVIRONMENT: 'production',
-  FRONT_END_URL: 'https://www.roomyledger.com',
-  MAIN_API_URL: 'https://api.roomyledger.com/v1',
   SUPABASE_URL: 'https://auth.kavindra.io',
   SUPABASE_KEY:
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVucGVmeXNvdmV3Zm5hdmV1a2x6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk1NjY3NDUsImV4cCI6MjA0NTE0Mjc0NX0.cyRHfAwWrSTiUtR80FYHJ0eCPFJgPKz3FdNo4UdVKac',
