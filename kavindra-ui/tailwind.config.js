@@ -7,12 +7,12 @@ module.exports = {
     extend: {},
     colors: {
       /* LIGHT THEME */
-      'light-primary': '#c0d2e5',
-      'light-secondary': '#6c757d',
+      'light-primary': '#f1f4f8',
+      'light-secondary': '#64737a',
       'light-text-primary': '#000000',
       /* DARK THEME */
-      'dark-primary': '#052c59',
-      'dark-secondary': '#92a0a9',
+      'dark-primary': '#001631',
+      'dark-secondary': '#596570',
       'dark-text-primary': '#FFFFFF',
     }
   },
