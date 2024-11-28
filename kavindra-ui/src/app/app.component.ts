@@ -11,9 +11,6 @@ import {filter, tap} from 'rxjs';
 import {UserAuthenticationStore} from './+state/auth/user-auth.store';
 import {UserPreferencesStore} from './+state/user-preferences/user-preferences.store';
 import {AppService} from './app.service';
-import {
-  BottomFullWidthMessageComponent,
-} from './components/lib/_messages/bottom-full-width-message/bottom-full-width-message.component';
 import {NavbarComponent} from './components/lib/_navbar/navbar/navbar.component';
 import {SidebarComponent} from './components/lib/_sidebar/sidebar/sidebar.component';
 import {FooterComponent} from './components/lib/footer/footer.component';
@@ -28,7 +25,6 @@ import {AuthService} from './services/auth/auth.service';
     DialogModule,
     NavbarComponent,
     FooterComponent,
-    BottomFullWidthMessageComponent,
     NgIf,
     ToastModule,
     SidebarComponent,

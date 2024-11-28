@@ -4,10 +4,4 @@
 <main class="flex flex-col min-h-screen">
   <router-outlet />
 </main>
-<app-bottom-full-width-message
-  *ngIf="isBottomMessageVisible() && !isSidebarVisible()"
-  [onAccept]="onAccept"
-  [message]="'This application is in a very early phase of development, not all functionality promised is complete and bug-free yet.'"
-  [acceptButtonText]="'Acknowledge'"
-/>
 <app-footer *ngIf="!isSidebarVisible()" class="sticky bottom-0 top-[100vh]" />
