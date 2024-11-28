@@ -1,22 +1,11 @@
 import {computed, inject} from '@angular/core';
-import {Router} from '@angular/router';
-import {
-  patchState,
-  signalStore,
-  withComputed,
-  withMethods,
-  withState,
-} from '@ngrx/signals';
+import {patchState, signalStore, withComputed, withMethods, withState} from '@ngrx/signals';
 import {MessageService} from 'primeng/api';
 import {take, tap} from 'rxjs';
 
-import {rebaseRoutePath, RoutePath} from '../../app.routes';
 import {TrialAndSubscriptionsForUserDto} from '../../dtos/payments/TrialAndSubscriptionsForUser.dto';
 import {PaymentsService} from '../../services/payments/payments.service';
 import {StripeService} from '../../services/stripe/stripe.service';
-import {RouterUtils} from '../../util/router/Router.utils';
-
-export type FreeTrialState = 'ACTIVE' | 'INACTIVE';
 
 export type PaymentStatus = 'PAID' | 'UNPAID' | 'TRIAL';
 
@@ -47,7 +36,6 @@ export const PaymentStore = signalStore(
     withState(initialState),
     withMethods((store) => {
       const stripeService = inject(StripeService);
-      const router = inject(Router);
       const paymentsService = inject(PaymentsService);
       const messageService = inject(MessageService);
       return {
@@ -76,9 +64,6 @@ export const PaymentStore = signalStore(
                       toastMessage = stripeCheckoutSessionQueryResponse.trialEnd ?
                   'Thank you for trying out our product!' :
                   'Thank you for your purchase!';
-                      router
-                          .navigate([rebaseRoutePath(RoutePath.BOARD)])
-                          .catch(RouterUtils.navigateCatchErrorCallback);
                     } else if (
                       stripeCheckoutSessionQueryResponse.status === 'FAILURE'
                     ) {
@@ -87,9 +72,6 @@ export const PaymentStore = signalStore(
                   'Please contact support using the contact links in the footer';
                       toastSeverity = 'error';
                       patchState(store, {paymentStatus: 'UNPAID'});
-                      router
-                          .navigate([rebaseRoutePath(RoutePath.ERROR_NOT_FOUND)])
-                          .catch(RouterUtils.navigateCatchErrorCallback);
                     }
                     messageService.add({
                       severity: toastSeverity,

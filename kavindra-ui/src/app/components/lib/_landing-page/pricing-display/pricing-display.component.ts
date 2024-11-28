@@ -13,6 +13,7 @@ import {rebaseRoutePath} from '../../../../util/router/Router.utils';
   ],
   templateUrl: './pricing-display.component.html',
   styleUrl: './pricing-display.component.scss',
+  standalone: true,
 })
 export class PricingDisplayComponent {
   protected readonly rebaseRoutePath = rebaseRoutePath;
@@ -21,5 +22,5 @@ export class PricingDisplayComponent {
   description = input.required<string>();
   monthlyPrice = input.required<string>();
   features = input.required<string[]>();
-  tag = input<string | null>(null);
+  tag = input<string | undefined>(undefined);
 }

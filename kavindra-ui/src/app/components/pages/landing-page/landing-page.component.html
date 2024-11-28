@@ -59,28 +59,23 @@
         <p class="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl lg:text-balance">
           Pricing that grows with you</p>
       </div>
-      <div
+      <div *ngIf="pricingPlans().length > 0 else loadingSpinner"
         class="isolate mx-auto mt-16 grid max-w-md grid-cols-1 gap-y-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-        <app-pricing-display
-          [name]="'Freelancer'"
-          [description]="'The essentials to provide your best work for your clients'"
-          [monthlyPrice]="'$19.99'"
-          [features]="['Up to 2 projects', 'Up to 10 team members', 'Custom subdomain']"
-        />
-        <app-pricing-display
-          [name]="'Startup'"
-          [description]="'A plan that scales with your rapidly growing business.'"
-          [monthlyPrice]="'$39.99'"
-          [features]="['Up to 10 projects', 'Up to 100 team members', 'Custom subdomain']"
-          [tag]="'Most Popular'"
-        />
-        <app-pricing-display
-          [name]="'Enterprise'"
-          [description]="'Dedicated support and infrastructure for your company.'"
-          [monthlyPrice]="'$99.99'"
-          [features]="['Unlimited projects', 'Unlimited team members', 'Custom hostname', 'Custom subdomain']"
-        />
+        @for(pricingPlan of pricingPlans(); track $index;) {
+          <app-pricing-display
+            [name]="pricingPlan.name"
+            [description]="pricingPlan.description"
+            [monthlyPrice]="pricingPlan.monthlyPrice"
+            [features]="pricingPlan.features"
+            [tag]="pricingPlan.tag"
+          />
+        }
       </div>
+      <ng-template #loadingSpinner>
+        <div class="flex justify-center items-center text-center mt-10">
+          <p-progress-spinner styleClass="w-10rem h-10rem" />
+        </div>
+      </ng-template>
     </div>
   </div>
 

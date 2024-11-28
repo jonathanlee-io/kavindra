@@ -8,6 +8,7 @@ import {Component, input} from '@angular/core';
   ],
   templateUrl: './feature-display.component.html',
   styleUrl: './feature-display.component.scss',
+  standalone: true,
 })
 export class FeatureDisplayComponent {
   primeIconClass = input.required<string>();

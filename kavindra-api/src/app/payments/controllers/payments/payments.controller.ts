@@ -1,7 +1,6 @@
 import {Controller, Get} from '@nestjs/common';
-import {AuthUser} from '@supabase/supabase-js';
 
-import {CurrentUser} from '../../../../lib/auth/supabase/decorators/current-user.decorator';
+import {Public} from '../../../../lib/auth/supabase/decorators/is-public.decorator';
 import {host} from '../../../../lib/config/host.config';
 import {PaymentsService} from '../../services/payments/payments.service';
 
@@ -9,8 +8,9 @@ import {PaymentsService} from '../../services/payments/payments.service';
 export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
+  @Public()
   @Get('plans')
-  async getPlans(@CurrentUser() currentUser: AuthUser) {
-    return this.paymentsService.getPlans(currentUser);
+  async getPlans() {
+    return this.paymentsService.getPlans();
   }
 }

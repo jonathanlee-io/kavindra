@@ -1,5 +1,4 @@
 import {Injectable, Logger, OnModuleInit} from '@nestjs/common';
-import {AuthUser} from '@supabase/supabase-js';
 
 import {PaymentPlanDto} from '../../dto/PaymentPlan.dto';
 import {PaymentsRepositoryService} from '../../repositories/payments-repository/payments-repository.service';
@@ -56,10 +55,7 @@ export class PaymentsService implements OnModuleInit {
     private readonly paymentsRepository: PaymentsRepositoryService,
   ) {}
 
-  async getPlans(currentUser: AuthUser) {
-    this.logger.log(
-      `User with e-mail: <${currentUser.email}> getting payment plans`,
-    );
+  async getPlans() {
     return this.paymentsRepository.getAllPaymentPlans();
   }
 
