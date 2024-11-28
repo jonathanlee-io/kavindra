@@ -5,7 +5,7 @@ import {SharedModule} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
-import {delay, take, tap} from 'rxjs';
+import {take, tap} from 'rxjs';
 
 import {RoutePath} from '../../../app.routes';
 import {PaymentPlanDto} from '../../../dtos/payments/PaymentPlan.dto';
@@ -41,7 +41,6 @@ export class LandingPageComponent implements OnInit {
   ngOnInit() {
     this.paymentsService.getPlans().pipe(
         take(1),
-        delay(2500),
         tap((paymentPlans) => {
           this.pricingPlans.set(paymentPlans);
         }),
