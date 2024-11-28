@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PricingDisplayComponent } from './pricing-display.component';
+import {PricingDisplayComponent} from './pricing-display.component';
 
 describe('PricingDisplayComponent', () => {
   let component: PricingDisplayComponent;
@@ -8,9 +8,9 @@ describe('PricingDisplayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PricingDisplayComponent]
+      imports: [PricingDisplayComponent],
     })
-    .compileComponents();
+        .compileComponents();
 
     fixture = TestBed.createComponent(PricingDisplayComponent);
     component = fixture.componentInstance;
