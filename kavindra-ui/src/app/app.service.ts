@@ -23,22 +23,9 @@ export class AppService {
   private readonly supabaseService = inject(SupabaseService);
   private readonly authService = inject(AuthService);
 
-  pipeAuthAndDarkModeToggleRouterEvents(router: Router) {
+  pipeAuthRouterEvents(router: Router) {
     router.events
         .pipe(
-            tap(() => {
-              if (
-                this.authService.getDarkModeSettingFromLocalStorage() &&
-            !this.userPreferencesStore.isDarkMode()
-              ) {
-                this.userPreferencesStore.setDarkModeEnabled();
-              } else if (
-                !this.authService.getDarkModeSettingFromLocalStorage() &&
-            this.userPreferencesStore.isDarkMode()
-              ) {
-                this.userPreferencesStore.setLightModeEnabled();
-              }
-            }),
             filter(
                 (routerEvent): routerEvent is NavigationEnd =>
                   routerEvent instanceof NavigationEnd,

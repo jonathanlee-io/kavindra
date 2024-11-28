@@ -57,12 +57,4 @@ export class AuthService {
     //   );
     // }
   }
-
-  getDarkModeSettingFromLocalStorage() {
-    return localStorage.getItem(AuthService.darkModeKey) === 'true';
-  }
-
-  setDarkModeSettingInLocalStorage(isDarkMode: boolean) {
-    localStorage.setItem(AuthService.darkModeKey, JSON.stringify(isDarkMode));
-  }
 }

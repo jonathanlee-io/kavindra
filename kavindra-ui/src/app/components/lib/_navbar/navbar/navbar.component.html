@@ -72,15 +72,15 @@
         </button>
       </ng-container>
       <div class="ml-8 mt-2">
-        <p-toggleswitch class="mt-2" (onChange)="userAuthenticationStore.toggleDarkMode()" />
+        <p-toggleswitch class="mt-2" (onChange)="userPreferencesStore.toggleDarkMode()" />
       </div>
       <div class="ml-2 mt-2">
-        <i class="pi" [ngClass]="userAuthenticationStore.isDarkMode() ? 'pi-moon' : 'pi-sun'"></i>
+        <i class="pi" [ngClass]="userPreferencesStore.isDarkMode() ? 'pi-moon' : 'pi-sun'"></i>
       </div>
     </div>
   </nav>
   <!-- Mobile menu, show/hide based on menu open state. -->
-  <div *ngIf="!userAuthenticationStore.isLoading()" class="lg:hidden" role="dialog" aria-modal="true">
+  <div *ngIf="!userPreferencesStore.isLoading()" class="lg:hidden" role="dialog" aria-modal="true">
     <!-- Background backdrop, show/hide based on slide-over state. -->
     <div class="fixed inset-0 z-10"></div>
     <div
