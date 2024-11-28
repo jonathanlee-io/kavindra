@@ -55,14 +55,12 @@ export const UserPreferencesStore = signalStore(
     }),
     withHooks({
       onInit: (store) => {
-        if (window?.matchMedia('(prefers-color-scheme: dark)')?.matches) {
-          store.setDarkModeEnabled();
-        }
         const darkModeLocalStorage = localStorage.getItem(darkModeKey);
-        if (darkModeLocalStorage === null) {
+        if (darkModeLocalStorage === null && window?.matchMedia('(prefers-color-scheme: dark)')?.matches) {
+          store.setDarkModeEnabled();
           return;
         }
-        if (!darkModeLocalStorage) {
+        if (!JSON.parse(<string>darkModeLocalStorage)) {
           store.setLightModeEnabled();
         } else {
           store.setDarkModeEnabled();
