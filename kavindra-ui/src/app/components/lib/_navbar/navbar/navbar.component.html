@@ -72,7 +72,7 @@
         </button>
       </ng-container>
       <div class="ml-8 mt-2">
-        <p-toggleswitch class="mt-2" (onChange)="userPreferencesStore.toggleDarkMode()" />
+        <p-toggleswitch class="mt-2" [(ngModel)]="isDarkMode" (onChange)="userPreferencesStore.toggleDarkMode()" />
       </div>
       <div class="ml-2 mt-2">
         <i class="pi" [ngClass]="userPreferencesStore.isDarkMode() ? 'pi-moon' : 'pi-sun'"></i>

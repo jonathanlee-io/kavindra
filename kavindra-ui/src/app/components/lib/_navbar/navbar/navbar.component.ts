@@ -1,5 +1,6 @@
 import {NgClass, NgIf} from '@angular/common';
 import {Component, inject, signal} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {ToggleSwitchModule} from 'primeng/toggleswitch';
 
@@ -19,6 +20,7 @@ import {ProductsDropdownComponent} from '../products-dropdown/products-dropdown.
     ProductsDropdownComponent,
     RouterLink,
     ToggleSwitchModule,
+    FormsModule,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
@@ -30,8 +32,5 @@ export class NavbarComponent {
   protected readonly clientStore = inject(ClientStore);
   protected readonly rebaseRoutePath = rebaseRoutePath;
   protected readonly RoutePath = RoutePath;
-  constructor(
-  ) {
-    this.userPreferencesStore.toggleDarkMode();
-  }
+  isDarkMode: boolean = this.userPreferencesStore.isDarkMode();
 }

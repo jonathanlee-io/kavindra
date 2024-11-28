@@ -1,8 +1,6 @@
 import {inject} from '@angular/core';
 import {patchState, signalStore, withHooks, withMethods, withState} from '@ngrx/signals';
 
-import {AuthService} from '../../services/auth/auth.service';
-
 export type UserPreferencesState = {
   isLoading: boolean;
   isDarkMode: boolean;
@@ -57,16 +55,17 @@ export const UserPreferencesStore = signalStore(
     }),
     withHooks({
       onInit: (store) => {
-        if (
-          window?.matchMedia('(prefers-color-scheme: dark)')?.matches
-        ) {
+        if (window?.matchMedia('(prefers-color-scheme: dark)')?.matches) {
           store.setDarkModeEnabled();
-        } else if (
-          JSON.parse(localStorage.getItem(AuthService.darkModeKey)!) === true
-        ) {
-          store.setDarkModeEnabled();
-        } else {
+        }
+        const darkModeLocalStorage = localStorage.getItem(darkModeKey);
+        if (darkModeLocalStorage === null) {
+          return;
+        }
+        if (!darkModeLocalStorage) {
           store.setLightModeEnabled();
+        } else {
+          store.setDarkModeEnabled();
         }
       },
     }),
