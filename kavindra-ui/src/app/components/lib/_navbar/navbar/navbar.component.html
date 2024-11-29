@@ -15,37 +15,16 @@
         </svg>
       </button>
     </div>
-    <div *ngIf="!userAuthenticationStore.isLoading()" class="hidden lg:flex lg:gap-x-12">
-      <div *ngIf="!userAuthenticationStore.isLoggedIn()">
-        <button (click)="isProductsDropdownVisible.set(!isProductsDropdownVisible())" type="button"
-                class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900" aria-expanded="false">
-          Product
-          <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
-               data-slot="icon">
-            <path fill-rule="evenodd"
-                  d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                  clip-rule="evenodd" />
-          </svg>
-        </button>
-        <app-products-dropdown [isVisible]="isProductsDropdownVisible()" />
-      </div>
-
-      <ng-container *ngIf="userAuthenticationStore.isLoggedIn() && (clientStore.subdomain() !== null || clientStore.customHostname() !== null)">
-        <a [routerLink]="['/board']"
-           class="text-sm font-semibold leading-6 text-gray-900">Board</a>
-        <a [routerLink]="['/backlog']"
-           class="text-sm font-semibold leading-6 text-gray-900">Backlog</a>
-        <a [routerLink]="['/schedule']"
-           class="text-sm font-semibold leading-6 text-gray-900">Schedule</a>
-      </ng-container>
-    </div>
     <ng-container *ngIf="!userAuthenticationStore.isLoggedIn() && !userAuthenticationStore.isLoading()">
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <a [routerLink]="['/register']" class="text-sm font-semibold leading-6 text-gray-900 mx-5">Create an Account
-          <span
-            aria-hidden="true">&rarr;</span></a>
-        <a [routerLink]="['/login']" class="text-sm font-semibold leading-6 text-gray-900">Log in <span
-          aria-hidden="true">&rarr;</span></a>
+        <a [routerLink]="['/register']"
+           class="text-sm font-bold leading-6 text-gray-900 bg-pink-300 rounded-md px-5 py-2 mx-3 shadow-md hover:bg-pink-400 hover:scale-105 transition-transform duration-300">
+          Create an Account
+        </a>
+        <a [routerLink]="['/login']"
+           class="text-sm font-bold leading-6 text-gray-900 bg-green-300 rounded-md px-5 py-2 mx-3 shadow-md hover:bg-green-400 hover:scale-105 transition-transform duration-300">
+          Log in
+        </a>
       </div>
     </ng-container>
     <ng-container *ngIf="userAuthenticationStore.isLoading()">
