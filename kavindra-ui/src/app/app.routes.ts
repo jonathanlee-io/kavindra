@@ -10,6 +10,9 @@ import {
   MainDashboardComponent,
 } from './components/pages/_authenticated/_dashboard/main-dashboard/main-dashboard.component';
 import {
+  ProjectDashboardPageComponent,
+} from './components/pages/_authenticated/_dashboard/project-dashboard-page/project-dashboard-page.component';
+import {
   SettingsPageComponent,
 } from './components/pages/_authenticated/_manage_settings_pages/settings-page/settings-page.component';
 import {LoginPageComponent} from './components/pages/_login_register_pages/login-page/login-page.component';
@@ -33,6 +36,7 @@ export enum RoutePath {
   CREATE_PROJECT = 'create/project',
   SETTINGS_PAGE = 'manage/settings',
   DASHBOARD = 'dashboard',
+  PROJECT_DASHBOARD = 'dashboard/project/:projectSubdomain',
 }
 
 export const routes: Routes = [
@@ -76,6 +80,11 @@ export const routes: Routes = [
   {
     path: RoutePath.DASHBOARD,
     component: MainDashboardComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: RoutePath.PROJECT_DASHBOARD,
+    component: ProjectDashboardPageComponent,
     canActivate: [authGuard],
   },
 ];

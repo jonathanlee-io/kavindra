@@ -3,7 +3,7 @@
     <ng-template pTemplate="caption">
       <div class="flex items-center justify-between">
         <span class="text-xl font-bold">Projects Where Involved</span>
-        <p-button icon="pi pi-refresh" rounded raised />
+        <p-button icon="pi pi-refresh" (click)="loadProjectsWhereInvolved()" rounded raised />
       </div>
     </ng-template>
     <ng-template pTemplate="header">
@@ -17,7 +17,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-project>
       <tr>
-        <td>{{ project.subdomain }}</td>
+        <td><a [routerLink]="[rebaseRoutePathAsString(RoutePath.PROJECT_DASHBOARD.replace(':projectSubdomain', project.subdomain))]">{{ project.subdomain }}</a><i class="px-2 pi pi-arrow-right"></i></td>
         <td>{{ (project.customHostnames?.length === 0) ? 'None' : project.customHostnames }}</td>
         <td><p-tag [value]="(project.isBugReportsEnabled) ? 'Enabled': 'Disabled'" [severity]="(project.isBugReportsEnabled) ? 'success': 'danger'" /></td>
         <td><p-tag [value]="(project.isFeatureRequestsEnabled) ? 'Enabled': 'Disabled'" [severity]="(project.isFeatureRequestsEnabled) ? 'success': 'danger'" /></td>

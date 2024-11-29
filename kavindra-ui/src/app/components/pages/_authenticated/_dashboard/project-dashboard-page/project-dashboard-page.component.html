@@ -1,0 +1,39 @@
+<div class="card">
+  <p-drawer header="Left Drawer" [(visible)]="visible1" position="left">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+      et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+      aliquip ex ea commodo consequat.
+    </p>
+  </p-drawer>
+
+  <p-drawer header="Right Drawer" [(visible)]="visible2" position="right">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+      et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+      aliquip ex ea commodo consequat.
+    </p>
+  </p-drawer>
+
+  <p-drawer header="Top Drawer" [(visible)]="visible3" position="top">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+      et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+      aliquip ex ea commodo consequat.
+    </p>
+  </p-drawer>
+
+  <p-drawer header="Bottom Drawer" [(visible)]="visible4" position="bottom">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+      et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+      aliquip ex ea commodo consequat.
+    </p>
+  </p-drawer>
+  <div class="flex gap-2 justify-center mt-4">
+    <p-button type="button" (click)="visible1 = true" icon="pi pi-arrow-right" />
+    <p-button type="button" (click)="visible2 = true" icon="pi pi-arrow-left" />
+    <p-button type="button" (click)="visible3 = true" icon="pi pi-arrow-down" />
+    <p-button type="button" (click)="visible4 = true" icon="pi pi-arrow-up" />
+  </div>
+</div>
