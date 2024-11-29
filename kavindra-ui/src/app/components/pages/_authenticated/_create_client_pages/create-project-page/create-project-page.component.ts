@@ -5,13 +5,13 @@ import {RoutePath} from '../../../../../app.routes';
 import {rebaseRoutePath} from '../../../../../util/router/Router.utils';
 
 @Component({
-  selector: 'app-create-client-intro-page',
+  selector: 'app-create-project-page',
   imports: [RouterLink],
   standalone: true,
-  templateUrl: './create-client-intro-page.component.html',
-  styleUrl: './create-client-intro-page.component.scss',
+  templateUrl: './create-project-page.component.html',
+  styleUrl: './create-project-page.component.scss',
 })
-export class CreateClientIntroPageComponent {
+export class CreateProjectPageComponent {
   protected readonly rebaseRoutePath = rebaseRoutePath;
   protected readonly RoutePath = RoutePath;
 }

@@ -3,6 +3,9 @@ import {Routes} from '@angular/router';
 import {
   CreateClientIntroPageComponent,
 } from './components/pages/_authenticated/_create_client_pages/create-client-intro-page/create-client-intro-page.component';
+import {
+  CreateProjectPageComponent,
+} from './components/pages/_authenticated/_create_client_pages/create-project-page/create-project-page.component';
 import {LoginPageComponent} from './components/pages/_login_register_pages/login-page/login-page.component';
 import {RegisterPageComponent} from './components/pages/_login_register_pages/register-page/register-page.component';
 import {LandingPageComponent} from './components/pages/landing-page/landing-page.component';
@@ -21,6 +24,7 @@ export enum RoutePath {
   LOGIN_SUCCESS = 'login-success',
   /* AUTHENTICATED ROUTES */
   CREATE_CLIENT_INTRO = 'create/client/intro',
+  CREATE_PROJECT = 'create/project',
 }
 
 export const routes: Routes = [
@@ -49,6 +53,11 @@ export const routes: Routes = [
   {
     path: RoutePath.CREATE_CLIENT_INTRO,
     component: CreateClientIntroPageComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: RoutePath.CREATE_PROJECT,
+    component: CreateProjectPageComponent,
     canActivate: [authGuard],
   },
 ];
