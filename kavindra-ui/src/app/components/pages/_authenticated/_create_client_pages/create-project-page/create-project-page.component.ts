@@ -1,15 +1,17 @@
 import {NgClass, NgIf, NgSwitch, NgSwitchCase} from '@angular/common';
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {watchState} from '@ngrx/signals';
 import {ButtonModule} from 'primeng/button';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {ToggleSwitchModule} from 'primeng/toggleswitch';
-import {debounceTime, filter, tap} from 'rxjs';
+import {debounceTime, filter, take, tap} from 'rxjs';
 
 import {ClientStore} from '../../../../../+state/client/client.store';
 import {RoutePath} from '../../../../../app.routes';
+import {PaymentPlanDto} from '../../../../../dtos/payments/PaymentPlan.dto';
+import {PaymentsService} from '../../../../../services/payments/payments.service';
 import {rebaseRoutePath} from '../../../../../util/router/Router.utils';
 
 export type SubdomainState = 'INIT' | 'AVAILABLE' | 'UNAVAILABLE' | 'LOADING';
@@ -31,11 +33,14 @@ export type SubdomainState = 'INIT' | 'AVAILABLE' | 'UNAVAILABLE' | 'LOADING';
   templateUrl: './create-project-page.component.html',
   styleUrl: './create-project-page.component.scss',
 })
-export class CreateProjectPageComponent {
+export class CreateProjectPageComponent implements OnInit {
   protected readonly rebaseRoutePath = rebaseRoutePath;
   protected readonly RoutePath = RoutePath;
+  protected readonly clientStore = inject(ClientStore);
 
-  private readonly clientStore = inject(ClientStore);
+  private readonly pricingPlans = signal<PaymentPlanDto[]>([]);
+
+  private readonly paymentsService = inject(PaymentsService);
 
   subdomainState: SubdomainState = 'INIT';
 
@@ -69,5 +74,18 @@ export class CreateProjectPageComponent {
           this.subdomainState = 'LOADING';
         }),
     ).subscribe();
+  }
+
+  ngOnInit() {
+    this.paymentsService.getPaymentPlans().pipe(
+        take(1),
+        tap((paymentPlans) => {
+          this.pricingPlans.set(paymentPlans);
+        }),
+    ).subscribe();
+  }
+
+  doCreateProject() {
+    this.clientStore.registerNewClientAndProjectWithPlan(this.subdomainFormControl.value!, this.pricingPlans()[0]);
   }
 }

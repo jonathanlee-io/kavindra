@@ -46,7 +46,7 @@ export class PaymentsService {
     );
   }
 
-  getPlans() {
+  getPaymentPlans() {
     return this.httpClient.get<PaymentPlanDto[]>(
         this.tenantStore.getFullRequestUrl(`v1/payments/plans`),
     );

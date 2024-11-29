@@ -20,9 +20,7 @@ export class ClientsRepositoryService {
 
   async registerNewClientWithTransaction(
     currentUser: AuthUser,
-    clientDescription: string,
     subdomain: string,
-    projectName: string,
     paymentPlanId: string,
   ) {
     const user = await this.usersRepository.findBySupabaseId(
@@ -35,17 +33,14 @@ export class ClientsRepositoryService {
     }
     let createdClient: {
       id: string;
-      displayName: string;
       createdAt: Date;
       updatedAt: Date;
-      description: string;
       userId: string;
     };
     try {
       createdClient = await this.prismaService.client.create({
         data: {
           displayName: subdomain,
-          description: clientDescription,
           paymentPlan: {
             connect: {
               id: paymentPlanId,
@@ -85,7 +80,7 @@ export class ClientsRepositoryService {
         }),
         this.prismaService.project.create({
           data: {
-            name: projectName,
+            name: subdomain,
             client: {
               connect: {
                 id: createdClient.id,

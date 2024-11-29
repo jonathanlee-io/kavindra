@@ -28,7 +28,6 @@ model User {
 model Client {
   id            String      @id @default(uuid())
   displayName   String
-  description   String
   paymentPlan   PaymentPlan @relation(fields: [paymentPlanId], references: [id])
   createdBy     User        @relation(fields: [userId], references: [id], name: "createdByUser")
   members       User[]      @relation(name: "membersOfClient")
@@ -45,8 +44,8 @@ model Client {
 model PaymentPlan {
   id                   String   @id @default(uuid())
   name                 String
-  description          String   @default("")
-  monthlyPrice         String   @default("$9999.99")
+  description          String
+  monthlyPrice         String
   features             String[]
   tag                  String?
   stripePricingTableId String

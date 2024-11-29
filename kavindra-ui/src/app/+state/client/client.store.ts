@@ -85,16 +85,12 @@ export const ClientStore = signalStore(
         },
         registerNewClientAndProjectWithPlan: (
             subdomain: string,
-            clientDescription: string,
-            projectName: string,
             paymentPlan: PaymentPlanDto,
         ) => {
           patchState(store, {isLoading: true});
           clientService
               .registerNewClientAndProjectWithPlan(
                   subdomain,
-                  clientDescription,
-                  projectName,
                   paymentPlan,
               )
               .pipe(

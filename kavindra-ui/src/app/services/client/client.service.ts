@@ -25,16 +25,12 @@ export class ClientService {
 
   registerNewClientAndProjectWithPlan(
       subdomain: string,
-      clientDescription: string,
-      projectName: string,
       paymentPlan: PaymentPlanDto,
   ) {
     return this.httpClient.post<POSTSuccessDto & { clientId: string }>(
         this.tenantStore.getFullRequestUrl('v1/clients/create'),
         {
           subdomain,
-          clientDescription,
-          projectName,
           paymentPlanId: paymentPlan.id,
         },
     );

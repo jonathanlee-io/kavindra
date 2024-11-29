@@ -39,7 +39,7 @@ export class LandingPageComponent implements OnInit {
   private readonly paymentsService = inject(PaymentsService);
 
   ngOnInit() {
-    this.paymentsService.getPlans().pipe(
+    this.paymentsService.getPaymentPlans().pipe(
         take(1),
         tap((paymentPlans) => {
           this.pricingPlans.set(paymentPlans);

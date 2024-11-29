@@ -45,12 +45,8 @@ export const createMockAuthUser = (overrides?: {
 
 export const createMockCreateClientDto = (overrides?: {
   subdomain?: string;
-  clientDescription?: string;
-  projectName?: string;
   paymentPlanId?: string;
 }): CreateClientDto => ({
   subdomain: overrides?.subdomain ?? faker.internet.domainName().split('.')[0],
-  clientDescription: overrides?.clientDescription ?? faker.lorem.paragraph(),
-  projectName: overrides?.projectName ?? faker.lorem.text(),
   paymentPlanId: overrides?.paymentPlanId ?? faker.string.uuid(),
 });

@@ -24,36 +24,11 @@ export class ClientsService {
 
   async createClient(
     currentUser: AuthUser,
-    {subdomain, clientDescription, projectName, paymentPlanId}: CreateClientDto,
+    {subdomain, paymentPlanId}: CreateClientDto,
   ) {
     this.logger.log(
       `User with e-mail: <${currentUser.email}> attempting to create/update client with subdomain: ${subdomain}`,
     );
-    const existingClients =
-      await this.clientsRepository.getClientsWhereUserInvolved(currentUser, {
-        isIncludeCreatedBy: true,
-      });
-    if (
-      existingClients
-        .map((client) => client.createdBy.supabaseUserId)
-        .includes(currentUser[supabaseUserIdKey])
-    ) {
-      await this.clientsRepository.updatePaymentPlanForClientById(
-        currentUser,
-        existingClients.find(
-          (client) =>
-            client.createdBy.supabaseUserId === currentUser[supabaseUserIdKey],
-        )?.id,
-        paymentPlanId,
-      );
-      return {
-        isSuccessful: true,
-        clientId: existingClients.find(
-          (client) =>
-            client.createdBy.supabaseUserId === currentUser[supabaseUserIdKey],
-        )?.id,
-      };
-    }
     if (
       !(await this.checkIfSubdomainAvailable({subdomain})).isSubdomainAvailable
     ) {
@@ -62,9 +37,7 @@ export class ClientsService {
     const {createdClient, createdSubdomain, createdProject} =
       await this.clientsRepository.registerNewClientWithTransaction(
         currentUser,
-        clientDescription,
         subdomain,
-        projectName,
         paymentPlanId,
       );
     if (!createdClient || !createdSubdomain || !createdProject) {
