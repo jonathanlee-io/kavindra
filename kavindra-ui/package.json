@@ -10,7 +10,9 @@
     "build:prod": "ng build --configuration production",
     "build:stage": "ng build --configuration stage",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test --browsers ChromeHeadless --watch=false"
+    "test": "ng test --browsers ChromeHeadless --watch=false",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "private": true,
   "dependencies": {
@@ -45,6 +47,7 @@
     "@typescript-eslint/eslint-plugin": "^8.15.0",
     "@typescript-eslint/parser": "^8.16.0",
     "autoprefixer": "^10.4.20",
+    "cypress": "^13.16.0",
     "eslint": "^8.42.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^9.1.0",
