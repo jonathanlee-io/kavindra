@@ -12,12 +12,31 @@
           <div class="sm:col-span-4">
             <div class="mt-2">
               <div class="mt-2">
-                <div class="flex items-center rounded-full bg-white py-2 px-4 shadow-lg outline outline-2 outline-pink-300 focus-within:outline-pink-500">
+                <div [ngClass]="{'outline-light-error text-light-error': (subdomainState !== 'LOADING' && ((subdomainFormControl.invalid && subdomainFormControl.dirty) || subdomainState === 'UNAVAILABLE')), 'outline-light-success': (subdomainState !== 'LOADING' && (subdomainFormControl.valid && subdomainState === 'AVAILABLE'))}"
+                     class="flex items-center rounded-full bg-white py-2 px-4 shadow-lg outline outline-2 focus-within:outline-pink-500">
                   <div class="shrink-0 select-none text-lg text-gray-700 mr-2 sm:text-base">https://</div>
                   <input type="text" name="subdomain" id="subdomain"
-                         class="w-full text-lg text-gray-900 placeholder:text-gray-500 rounded-full focus:outline-none focus:bg-pink-50"
+                         [formControl]="subdomainFormControl"
+                         [ngClass]="{'placeholder-light-error': (subdomainState !== 'LOADING' && ((subdomainFormControl.invalid && subdomainFormControl.dirty) || subdomainState === 'UNAVAILABLE')), 'text-light-success outline-light-success': (subdomainState !== 'LOADING' && (subdomainFormControl.valid && subdomainState === 'AVAILABLE'))}"
+                         class="w-full text-lg rounded-full focus:outline-none"
                          placeholder="Enter subdomain">
                   <div class="shrink-0 select-none text-lg text-gray-700 ml-2 sm:text-base">.kavindra.io</div>
+
+                  <!-- Progress Spinner -->
+                  <div class="flex items-center ml-2 mt-2 pb-2">
+                    <ng-container [ngSwitch]="subdomainState">
+                      <p-progress-spinner *ngSwitchCase="'LOADING'" styleClass="w-8 h-8" />
+                      <i *ngSwitchCase="'AVAILABLE'" class="pi pi-thumbs-up text-light-success"></i>
+                      <i *ngSwitchCase="'UNAVAILABLE'" class="pi pi-thumbs-down text-light-error"></i>
+                    </ng-container>
+                  </div>
+                </div>
+
+                <div *ngIf="(subdomainFormControl.invalid && subdomainFormControl.dirty) || subdomainState === 'UNAVAILABLE'" class="text-light-error mt-4">
+                  Please enter a valid subdomain.
+                </div>
+                <div *ngIf="subdomainFormControl.valid && subdomainState === 'AVAILABLE'" class="text-light-success mt-4">
+                  Valid subdomain.
                 </div>
               </div>
             </div>
