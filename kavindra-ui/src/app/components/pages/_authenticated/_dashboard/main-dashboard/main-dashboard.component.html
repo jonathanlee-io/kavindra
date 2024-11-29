@@ -17,7 +17,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-project>
       <tr>
-        <td><a [routerLink]="[rebaseRoutePathAsString(RoutePath.PROJECT_DASHBOARD.replace(':projectSubdomain', project.subdomain))]">{{ project.subdomain }}</a><i class="px-2 pi pi-arrow-right"></i></td>
+        <td><a [routerLink]="[rebaseRoutePathAsString(RoutePath.PROJECT_DASHBOARD.replace(':projectSubdomain', project.subdomain))]">{{ project.subdomain }}<i class="px-2 pi pi-arrow-right"></i></a></td>
         <td>{{ (project.customHostnames?.length === 0) ? 'None' : project.customHostnames }}</td>
         <td><p-tag [value]="(project.isBugReportsEnabled) ? 'Enabled': 'Disabled'" [severity]="(project.isBugReportsEnabled) ? 'success': 'danger'" /></td>
         <td><p-tag [value]="(project.isFeatureRequestsEnabled) ? 'Enabled': 'Disabled'" [severity]="(project.isFeatureRequestsEnabled) ? 'success': 'danger'" /></td>
