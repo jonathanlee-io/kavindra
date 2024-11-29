@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {delay, take, tap} from 'rxjs';
 
 import {UserAuthenticationStore} from '../../../+state/auth/user-auth.store';
@@ -14,7 +14,6 @@ import {SuccessCheckmarkComponent} from '../../lib/success-checkmark/success-che
 })
 export class LoginSuccessComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
-  private readonly router = inject(Router);
   private readonly userAuthenticationStore = inject(UserAuthenticationStore);
 
   ngOnInit() {
