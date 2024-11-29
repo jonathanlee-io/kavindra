@@ -7,12 +7,12 @@ import {PaymentsRepositoryService} from '../../repositories/payments-repository/
 export class PaymentsService implements OnModuleInit {
   static readonly paymentPlans: PaymentPlanDto[] = [
     {
-      id: '9a5aa90b-e13c-4ba5-a993-59c45a158a52',
-      name: 'Freelancer',
+      id: 'dd0f7e53-5891-4392-96de-0b75d1e87b47',
+      name: 'Indie Hacker',
       description: 'The essentials to provide your best work for your clients',
       monthlyPrice: '$19.99',
       features: [
-        'Up to 2 projects',
+        'Up to 5 projects',
         'Up to 10 team members',
         'Custom subdomain',
       ],
@@ -21,13 +21,13 @@ export class PaymentsService implements OnModuleInit {
         'pk_test_51QLq5wCtqipjj4SBEPU29LCPwZUPBXkrpmjhNYCjqBtAMjNiIzf718UNPLPEPbCokgs3ZXe7BV0plqmiiFQLiwkm00WAQxjvwc',
     },
     {
-      id: '04e1880f-9920-48e5-ba58-a656f49c7ba9',
+      id: '834301d2-4d25-4ec0-b729-b027721d9846',
       name: 'Startup',
       description: 'A plan that scales with your rapidly growing business.',
       monthlyPrice: '$39.99',
       features: [
-        'Up to 10 projects',
-        'Up to 100 team members',
+        'Up to 15 projects',
+        'Up to 150 team members',
         'Custom subdomain',
       ],
       tag: 'Most Popular',
@@ -36,7 +36,7 @@ export class PaymentsService implements OnModuleInit {
         'pk_test_51QLq5wCtqipjj4SBEPU29LCPwZUPBXkrpmjhNYCjqBtAMjNiIzf718UNPLPEPbCokgs3ZXe7BV0plqmiiFQLiwkm00WAQxjvwc',
     },
     {
-      id: '540ca7ba-f4b1-41be-8b5f-b89420895381',
+      id: 'a84dc340-f60b-46bc-b37c-0dcc2735fa31',
       name: 'Enterprise',
       description: 'Dedicated support and infrastructure for your company.',
       monthlyPrice: '$99.99',
@@ -69,9 +69,6 @@ export class PaymentsService implements OnModuleInit {
       }
     });
     const toRemove: PaymentPlanDto[] = [];
-    this.logger.log(
-      `Inserting ${toPersist.length} payment plans and removing ${toRemove.length} payment plans`,
-    );
     paymentPlans.forEach((paymentPlan) => {
       if (
         !PaymentsService.paymentPlans
@@ -81,6 +78,9 @@ export class PaymentsService implements OnModuleInit {
         toRemove.push(paymentPlan);
       }
     });
+    this.logger.log(
+      `Inserting ${toPersist.length} payment plans and removing ${toRemove.length} payment plans`,
+    );
     for (const paymentPlan of toPersist) {
       await this.paymentsRepository.create(paymentPlan);
     }
