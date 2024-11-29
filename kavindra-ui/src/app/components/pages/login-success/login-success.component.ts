@@ -1,8 +1,10 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {delay, take, tap} from 'rxjs';
 
 import {UserAuthenticationStore} from '../../../+state/auth/user-auth.store';
+import {RoutePath} from '../../../app.routes';
+import {rebaseRoutePath} from '../../../util/router/Router.utils';
 import {SuccessCheckmarkComponent} from '../../lib/success-checkmark/success-checkmark.component';
 
 @Component({
@@ -15,6 +17,7 @@ import {SuccessCheckmarkComponent} from '../../lib/success-checkmark/success-che
 export class LoginSuccessComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly userAuthenticationStore = inject(UserAuthenticationStore);
+  private readonly router = inject(Router);
 
   ngOnInit() {
     this.activatedRoute.url
@@ -23,7 +26,7 @@ export class LoginSuccessComponent implements OnInit {
             delay(2500),
             tap(() => {
               if (this.userAuthenticationStore.isLoggedIn()) {
-                return;
+                this.router.navigate([rebaseRoutePath(RoutePath.CREATE_CLIENT_INTRO)]);
               }
             }),
         )
