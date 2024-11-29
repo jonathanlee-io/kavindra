@@ -86,12 +86,18 @@ export const ClientStore = signalStore(
         registerNewClientAndProjectWithPlan: (
             subdomain: string,
             paymentPlan: PaymentPlanDto,
+            isBugReportsEnabled: boolean,
+            isFeatureRequestsEnabled: boolean,
+            isFeatureFeedbackEnabled: boolean,
         ) => {
           patchState(store, {isLoading: true});
           clientService
               .registerNewClientAndProjectWithPlan(
                   subdomain,
                   paymentPlan,
+                  isBugReportsEnabled,
+                  isFeatureRequestsEnabled,
+                  isFeatureFeedbackEnabled,
               )
               .pipe(
                   take(1),

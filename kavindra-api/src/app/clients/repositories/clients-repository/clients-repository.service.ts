@@ -22,6 +22,15 @@ export class ClientsRepositoryService {
     currentUser: AuthUser,
     subdomain: string,
     paymentPlanId: string,
+    {
+      isBugReportsEnabled,
+      isFeatureRequestsEnabled,
+      isFeatureFeedbackEnabled,
+    }: {
+      isBugReportsEnabled: boolean;
+      isFeatureRequestsEnabled: boolean;
+      isFeatureFeedbackEnabled: boolean;
+    },
   ) {
     const user = await this.usersRepository.findBySupabaseId(
       currentUser[supabaseUserIdKey],
@@ -81,6 +90,9 @@ export class ClientsRepositoryService {
         this.prismaService.project.create({
           data: {
             name: subdomain,
+            isBugReportsEnabled,
+            isFeatureRequestsEnabled,
+            isFeatureFeedbackEnabled,
             client: {
               connect: {
                 id: createdClient.id,

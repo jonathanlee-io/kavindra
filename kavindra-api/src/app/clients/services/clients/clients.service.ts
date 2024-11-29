@@ -24,7 +24,13 @@ export class ClientsService {
 
   async createClient(
     currentUser: AuthUser,
-    {subdomain, paymentPlanId}: CreateClientDto,
+    {
+      subdomain,
+      paymentPlanId,
+      isBugReportsEnabled,
+      isFeatureRequestsEnabled,
+      isFeatureFeedbackEnabled,
+    }: CreateClientDto,
   ) {
     this.logger.log(
       `User with e-mail: <${currentUser.email}> attempting to create/update client with subdomain: ${subdomain}`,
@@ -39,6 +45,11 @@ export class ClientsService {
         currentUser,
         subdomain,
         paymentPlanId,
+        {
+          isBugReportsEnabled,
+          isFeatureRequestsEnabled,
+          isFeatureFeedbackEnabled,
+        },
       );
     if (!createdClient || !createdSubdomain || !createdProject) {
       throw new InternalServerErrorException();

@@ -86,6 +86,12 @@ export class CreateProjectPageComponent implements OnInit {
   }
 
   doCreateProject() {
-    this.clientStore.registerNewClientAndProjectWithPlan(this.subdomainFormControl.value!, this.pricingPlans()[0]);
+    this.clientStore.registerNewClientAndProjectWithPlan(
+      this.subdomainFormControl.value!,
+      this.pricingPlans()[0],
+      this.bugReportsEnabledFormControl.value!,
+      this.featureRequestsEnabledFormControl.value!,
+      this.featureFeedbackEnabledFormControl.value!,
+    );
   }
 }

@@ -73,15 +73,18 @@ model Hostname {
 }
 
 model Project {
-  id        String   @id @default(uuid())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  createdBy User     @relation(fields: [userId], references: [id])
-  epics     Epic[]
-  client    Client?  @relation(fields: [clientId], references: [id])
-  clientId  String?
-  userId    String
+  id                       String   @id @default(uuid())
+  name                     String
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @default(now())
+  createdBy                User     @relation(fields: [userId], references: [id])
+  isBugReportsEnabled      Boolean  @default(true)
+  isFeatureRequestsEnabled Boolean  @default(true)
+  isFeatureFeedbackEnabled Boolean  @default(true)
+  epics                    Epic[]
+  client                   Client?  @relation(fields: [clientId], references: [id])
+  clientId                 String?
+  userId                   String
 }
 
 model Epic {

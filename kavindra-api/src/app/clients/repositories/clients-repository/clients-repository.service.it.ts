@@ -76,6 +76,11 @@ describe('ClientsRepositoryService', () => {
       mockUserData as unknown as AuthUser,
       faker.internet.domainName().split('.')[0],
       PaymentsService.paymentPlans[0].id,
+      {
+        isBugReportsEnabled: faker.datatype.boolean(),
+        isFeatureRequestsEnabled: faker.datatype.boolean(),
+        isFeatureFeedbackEnabled: faker.datatype.boolean(),
+      },
     );
 
     expect(result).toBeDefined();

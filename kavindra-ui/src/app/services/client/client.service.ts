@@ -26,12 +26,18 @@ export class ClientService {
   registerNewClientAndProjectWithPlan(
       subdomain: string,
       paymentPlan: PaymentPlanDto,
+      isBugReportsEnabled: boolean,
+      isFeatureRequestsEnabled: boolean,
+      isFeatureFeedbackEnabled: boolean,
   ) {
     return this.httpClient.post<POSTSuccessDto & { clientId: string }>(
         this.tenantStore.getFullRequestUrl('v1/clients/create'),
         {
           subdomain,
           paymentPlanId: paymentPlan.id,
+          isBugReportsEnabled,
+          isFeatureRequestsEnabled,
+          isFeatureFeedbackEnabled,
         },
     );
   }
