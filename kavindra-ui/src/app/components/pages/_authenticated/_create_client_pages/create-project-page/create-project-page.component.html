@@ -1,6 +1,6 @@
 <div class="py-8 px-8">
   <form>
-    <div class="space-y-12">
+    <div class="space-y-12 animate-fadeinup">
       <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3">
         <div>
           <h2 class="text-base/7 font-semibold text-gray-900">Project</h2>
@@ -128,7 +128,7 @@
       </div>
     </div>
 
-    <div class="mt-6 flex items-center justify-end gap-x-3">
+    <div class="mt-6 flex items-center justify-end gap-x-3 animate-fadeindown">
       <a [routerLink]="rebaseRoutePath(RoutePath.CREATE_CLIENT_INTRO)" type="button" class="px-6 py-2 text-lg font-bold text-white bg-yellow-500 rounded-full shadow-lg transform transition-transform hover:scale-105 hover:bg-yellow-400 hover:rotate-3">Cancel</a>
       <button type="submit" class="px-6 py-2 text-lg font-bold text-white bg-green-600 rounded-full shadow-lg transform transition-transform hover:scale-105 hover:bg-green-500 hover:rotate-3">Save</button>
     </div>
