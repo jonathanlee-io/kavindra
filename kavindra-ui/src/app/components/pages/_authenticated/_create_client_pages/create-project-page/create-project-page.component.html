@@ -28,8 +28,13 @@
                   <div class="flex items-center ml-2 mt-2 pb-2">
                     <ng-container [ngSwitch]="subdomainState">
                       <p-progress-spinner *ngSwitchCase="'LOADING'" styleClass="w-8 h-8"/>
-                      <i *ngSwitchCase="'AVAILABLE'" class="pi pi-thumbs-up text-light-success"></i>
+                      <ng-container *ngIf="subdomainFormControl.valid">
+                        <i *ngSwitchCase="'AVAILABLE'" class="pi pi-thumbs-up text-light-success"></i>
+                      </ng-container>
                       <i *ngSwitchCase="'UNAVAILABLE'" class="pi pi-thumbs-down text-light-error"></i>
+                    </ng-container>
+                    <ng-container *ngIf="subdomainFormControl.invalid && subdomainFormControl.dirty">
+                      <i class="pi pi-thumbs-down text-light-error"></i>
                     </ng-container>
                   </div>
                 </div>

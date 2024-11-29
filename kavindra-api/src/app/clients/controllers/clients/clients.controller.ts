@@ -31,12 +31,10 @@ export class ClientsController {
   @Post('is-subdomain-available')
   @HttpCode(HttpStatus.OK)
   async isSubdomainAvailable(
-    @CurrentUser() currentUser: AuthUser,
     @Body() isSubdomainAvailableDto: IsSubdomainAvailableDto,
   ) {
     return this.clientsService.checkIfSubdomainAvailable(
       isSubdomainAvailableDto,
-      currentUser,
     );
   }
 
