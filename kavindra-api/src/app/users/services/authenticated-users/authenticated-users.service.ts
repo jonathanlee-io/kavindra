@@ -15,13 +15,13 @@ export class AuthenticatedUsersService {
   async checkIn(
     currentUser: AuthUser,
   ): Promise<POSTSuccessDto & {isCreatedNew: boolean}> {
-    this.logger.log(`Checking in user with e-mail: <${currentUser.email}>`);
     const existingUser = await this.usersRepository.findBySupabaseId(
       currentUser[supabaseUserIdKey],
     );
     if (existingUser) {
       return {isSuccessful: true, isCreatedNew: false};
     }
+    this.logger.log(`Creating new user for <${currentUser.email}>`);
     await this.usersRepository.createUserFromAuthUser(currentUser);
     return {isSuccessful: true, isCreatedNew: true};
   }
