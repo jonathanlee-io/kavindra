@@ -7,7 +7,7 @@ import {PaymentsRepositoryService} from '../../repositories/payments-repository/
 export class PaymentsService implements OnModuleInit {
   static readonly paymentPlans: PaymentPlanDto[] = [
     {
-      id: 'dd0f7e53-5891-4392-96de-0b75d1e87b47',
+      id: '4145d0a7-73c9-4997-a971-690eefa5968a',
       name: 'Indie Hacker',
       description: 'The essentials to provide your best work for your clients',
       monthlyPrice: '$19.99',
@@ -15,13 +15,14 @@ export class PaymentsService implements OnModuleInit {
         'Up to 5 projects',
         'Up to 10 team members',
         'Custom subdomain',
+        'Embeddable Feedback Widget',
       ],
       stripePricingTableId: 'prctbl_1QNQf2Ctqipjj4SBOOWyi4wy',
       stripePublishableKey:
         'pk_test_51QLq5wCtqipjj4SBEPU29LCPwZUPBXkrpmjhNYCjqBtAMjNiIzf718UNPLPEPbCokgs3ZXe7BV0plqmiiFQLiwkm00WAQxjvwc',
     },
     {
-      id: '834301d2-4d25-4ec0-b729-b027721d9846',
+      id: 'a673e68f-a276-4cdf-9179-aa404f2f1467',
       name: 'Startup',
       description: 'A plan that scales with your rapidly growing business.',
       monthlyPrice: '$39.99',
@@ -29,6 +30,7 @@ export class PaymentsService implements OnModuleInit {
         'Up to 15 projects',
         'Up to 150 team members',
         'Custom subdomain',
+        'Embeddable Feedback Widget',
       ],
       tag: 'Most Popular',
       stripePricingTableId: 'prctbl_1QNQmHCtqipjj4SB8UV3onnl',
@@ -36,7 +38,7 @@ export class PaymentsService implements OnModuleInit {
         'pk_test_51QLq5wCtqipjj4SBEPU29LCPwZUPBXkrpmjhNYCjqBtAMjNiIzf718UNPLPEPbCokgs3ZXe7BV0plqmiiFQLiwkm00WAQxjvwc',
     },
     {
-      id: 'a84dc340-f60b-46bc-b37c-0dcc2735fa31',
+      id: '0bc752b6-a13d-4ba7-be31-c062200f9351',
       name: 'Enterprise',
       description: 'Dedicated support and infrastructure for your company.',
       monthlyPrice: '$99.99',
@@ -44,6 +46,7 @@ export class PaymentsService implements OnModuleInit {
         'Unlimited projects',
         'Unlimited team members',
         'Custom hostname',
+        'Embeddable Feedback Widget',
       ],
       stripePricingTableId: 'enterprise',
       stripePublishableKey: 'enterprise',
