@@ -1,5 +1,5 @@
 import {NgIf} from '@angular/common';
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, input, OnInit} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
@@ -20,6 +20,7 @@ import {UserAuthenticationStore} from '../../../../+state/auth/user-auth.store';
 })
 export class SharedAccountPageComponent implements OnInit {
   protected readonly userAuthenticationStore = inject(UserAuthenticationStore);
+  headingText = input.required<string>();
 
   ngOnInit() {
     window.scrollTo(0, 0);
