@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MainDashboardComponent } from './main-dashboard.component';
+import {MainDashboardComponent} from './main-dashboard.component';
 
 describe('MainDashboardComponent', () => {
   let component: MainDashboardComponent;
@@ -8,9 +8,9 @@ describe('MainDashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MainDashboardComponent]
+      imports: [MainDashboardComponent],
     })
-    .compileComponents();
+        .compileComponents();
 
     fixture = TestBed.createComponent(MainDashboardComponent);
     component = fixture.componentInstance;
