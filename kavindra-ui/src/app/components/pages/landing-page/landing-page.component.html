@@ -8,9 +8,15 @@
           <p class="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8 dark:text-dark-text-primary animate__animated animate__fadeIn animate__slow">An open-source feedback application
             for your web applications</p>
           <div class="mt-10 flex items-center justify-center gap-x-6">
-            <a [routerLink]="rebaseRoutePath(RoutePath.REGISTER)"
-               class="rounded-md bg-light-blue dark:bg-dark-blue px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 animate__animated animate__fadeIn animate__slower">Get
-              started</a>
+            <a
+              [routerLink]="rebaseRoutePath(RoutePath.REGISTER)"
+              class="bg-light-blue dark:bg-dark-blue text-white px-3.5 py-2.5 text-sm font-semibold rounded-full
+         border-4 border-light-blue hover:border-indigo-500 dark:border-dark-blue shadow-lg hover:shadow-xl
+         transform transition-transform hover:scale-110 hover:rotate-3
+         focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600
+         animate__animated animate__fadeIn animate__slower">
+              Get started
+            </a>
           </div>
         </div>
       </div>
