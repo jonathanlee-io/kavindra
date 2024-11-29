@@ -1,9 +1,9 @@
 import {Routes} from '@angular/router';
 
+import {LoginPageComponent} from './components/pages/_login_register_pages/login-page/login-page.component';
+import {RegisterPageComponent} from './components/pages/_login_register_pages/register-page/register-page.component';
 import {LandingPageComponent} from './components/pages/landing-page/landing-page.component';
-import {LoginPageComponent} from './components/pages/login-page/login-page.component';
 import {LoginSuccessComponent} from './components/pages/login-success/login-success.component';
-import {RegisterPageComponent} from './components/pages/register-page/register-page.component';
 import {reverseAuthGuard} from './guards/reverse-auth.guard';
 
 export enum RoutePath {
