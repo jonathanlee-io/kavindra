@@ -4,6 +4,7 @@ import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {ToggleSwitchModule} from 'primeng/toggleswitch';
 import {debounceTime, tap} from 'rxjs';
 
 import {RoutePath} from '../../../../../app.routes';
@@ -13,7 +14,17 @@ export type SubdomainState = 'INIT' | 'AVAILABLE' | 'UNAVAILABLE' | 'LOADING';
 
 @Component({
   selector: 'app-create-project-page',
-  imports: [RouterLink, ButtonModule, NgClass, ReactiveFormsModule, NgIf, ProgressSpinnerModule, NgSwitchCase, NgSwitch],
+  imports: [
+    RouterLink,
+    ButtonModule,
+    NgClass,
+    ReactiveFormsModule,
+    NgIf,
+    ProgressSpinnerModule,
+    NgSwitchCase,
+    NgSwitch,
+    ToggleSwitchModule,
+  ],
   standalone: true,
   templateUrl: './create-project-page.component.html',
   styleUrl: './create-project-page.component.scss',
@@ -21,12 +32,16 @@ export type SubdomainState = 'INIT' | 'AVAILABLE' | 'UNAVAILABLE' | 'LOADING';
 export class CreateProjectPageComponent {
   protected readonly rebaseRoutePath = rebaseRoutePath;
   protected readonly RoutePath = RoutePath;
+
+  subdomainState: SubdomainState = 'INIT';
+
   subdomainFormControl = new FormControl<string>('', Validators.compose([
     Validators.required,
     Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9.-]+[a-zA-Z0-9]$/),
-  ]),
-  );
-  subdomainState: SubdomainState = 'INIT';
+  ]));
+  bugReportsEnabledFormControl = new FormControl<boolean>(true);
+  featureRequestsEnabledFormControl = new FormControl<boolean>(true);
+  featureFeedbackEnabledFormControl = new FormControl<boolean>(true);
 
   constructor() {
     this.subdomainFormControl.valueChanges.pipe(
