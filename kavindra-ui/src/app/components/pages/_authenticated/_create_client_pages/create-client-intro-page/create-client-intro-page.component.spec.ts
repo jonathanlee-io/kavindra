@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CreateClientIntroPageComponent } from './create-client-intro-page.component';
+import {CreateClientIntroPageComponent} from './create-client-intro-page.component';
 
 describe('CreateClientIntroPageComponent', () => {
   let component: CreateClientIntroPageComponent;
@@ -8,9 +8,9 @@ describe('CreateClientIntroPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CreateClientIntroPageComponent]
+      imports: [CreateClientIntroPageComponent],
     })
-    .compileComponents();
+        .compileComponents();
 
     fixture = TestBed.createComponent(CreateClientIntroPageComponent);
     component = fixture.componentInstance;
