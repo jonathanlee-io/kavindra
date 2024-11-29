@@ -103,7 +103,10 @@
 
     <div class="mt-6 flex items-center justify-end gap-x-3 animate-fadeindown">
       <a [routerLink]="rebaseRoutePath(RoutePath.CREATE_CLIENT_INTRO)" type="button" class="px-6 py-2 text-lg font-bold text-white bg-yellow-500 rounded-full shadow-lg transform transition-transform hover:scale-105 hover:bg-yellow-400 hover:rotate-3">Cancel</a>
-      <button type="submit" class="px-6 py-2 text-lg font-bold text-white bg-green-600 rounded-full shadow-lg transform transition-transform hover:scale-105 hover:bg-green-500 hover:rotate-3">Save</button>
+      <p-button [disabled]="true"
+              class="px-6 py-2 text-lg font-bold text-white bg-green-600 rounded-full shadow-lg transform transition-transform hover:scale-105 hover:bg-green-500 hover:rotate-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400">
+        Save
+      </p-button>
     </div>
   </form>
 </div>
