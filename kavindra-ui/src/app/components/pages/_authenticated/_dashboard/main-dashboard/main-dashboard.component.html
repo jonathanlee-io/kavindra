@@ -1,0 +1,29 @@
+<div class="card">
+  <p-table [value]="projects()" [tableStyle]="{ 'min-width': '60rem' }">
+    <ng-template pTemplate="caption">
+      <div class="flex items-center justify-between">
+        <span class="text-xl font-bold">Projects Where Involved</span>
+        <p-button icon="pi pi-refresh" rounded raised />
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Subdomain</th>
+        <th>Custom Hostname</th>
+        <th>Bug Reporting Enabled</th>
+        <th>Feature Request Enabled</th>
+        <th>Feature Feedback Enabled</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-project>
+      <tr>
+        <td>{{ project.subdomain }}</td>
+        <td>{{ (project.customHostnames?.length === 0) ? 'None' : project.customHostnames }}</td>
+        <td><p-tag [value]="(project.isBugReportsEnabled) ? 'Enabled': 'Disabled'" [severity]="(project.isBugReportsEnabled) ? 'success': 'danger'" /></td>
+        <td><p-tag [value]="(project.isFeatureRequestsEnabled) ? 'Enabled': 'Disabled'" [severity]="(project.isFeatureRequestsEnabled) ? 'success': 'danger'" /></td>
+        <td><p-tag [value]="(project.isFeatureFeedbackEnabled) ? 'Enabled': 'Disabled'" [severity]="(project.isFeatureFeedbackEnabled) ? 'success': 'danger'" /></td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">Total of {{ projects() ? projects().length : 0 }} project(s). </ng-template>
+  </p-table>
+</div>

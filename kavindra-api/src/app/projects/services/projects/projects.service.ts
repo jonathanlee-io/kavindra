@@ -26,4 +26,8 @@ export class ProjectsService {
     );
     return this.projectsRepository.create(currentUser, createProjectDto);
   }
+
+  async getProjectsWhereInvolved(currentUser: AuthUser) {
+    return this.projectsRepository.getProjectsWhereInvolved(currentUser);
+  }
 }

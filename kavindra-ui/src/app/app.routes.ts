@@ -7,6 +7,9 @@ import {
   CreateProjectPageComponent,
 } from './components/pages/_authenticated/_create_client_pages/create-project-page/create-project-page.component';
 import {
+  MainDashboardComponent,
+} from './components/pages/_authenticated/_dashboard/main-dashboard/main-dashboard.component';
+import {
   SettingsPageComponent,
 } from './components/pages/_authenticated/_manage_settings_pages/settings-page/settings-page.component';
 import {LoginPageComponent} from './components/pages/_login_register_pages/login-page/login-page.component';
@@ -29,6 +32,7 @@ export enum RoutePath {
   CREATE_CLIENT_INTRO = 'create/client/intro',
   CREATE_PROJECT = 'create/project',
   SETTINGS_PAGE = 'manage/settings',
+  DASHBOARD = 'dashboard',
 }
 
 export const routes: Routes = [
@@ -67,6 +71,11 @@ export const routes: Routes = [
   {
     path: RoutePath.SETTINGS_PAGE,
     component: SettingsPageComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: RoutePath.DASHBOARD,
+    component: MainDashboardComponent,
     canActivate: [authGuard],
   },
 ];

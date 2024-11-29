@@ -12,7 +12,6 @@ import {UserAuthenticationStore} from './+state/auth/user-auth.store';
 import {UserPreferencesStore} from './+state/user-preferences/user-preferences.store';
 import {AppService} from './app.service';
 import {NavbarComponent} from './components/lib/_navbar/navbar/navbar.component';
-import {SidebarComponent} from './components/lib/_sidebar/sidebar/sidebar.component';
 import {FooterComponent} from './components/lib/footer/footer.component';
 import {AuthService} from './services/auth/auth.service';
 
@@ -27,7 +26,6 @@ import {AuthService} from './services/auth/auth.service';
     FooterComponent,
     NgIf,
     ToastModule,
-    SidebarComponent,
   ],
   providers: [MessageService],
   templateUrl: './app.component.html',

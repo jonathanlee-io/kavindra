@@ -1,13 +1,7 @@
 import {DOCUMENT} from '@angular/common';
 import {computed, inject} from '@angular/core';
 import {Router} from '@angular/router';
-import {
-  patchState,
-  signalStore,
-  withComputed,
-  withMethods,
-  withState,
-} from '@ngrx/signals';
+import {patchState, signalStore, withComputed, withMethods, withState} from '@ngrx/signals';
 import {MessageService} from 'primeng/api';
 import {take} from 'rxjs';
 
@@ -127,7 +121,6 @@ export const UserAuthenticationStore = signalStore(
           supabaseService.session = JSON.parse(
               localStorage.getItem('supabase-session') ?? JSON.stringify(null),
           );
-          console.log(supabaseService.session);
           if (supabaseService.session !== null) {
             patchState(store, {loggedInState: 'LOGGED_IN'});
           }

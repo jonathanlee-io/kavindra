@@ -1,4 +1,4 @@
-import {Body, Controller, Post} from '@nestjs/common';
+import {Body, Controller, Get, Post} from '@nestjs/common';
 import {AuthUser} from '@supabase/supabase-js';
 
 import {CurrentUser} from '../../../../lib/auth/supabase/decorators/current-user.decorator';
@@ -16,5 +16,10 @@ export class ProjectsController {
     @Body() createProjectDto: CreateProjectDto,
   ) {
     return this.projectsService.createProject(currentUser, createProjectDto);
+  }
+
+  @Get('where-involved')
+  async getProjectsWhereInvolved(@CurrentUser() currentUser: AuthUser) {
+    return this.projectsService.getProjectsWhereInvolved(currentUser);
   }
 }

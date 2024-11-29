@@ -1,10 +1,13 @@
 import {inject} from '@angular/core';
+import {Router} from '@angular/router';
 import {patchState, signalStore, withMethods, withState} from '@ngrx/signals';
 import {catchError, take, tap, throwError} from 'rxjs';
 
+import {RoutePath} from '../../app.routes';
 import {ClientDto} from '../../dtos/client/Client.dto';
 import {PaymentPlanDto} from '../../dtos/payments/PaymentPlan.dto';
 import {ClientService} from '../../services/client/client.service';
+import {rebaseRoutePath, RouterUtils} from '../../util/router/Router.utils';
 import {UserAuthenticationStore} from '../auth/user-auth.store';
 
 export type ClientState = {
@@ -29,6 +32,7 @@ export const ClientStore = signalStore(
     {providedIn: 'root'},
     withState(initialState),
     withMethods((store) => {
+      const router = inject(Router);
       const clientService = inject(ClientService);
       const userAuthenticationStore = inject(UserAuthenticationStore);
       return {
@@ -112,6 +116,8 @@ export const ClientStore = signalStore(
                       );
                       return;
                     }
+                    router.navigate([rebaseRoutePath(RoutePath.DASHBOARD)])
+                        .catch(RouterUtils.navigateCatchErrorCallback);
                   }),
                   catchError((err) => {
                     patchState(store, {isLoading: false});
