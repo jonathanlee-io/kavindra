@@ -1,3 +1,4 @@
+import {CacheModule} from '@nestjs/cache-manager';
 import {Module} from '@nestjs/common';
 import {ConfigModule} from '@nestjs/config';
 import {APP_GUARD, RouterModule} from '@nestjs/core';
@@ -29,6 +30,9 @@ import {SupabaseAuthGuard} from '../lib/auth/supabase/guards/supabase-auth/supab
         limit: 10,
       },
     ]),
+    CacheModule.register({
+      isGlobal: true,
+    }),
     AuthModule,
     IssuesModule,
     ReleasesModule,
