@@ -79,33 +79,35 @@ export class ClientsRepositoryService {
     if (!createdClient) {
       throw new InternalServerErrorException();
     }
-    const [createdSubdomain, createdProject] =
-      await this.prismaService.$transaction([
-        this.prismaService.subdomain.create({
-          data: {
-            client: {connect: {id: createdClient.id}},
-            subdomain,
+    const createdProject = await this.prismaService.project.create({
+      data: {
+        name: subdomain,
+        isBugReportsEnabled,
+        isFeatureRequestsEnabled,
+        isFeatureFeedbackEnabled,
+        client: {
+          connect: {
+            id: createdClient.id,
           },
-        }),
-        this.prismaService.project.create({
-          data: {
-            name: subdomain,
-            isBugReportsEnabled,
-            isFeatureRequestsEnabled,
-            isFeatureFeedbackEnabled,
-            client: {
-              connect: {
-                id: createdClient.id,
-              },
-            },
-            createdBy: {
-              connect: {
-                id: user.id,
-              },
-            },
+        },
+        createdBy: {
+          connect: {
+            id: user.id,
           },
-        }),
-      ]);
+        },
+      },
+    });
+
+    const createdSubdomain = await this.prismaService.subdomain.create({
+      data: {
+        subdomain,
+        project: {
+          connect: {
+            id: createdProject.id,
+          },
+        },
+      },
+    });
 
     return {createdClient, createdSubdomain, createdProject};
   }
@@ -121,15 +123,11 @@ export class ClientsRepositoryService {
     currentUser: AuthUser,
     {
       isIncludeCreatedBy,
-      isIncludeSubdomains,
-      isIncludeHostnames,
       isIncludeMembers,
       isIncludeAdmins,
       isIncludeProjects,
     }: {
       isIncludeCreatedBy?: boolean;
-      isIncludeSubdomains?: boolean;
-      isIncludeHostnames?: boolean;
       isIncludeMembers?: boolean;
       isIncludeAdmins?: boolean;
       isIncludeProjects?: boolean;
@@ -156,8 +154,6 @@ export class ClientsRepositoryService {
       },
       include: {
         createdBy: isIncludeCreatedBy,
-        subdomains: isIncludeSubdomains,
-        hostnames: isIncludeHostnames,
         members: isIncludeMembers,
         admins: isIncludeAdmins,
         projects: isIncludeProjects,
@@ -169,14 +165,10 @@ export class ClientsRepositoryService {
     clientId: string,
     {
       isIncludeCreatedBy,
-      isIncludeSubdomains,
-      isIncludeHostnames,
       isIncludeMembers,
       isIncludeAdmins,
     }: {
       isIncludeCreatedBy?: boolean;
-      isIncludeSubdomains?: boolean;
-      isIncludeHostnames?: boolean;
       isIncludeMembers?: boolean;
       isIncludeAdmins?: boolean;
     },
@@ -187,8 +179,6 @@ export class ClientsRepositoryService {
         createdBy: isIncludeCreatedBy,
         admins: isIncludeAdmins,
         members: isIncludeMembers,
-        subdomains: isIncludeSubdomains,
-        hostnames: isIncludeHostnames,
       },
     });
   }

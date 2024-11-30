@@ -8,20 +8,15 @@ datasource db {
 }
 
 model User {
-  id                 String        @id @default(uuid())
-  supabaseUserId     String        @unique
+  id                 String    @id @default(uuid())
+  supabaseUserId     String    @unique
   displayName        String
-  createdAt          DateTime      @default(now())
-  updatedAt          DateTime      @default(now())
-  Issue              Issue[]
-  Release            Release?      @relation(fields: [releaseId], references: [id])
-  releaseId          String?
-  ClientCreated      Client[]      @relation(name: "createdByUser")
-  IssueSection       IssueSection? @relation(fields: [issueSectionId], references: [id])
-  issueSectionId     String?
-  Project            Project[]
-  ClientsWhereMember Client[]      @relation(name: "membersOfClient")
-  ClientsWhereAdmin  Client[]      @relation(name: "adminsOfClient")
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @default(now())
+  clientCreated      Client[]  @relation(name: "createdByUser")
+  project            Project[]
+  clientsWhereMember Client[]  @relation(name: "membersOfClient")
+  clientsWhereAdmin  Client[]  @relation(name: "adminsOfClient")
   clientId           String?
 }
 
@@ -32,8 +27,6 @@ model Client {
   createdBy     User        @relation(fields: [userId], references: [id], name: "createdByUser")
   members       User[]      @relation(name: "membersOfClient")
   admins        User[]      @relation(name: "adminsOfClient")
-  subdomains    Subdomain[]
-  hostnames     Hostname[]
   projects      Project[]
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @default(now())
@@ -52,7 +45,23 @@ model PaymentPlan {
   stripePublishableKey String
   createdAt            DateTime @default(now())
   updatedAt            DateTime @default(now())
-  Client               Client[]
+  clients              Client[]
+}
+
+model Project {
+  id                       String      @id @default(uuid())
+  name                     String
+  createdAt                DateTime    @default(now())
+  updatedAt                DateTime    @default(now())
+  createdBy                User        @relation(fields: [userId], references: [id])
+  isBugReportsEnabled      Boolean     @default(true)
+  isFeatureRequestsEnabled Boolean     @default(true)
+  isFeatureFeedbackEnabled Boolean     @default(true)
+  hostnames                Hostname[]
+  subdomains               Subdomain[]
+  client                   Client?     @relation(fields: [clientId], references: [id])
+  clientId                 String?
+  userId                   String
 }
 
 model Subdomain {
@@ -60,84 +69,15 @@ model Subdomain {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
   subdomain String   @unique
-  client    Client?  @relation(fields: [clientId], references: [id])
-  clientId  String?
+  project   Project? @relation(fields: [projectId], references: [id])
+  projectId String?
 }
 
 model Hostname {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
-  client    Client?  @relation(fields: [clientId], references: [id])
-  clientId  String?
-}
-
-model Project {
-  id                       String   @id @default(uuid())
-  name                     String
-  createdAt                DateTime @default(now())
-  updatedAt                DateTime @default(now())
-  createdBy                User     @relation(fields: [userId], references: [id])
-  isBugReportsEnabled      Boolean  @default(true)
-  isFeatureRequestsEnabled Boolean  @default(true)
-  isFeatureFeedbackEnabled Boolean  @default(true)
-  epics                    Epic[]
-  client                   Client?  @relation(fields: [clientId], references: [id])
-  clientId                 String?
-  userId                   String
-}
-
-model Epic {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  issues    Issue[]
+  hostname  String   @unique
   project   Project? @relation(fields: [projectId], references: [id])
   projectId String?
-}
-
-model Sprint {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  issues    Issue[]
-}
-
-model Release {
-  id          String   @id @default(uuid())
-  releaseDate DateTime
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
-  assignees   User[]
-  issues      Issue[]
-}
-
-model Issue {
-  id             String        @id @default(uuid())
-  title          String
-  iconClass      String
-  type           String
-  color          String
-  dueDate        DateTime
-  assignee       User          @relation(fields: [userId], references: [id])
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @default(now())
-  epic           Epic?         @relation(fields: [epicId], references: [id])
-  epicId         String?
-  userId         String
-  sprint         Sprint?       @relation(fields: [sprintId], references: [id])
-  sprintId       String?
-  Release        Release?      @relation(fields: [releaseId], references: [id])
-  releaseId      String?
-  IssueSection   IssueSection? @relation(fields: [issueSectionId], references: [id])
-  issueSectionId String?
-}
-
-model IssueSection {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  issues    Issue[]
-  admins    User[]
-  isOpen    Boolean
 }

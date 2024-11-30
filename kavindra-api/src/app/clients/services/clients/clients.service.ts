@@ -105,8 +105,6 @@ export class ClientsService {
     );
     return this.clientsRepository.getClientsWhereUserInvolved(currentUser, {
       isIncludeCreatedBy: true,
-      isIncludeSubdomains: true,
-      isIncludeHostnames: true,
       isIncludeMembers: true,
       isIncludeAdmins: true,
       isIncludeProjects: true,
