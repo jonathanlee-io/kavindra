@@ -102,9 +102,6 @@ export class ClientsService {
   }
 
   async getClientsWhereInvolved(currentUser: AuthUser) {
-    this.logger.log(
-      `Request from: <${currentUser.email}> to get clients where involved`,
-    );
     return this.clientsRepository.getClientsWhereUserInvolved(currentUser, {
       isIncludeCreatedBy: true,
       isIncludeMembers: true,

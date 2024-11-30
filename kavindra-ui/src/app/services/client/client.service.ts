@@ -46,4 +46,10 @@ export class ClientService {
         this.tenantStore.getFullRequestUrl('v1/clients/where-involved'),
     );
   }
+
+  fetchIsMemberOfAnything() {
+    return this.httpClient.get<{isMemberOfAnything: boolean}>(
+        this.tenantStore.getFullRequestUrl('v1/clients/is-member-of-anything'),
+    );
+  }
 }
