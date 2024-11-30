@@ -13,6 +13,7 @@ module.exports = {
       'light-blue': '#007bff',
       'light-error': '#dc3545',
       'light-success': '#28a745',
+      'light-white': '#FFFFFF',
       /* DARK THEME */
       'dark-primary': '#001631',
       'dark-secondary': '#596570',
@@ -20,6 +21,7 @@ module.exports = {
       'dark-blue': '#007bff',
       'dark-error': '#dc3545',
       'dark-success': '#28a745',
+      'dark-white': '#FFFFFF',
     }
   },
   darkMode: 'class',
