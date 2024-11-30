@@ -61,6 +61,7 @@ export class ProjectsRepositoryService {
       },
       include: {
         createdBy: true,
+        client: true,
         hostnames: true,
         subdomains: true,
       },

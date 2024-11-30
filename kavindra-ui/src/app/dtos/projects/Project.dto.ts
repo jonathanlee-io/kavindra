@@ -6,6 +6,9 @@ export interface ProjectDto {
   isFeatureFeedbackEnabled: boolean;
   subdomains: string[];
   hostnames: string[]
+  client: {
+    displayName: string;
+  };
   clientId: string;
   userId: string;
   createdAt: string;
