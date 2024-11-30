@@ -1,18 +1,26 @@
 import {ApiProperty} from '@nestjs/swagger';
-import {IsBoolean, IsDefined, IsString, IsUUID, Matches} from 'class-validator';
+import {
+  IsBoolean,
+  IsDefined,
+  IsString,
+  Matches,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 export class CreateClientDto {
+  @IsDefined()
+  @IsString()
+  @MinLength(3)
+  @MaxLength(100)
+  @ApiProperty({required: true})
+  clientDisplayName: string;
+
   @IsDefined()
   @IsString()
   @Matches(/^[a-zA-Z0-9][a-zA-Z0-9.-]+[a-zA-Z0-9]$/)
   @ApiProperty({required: true})
   subdomain: string;
-
-  @IsDefined()
-  @IsString()
-  @IsUUID()
-  @ApiProperty({required: true})
-  paymentPlanId: string;
 
   @IsDefined()
   @IsBoolean()

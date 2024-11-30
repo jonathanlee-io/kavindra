@@ -44,6 +44,11 @@ export class CreateProjectPageComponent implements OnInit {
 
   subdomainState: SubdomainState = 'INIT';
 
+  clientDisplayNameFormControl = new FormControl<string>('', Validators.compose([
+    Validators.required,
+    Validators.minLength(3),
+    Validators.maxLength(100),
+  ]));
   subdomainFormControl = new FormControl<string>('', Validators.compose([
     Validators.required,
     Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9.-]+[a-zA-Z0-9]$/),
@@ -87,8 +92,8 @@ export class CreateProjectPageComponent implements OnInit {
 
   doCreateProject() {
     this.clientStore.registerNewClientAndProjectWithPlan(
+      this.clientDisplayNameFormControl.value!,
       this.subdomainFormControl.value!,
-      this.pricingPlans()[0],
       this.bugReportsEnabledFormControl.value!,
       this.featureRequestsEnabledFormControl.value!,
       this.featureFeedbackEnabledFormControl.value!,

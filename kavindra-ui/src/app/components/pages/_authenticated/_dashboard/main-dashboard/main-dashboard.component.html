@@ -8,7 +8,7 @@
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th>Subdomain</th>
+        <th>Primary Subdomain</th>
         <th>Custom Hostname</th>
         <th>Bug Reporting Enabled</th>
         <th>Feature Request Enabled</th>
@@ -17,8 +17,8 @@
     </ng-template>
     <ng-template pTemplate="body" let-project>
       <tr>
-        <td><a [routerLink]="[rebaseRoutePathAsString(RoutePath.PROJECT_DASHBOARD.replace(':projectSubdomain', project.subdomain))]">{{ project.subdomain }}<i class="px-2 pi pi-arrow-right"></i></a></td>
-        <td>{{ (project.customHostnames?.length === 0) ? 'None' : project.customHostnames }}</td>
+        <td><a [routerLink]="[rebaseRoutePathAsString(RoutePath.PROJECT_DASHBOARD.replace(':projectSubdomain', project.subdomains?.[0].subdomain))]">{{ project.subdomains?.[0].subdomain }}<i class="px-2 pi pi-arrow-right"></i></a></td>
+        <td>{{ (project.hostnames?.length === 0) ? 'None' : project.hostnames?.[0].hostname }}</td>
         <td><p-tag [value]="(project.isBugReportsEnabled) ? 'Enabled': 'Disabled'" [severity]="(project.isBugReportsEnabled) ? 'success': 'danger'" /></td>
         <td><p-tag [value]="(project.isFeatureRequestsEnabled) ? 'Enabled': 'Disabled'" [severity]="(project.isFeatureRequestsEnabled) ? 'success': 'danger'" /></td>
         <td><p-tag [value]="(project.isFeatureFeedbackEnabled) ? 'Enabled': 'Disabled'" [severity]="(project.isFeatureFeedbackEnabled) ? 'success': 'danger'" /></td>

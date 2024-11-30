@@ -11,6 +11,7 @@ import {AuthUser} from '@supabase/supabase-js';
 import {supabaseUserIdKey} from '../../../../lib/constants/auth/supabase-user-id.constants';
 import {reservedSubdomains} from '../../../../lib/constants/subdomains/reserved-subdomains.constants';
 import {POSTSuccessDto} from '../../../../lib/dto/POSTSuccess.dto';
+import {PaymentsService} from '../../../payments/services/payments/payments.service';
 import {CreateClientDto} from '../../dto/CreateClient.dto';
 import {IsSubdomainAvailableDto} from '../../dto/IsSubdomainAvailable.dto';
 import {ClientsRepositoryService} from '../../repositories/clients-repository/clients-repository.service';
@@ -25,8 +26,8 @@ export class ClientsService {
   async createClient(
     currentUser: AuthUser,
     {
+      clientDisplayName,
       subdomain,
-      paymentPlanId,
       isBugReportsEnabled,
       isFeatureRequestsEnabled,
       isFeatureFeedbackEnabled,
@@ -43,8 +44,9 @@ export class ClientsService {
     const {createdClient, createdSubdomain, createdProject} =
       await this.clientsRepository.registerNewClientWithTransaction(
         currentUser,
+        clientDisplayName,
         subdomain,
-        paymentPlanId,
+        PaymentsService.paymentPlans[0].id,
         {
           isBugReportsEnabled,
           isFeatureRequestsEnabled,

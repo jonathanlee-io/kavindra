@@ -4,7 +4,6 @@ import {inject, Injectable} from '@angular/core';
 import {TenantStore} from '../../+state/tenant/tenant.store';
 import {POSTSuccessDto} from '../../dtos/POSTSuccess.dto';
 import {ClientDto} from '../../dtos/client/Client.dto';
-import {PaymentPlanDto} from '../../dtos/payments/PaymentPlan.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -24,8 +23,8 @@ export class ClientService {
   }
 
   registerNewClientAndProjectWithPlan(
+      clientDisplayName: string,
       subdomain: string,
-      paymentPlan: PaymentPlanDto,
       isBugReportsEnabled: boolean,
       isFeatureRequestsEnabled: boolean,
       isFeatureFeedbackEnabled: boolean,
@@ -33,8 +32,8 @@ export class ClientService {
     return this.httpClient.post<POSTSuccessDto & { clientId: string }>(
         this.tenantStore.getFullRequestUrl('v1/clients/create'),
         {
+          clientDisplayName,
           subdomain,
-          paymentPlanId: paymentPlan.id,
           isBugReportsEnabled,
           isFeatureRequestsEnabled,
           isFeatureFeedbackEnabled,

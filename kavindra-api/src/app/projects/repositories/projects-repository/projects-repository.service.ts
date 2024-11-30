@@ -28,7 +28,7 @@ export class ProjectsRepositoryService {
   }
 
   async getProjectsWhereInvolved(currentUser: AuthUser) {
-    return this.prismaService.client.findMany({
+    const clientsWhereInvolved = await this.prismaService.client.findMany({
       where: {
         OR: [
           {
@@ -52,6 +52,17 @@ export class ProjectsRepositoryService {
         members: true,
         admins: true,
         projects: true,
+      },
+    });
+
+    return this.prismaService.project.findMany({
+      where: {
+        clientId: {in: clientsWhereInvolved.map((client) => client.id)},
+      },
+      include: {
+        createdBy: true,
+        hostnames: true,
+        subdomains: true,
       },
     });
   }

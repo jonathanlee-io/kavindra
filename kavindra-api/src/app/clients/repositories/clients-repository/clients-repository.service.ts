@@ -14,6 +14,7 @@ export class ClientsRepositoryService {
 
   async registerNewClientWithTransaction(
     currentUser: AuthUser,
+    clientDisplayName: string,
     subdomain: string,
     paymentPlanId: string,
     {
@@ -38,7 +39,7 @@ export class ClientsRepositoryService {
       await this.prismaService.$transaction(async (prisma) => {
         const createdClient = await prisma.client.create({
           data: {
-            displayName: subdomain,
+            displayName: clientDisplayName,
             paymentPlan: {
               connect: {
                 id: paymentPlanId,

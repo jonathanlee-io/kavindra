@@ -74,6 +74,7 @@ describe('ClientsRepositoryService', () => {
 
     const result = await repository.registerNewClientWithTransaction(
       mockUserData as unknown as AuthUser,
+      faker.internet.displayName(),
       faker.internet.domainName().split('.')[0],
       PaymentsService.paymentPlans[0].id,
       {

@@ -5,7 +5,6 @@ import {catchError, take, tap, throwError} from 'rxjs';
 
 import {RoutePath} from '../../app.routes';
 import {ClientDto} from '../../dtos/client/Client.dto';
-import {PaymentPlanDto} from '../../dtos/payments/PaymentPlan.dto';
 import {ClientService} from '../../services/client/client.service';
 import {rebaseRoutePath, RouterUtils} from '../../util/router/Router.utils';
 import {UserAuthenticationStore} from '../auth/user-auth.store';
@@ -88,8 +87,8 @@ export const ClientStore = signalStore(
               .subscribe();
         },
         registerNewClientAndProjectWithPlan: (
+            clientDisplayName: string,
             subdomain: string,
-            paymentPlan: PaymentPlanDto,
             isBugReportsEnabled: boolean,
             isFeatureRequestsEnabled: boolean,
             isFeatureFeedbackEnabled: boolean,
@@ -97,8 +96,8 @@ export const ClientStore = signalStore(
           patchState(store, {isLoading: true});
           clientService
               .registerNewClientAndProjectWithPlan(
+                  clientDisplayName,
                   subdomain,
-                  paymentPlan,
                   isBugReportsEnabled,
                   isFeatureRequestsEnabled,
                   isFeatureFeedbackEnabled,
