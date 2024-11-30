@@ -1,12 +1,12 @@
-<div class="py-8 px-8 border-8 border-black rounded-3xl" style="box-shadow: 5px 5px 0 black; outline: 3px solid black;">
+<div class="py-8 px-8 border-8 border-black rounded-3xl min-h-screen dark:bg-dark-primary" style="box-shadow: 5px 5px 0 black; outline: 3px solid black;">
   <form>
     <div class="space-y-12 animate-fadeinup">
       <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3">
         <div>
-          <h2 class="text-4xl font-extrabold text-gray-900 tracking-wide">
+          <h2 class="text-4xl font-extrabold tracking-wide text-light-text-primary dark:text-dark-text-primary">
             Project
           </h2>
-          <p class="mt-1 text-xl text-gray-600">This information will be displayed publicly so be careful what you
+          <p class="mt-1 text-xl text-light-text-primary dark:text-dark-text-primary">This information will be displayed publicly so be careful what you
             share.</p>
         </div>
 
@@ -16,15 +16,15 @@
               <div class="mt-2">
                 <div
                   [ngClass]="{'outline-light-error text-light-error': (subdomainState !== 'LOADING' && ((subdomainFormControl.invalid && subdomainFormControl.dirty) || subdomainState === 'UNAVAILABLE')), 'outline-light-success': (subdomainState !== 'LOADING' && (subdomainFormControl.valid && subdomainState === 'AVAILABLE'))}"
-                  class="flex items-center rounded-full bg-white py-2 px-4 shadow-lg outline outline-2 focus-within:outline-pink-500">
-                  <div class="shrink-0 select-none text-lg text-gray-700 mr-2 sm:text-base">https://</div>
+                  class="flex items-center rounded-full py-2 px-4 shadow-lg outline outline-2 dark:outline-dark-text-primary focus-within:outline-pink-500">
+                  <div class="shrink-0 select-none text-lg text-light-text-primary dark:text-dark-text-primary mr-2 sm:text-base">https://</div>
                   <input type="text" name="subdomain" id="subdomain"
                          autocomplete="off"
                          [formControl]="subdomainFormControl"
                          [ngClass]="{'placeholder-light-error': (subdomainState !== 'LOADING' && ((subdomainFormControl.invalid && subdomainFormControl.dirty) || subdomainState === 'UNAVAILABLE')), 'text-light-success outline-light-success': (subdomainState !== 'LOADING' && (subdomainFormControl.valid && subdomainState === 'AVAILABLE'))}"
-                         class="w-full text-lg rounded-full focus:outline-none"
+                         class="w-full text-lg rounded-full focus:outline-none text-light-text-primary dark:text-light-text-primary"
                          placeholder="Enter subdomain">
-                  <div class="shrink-0 select-none text-lg text-gray-700 ml-2 sm:text-base">.kavindra.io</div>
+                  <div class="shrink-0 select-none text-lg text-gray-700 ml-2 sm:text-base text-light-text-primary dark:text-dark-text-primary">.kavindra.io</div>
                   <div class="flex items-center ml-2 mt-2 pb-2">
                     <ng-container [ngSwitch]="subdomainState">
                       <p-progress-spinner *ngSwitchCase="'LOADING'" styleClass="w-8 h-8"/>
@@ -57,16 +57,16 @@
 
       <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3">
         <div>
-          <h2 class="text-4xl font-extrabold text-gray-900 tracking-wide">
+          <h2 class="text-4xl font-extrabold text-light-text-primary dark:text-dark-text-primary tracking-wide">
             Features
           </h2>
-          <p class="mt-1 text-xl text-gray-600">You can disable or enable any of these features at any time using our
+          <p class="mt-1 text-xl text-light-text-primary dark:text-dark-text-primary">You can disable or enable any of these features at any time using our
             dashboard.</p>
         </div>
 
         <div class="max-w-2xl space-y-10 md:col-span-2">
           <fieldset>
-            <legend class="text-3xl font-bold text-gray-900">Enable / Disable</legend>
+            <legend class="text-3xl font-bold text-light-text-primary dark:text-dark-text-primary">Enable / Disable</legend>
             <div class="mt-6 space-y-6">
               <div class="flex gap-3">
                 <div class="flex h-6 shrink-0 items-center">
@@ -75,8 +75,8 @@
                   </div>
                 </div>
                 <div class="ml-6">
-                  <label class="text-2xl font-bold text-gray-900">Bug Reports</label>
-                  <p id="comments-description" class="text-xl text-gray-500">Allow users to report issues with your
+                  <label class="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary">Bug Reports</label>
+                  <p id="comments-description" class="text-xl text-light-text-primary dark:text-dark-text-primary">Allow users to report issues with your
                     software so you can fix it quickly.</p>
                 </div>
               </div>
@@ -87,8 +87,8 @@
                   </div>
                 </div>
                 <div class="ml-6">
-                  <label class="text-2xl font-bold text-gray-900">Feature Requests</label>
-                  <p id="candidates-description" class="text-xl text-gray-500">Sometimes customers have the best ideas,
+                  <label class="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary">Feature Requests</label>
+                  <p id="candidates-description" class="text-xl text-light-text-primary dark:text-dark-text-primary">Sometimes customers have the best ideas,
                     this way they can submit them directly to you.</p>
                 </div>
               </div>
@@ -99,8 +99,8 @@
                   </div>
                 </div>
                 <div class="ml-6">
-                  <label class="text-2xl font-bold text-gray-900">Feature Feedback</label>
-                  <p id="offers-description" class="text-xl text-gray-500">You can see exactly how customers are
+                  <label class="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary">Feature Feedback</label>
+                  <p id="offers-description" class="text-xl text-light-text-primary dark:text-dark-text-primary">You can see exactly how customers are
                     responding to your newly launched features.</p>
                 </div>
               </div>
@@ -112,13 +112,13 @@
 
     <div class="mt-6 flex items-center justify-end gap-x-3 animate-fadeindown">
       <a [routerLink]="rebaseRoutePath(RoutePath.CREATE_CLIENT_INTRO)" type="button"
-         class="px-8 py-4 text-2xl font-bold text-white bg-yellow-500 rounded-full shadow-lg transform transition-transform hover:scale-105 hover:bg-yellow-400 hover:rotate-3">
+         class="px-8 py-4 text-2xl font-bold text-light-text-primary dark:text-dark-text-primary dark:outline-dark-text-primary dark:outline rounded-full shadow-lg transform transition-transform hover:scale-105 hover:bg-yellow-400 hover:rotate-3">
         Cancel
       </a>
       <p-button [disabled]="!(subdomainState === 'AVAILABLE' && subdomainFormControl.valid)"
                 [loading]="clientStore.isLoading()"
                 (click)="doCreateProject()"
-                class="px-8 py-4 text-2xl font-bold text-white bg-green-600 rounded-full shadow-lg transform transition-transform hover:scale-105 hover:bg-green-500 hover:rotate-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400">
+                class="px-8 py-4 text-2xl font-bold text-white text-light-text-primary dark:text-dark-text-primary dark:outline-dark-text-primary dark:outline rounded-full shadow-lg transform transition-transform hover:scale-105 hover:bg-green-500 hover:rotate-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400">
         Continue
       </p-button>
     </div>
