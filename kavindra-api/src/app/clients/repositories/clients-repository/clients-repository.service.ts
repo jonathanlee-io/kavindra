@@ -1,9 +1,4 @@
-import {
-  ForbiddenException,
-  Injectable,
-  InternalServerErrorException,
-  Logger,
-} from '@nestjs/common';
+import {Injectable, InternalServerErrorException} from '@nestjs/common';
 import {AuthUser} from '@supabase/supabase-js';
 
 import {supabaseUserIdKey} from '../../../../lib/constants/auth/supabase-user-id.constants';
@@ -13,7 +8,6 @@ import {UsersRepositoryService} from '../../../users/repositories/users-reposito
 @Injectable()
 export class ClientsRepositoryService {
   constructor(
-    private readonly logger: Logger,
     private readonly prismaService: PrismaService,
     private readonly usersRepository: UsersRepositoryService,
   ) {}
@@ -40,74 +34,65 @@ export class ClientsRepositoryService {
         `Could not find user with id: ${currentUser[supabaseUserIdKey]}`,
       );
     }
-    let createdClient: {
-      id: string;
-      createdAt: Date;
-      updatedAt: Date;
-      userId: string;
-    };
-    try {
-      createdClient = await this.prismaService.client.create({
-        data: {
-          displayName: subdomain,
-          paymentPlan: {
-            connect: {
-              id: paymentPlanId,
+    const [createdClient, createdProject, createdSubdomain] =
+      await this.prismaService.$transaction(async (prisma) => {
+        const createdClient = await prisma.client.create({
+          data: {
+            displayName: subdomain,
+            paymentPlan: {
+              connect: {
+                id: paymentPlanId,
+              },
+            },
+            createdBy: {
+              connect: {
+                id: user.id,
+              },
+            },
+            admins: {
+              connect: {
+                supabaseUserId: currentUser[supabaseUserIdKey],
+              },
+            },
+            members: {
+              connect: {
+                supabaseUserId: currentUser[supabaseUserIdKey],
+              },
             },
           },
-          createdBy: {
-            connect: {
-              id: user.id,
+        });
+        const createdProject = await prisma.project.create({
+          data: {
+            name: subdomain,
+            isBugReportsEnabled,
+            isFeatureRequestsEnabled,
+            isFeatureFeedbackEnabled,
+            client: {
+              connect: {
+                id: createdClient.id,
+              },
+            },
+            createdBy: {
+              connect: {
+                id: user.id,
+              },
             },
           },
-          admins: {
-            connect: {
-              supabaseUserId: currentUser[supabaseUserIdKey],
-            },
-          },
-          members: {
-            connect: {
-              supabaseUserId: currentUser[supabaseUserIdKey],
-            },
-          },
-        },
-      });
-    } catch (error) {
-      this.logger.error(error);
-      throw new InternalServerErrorException();
-    }
-    if (!createdClient) {
-      throw new InternalServerErrorException();
-    }
-    const createdProject = await this.prismaService.project.create({
-      data: {
-        name: subdomain,
-        isBugReportsEnabled,
-        isFeatureRequestsEnabled,
-        isFeatureFeedbackEnabled,
-        client: {
-          connect: {
-            id: createdClient.id,
-          },
-        },
-        createdBy: {
-          connect: {
-            id: user.id,
-          },
-        },
-      },
-    });
+        });
 
-    const createdSubdomain = await this.prismaService.subdomain.create({
-      data: {
-        subdomain,
-        project: {
-          connect: {
-            id: createdProject.id,
+        const createdSubdomain = await prisma.subdomain.create({
+          data: {
+            subdomain,
+            project: {
+              connect: {
+                id: createdProject.id,
+              },
+            },
           },
-        },
-      },
-    });
+        });
+
+        return [createdClient, createdProject, createdSubdomain];
+      });
 
     return {createdClient, createdSubdomain, createdProject};
   }
@@ -179,39 +164,6 @@ export class ClientsRepositoryService {
         createdBy: isIncludeCreatedBy,
         admins: isIncludeAdmins,
         members: isIncludeMembers,
-      },
-    });
-  }
-
-  async updatePaymentPlanForClientById(
-    currentUser: AuthUser,
-    id: string | undefined,
-    paymentPlanId: string,
-  ) {
-    if (!id) {
-      throw new InternalServerErrorException();
-    }
-    const client = await this.prismaService.client.findUnique({
-      where: {
-        id,
-      },
-      include: {
-        createdBy: true,
-      },
-    });
-    if (client.createdBy.supabaseUserId !== currentUser[supabaseUserIdKey]) {
-      throw new ForbiddenException();
-    }
-    await this.prismaService.client.update({
-      where: {
-        id,
-      },
-      data: {
-        paymentPlan: {
-          connect: {
-            id: paymentPlanId,
-          },
-        },
       },
     });
   }
