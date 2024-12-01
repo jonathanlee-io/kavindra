@@ -36,7 +36,7 @@ export enum RoutePath {
   CREATE_PROJECT = 'create/project',
   SETTINGS_PAGE = 'manage/settings',
   DASHBOARD = 'dashboard',
-  PROJECT_DASHBOARD = 'dashboard/project/:projectSubdomain',
+  PROJECT_DASHBOARD = 'dashboard/project/:projectId',
 }
 
 export const routes: Routes = [

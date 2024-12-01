@@ -14,4 +14,12 @@ export class ProjectsService {
   fetchProjectsWhereInvolved() {
     return this.httpClient.get<ProjectDto[]>(this.tenantStore.getFullRequestUrl('v1/projects/where-involved'));
   }
+
+  fetchProjectById(projectId: string) {
+    return this.httpClient.get<ProjectDto>(this.tenantStore.getFullRequestUrl(`v1/projects/${projectId}`));
+  }
+
+  updateProjectById(projectId: string, project: ProjectDto) {
+    return this.httpClient.put<ProjectDto>(this.tenantStore.getFullRequestUrl(`v1/projects/${projectId}`), project);
+  }
 }

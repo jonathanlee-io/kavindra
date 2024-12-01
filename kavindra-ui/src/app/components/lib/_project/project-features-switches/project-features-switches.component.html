@@ -3,13 +3,13 @@
     <h2 class="text-4xl font-extrabold text-light-text-primary dark:text-dark-text-primary tracking-wide">
       Project Features
     </h2>
-    <p *ngIf="hintEnabled()" class="mt-1 text-xl text-light-text-primary dark:text-dark-text-primary">You can disable or enable any of
+    <p *ngIf="isHintEnabled()" class="mt-1 text-xl text-light-text-primary dark:text-dark-text-primary">You can disable or enable any of
       these features at any time using our
       dashboard.</p>
   </div>
 
   <div class="max-w-2xl space-y-10 md:col-span-2">
-    <fieldset>
+    <fieldset *ngIf="!projectStore.isLoading() else loadingSpinner">
       <legend class="text-3xl font-bold text-light-text-primary dark:text-dark-text-primary">Enable / Disable
       </legend>
       <div class="mt-6 space-y-6">
@@ -57,5 +57,10 @@
         </div>
       </div>
     </fieldset>
+    <ng-template #loadingSpinner>
+      <div class="flex justify-center items-center">
+        <p-progressSpinner styleClass="mt-8" />
+      </div>
+    </ng-template>
   </div>
 </div>

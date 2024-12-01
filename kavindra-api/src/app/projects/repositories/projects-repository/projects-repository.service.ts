@@ -4,6 +4,7 @@ import {AuthUser} from '@supabase/supabase-js';
 import {supabaseUserIdKey} from '../../../../lib/constants/auth/supabase-user-id.constants';
 import {PrismaService} from '../../../../lib/prisma/services/prisma.service';
 import {CreateProjectDto} from '../../dto/CreateProject.dto';
+import {UpdateProjectDto} from '../../dto/UpdateProject.dto';
 
 @Injectable()
 export class ProjectsRepositoryService {
@@ -58,6 +59,42 @@ export class ProjectsRepositoryService {
     return this.prismaService.project.findMany({
       where: {
         clientId: {in: clientsWhereInvolved.map((client) => client.id)},
+      },
+      include: {
+        createdBy: true,
+        client: true,
+        hostnames: true,
+        subdomains: true,
+      },
+    });
+  }
+
+  async findById(projectId: string) {
+    return this.prismaService.project.findUnique({
+      where: {
+        id: projectId,
+      },
+      include: {
+        createdBy: true,
+        client: true,
+        hostnames: true,
+        subdomains: true,
+      },
+    });
+  }
+
+  async updateProjectById(
+    projectId: string,
+    updateProjectDto: UpdateProjectDto,
+  ) {
+    return this.prismaService.project.update({
+      where: {
+        id: projectId,
+      },
+      data: {
+        isBugReportsEnabled: updateProjectDto.isBugReportsEnabled,
+        isFeatureRequestsEnabled: updateProjectDto.isFeatureRequestsEnabled,
+        isFeatureFeedbackEnabled: updateProjectDto.isFeatureFeedbackEnabled,
       },
       include: {
         createdBy: true,

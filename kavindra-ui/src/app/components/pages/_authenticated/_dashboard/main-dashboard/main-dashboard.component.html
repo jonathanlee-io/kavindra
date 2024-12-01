@@ -1,9 +1,10 @@
 <div class="card min-h-screen bg-light-primary dark:bg-dark-primary">
-  <p-table [value]="projects()" [tableStyle]="{ 'min-width': '60rem' }">
+  <p-table *ngIf="!projectStore.isLoading() else loadingSpinner" [value]="projectStore.projectsWhereInvolved()"
+           [tableStyle]="{ 'min-width': '60rem' }">
     <ng-template pTemplate="caption">
       <div class="flex items-center justify-between">
         <span class="text-xl font-bold">Projects Where Involved</span>
-        <p-button icon="pi pi-refresh" (click)="loadProjectsWhereInvolved()" rounded raised />
+        <p-button icon="pi pi-refresh" (click)="projectStore.loadProjectsWhereInvolved()" rounded raised/>
       </div>
     </ng-template>
     <ng-template pTemplate="header">
@@ -18,14 +19,32 @@
     </ng-template>
     <ng-template pTemplate="body" let-project>
       <tr>
-        <td><a [routerLink]="[rebaseRoutePathAsString(RoutePath.PROJECT_DASHBOARD.replace(':projectSubdomain', project.subdomains?.[0].subdomain))]">{{ project.client.displayName }}<i class="px-2 pi pi-arrow-right"></i></a></td>
-        <td><a [routerLink]="[rebaseRoutePathAsString(RoutePath.PROJECT_DASHBOARD.replace(':projectSubdomain', project.subdomains?.[0].subdomain))]">{{ project.subdomains?.[0].subdomain }}<i class="px-2 pi pi-arrow-right"></i></a></td>
+        <td><a
+          [routerLink]="[rebaseRoutePathAsString(RoutePath.PROJECT_DASHBOARD.replace(':projectId', project.id))]">{{ project.client.displayName }}
+          <i class="px-2 pi pi-arrow-right"></i></a></td>
+        <td><a
+          [routerLink]="[rebaseRoutePathAsString(RoutePath.PROJECT_DASHBOARD.replace(':projectId', project.id))]">{{ project.subdomains?.[0].subdomain }}
+          <i class="px-2 pi pi-arrow-right"></i></a></td>
         <td>{{ (project.hostnames?.length === 0) ? 'None' : project.hostnames?.[0].hostname }}</td>
-        <td><p-tag [value]="(project.isBugReportsEnabled) ? 'Enabled': 'Disabled'" [severity]="(project.isBugReportsEnabled) ? 'success': 'danger'" /></td>
-        <td><p-tag [value]="(project.isFeatureRequestsEnabled) ? 'Enabled': 'Disabled'" [severity]="(project.isFeatureRequestsEnabled) ? 'success': 'danger'" /></td>
-        <td><p-tag [value]="(project.isFeatureFeedbackEnabled) ? 'Enabled': 'Disabled'" [severity]="(project.isFeatureFeedbackEnabled) ? 'success': 'danger'" /></td>
+        <td>
+          <p-tag [value]="(project.isBugReportsEnabled) ? 'Enabled': 'Disabled'"
+                 [severity]="(project.isBugReportsEnabled) ? 'success': 'danger'"/>
+        </td>
+        <td>
+          <p-tag [value]="(project.isFeatureRequestsEnabled) ? 'Enabled': 'Disabled'"
+                 [severity]="(project.isFeatureRequestsEnabled) ? 'success': 'danger'"/>
+        </td>
+        <td>
+          <p-tag [value]="(project.isFeatureFeedbackEnabled) ? 'Enabled': 'Disabled'"
+                 [severity]="(project.isFeatureFeedbackEnabled) ? 'success': 'danger'"/>
+        </td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="footer">Total of {{ projects() ? projects().length : 0 }} project(s). </ng-template>
+    <ng-template pTemplate="footer">Total of {{ projects() ? projects().length : 0 }} project(s).</ng-template>
   </p-table>
+  <ng-template #loadingSpinner>
+    <div class="flex justify-center items-center">
+      <p-progressSpinner styleClass="mt-8" />
+    </div>
+  </ng-template>
 </div>
