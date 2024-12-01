@@ -29,6 +29,7 @@ export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
   protected readonly projectStore = inject(ProjectStore);
 
   private routeParamsSubscription?: Subscription;
+  private projectByIdSubscription?: Subscription;
 
   visible1: boolean = false;
   visible2: boolean = false;
@@ -51,7 +52,7 @@ export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
   });
 
   constructor() {
-    toObservable<ProjectDto | null>(this.projectStore.projectById).pipe(
+    this.projectByIdSubscription = toObservable<ProjectDto | null>(this.projectStore.projectById).pipe(
         filter((value) => !!value),
         tap((projectById) => {
           if (projectById.isBugReportsEnabled !== this.bugReportsEnabledFormControl.value) {
@@ -119,5 +120,6 @@ export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.routeParamsSubscription?.unsubscribe();
+    this.projectByIdSubscription?.unsubscribe();
   }
 }
