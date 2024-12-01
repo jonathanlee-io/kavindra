@@ -30,10 +30,37 @@
       aliquip ex ea commodo consequat.
     </p>
   </p-drawer>
+</div>
+<div class="py-8 px-8 border-8 border-black rounded-3xl min-h-screen dark:bg-dark-primary"
+     style="box-shadow: 5px 5px 0 black; outline: 3px solid black;">
   <div class="flex gap-2 justify-center mt-4">
-    <p-button type="button" (click)="visible1 = true" icon="pi pi-arrow-right" />
-    <p-button type="button" (click)="visible2 = true" icon="pi pi-arrow-left" />
-    <p-button type="button" (click)="visible3 = true" icon="pi pi-arrow-down" />
-    <p-button type="button" (click)="visible4 = true" icon="pi pi-arrow-up" />
+    <p-button type="button" (click)="visible1 = true" icon="pi pi-arrow-right"/>
+    <p-button type="button" (click)="visible2 = true" icon="pi pi-arrow-left"/>
+    <p-button type="button" (click)="visible3 = true" icon="pi pi-arrow-down"/>
+    <p-button type="button" (click)="visible4 = true" icon="pi pi-arrow-up"/>
+  </div>
+  <div class="space-y-12 animate-fadeinup px-8">
+    <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3">
+      <div>
+        <h2 class="text-4xl font-extrabold tracking-wide text-light-text-primary dark:text-dark-text-primary">
+          Organization:&nbsp;<span class="text-xl text-light-text-primary dark:text-dark-text-primary">JDevel</span>
+        </h2>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3">
+      <div>
+        <h2 class="text-4xl font-extrabold tracking-wide text-light-text-primary dark:text-dark-text-primary">
+          Project:&nbsp;<span class="text-xl text-light-text-primary dark:text-dark-text-primary">roomyledger</span>
+        </h2>
+      </div>
+    </div>
+    <div>
+      <app-project-features-switches
+        [bugReportsEnabledFormControl]="bugReportsEnabledFormControl"
+        [featureRequestsEnabledFormControl]="featureRequestsEnabledFormControl"
+        [featureFeedbackEnabledFormControl]="featureFeedbackEnabledFormControl"
+        [hintEnabled]="false"
+      />
+    </div>
   </div>
 </div>

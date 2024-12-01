@@ -13,6 +13,9 @@ import {RoutePath} from '../../../../../app.routes';
 import {PaymentPlanDto} from '../../../../../dtos/payments/PaymentPlan.dto';
 import {PaymentsService} from '../../../../../services/payments/payments.service';
 import {rebaseRoutePath} from '../../../../../util/router/Router.utils';
+import {
+  ProjectFeaturesSwitchesComponent,
+} from '../../../../lib/_project/project-features-switches/project-features-switches.component';
 
 export type SubdomainState = 'INIT' | 'AVAILABLE' | 'UNAVAILABLE' | 'LOADING';
 
@@ -28,6 +31,7 @@ export type SubdomainState = 'INIT' | 'AVAILABLE' | 'UNAVAILABLE' | 'LOADING';
     NgSwitchCase,
     NgSwitch,
     ToggleSwitchModule,
+    ProjectFeaturesSwitchesComponent,
   ],
   standalone: true,
   templateUrl: './create-project-page.component.html',
@@ -44,18 +48,36 @@ export class CreateProjectPageComponent implements OnInit {
 
   subdomainState: SubdomainState = 'INIT';
 
-  clientDisplayNameFormControl = new FormControl<string>('', Validators.compose([
-    Validators.required,
-    Validators.minLength(3),
-    Validators.maxLength(100),
-  ]));
-  subdomainFormControl = new FormControl<string>('', Validators.compose([
-    Validators.required,
-    Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9.-]+[a-zA-Z0-9]$/),
-  ]));
-  bugReportsEnabledFormControl = new FormControl<boolean>(true);
-  featureRequestsEnabledFormControl = new FormControl<boolean>(true);
-  featureFeedbackEnabledFormControl = new FormControl<boolean>(true);
+  clientDisplayNameFormControl = new FormControl<string>('', {
+    nonNullable: true, validators: Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(100),
+    ]),
+  });
+
+  subdomainFormControl = new FormControl<string>('', {
+    nonNullable: true,
+    validators: Validators.compose([
+      Validators.required,
+      Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9.-]+[a-zA-Z0-9]$/),
+    ]),
+  });
+
+  bugReportsEnabledFormControl = new FormControl<boolean>(true, {
+    nonNullable: true,
+    validators: [Validators.required],
+  });
+
+  featureRequestsEnabledFormControl = new FormControl<boolean>(true, {
+    nonNullable: true,
+    validators: [Validators.required],
+  });
+
+  featureFeedbackEnabledFormControl = new FormControl<boolean>(true, {
+    nonNullable: true,
+    validators: [Validators.required],
+  });
 
   constructor() {
     watchState(this.clientStore, (state) => {
@@ -92,11 +114,11 @@ export class CreateProjectPageComponent implements OnInit {
 
   doCreateProject() {
     this.clientStore.registerNewClientAndProjectWithPlan(
-      this.clientDisplayNameFormControl.value!,
-      this.subdomainFormControl.value!,
-      this.bugReportsEnabledFormControl.value!,
-      this.featureRequestsEnabledFormControl.value!,
-      this.featureFeedbackEnabledFormControl.value!,
+        this.clientDisplayNameFormControl.value,
+        this.subdomainFormControl.value,
+        this.bugReportsEnabledFormControl.value,
+        this.featureRequestsEnabledFormControl.value,
+        this.featureFeedbackEnabledFormControl.value,
     );
   }
 }
