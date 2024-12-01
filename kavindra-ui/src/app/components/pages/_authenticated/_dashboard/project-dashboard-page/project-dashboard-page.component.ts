@@ -1,10 +1,10 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {watchState} from '@ngrx/signals';
 import {ButtonModule} from 'primeng/button';
 import {Drawer} from 'primeng/drawer';
-import {skip, take, tap} from 'rxjs';
+import {skip, Subscription, tap} from 'rxjs';
 
 import {ProjectStore} from '../../../../../+state/project/project.store';
 import {
@@ -22,12 +22,14 @@ import {
   templateUrl: './project-dashboard-page.component.html',
   styleUrl: './project-dashboard-page.component.scss',
 })
-export class ProjectDashboardPageComponent implements OnInit {
+export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
   private readonly route = inject(ActivatedRoute);
 
   protected readonly projectStore = inject(ProjectStore);
 
   private isInitialized = false;
+
+  private routeParamsSubscription?: Subscription;
 
   visible1: boolean = false;
   visible2: boolean = false;
@@ -107,11 +109,14 @@ export class ProjectDashboardPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.pipe(
-        take(1),
+    this.routeParamsSubscription = this.route.params.pipe(
         tap((params) => {
           this.projectStore.loadProjectById(params['projectId']);
         }),
     ).subscribe();
+  }
+
+  ngOnDestroy() {
+    this.routeParamsSubscription?.unsubscribe();
   }
 }

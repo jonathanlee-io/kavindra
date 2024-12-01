@@ -66,6 +66,9 @@ export class ProjectsRepositoryService {
         hostnames: true,
         subdomains: true,
       },
+      orderBy: {
+        name: 'asc',
+      },
     });
   }
 
