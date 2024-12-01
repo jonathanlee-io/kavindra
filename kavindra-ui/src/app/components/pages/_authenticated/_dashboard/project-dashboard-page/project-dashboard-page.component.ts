@@ -1,12 +1,13 @@
 import {Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {toObservable} from '@angular/core/rxjs-interop';
 import {FormControl, FormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
-import {watchState} from '@ngrx/signals';
 import {ButtonModule} from 'primeng/button';
 import {Drawer} from 'primeng/drawer';
-import {skip, Subscription, tap} from 'rxjs';
+import {filter, Subscription, tap} from 'rxjs';
 
 import {ProjectStore} from '../../../../../+state/project/project.store';
+import {ProjectDto} from '../../../../../dtos/projects/Project.dto';
 import {
   ProjectFeaturesSwitchesComponent,
 } from '../../../../lib/_project/project-features-switches/project-features-switches.component';
@@ -26,8 +27,6 @@ export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
   private readonly route = inject(ActivatedRoute);
 
   protected readonly projectStore = inject(ProjectStore);
-
-  private isInitialized = false;
 
   private routeParamsSubscription?: Subscription;
 
@@ -52,18 +51,22 @@ export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
   });
 
   constructor() {
-    watchState(this.projectStore, (state) => {
-      if (!state?.projectById || this.isInitialized) {
-        return;
-      }
-      this.isInitialized = true;
-      this.bugReportsEnabledFormControl.setValue(state.projectById.isBugReportsEnabled);
-      this.featureRequestsEnabledFormControl.setValue(state.projectById.isFeatureRequestsEnabled);
-      this.featureFeedbackEnabledFormControl.setValue(state.projectById.isFeatureFeedbackEnabled);
-    });
+    toObservable<ProjectDto | null>(this.projectStore.projectById).pipe(
+        filter((value) => !!value),
+        tap((projectById) => {
+          if (projectById.isBugReportsEnabled !== this.bugReportsEnabledFormControl.value) {
+            this.bugReportsEnabledFormControl.setValue(projectById.isBugReportsEnabled);
+          }
+          if (projectById.isFeatureRequestsEnabled !== this.featureRequestsEnabledFormControl.value) {
+            this.featureRequestsEnabledFormControl.setValue(projectById.isFeatureRequestsEnabled);
+          }
+          if (projectById.isFeatureFeedbackEnabled !== this.featureFeedbackEnabledFormControl.value) {
+            this.featureFeedbackEnabledFormControl.setValue(projectById.isFeatureFeedbackEnabled);
+          }
+        }),
+    ).subscribe();
 
     this.bugReportsEnabledFormControl.valueChanges.pipe(
-        skip(1), // Initial data load
         tap((value) => {
           const projectById = this.projectStore.projectById();
           if (!projectById) {
@@ -78,7 +81,6 @@ export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
     ).subscribe();
 
     this.featureRequestsEnabledFormControl.valueChanges.pipe(
-        skip(1), // Initial data load
         tap((value) => {
           const projectById = this.projectStore.projectById();
           if (!projectById) {
@@ -93,7 +95,6 @@ export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
     ).subscribe();
 
     this.featureFeedbackEnabledFormControl.valueChanges.pipe(
-        skip(1), // Initial data load
         tap((value) => {
           const projectById = this.projectStore.projectById();
           if (!projectById) {
