@@ -1,31 +1,82 @@
-import {Injectable} from '@nestjs/common';
+import {Injectable, InternalServerErrorException} from '@nestjs/common';
 import {AuthUser} from '@supabase/supabase-js';
 
 import {supabaseUserIdKey} from '../../../../lib/constants/auth/supabase-user-id.constants';
 import {PrismaService} from '../../../../lib/prisma/services/prisma.service';
+import {UsersRepositoryService} from '../../../users/repositories/users-repository/users-repository.service';
 import {CreateProjectDto} from '../../dto/CreateProject.dto';
 import {UpdateProjectDto} from '../../dto/UpdateProject.dto';
 
 @Injectable()
 export class ProjectsRepositoryService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly usersRepository: UsersRepositoryService,
+  ) {}
 
-  async create(currentUser: AuthUser, createProjectDto: CreateProjectDto) {
-    return this.prismaService.project.create({
-      data: {
-        name: createProjectDto.name,
-        client: {
-          connect: {
-            id: createProjectDto.clientId,
+  async create(
+    currentUser: AuthUser,
+    {
+      clientId,
+      name,
+      subdomain,
+      isBugReportsEnabled,
+      isFeatureRequestsEnabled,
+      isFeatureFeedbackEnabled,
+    }: CreateProjectDto,
+  ) {
+    const user = await this.usersRepository.findBySupabaseId(
+      currentUser[supabaseUserIdKey],
+    );
+    if (!user) {
+      throw new InternalServerErrorException(
+        `Could not find user with id: ${currentUser[supabaseUserIdKey]}`,
+      );
+    }
+    const [createdProject, createdSubdomain] =
+      await this.prismaService.$transaction(async (prisma) => {
+        const createdProject = await prisma.project.create({
+          data: {
+            name,
+            isBugReportsEnabled,
+            isFeatureRequestsEnabled,
+            isFeatureFeedbackEnabled,
+            client: {
+              connect: {
+                id: clientId,
+              },
+            },
+            createdBy: {
+              connect: {
+                id: user.id,
+              },
+            },
           },
-        },
-        createdBy: {
-          connect: {
-            supabaseUserId: currentUser[supabaseUserIdKey],
+          include: {
+            createdBy: true,
+            client: true,
+            subdomains: true,
+            hostnames: true,
           },
-        },
-      },
-    });
+        });
+
+        const createdSubdomain = await prisma.subdomain.create({
+          data: {
+            subdomain,
+            project: {
+              connect: {
+                id: createdProject.id,
+              },
+            },
+          },
+        });
+
+        return [createdProject, createdSubdomain];
+      });
+    return {
+      ...createdProject,
+      subdomains: [createdSubdomain],
+    };
   }
 
   async getProjectsWhereInvolved(currentUser: AuthUser) {

@@ -1,4 +1,8 @@
-import {ForbiddenException, Injectable, Logger} from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+} from '@nestjs/common';
 import {AuthUser} from '@supabase/supabase-js';
 
 import {supabaseUserIdKey} from '../../../../lib/constants/auth/supabase-user-id.constants';
@@ -10,7 +14,6 @@ import {ProjectsRepositoryService} from '../../repositories/projects-repository/
 @Injectable()
 export class ProjectsService {
   constructor(
-    private readonly logger: Logger,
     private readonly projectsRepository: ProjectsRepositoryService,
     private readonly clientsService: ClientsService,
   ) {}
@@ -23,9 +26,25 @@ export class ProjectsService {
       currentUser,
       createProjectDto.clientId,
     );
-    this.logger.log(
-      `Attempting to create project with name: ${createProjectDto.name} for client with ID: ${client.id}}`,
-    );
+    if (
+      !client.admins
+        .map((admin) => admin.supabaseUserId)
+        .includes(currentUser[supabaseUserIdKey])
+    ) {
+      throw new ForbiddenException();
+    }
+    if (
+      !(
+        await this.clientsService.checkIfSubdomainAvailable(
+          {
+            subdomain: createProjectDto.subdomain,
+          },
+          currentUser,
+        )
+      ).isSubdomainAvailable
+    ) {
+      return new BadRequestException('Subdomain already exists');
+    }
     return this.projectsRepository.create(currentUser, createProjectDto);
   }
 
