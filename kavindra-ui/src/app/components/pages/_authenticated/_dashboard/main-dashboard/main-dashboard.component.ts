@@ -1,5 +1,5 @@
 import {NgIf} from '@angular/common';
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
@@ -11,7 +11,6 @@ import {TagModule} from 'primeng/tag';
 
 import {ProjectStore} from '../../../../../+state/project/project.store';
 import {RoutePath} from '../../../../../app.routes';
-import {ProjectDto} from '../../../../../dtos/projects/Project.dto';
 import {rebaseRoutePath, rebaseRoutePathAsString} from '../../../../../util/router/Router.utils';
 
 @Component({
@@ -32,8 +31,6 @@ import {rebaseRoutePath, rebaseRoutePathAsString} from '../../../../../util/rout
 })
 export class MainDashboardComponent implements OnInit {
   protected readonly projectStore = inject(ProjectStore);
-
-  projects = signal<ProjectDto[]>([]);
 
   ngOnInit() {
     this.projectStore.loadProjectsWhereInvolved();

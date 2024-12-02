@@ -10,7 +10,8 @@
     <ng-template pTemplate="header">
       <tr>
         <th>Organization</th>
-        <th>Name / Subdomain</th>
+        <th>Name</th>
+        <th>Subdomain (.kavindra.io)</th>
         <th>Custom Hostname</th>
         <th>Bug Reporting Enabled</th>
         <th>Feature Request Enabled</th>
@@ -23,8 +24,9 @@
           [routerLink]="[rebaseRoutePathAsString(RoutePath.PROJECT_DASHBOARD.replace(':projectId', project.id))]">{{ project.client.displayName }}
           <i class="px-2 pi pi-arrow-right"></i></a></td>
         <td><a
-          [routerLink]="[rebaseRoutePathAsString(RoutePath.PROJECT_DASHBOARD.replace(':projectId', project.id))]">{{ project.subdomains?.[0].subdomain }}
+          [routerLink]="[rebaseRoutePathAsString(RoutePath.PROJECT_DASHBOARD.replace(':projectId', project.id))]">{{ project.name }}
           <i class="px-2 pi pi-arrow-right"></i></a></td>
+        <td>{{ (project.subdomains?.length === 0) ? 'None' : project.subdomains?.[0].subdomain }}</td>
         <td>{{ (project.hostnames?.length === 0) ? 'None' : project.hostnames?.[0].hostname }}</td>
         <td>
           <p-tag [value]="(project.isBugReportsEnabled) ? 'Enabled': 'Disabled'"
@@ -40,7 +42,7 @@
         </td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="footer">Total of {{ projects() ? projects().length : 0 }} project(s).</ng-template>
+    <ng-template pTemplate="footer">Total of {{ projectStore.projectsWhereInvolved() ? projectStore.projectsWhereInvolved().length : 0 }} project(s).</ng-template>
   </p-table>
   <ng-template #loadingSpinner>
     <div class="flex justify-center items-center">
