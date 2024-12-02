@@ -99,7 +99,6 @@ export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
     if (!projectById) {
       return;
     }
-
     this.projectStore.updateProjectById(projectById.id, {...projectById, ...updateProjectValue});
   }
 }
