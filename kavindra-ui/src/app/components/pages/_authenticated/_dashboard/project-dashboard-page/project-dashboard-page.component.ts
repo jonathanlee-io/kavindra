@@ -66,45 +66,15 @@ export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
     ).subscribe();
 
     this.bugReportsSubscription = this.bugReportsEnabledFormControl.valueChanges.pipe(
-        tap((value) => {
-          const projectById = this.projectStore.projectById();
-          if (!projectById) {
-            return;
-          }
-
-          this.projectStore.updateProjectById(projectById.id, {
-            ...projectById,
-            isBugReportsEnabled: value,
-          });
-        }),
+        tap((newValue) => this.updateProjectFormControlValue({isBugReportsEnabled: newValue})),
     ).subscribe();
 
     this.featureRequestsSubscription = this.featureRequestsEnabledFormControl.valueChanges.pipe(
-        tap((value) => {
-          const projectById = this.projectStore.projectById();
-          if (!projectById) {
-            return;
-          }
-
-          this.projectStore.updateProjectById(projectById.id, {
-            ...projectById,
-            isFeatureRequestsEnabled: value,
-          });
-        }),
+        tap((newValue) => this.updateProjectFormControlValue({isFeatureRequestsEnabled: newValue})),
     ).subscribe();
 
     this.featureFeedbackSubscription = this.featureFeedbackEnabledFormControl.valueChanges.pipe(
-        tap((value) => {
-          const projectById = this.projectStore.projectById();
-          if (!projectById) {
-            return;
-          }
-
-          this.projectStore.updateProjectById(projectById.id, {
-            ...projectById,
-            isFeatureFeedbackEnabled: value,
-          });
-        }),
+        tap((newValue) => this.updateProjectFormControlValue({isFeatureFeedbackEnabled: newValue})),
     ).subscribe();
   }
 
@@ -122,5 +92,14 @@ export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
     this.bugReportsSubscription.unsubscribe();
     this.featureRequestsSubscription.unsubscribe();
     this.featureFeedbackSubscription.unsubscribe();
+  }
+
+  private updateProjectFormControlValue(updateProjectValue: Partial<ProjectDto>) {
+    const projectById = this.projectStore.projectById();
+    if (!projectById) {
+      return;
+    }
+
+    this.projectStore.updateProjectById(projectById.id, {...projectById, ...updateProjectValue});
   }
 }
