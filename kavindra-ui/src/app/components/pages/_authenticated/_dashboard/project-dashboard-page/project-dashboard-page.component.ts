@@ -60,13 +60,13 @@ export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
         filter((value) => !!value),
         tap((projectById) => {
           if (projectById.isBugReportsEnabled !== this.bugReportsEnabledFormControl.value) {
-            this.bugReportsEnabledFormControl.setValue(projectById.isBugReportsEnabled);
+            this.bugReportsEnabledFormControl.setValue(projectById.isBugReportsEnabled, {emitEvent: false});
           }
           if (projectById.isFeatureRequestsEnabled !== this.featureRequestsEnabledFormControl.value) {
-            this.featureRequestsEnabledFormControl.setValue(projectById.isFeatureRequestsEnabled);
+            this.featureRequestsEnabledFormControl.setValue(projectById.isFeatureRequestsEnabled, {emitEvent: false});
           }
           if (projectById.isFeatureFeedbackEnabled !== this.featureFeedbackEnabledFormControl.value) {
-            this.featureFeedbackEnabledFormControl.setValue(projectById.isFeatureFeedbackEnabled);
+            this.featureFeedbackEnabledFormControl.setValue(projectById.isFeatureFeedbackEnabled, {emitEvent: false});
           }
         }),
     ).subscribe();
