@@ -3,7 +3,6 @@ import {toObservable} from '@angular/core/rxjs-interop';
 import {FormControl, FormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
-import {Drawer} from 'primeng/drawer';
 import {filter, Subscription, tap} from 'rxjs';
 
 import {ProjectStore} from '../../../../../+state/project/project.store';
@@ -16,7 +15,6 @@ import {
   selector: 'app-project-dashboard-page',
   imports: [
     ButtonModule,
-    Drawer,
     ProjectFeaturesSwitchesComponent,
     FormsModule,
   ],
@@ -34,11 +32,6 @@ export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
 
   private routeParamsSubscription?: Subscription;
   private projectByIdSubscription?: Subscription;
-
-  visible1: boolean = false;
-  visible2: boolean = false;
-  visible3: boolean = false;
-  visible4: boolean = false;
 
   bugReportsEnabledFormControl = new FormControl<boolean>(true, {
     nonNullable: true,
