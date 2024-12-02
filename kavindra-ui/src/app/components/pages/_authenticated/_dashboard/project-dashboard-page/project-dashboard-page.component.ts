@@ -59,15 +59,9 @@ export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
     this.projectByIdSubscription = toObservable<ProjectDto | null>(this.projectStore.projectById).pipe(
         filter((value) => !!value),
         tap((projectById) => {
-          if (projectById.isBugReportsEnabled !== this.bugReportsEnabledFormControl.value) {
-            this.bugReportsEnabledFormControl.setValue(projectById.isBugReportsEnabled, {emitEvent: false});
-          }
-          if (projectById.isFeatureRequestsEnabled !== this.featureRequestsEnabledFormControl.value) {
-            this.featureRequestsEnabledFormControl.setValue(projectById.isFeatureRequestsEnabled, {emitEvent: false});
-          }
-          if (projectById.isFeatureFeedbackEnabled !== this.featureFeedbackEnabledFormControl.value) {
-            this.featureFeedbackEnabledFormControl.setValue(projectById.isFeatureFeedbackEnabled, {emitEvent: false});
-          }
+          this.bugReportsEnabledFormControl.setValue(projectById.isBugReportsEnabled, {emitEvent: false});
+          this.featureRequestsEnabledFormControl.setValue(projectById.isFeatureRequestsEnabled, {emitEvent: false});
+          this.featureFeedbackEnabledFormControl.setValue(projectById.isFeatureFeedbackEnabled, {emitEvent: false});
         }),
     ).subscribe();
 
