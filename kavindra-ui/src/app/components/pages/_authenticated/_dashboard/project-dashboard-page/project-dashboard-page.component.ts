@@ -28,6 +28,10 @@ export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
 
   protected readonly projectStore = inject(ProjectStore);
 
+  private readonly bugReportsSubscription: Subscription;
+  private readonly featureRequestsSubscription: Subscription;
+  private readonly featureFeedbackSubscription: Subscription;
+
   private routeParamsSubscription?: Subscription;
   private projectByIdSubscription?: Subscription;
 
@@ -67,7 +71,7 @@ export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
         }),
     ).subscribe();
 
-    this.bugReportsEnabledFormControl.valueChanges.pipe(
+    this.bugReportsSubscription = this.bugReportsEnabledFormControl.valueChanges.pipe(
         tap((value) => {
           const projectById = this.projectStore.projectById();
           if (!projectById) {
@@ -81,7 +85,7 @@ export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
         }),
     ).subscribe();
 
-    this.featureRequestsEnabledFormControl.valueChanges.pipe(
+    this.featureRequestsSubscription = this.featureRequestsEnabledFormControl.valueChanges.pipe(
         tap((value) => {
           const projectById = this.projectStore.projectById();
           if (!projectById) {
@@ -95,7 +99,7 @@ export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
         }),
     ).subscribe();
 
-    this.featureFeedbackEnabledFormControl.valueChanges.pipe(
+    this.featureFeedbackSubscription = this.featureFeedbackEnabledFormControl.valueChanges.pipe(
         tap((value) => {
           const projectById = this.projectStore.projectById();
           if (!projectById) {
@@ -121,5 +125,8 @@ export class ProjectDashboardPageComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.routeParamsSubscription?.unsubscribe();
     this.projectByIdSubscription?.unsubscribe();
+    this.bugReportsSubscription.unsubscribe();
+    this.featureRequestsSubscription.unsubscribe();
+    this.featureFeedbackSubscription.unsubscribe();
   }
 }
