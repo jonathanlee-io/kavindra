@@ -2,6 +2,8 @@ import {NgClass, NgIf} from '@angular/common';
 import {Component, inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
+import {ButtonModule} from 'primeng/button';
+import {StyleClassModule} from 'primeng/styleclass';
 import {ToggleSwitchModule} from 'primeng/toggleswitch';
 
 import {UserAuthenticationStore} from '../../../../+state/auth/user-auth.store';
@@ -18,6 +20,8 @@ import {rebaseRoutePath} from '../../../../util/router/Router.utils';
     RouterLink,
     ToggleSwitchModule,
     FormsModule,
+    ButtonModule,
+    StyleClassModule,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
