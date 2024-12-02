@@ -158,4 +158,18 @@ export class ProjectsRepositoryService {
       },
     });
   }
+
+  async getProjectsForClient(clientId: string) {
+    return this.prismaService.project.findMany({
+      where: {
+        clientId,
+      },
+      include: {
+        createdBy: true,
+        client: true,
+        subdomains: true,
+        hostnames: true,
+      },
+    });
+  }
 }

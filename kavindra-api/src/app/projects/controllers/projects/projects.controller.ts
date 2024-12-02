@@ -25,23 +25,31 @@ export class ProjectsController {
     return this.projectsService.getProjectsWhereInvolved(currentUser);
   }
 
+  @Get('for-client/:id')
+  async getProjectsForClient(
+    @CurrentUser() currentUser: AuthUser,
+    @Param() {id: clientId}: IdParamDto,
+  ) {
+    return this.projectsService.getProjectsForClient(currentUser, clientId);
+  }
+
   @Get(':id')
   async getProjectById(
     @CurrentUser() currentUser: AuthUser,
-    @Param() {id}: IdParamDto,
+    @Param() {id: projectId}: IdParamDto,
   ) {
-    return this.projectsService.getProjectById(currentUser, id);
+    return this.projectsService.getProjectById(currentUser, projectId);
   }
 
   @Put(':id')
   async updateProjectById(
     @CurrentUser() currentUser: AuthUser,
-    @Param() {id}: IdParamDto,
+    @Param() {id: projectId}: IdParamDto,
     @Body() updateProjectDto: UpdateProjectDto,
   ) {
     return this.projectsService.updateProjectById(
       currentUser,
-      id,
+      projectId,
       updateProjectDto,
     );
   }

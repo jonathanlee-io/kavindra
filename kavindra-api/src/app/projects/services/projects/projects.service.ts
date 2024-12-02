@@ -80,4 +80,9 @@ export class ProjectsService {
       updateProjectDto,
     );
   }
+
+  async getProjectsForClient(currentUser: AuthUser, clientId: string) {
+    await this.clientsService.getClientById(currentUser, clientId); // Will throw not found or forbidden exception
+    return this.projectsRepository.getProjectsForClient(clientId);
+  }
 }
