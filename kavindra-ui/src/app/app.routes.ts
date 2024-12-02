@@ -7,6 +7,9 @@ import {
   CreateProjectPageComponent,
 } from './components/pages/_authenticated/_create_client_pages/create-project-page/create-project-page.component';
 import {
+  ClientDashboardComponent,
+} from './components/pages/_authenticated/_dashboard/client-dashboard/client-dashboard.component';
+import {
   MainDashboardComponent,
 } from './components/pages/_authenticated/_dashboard/main-dashboard/main-dashboard.component';
 import {
@@ -36,6 +39,7 @@ export enum RoutePath {
   CREATE_PROJECT = 'create/project',
   SETTINGS_PAGE = 'manage/settings',
   DASHBOARD = 'dashboard',
+  CLIENT_DASHBOARD = 'dashboard/client/:clientId',
   PROJECT_DASHBOARD = 'dashboard/project/:projectId',
 }
 
@@ -80,6 +84,11 @@ export const routes: Routes = [
   {
     path: RoutePath.DASHBOARD,
     component: MainDashboardComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: RoutePath.CLIENT_DASHBOARD,
+    component: ClientDashboardComponent,
     canActivate: [authGuard],
   },
   {

@@ -1,9 +1,12 @@
 <div class="card min-h-screen bg-light-primary dark:bg-dark-primary">
+  <div>
+    <h1 class="text-3xl py-8 px-4 text-light-text-primary dark:text-dark-text-primary">Organization Dashboard</h1>
+  </div>
   <p-table *ngIf="!projectStore.isLoading() else loadingSpinner" [value]="projectStore.projectsWhereInvolved()"
            [tableStyle]="{ 'min-width': '60rem' }">
     <ng-template pTemplate="caption">
       <div class="flex items-center justify-between">
-        <span class="text-xl font-bold">Projects Where Involved</span>
+        <span class="text-xl font-bold">Projects under Organization</span>
         <p-button icon="pi pi-refresh" (click)="projectStore.loadProjectsWhereInvolved()" rounded raised/>
       </div>
     </ng-template>
@@ -42,11 +45,13 @@
         </td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="footer">Total of {{ projectStore.projectsWhereInvolved() ? projectStore.projectsWhereInvolved().length : 0 }} project(s).</ng-template>
+    <ng-template pTemplate="footer">Total
+      of {{ projectStore.projectsWhereInvolved() ? projectStore.projectsWhereInvolved().length : 0 }} project(s).
+    </ng-template>
   </p-table>
   <ng-template #loadingSpinner>
     <div class="flex justify-center items-center">
-      <p-progressSpinner styleClass="mt-8" />
+      <p-progressSpinner styleClass="mt-8"/>
     </div>
   </ng-template>
 </div>
