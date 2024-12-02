@@ -9,12 +9,14 @@ export type ProjectState = {
   isLoading: boolean;
   projectById: ProjectDto | null;
   projectsWhereInvolved: ProjectDto[];
+  projectsForClient: ProjectDto[];
 };
 
 const initialState: ProjectState = {
   isLoading: false,
   projectById: null,
   projectsWhereInvolved: [],
+  projectsForClient: [],
 };
 
 export const ProjectStore = signalStore(
@@ -30,6 +32,20 @@ export const ProjectStore = signalStore(
                   take(1),
                   tap((projectsWhereInvolved) => {
                     patchState(store, {isLoading: false, projectsWhereInvolved: [...projectsWhereInvolved]});
+                  }),
+                  catchError((err) => {
+                    patchState(store, {...initialState});
+                    return throwError(() => err);
+                  }),
+              ).subscribe();
+        },
+        loadProjectsForClient: (clientId: string) => {
+          patchState(store, {isLoading: true});
+          projectsService.fetchProjectsForClient(clientId)
+              .pipe(
+                  take(1),
+                  tap((projectsForClient) => {
+                    patchState(store, {isLoading: false, projectsForClient: [...projectsForClient]});
                   }),
                   catchError((err) => {
                     patchState(store, {...initialState});
