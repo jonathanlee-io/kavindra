@@ -33,7 +33,10 @@ export class MainDashboardComponent implements OnInit {
   protected readonly projectStore = inject(ProjectStore);
 
   ngOnInit() {
-    this.projectStore.loadProjectsWhereInvolved();
+    this.projectStore.loadProjectsWhereInvolved()
+        .catch((error) => {
+          console.error(error);
+        });
   }
 
   protected readonly rebaseRoutePath = rebaseRoutePath;

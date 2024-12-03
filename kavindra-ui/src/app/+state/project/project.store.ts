@@ -25,20 +25,22 @@ export const ProjectStore = signalStore(
     withMethods((store) => {
       const projectsService = inject(ProjectsService);
       return {
-        loadProjectsWhereInvolved: () => {
+        loadProjectsWhereInvolved: async () => new Promise<ProjectDto[]>((resolve, reject) => {
           patchState(store, {isLoading: true});
           projectsService.fetchProjectsWhereInvolved()
               .pipe(
                   take(1),
                   tap((projectsWhereInvolved) => {
                     patchState(store, {isLoading: false, projectsWhereInvolved: [...projectsWhereInvolved]});
+                    resolve(projectsWhereInvolved);
                   }),
                   catchError((err) => {
                     patchState(store, {...initialState});
+                    reject(err);
                     return throwError(() => err);
                   }),
               ).subscribe();
-        },
+        }),
         loadProjectsForClient: (clientId: string) => {
           patchState(store, {isLoading: true});
           projectsService.fetchProjectsForClient(clientId)

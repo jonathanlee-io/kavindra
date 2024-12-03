@@ -1,7 +1,7 @@
 import {inject} from '@angular/core';
 import {Router} from '@angular/router';
 import {patchState, signalStore, withMethods, withState} from '@ngrx/signals';
-import {catchError, lastValueFrom, take, tap, throwError} from 'rxjs';
+import {catchError, take, tap, throwError} from 'rxjs';
 
 import {RoutePath} from '../../app.routes';
 import {ClientDto} from '../../dtos/client/Client.dto';
@@ -39,9 +39,6 @@ export const ClientStore = signalStore(
       return {
         resetIsSubdomainAvailable: () => {
           patchState(store, {isLoading: false, isSubdomainAvailable: null});
-        },
-        isMemberOfAnything: async () => {
-          return lastValueFrom(clientService.fetchIsMemberOfAnything().pipe(take(1)));
         },
         fetchClientById: (clientId: string) => {
           patchState(store, {isLoading: false});

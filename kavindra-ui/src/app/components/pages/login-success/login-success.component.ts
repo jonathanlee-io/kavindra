@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {delay, take, tap} from 'rxjs';
 
 import {UserAuthenticationStore} from '../../../+state/auth/user-auth.store';
-import {ClientStore} from '../../../+state/client/client.store';
+import {ProjectStore} from '../../../+state/project/project.store';
 import {RoutePath} from '../../../app.routes';
 import {rebaseRoutePath, RouterUtils} from '../../../util/router/Router.utils';
 import {SuccessCheckmarkComponent} from '../../lib/success-checkmark/success-checkmark.component';
@@ -18,7 +18,7 @@ import {SuccessCheckmarkComponent} from '../../lib/success-checkmark/success-che
 export class LoginSuccessComponent implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly userAuthenticationStore = inject(UserAuthenticationStore);
-  private readonly clientStore = inject(ClientStore);
+  private readonly projectStore = inject(ProjectStore);
   private readonly router = inject(Router);
 
   async ngOnInit() {
@@ -28,13 +28,15 @@ export class LoginSuccessComponent implements OnInit {
             delay(2500),
             tap(async () => {
               if (this.userAuthenticationStore.isLoggedIn()) {
-                if ((await this.clientStore.isMemberOfAnything()).isMemberOfAnything) {
-                  this.router.navigate([rebaseRoutePath(RoutePath.DASHBOARD)]).catch(
-                      RouterUtils.navigateCatchErrorCallback);
-                } else {
+                const projectsWhereInvolved = await this.projectStore.loadProjectsWhereInvolved();
+                if (projectsWhereInvolved.length === 0) {
                   this.router.navigate([rebaseRoutePath(RoutePath.CREATE_CLIENT_INTRO)])
                       .catch(RouterUtils.navigateCatchErrorCallback);
+                  return;
                 }
+
+                this.router.navigate([rebaseRoutePath(RoutePath.DASHBOARD)])
+                    .catch(RouterUtils.navigateCatchErrorCallback);
               }
             }),
         )

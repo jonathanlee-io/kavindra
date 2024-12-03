@@ -47,12 +47,6 @@ export class ClientService {
     );
   }
 
-  fetchIsMemberOfAnything() {
-    return this.httpClient.get<{isMemberOfAnything: boolean}>(
-        this.tenantStore.getFullRequestUrl('v1/clients/is-member-of-anything'),
-    );
-  }
-
   fetchClientById(clientId: string) {
     return this.httpClient.get<ClientDto>(
         this.tenantStore.getFullRequestUrl(`v1/clients/${clientId}`),

@@ -52,13 +52,4 @@ export class ClientsController {
   ) {
     return this.clientsService.getClientById(currentUser, clientId);
   }
-
-  @Get('is-member-of-anything')
-  async getIsMemberOfAnything(@CurrentUser() currentUser: AuthUser) {
-    return {
-      isMemberOfAnything:
-        (await this.clientsService.getClientsWhereInvolved(currentUser))
-          .length > 0,
-    };
-  }
 }
