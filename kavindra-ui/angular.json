@@ -41,6 +41,10 @@
           },
           "configurations": {
             "production": {
+              "index": {
+                "input": "src/index.prod.html",
+                "output": "index.html"
+              },
               "budgets": [
                 {
                   "type": "initial",
@@ -54,10 +58,6 @@
                 }
               ],
               "fileReplacements": [
-                {
-                  "replace": "src/index.html",
-                  "with": "src/index.prod.html"
-                },
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
@@ -70,6 +70,10 @@
               "outputHashing": "all"
             },
             "stage": {
+              "index": {
+                "input": "src/index.staging.html",
+                "output": "index.html"
+              },
               "budgets": [
                 {
                   "type": "initial",
@@ -83,10 +87,6 @@
                 }
               ],
               "fileReplacements": [
-                {
-                  "replace": "src/index.html",
-                  "with": "src/index.staging.html"
-                },
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.stage.ts"
