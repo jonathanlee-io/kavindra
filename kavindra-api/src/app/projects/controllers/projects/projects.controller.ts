@@ -1,3 +1,4 @@
+import {CacheInterceptor, CacheTTL} from '@nestjs/cache-manager';
 import {
   Body,
   Controller,
@@ -7,12 +8,14 @@ import {
   Param,
   Post,
   Put,
+  UseInterceptors,
 } from '@nestjs/common';
 import {AuthUser} from '@supabase/supabase-js';
 
 import {CurrentUser} from '../../../../lib/auth/supabase/decorators/current-user.decorator';
 import {Public} from '../../../../lib/auth/supabase/decorators/is-public.decorator';
 import {host} from '../../../../lib/config/host.config';
+import {oneDayInMilliseconds} from '../../../../lib/constants/time/time.constants';
 import {ClientParamDto} from '../../../../lib/dto/ClientParam.dto';
 import {IdParamDto} from '../../../../lib/validation/id.param.dto';
 import {CreateProjectDto} from '../../dto/CreateProject.dto';
@@ -30,6 +33,15 @@ export class ProjectsController {
     @HostParam() {client: clientSubdomain}: ClientParamDto,
   ) {
     return this.projectsService.getFeedbackWidgetScript(clientSubdomain);
+  }
+
+  @Public()
+  @Get('widget.js')
+  @Header('Content-Type', 'text/javascript')
+  @UseInterceptors(CacheInterceptor)
+  @CacheTTL(oneDayInMilliseconds)
+  async getWidgetScript() {
+    return this.projectsService.getWidgetScript();
   }
 
   @Post('create')

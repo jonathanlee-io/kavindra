@@ -1,4 +1,4 @@
 
 export function ping() {
-    return 'pong';
+  return 'pong';
 }

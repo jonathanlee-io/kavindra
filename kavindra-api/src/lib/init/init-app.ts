@@ -10,7 +10,6 @@ import helmet from 'helmet';
 import {LoggingInterceptor} from '../../app/_shared/interceptors/logging/logging.interceptor';
 
 export const initApp = (app: INestApplication) => {
-  // app.use(helmet());
   app.use(helmet.crossOriginResourcePolicy({policy: 'cross-origin'}));
 
   app.useGlobalPipes(

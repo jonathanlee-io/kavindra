@@ -1,3 +1,5 @@
+import * as fs from 'node:fs';
+
 import {
   BadRequestException,
   ForbiddenException,
@@ -104,7 +106,7 @@ export class ProjectsService {
     ) {
       widgetSrc = 'https://staging.kavindra.io/widget.js';
     } else {
-      widgetSrc = 'http://localhost:8080/widget.js';
+      widgetSrc = 'http://www.local.api.kavindra.io:3000/v1/projects/widget.js';
     }
     return `
         (function (w,d,s,o,f,js,fjs) {
@@ -115,5 +117,12 @@ export class ProjectsService {
         mw('init', { someConfiguration: 42 });
         mw('message', 'Hello from ${clientSubdomain}.kavindra.io!');
     `;
+  }
+
+  async getWidgetScript() {
+    return fs.readFileSync(
+      '/Users/jonathanlee/Workspace/kavindra/kavindra-api/js-widget/dist/widget.js',
+      'utf8',
+    );
   }
 }
