@@ -122,7 +122,10 @@ export class ProjectsService {
 
   async getWidgetScript() {
     return fs.readFileSync(
-      path.join(__dirname, '../../../../..', 'js-widget/dist/widget.js'),
+      this.configService.getOrThrow<NodeEnvironment>('NODE_ENV') ===
+        'development'
+        ? path.join(__dirname, '../../../../..', 'js-widget/dist/widget.js')
+        : path.join(__dirname, './', 'dist/js-widget/dist/widget.js'),
       'utf8',
     );
   }
