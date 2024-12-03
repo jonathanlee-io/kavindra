@@ -7,7 +7,7 @@
     <ng-template pTemplate="caption">
       <div class="flex items-center justify-between">
         <span class="text-xl font-bold">Projects under Organization</span>
-        <p-button icon="pi pi-refresh" (click)="projectStore.loadProjectsWhereInvolved()" rounded raised/>
+        <p-button icon="pi pi-refresh" (click)="loadProjectsForClient(clientId())" rounded raised/>
       </div>
     </ng-template>
     <ng-template pTemplate="header">

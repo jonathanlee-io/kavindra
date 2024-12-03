@@ -1,5 +1,5 @@
 import {NgIf} from '@angular/common';
-import {Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
@@ -34,17 +34,24 @@ export class ClientDashboardComponent implements OnInit, OnDestroy {
   protected readonly RoutePath = RoutePath;
 
   private routeParamsSubscription?: Subscription;
+  protected readonly clientId = signal<string>('');
 
   ngOnInit() {
     this.routeParamsSubscription = this.route.params.pipe(
         tap((params) => {
-          this.projectStore.loadProjectsForClient(params['clientId']);
-          this.clientStore.fetchClientById(params['clientId']);
+          const {clientId} = params;
+          this.clientId.set(clientId);
+          this.loadProjectsForClient(clientId);
         }),
     ).subscribe();
   }
 
   ngOnDestroy() {
     this.routeParamsSubscription?.unsubscribe();
+  }
+
+  loadProjectsForClient(clientId: string) {
+    this.projectStore.loadProjectsForClient(clientId);
+    this.clientStore.fetchClientById(clientId);
   }
 }
