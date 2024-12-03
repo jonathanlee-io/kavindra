@@ -45,6 +45,10 @@ async function bootstrap() {
   logger.log(
     `Attempting to listen on port ${port} in NODE_ENV: ${configService.getOrThrow<NodeEnvironment>('NODE_ENV')}...`,
   );
-  await app.listen(port);
+  await app.listen(port, () => {
+    logger.log(
+      `Listening on port ${port} in NODE_ENV: ${configService.getOrThrow<NodeEnvironment>('NODE_ENV')}...`,
+    );
+  });
 }
 bootstrap().catch((error) => console.error(error));

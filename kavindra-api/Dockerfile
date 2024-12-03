@@ -33,6 +33,8 @@ USER node
 
 FROM --platform=linux/amd64 node:20.17.0-alpine3.20 AS production
 
+WORKDIR /
+
 COPY --chown=node:node --from=build /usr/src/app/package.json ./package.json
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/prisma ./prisma

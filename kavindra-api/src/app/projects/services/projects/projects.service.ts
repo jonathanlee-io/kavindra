@@ -121,16 +121,18 @@ export class ProjectsService {
   }
 
   async getWidgetScript() {
+    return fs.realpathSync('.');
+
     if (
       this.configService.getOrThrow<NodeEnvironment>('NODE_ENV') ===
       'development'
     ) {
       return fs.readFileSync(
-        path.join(__dirname, '../../../..', '../js-widget/dist/widget.js'),
+        path.join(__dirname, '../../../../..', 'js-widget/dist/widget.js'),
         'utf8',
       );
     }
 
-    return fs.readFileSync('/dist/js-widget/dist/widget.js', 'utf8');
+    // return fs.readFileSync('/dist/js-widget/dist/widget.js', 'utf8');
   }
 }
