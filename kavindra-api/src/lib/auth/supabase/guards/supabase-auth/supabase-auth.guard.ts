@@ -14,14 +14,11 @@ export class SupabaseAuthGuard extends AuthGuard('supabase-jwt') {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    if (
-      this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
-        context.getHandler(),
-        context.getClass(),
-      ])
-    ) {
-      return true;
-    }
-    return super.canActivate(context);
+    return this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ])
+      ? true
+      : super.canActivate(context);
   }
 }

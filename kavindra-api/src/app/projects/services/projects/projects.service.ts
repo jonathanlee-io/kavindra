@@ -3,8 +3,13 @@ import {
   ForbiddenException,
   Injectable,
 } from '@nestjs/common';
+import {ConfigService} from '@nestjs/config';
 import {AuthUser} from '@supabase/supabase-js';
 
+import {
+  EnvironmentVariables,
+  NodeEnvironment,
+} from '../../../../lib/config/environment';
 import {supabaseUserIdKey} from '../../../../lib/constants/auth/supabase-user-id.constants';
 import {ClientsService} from '../../../clients/services/clients/clients.service';
 import {CreateProjectDto} from '../../dto/CreateProject.dto';
@@ -16,6 +21,7 @@ export class ProjectsService {
   constructor(
     private readonly projectsRepository: ProjectsRepositoryService,
     private readonly clientsService: ClientsService,
+    private readonly configService: ConfigService<EnvironmentVariables>,
   ) {}
 
   async createProject(
@@ -84,5 +90,30 @@ export class ProjectsService {
   async getProjectsForClient(currentUser: AuthUser, clientId: string) {
     await this.clientsService.getClientById(currentUser, clientId); // Will throw not found or forbidden exception
     return this.projectsRepository.getProjectsForClient(clientId);
+  }
+
+  async getFeedbackWidgetScript(clientSubdomain: string) {
+    let widgetSrc: string;
+    if (
+      this.configService.getOrThrow<NodeEnvironment>('NODE_ENV') ===
+      'production'
+    ) {
+      widgetSrc = 'https://www.kavindra.io/widget.js';
+    } else if (
+      this.configService.getOrThrow<NodeEnvironment>('NODE_ENV') === 'staging'
+    ) {
+      widgetSrc = 'https://staging.kavindra.io/widget.js';
+    } else {
+      widgetSrc = 'http://localhost:8080/widget.js';
+    }
+    return `
+        (function (w,d,s,o,f,js,fjs) {
+            w['JS-Widget']=o;w[o] = w[o] || function () { (w[o].q = w[o].q || []).push(arguments) };
+            js = d.createElement(s), fjs = d.getElementsByTagName(s)[0];
+            js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs);
+        }(window, document, 'script', 'mw', '${widgetSrc}'));
+        mw('init', { someConfiguration: 42 });
+        mw('message', 'Hello from ${clientSubdomain}.kavindra.io!');
+    `;
   }
 }
