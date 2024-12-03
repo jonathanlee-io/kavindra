@@ -55,6 +55,10 @@
               ],
               "fileReplacements": [
                 {
+                  "replace": "src/index.html",
+                  "with": "src/index.prod.html"
+                },
+                {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 },
@@ -79,6 +83,10 @@
                 }
               ],
               "fileReplacements": [
+                {
+                  "replace": "src/index.html",
+                  "with": "src/index.staging.html"
+                },
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.stage.ts"
