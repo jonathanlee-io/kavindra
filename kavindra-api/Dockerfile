@@ -39,6 +39,7 @@ COPY --chown=node:node --from=build /usr/src/app/package.json ./package.json
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/prisma ./prisma
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
+RUN chmod +r ./dist/js-widget/dist/widget.js
 
 EXPOSE 3000
 
