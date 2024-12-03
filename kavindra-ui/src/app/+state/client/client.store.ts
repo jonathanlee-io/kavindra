@@ -13,6 +13,7 @@ export type ClientState = {
   isLoading: boolean;
   subdomain: string | null;
   customHostname: string | null;
+  clientById: ClientDto | null;
   isSubdomainAvailable: boolean | null;
   currentlyCreatingClientId: string | null;
   currentlyCreatingClient: ClientDto | null;
@@ -22,6 +23,7 @@ const initialState: ClientState = {
   isLoading: false,
   subdomain: null,
   customHostname: null,
+  clientById: null,
   isSubdomainAvailable: null,
   currentlyCreatingClientId: null,
   currentlyCreatingClient: null,
@@ -40,6 +42,21 @@ export const ClientStore = signalStore(
         },
         isMemberOfAnything: async () => {
           return lastValueFrom(clientService.fetchIsMemberOfAnything().pipe(take(1)));
+        },
+        fetchClientById: (clientId: string) => {
+          patchState(store, {isLoading: false});
+          clientService.fetchClientById(clientId)
+              .pipe(
+                  take(1),
+                  tap((clientById) => {
+                    patchState(store, {clientById, isLoading: false});
+                  }),
+                  catchError((err) => {
+                    patchState(store, {...initialState});
+                    return throwError(() => err);
+                  }),
+              )
+              .subscribe();
         },
         fetchCreatedClient: () => {
           patchState(store, {isLoading: true});

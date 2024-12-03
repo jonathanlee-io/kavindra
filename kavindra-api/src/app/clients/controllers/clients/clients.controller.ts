@@ -4,6 +4,7 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Param,
   Post,
 } from '@nestjs/common';
 import {ApiTags} from '@nestjs/swagger';
@@ -11,6 +12,7 @@ import {AuthUser} from '@supabase/supabase-js';
 
 import {CurrentUser} from '../../../../lib/auth/supabase/decorators/current-user.decorator';
 import {host} from '../../../../lib/config/host.config';
+import {IdParamDto} from '../../../../lib/validation/id.param.dto';
 import {CreateClientDto} from '../../dto/CreateClient.dto';
 import {IsSubdomainAvailableDto} from '../../dto/IsSubdomainAvailable.dto';
 import {ClientsService} from '../../services/clients/clients.service';
@@ -41,6 +43,14 @@ export class ClientsController {
   @Get('where-involved')
   async getClientsWhereInvolved(@CurrentUser() currentUser: AuthUser) {
     return this.clientsService.getClientsWhereInvolved(currentUser);
+  }
+
+  @Get(':id')
+  async getClientById(
+    @CurrentUser() currentUser: AuthUser,
+    @Param() {id: clientId}: IdParamDto,
+  ) {
+    return this.clientsService.getClientById(currentUser, clientId);
   }
 
   @Get('is-member-of-anything')

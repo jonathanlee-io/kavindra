@@ -7,6 +7,7 @@ import {TableModule} from 'primeng/table';
 import {TagModule} from 'primeng/tag';
 import {Subscription, tap} from 'rxjs';
 
+import {ClientStore} from '../../../../../+state/client/client.store';
 import {ProjectStore} from '../../../../../+state/project/project.store';
 import {RoutePath} from '../../../../../app.routes';
 import {rebaseRoutePathAsString} from '../../../../../util/router/Router.utils';
@@ -28,6 +29,7 @@ export class ClientDashboardComponent implements OnInit, OnDestroy {
   private readonly route = inject(ActivatedRoute);
 
   protected readonly projectStore = inject(ProjectStore);
+  protected readonly clientStore = inject(ClientStore);
   protected readonly rebaseRoutePathAsString = rebaseRoutePathAsString;
   protected readonly RoutePath = RoutePath;
 
@@ -37,6 +39,7 @@ export class ClientDashboardComponent implements OnInit, OnDestroy {
     this.routeParamsSubscription = this.route.params.pipe(
         tap((params) => {
           this.projectStore.loadProjectsForClient(params['clientId']);
+          this.clientStore.fetchClientById(params['clientId']);
         }),
     ).subscribe();
   }
