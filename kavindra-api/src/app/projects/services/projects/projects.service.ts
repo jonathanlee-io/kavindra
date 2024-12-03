@@ -1,4 +1,5 @@
 import * as fs from 'node:fs';
+import * as path from 'node:path';
 
 import {
   BadRequestException,
@@ -100,11 +101,11 @@ export class ProjectsService {
       this.configService.getOrThrow<NodeEnvironment>('NODE_ENV') ===
       'production'
     ) {
-      widgetSrc = 'https://www.kavindra.io/widget.js';
+      widgetSrc = 'https://www.kavindra.io/v1/projects/widget.js';
     } else if (
       this.configService.getOrThrow<NodeEnvironment>('NODE_ENV') === 'staging'
     ) {
-      widgetSrc = 'https://staging.kavindra.io/widget.js';
+      widgetSrc = 'https://staging.kavindra.io/v1/projects/widget.js';
     } else {
       widgetSrc = 'http://www.local.api.kavindra.io:3000/v1/projects/widget.js';
     }
@@ -121,7 +122,7 @@ export class ProjectsService {
 
   async getWidgetScript() {
     return fs.readFileSync(
-      '/Users/jonathanlee/Workspace/kavindra/kavindra-api/js-widget/dist/widget.js',
+      path.join(__dirname, '../../../..', '../js-widget/dist/widget.js'),
       'utf8',
     );
   }
