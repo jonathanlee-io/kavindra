@@ -1,6 +1,6 @@
 <div class="card min-h-screen bg-light-primary dark:bg-dark-primary">
   <div>
-    <h1 class="text-3xl py-8 px-4 text-light-text-primary dark:text-dark-text-primary">Organization Dashboard:&nbsp;{{ clientStore.clientById()?.displayName }}</h1>
+    <h1 class="text-3xl py-8 px-4 text-light-text-primary dark:text-dark-text-primary">Organization Dashboard:&nbsp;<span class="italic">{{ clientStore.clientById()?.displayName }}</span></h1>
   </div>
   <p-table *ngIf="!projectStore.isLoading() else loadingSpinner" [value]="projectStore.projectsForClient()"
            [tableStyle]="{ 'min-width': '60rem' }">
