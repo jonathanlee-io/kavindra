@@ -5,6 +5,7 @@ import {
   BadRequestException,
   ForbiddenException,
   Injectable,
+  Logger,
 } from '@nestjs/common';
 import {ConfigService} from '@nestjs/config';
 import {AuthUser} from '@supabase/supabase-js';
@@ -22,6 +23,7 @@ import {ProjectsRepositoryService} from '../../repositories/projects-repository/
 @Injectable()
 export class ProjectsService {
   constructor(
+    private readonly logger: Logger,
     private readonly projectsRepository: ProjectsRepositoryService,
     private readonly clientsService: ClientsService,
     private readonly configService: ConfigService<EnvironmentVariables>,
@@ -96,13 +98,7 @@ export class ProjectsService {
   }
 
   async getFeedbackWidgetScript(clientSubdomain: string) {
-    let clientSubdomainWelcomeText = 'Kavindra.io';
-    const project =
-      await this.projectsRepository.findBySubdomain(clientSubdomain);
-    if (project.length > 0) {
-      clientSubdomainWelcomeText =
-        project[0].name + ` at ${clientSubdomainWelcomeText}`;
-    }
+    const [project] = await this.projectsRepository.findBySubdomain('kavindra');
 
     let widgetSrc: string;
     if (
@@ -123,8 +119,8 @@ export class ProjectsService {
             js = d.createElement(s), fjs = d.getElementsByTagName(s)[0];
             js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs);
         }(window, document, 'script', 'mw', '${widgetSrc}'));
-        mw('init', { someConfiguration: 42 });
-        mw('message', 'Hello from ${clientSubdomainWelcomeText}!');
+        mw('init', { project: ${project ? JSON.stringify(project) : null} } );
+        mw('message', 'Feedback');
     `;
   }
 
