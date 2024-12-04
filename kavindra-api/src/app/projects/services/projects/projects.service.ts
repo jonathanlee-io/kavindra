@@ -98,7 +98,8 @@ export class ProjectsService {
   }
 
   async getFeedbackWidgetScript(clientSubdomain: string) {
-    const [project] = await this.projectsRepository.findBySubdomain('kavindra');
+    const [project] =
+      await this.projectsRepository.findBySubdomain(clientSubdomain);
 
     let widgetSrc: string;
     if (
