@@ -27,7 +27,7 @@ export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
   @Public()
-  @Get('feedback-widget-script.js')
+  @Get('feedback-widget-init-script.js')
   @Header('Content-Type', 'text/javascript')
   async getFeedbackWidgetScript(
     @HostParam() {client: clientSubdomain}: ClientParamDto,
