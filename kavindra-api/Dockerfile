@@ -9,15 +9,6 @@ RUN yarn install --frozen-lockfile
 
 COPY --chown=node:node . .
 
-WORKDIR /usr/src/widget
-
-COPY --chown=node:node package.json ./
-COPY --chown=node:node yarn.lock ./
-
-RUN yarn install --frozen-lockfile
-
-COPY --chown=node:node . .
-
 USER node
 
 FROM --platform=linux/amd64 node:20.17.0-alpine3.20 AS build

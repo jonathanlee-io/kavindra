@@ -11,7 +11,7 @@
     "widget:build": "npx webpack --config webpack.config.js",
     "widget:build:release": "npx webpack --config webpack.config.js --env.prod",
     "widget:start": "npx webpack-dev-server --open",
-    "build": "yarn run build:widget && nest build",
+    "build": "yarn run widget:build && nest build",
     "start": "nest start --watch",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
