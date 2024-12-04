@@ -29,6 +29,7 @@ export class ProjectsController {
   @Public()
   @Get('feedback-widget-init-script.js')
   @Header('Content-Type', 'text/javascript')
+  @Header('Cache-Control', 'no-cache, no-store, must-revalidate')
   async getFeedbackWidgetScript(
     @HostParam() {client: clientSubdomain}: ClientParamDto,
   ) {
