@@ -96,6 +96,14 @@ export class ProjectsService {
   }
 
   async getFeedbackWidgetScript(clientSubdomain: string) {
+    let clientSubdomainWelcomeText = 'Kavindra.io';
+    const project =
+      await this.projectsRepository.findBySubdomain(clientSubdomain);
+    if (project.length > 0) {
+      clientSubdomainWelcomeText =
+        project[0].name + ` at ${clientSubdomainWelcomeText}`;
+    }
+
     let widgetSrc: string;
     if (
       this.configService.getOrThrow<NodeEnvironment>('NODE_ENV') ===
@@ -116,7 +124,7 @@ export class ProjectsService {
             js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs);
         }(window, document, 'script', 'mw', '${widgetSrc}'));
         mw('init', { someConfiguration: 42 });
-        mw('message', 'Hello from ${clientSubdomain}.kavindra.io!');
+        mw('message', 'Hello from ${clientSubdomainWelcomeText}!');
     `;
   }
 

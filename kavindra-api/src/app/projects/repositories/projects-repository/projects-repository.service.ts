@@ -172,4 +172,20 @@ export class ProjectsRepositoryService {
       },
     });
   }
+
+  async findBySubdomain(clientSubdomain: string) {
+    return this.prismaService.project.findMany({
+      where: {
+        subdomains: {
+          some: {
+            subdomain: clientSubdomain,
+          },
+        },
+      },
+      include: {
+        createdBy: true,
+        client: true,
+      },
+    });
+  }
 }
