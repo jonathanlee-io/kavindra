@@ -32,11 +32,9 @@ COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modul
 
 COPY --chown=node:node . .
 
-COPY --chown=node:node ./js-widget ./js-widget
-
-COPY --chown=node:node --from=development /usr/src/widget/node_modules ./js-widget/node_modules
-
 RUN yarn run build
+
+RUN yarn run widget:build
 
 RUN npx prisma generate
 
@@ -52,6 +50,7 @@ COPY --chown=node:node --from=build /usr/src/app/package.json ./package.json
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/prisma ./prisma
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
+COPY --chown=node:node --from=build /usr/src/app/widget/dist ./widget/dist
 
 EXPOSE 3000
 

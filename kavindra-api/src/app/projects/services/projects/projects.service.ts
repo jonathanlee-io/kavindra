@@ -122,7 +122,7 @@ export class ProjectsService {
 
   async getWidgetScript() {
     return fs.readFileSync(
-      path.join(__dirname, '../../../../..', 'js-widget/dist/widget.js'),
+      path.join(__dirname, '../../../../..', 'widget/dist/widget.js'),
       'utf8',
     );
   }
