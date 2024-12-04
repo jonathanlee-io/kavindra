@@ -9,6 +9,15 @@ RUN yarn install --frozen-lockfile
 
 COPY --chown=node:node . .
 
+WORKDIR /usr/src/widget
+
+COPY --chown=node:node package.json ./
+COPY --chown=node:node yarn.lock ./
+
+RUN yarn install --frozen-lockfile
+
+COPY --chown=node:node . .
+
 USER node
 
 FROM --platform=linux/amd64 node:20.17.0-alpine3.20 AS build
@@ -22,6 +31,10 @@ COPY --chown=node:node prisma/ ./prisma
 COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
 
 COPY --chown=node:node . .
+
+COPY --chown=node:node ./js-widget ./js-widget
+
+COPY --chown=node:node --from=development /usr/src/widget/node_modules ./js-widget/node_modules
 
 RUN yarn run build
 
@@ -39,7 +52,6 @@ COPY --chown=node:node --from=build /usr/src/app/package.json ./package.json
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/prisma ./prisma
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
-RUN chmod +r ./dist/js-widget/dist/widget.js
 
 EXPOSE 3000
 

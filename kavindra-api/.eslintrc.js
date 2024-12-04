@@ -19,7 +19,7 @@ module.exports = {
     node: true,
     jest: true,
   },
-  ignorePatterns: ['.eslintrc.js', 'js-widget/**/*', 'dist/**/*', 'node_modules/**/*', '**/*.d.ts'],
+  ignorePatterns: ['.eslintrc.js', 'widget/**/*', 'dist/**/*', 'node_modules/**/*', '**/*.d.ts', 'webpack.config.js'],
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',

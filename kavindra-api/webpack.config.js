@@ -1,13 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
 var copyWebpackPlugin = require('copy-webpack-plugin');
-const bundleOutputDir = './dist';
+const bundleOutputDir = './widget/dist';
 
 module.exports = (env) => {
     const isDevBuild = !(env && env.prod);
 
     return [{
-        entry: './src/main.js',
+        entry: './widget/main.js',
         output: {
             filename: 'widget.js',
             path: path.resolve(bundleOutputDir),
@@ -16,7 +16,7 @@ module.exports = (env) => {
             contentBase: bundleOutputDir
         },
         plugins: isDevBuild
-            ? [new webpack.SourceMapDevToolPlugin(), new copyWebpackPlugin([{ from: 'demo/' }])]
+            ? [new webpack.SourceMapDevToolPlugin(), new copyWebpackPlugin([{ from: './widget/demo/' }])]
             : [new webpack.optimize.UglifyJsPlugin()],
         module: {
             rules: [
