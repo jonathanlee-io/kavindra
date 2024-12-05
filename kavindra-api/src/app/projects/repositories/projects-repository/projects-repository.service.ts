@@ -173,7 +173,10 @@ export class ProjectsRepositoryService {
     });
   }
 
-  async findBySubdomain(clientSubdomain: string) {
+  async findBySubdomain(
+    clientSubdomain: string,
+    overrides?: {isIncludeCreatedBy?: boolean; isIncludeClient?: boolean},
+  ) {
     return this.prismaService.project.findMany({
       where: {
         subdomains: {
@@ -183,8 +186,8 @@ export class ProjectsRepositoryService {
         },
       },
       include: {
-        createdBy: true,
-        client: true,
+        createdBy: overrides?.isIncludeCreatedBy,
+        client: overrides?.isIncludeClient,
       },
     });
   }
