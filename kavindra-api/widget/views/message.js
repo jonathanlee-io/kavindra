@@ -4,16 +4,18 @@ import './message.css';
 const elements = [];
 let body;
 let modal;
+let modalCloseButton;
 
 export function closeModal() {
   console.log('Closing modal');
-  modal.classList.add('hidden');
+  modal = document.getElementsByClassName('js-widget-modal')[0];
+  modal.style.visibility = 'hidden';
 }
 
 export function openModal() {
   console.log('Opening modal');
-  modal = document.getElementsByClassName('js-widget-modal')[0];
-  modal.classList.remove('hidden');
+  modal.style.visibility = 'visible';
+  modalCloseButton.addEventListener('click', closeModal);
   setTimeout(() => {
     body.addEventListener('click', closeModal);
   }, 1000);
@@ -34,11 +36,11 @@ export function show(text) {
 
   const widgetOverlay = document.getElementsByClassName('js-widget-overlay')[0];
   const widgetDialog = document.getElementsByClassName('js-widget-dialog')[0];
+  modal = document.getElementsByClassName('js-widget-modal')[0];
+  modalCloseButton = document.getElementById('js-widget-modal-close-button');
 
   widgetOverlay.addEventListener('click', openModal);
   widgetDialog.addEventListener('click', openModal);
-  widgetOverlay.addEventListener('click', close);
-  widgetDialog.addEventListener('click', close);
 }
 
 export function close() {

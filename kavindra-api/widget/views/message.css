@@ -24,12 +24,17 @@
 .js-widget-modal {
   z-index: 10003;
   position: fixed;
-  background-color: #7ac142;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 50%;
+  bottom: 50%;
+  left: 50%;
+  right: 50%;
+  border: solid 1px #333;
   opacity: 0.8;
+  margin: 0 0 0 -120px;
+  width: 200px;
+  height: 200px;
+  padding: 10px 20px;
+  background-color: #7ac142;
 }
 
 .center {
@@ -40,4 +45,8 @@
 
 .hidden {
   display: none;
+}
+
+.margin-top-20 {
+  margin-top: 20px;
 }
