@@ -21,8 +21,23 @@
     border: solid 1px #333
 }
 
+.js-widget-modal {
+  z-index: 10003;
+  position: fixed;
+  background-color: #7ac142;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.8;
+}
+
 .center {
   display: flex;
   justify-content: center;
   text-align: center;
+}
+
+.hidden {
+  display: none;
 }

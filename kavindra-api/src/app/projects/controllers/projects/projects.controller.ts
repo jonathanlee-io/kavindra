@@ -34,7 +34,7 @@ export class ProjectsController {
   }
 
   @Public()
-  @Get('widget.js')
+  @Get('kavindra-widget.js')
   @Header('Content-Type', 'text/javascript')
   async getWidgetScript() {
     return this.projectsService.getWidgetScript();

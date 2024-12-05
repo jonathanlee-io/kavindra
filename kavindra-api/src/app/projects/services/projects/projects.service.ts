@@ -116,13 +116,13 @@ export class ProjectsService implements OnModuleInit {
       this.configService.getOrThrow<NodeEnvironment>('NODE_ENV') ===
       'production'
     ) {
-      widgetSrc = `https://${clientSubdomain}.production.api.kavindra.io/v1/projects/widget.js`;
+      widgetSrc = `https://${clientSubdomain}.production.api.kavindra.io/v1/projects/kavindra-widget.js`;
     } else if (
       this.configService.getOrThrow<NodeEnvironment>('NODE_ENV') === 'staging'
     ) {
-      widgetSrc = `https://${clientSubdomain}.staging.api.kavindra.io/v1/projects/widget.js`;
+      widgetSrc = `https://${clientSubdomain}.staging.api.kavindra.io/v1/projects/kavindra-widget.js`;
     } else {
-      widgetSrc = `http://${clientSubdomain}.local.api.kavindra.io:3000/v1/projects/widget.js`;
+      widgetSrc = `http://${clientSubdomain}.local.api.kavindra.io:3000/v1/projects/kavindra-widget.js`;
     }
     return `
         (function (w,d,s,o,f,js,fjs) {
@@ -137,7 +137,7 @@ export class ProjectsService implements OnModuleInit {
 
   async getWidgetScript() {
     return fs.readFileSync(
-      path.join(__dirname, '../../../../..', 'widget/dist/widget.js'),
+      path.join(__dirname, '../../../../..', 'widget/dist/kavindra-widget.js'),
       'utf8',
     );
   }

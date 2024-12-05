@@ -9,7 +9,7 @@ module.exports = (env) => {
     return [{
         entry: './widget/main.js',
         output: {
-            filename: 'widget.js',
+            filename: 'kavindra-widget.js',
             path: path.resolve(bundleOutputDir),
         },
         devServer: {
