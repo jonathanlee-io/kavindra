@@ -10,7 +10,7 @@
       </a>
     </div>
     <ng-container *ngIf="!userAuthenticationStore.isLoggedIn() && !userAuthenticationStore.isLoading()">
-      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+      <div class="lg:flex lg:flex-1 lg:justify-end">
         <a [routerLink]="['/register']"
            class="text-sm font-bold leading-6 text-gray-900 bg-pink-300 rounded-md px-5 py-2 mx-3 shadow-md hover:bg-pink-400 hover:scale-105 transition-transform duration-300 bg-light-white dark:bg-dark-white">
           Create an Account
@@ -21,7 +21,7 @@
         </a>
       </div>
     </ng-container>
-    <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+    <div class="lg:flex lg:flex-1 lg:justify-end">
       <ng-container *ngIf="!userAuthenticationStore.isLoading() && userAuthenticationStore.isLoggedIn()">
         <button (click)="userAuthenticationStore.logout()" class="rounded-full text-light-text-primary dark:text-dark-black dark:bg-dark-white font-bold px-6 py-3 shadow-lg hover:bg-yellow-400 hover:shadow-xl hover:scale-110 transform transition-transform duration-300 ease-out">
           Log Out
