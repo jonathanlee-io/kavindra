@@ -28,17 +28,17 @@
 .js-widget-modal {
   z-index: 10003;
   position: fixed;
-  top: 50%;
+  top: 25%;
   bottom: 50%;
-  left: 50%;
-  right: 50%;
+  left: 25%;
+  right: 25%;
   border: solid 1px #333;
-  opacity: 0.8;
-  margin: 0 0 0 -120px;
-  width: 200px;
-  height: 200px;
+  opacity: 0.98;
+  margin-bottom: 30rem;
+  width: 50rem;
+  height: 30rem;
   padding: 10px 20px;
-  background-color: #7ac142;
+  background-color: #e8e1e1;
 }
 
 .center {

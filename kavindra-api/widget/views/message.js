@@ -6,7 +6,7 @@ let body;
 
 export function closeModal() {
   console.log('Closing modal');
-  body.removeEventListener('click', closeModal);
+  // body.removeEventListener('click', closeModal);
   const modal = document.getElementsByClassName('js-widget-modal')[0];
   modal.style.visibility = 'hidden';
 }
@@ -17,9 +17,9 @@ export function openModal() {
   modal.style.visibility = 'visible';
   const modalCloseButton = document.getElementById('js-widget-modal-close-button');
   modalCloseButton.addEventListener('click', closeModal);
-  setTimeout(() => {
-    body.addEventListener('click', closeModal);
-  }, 1000);
+  // setTimeout(() => {
+  //   body.addEventListener('click', closeModal);
+  // }, 1000);
 }
 
 export function show(text) {
