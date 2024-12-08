@@ -38,10 +38,10 @@ export class PaymentsService implements OnModuleInit {
         'pk_test_51QLq5wCtqipjj4SBEPU29LCPwZUPBXkrpmjhNYCjqBtAMjNiIzf718UNPLPEPbCokgs3ZXe7BV0plqmiiFQLiwkm00WAQxjvwc',
     },
     {
-      id: '0bc752b6-a13d-4ba7-be31-c062200f9351',
+      id: '2bc752b6-a13d-4ba7-be31-c062200f9351',
       name: 'Enterprise',
       description: 'Dedicated support and infrastructure for your company.',
-      monthlyPrice: '$99.99',
+      monthlyPrice: '$149.99',
       features: [
         'Unlimited projects',
         'Unlimited team members',
