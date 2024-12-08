@@ -11,26 +11,29 @@ export class PaymentsRepositoryService {
     return this.prismaService.paymentPlan.findMany();
   }
 
-  async create(paymentPlan: PaymentPlanDto) {
-    await this.prismaService.paymentPlan.create({
-      data: {
-        id: paymentPlan.id,
-        name: paymentPlan.name,
-        description: paymentPlan.description,
-        monthlyPrice: paymentPlan.monthlyPrice,
-        features: paymentPlan.features,
-        tag: paymentPlan.tag,
-        stripePricingTableId: paymentPlan.stripePricingTableId,
-        stripePublishableKey: paymentPlan.stripePublishableKey,
-      },
-    });
-  }
+  async updatePaymentPlans(
+    toPersist: PaymentPlanDto[],
+    toDelete: PaymentPlanDto[],
+  ) {
+    return this.prismaService.$transaction(async (prisma) => {
+      await prisma.paymentPlan.deleteMany({
+        where: {id: {in: toDelete.map((plan) => plan.id)}},
+      });
 
-  async deleteById(paymentPlanId: string) {
-    await this.prismaService.paymentPlan.deleteMany({
-      where: {
-        id: paymentPlanId,
-      },
+      for (const paymentPlan of toPersist) {
+        await prisma.paymentPlan.createMany({
+          data: {
+            id: paymentPlan.id,
+            name: paymentPlan.name,
+            description: paymentPlan.description,
+            monthlyPrice: paymentPlan.monthlyPrice,
+            features: paymentPlan.features,
+            tag: paymentPlan.tag,
+            stripePricingTableId: paymentPlan.stripePricingTableId,
+            stripePublishableKey: paymentPlan.stripePublishableKey,
+          },
+        });
+      }
     });
   }
 }
