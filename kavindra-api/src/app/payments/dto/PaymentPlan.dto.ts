@@ -5,6 +5,7 @@ export class PaymentPlanDto {
   monthlyPrice: string;
   features: string[];
   tag?: string;
+  sortIndex: number;
   stripePricingTableId: string;
   stripePublishableKey: string;
 }

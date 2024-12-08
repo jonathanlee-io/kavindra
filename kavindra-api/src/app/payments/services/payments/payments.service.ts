@@ -7,7 +7,7 @@ import {PaymentsRepositoryService} from '../../repositories/payments-repository/
 export class PaymentsService implements OnModuleInit {
   static readonly paymentPlans: PaymentPlanDto[] = [
     {
-      id: '4145d0a7-73c9-4997-a971-690eefa5968a',
+      id: '8b556c3b-49e3-4bcc-b968-78be42ab427b',
       name: 'Indie Hacker',
       description: 'The essentials to provide your best work for your clients',
       monthlyPrice: '$19.99',
@@ -17,28 +17,30 @@ export class PaymentsService implements OnModuleInit {
         'Custom subdomain',
         'Embeddable Feedback Widget',
       ],
+      sortIndex: 0,
       stripePricingTableId: 'prctbl_1QNQf2Ctqipjj4SBOOWyi4wy',
       stripePublishableKey:
         'pk_test_51QLq5wCtqipjj4SBEPU29LCPwZUPBXkrpmjhNYCjqBtAMjNiIzf718UNPLPEPbCokgs3ZXe7BV0plqmiiFQLiwkm00WAQxjvwc',
     },
     {
-      id: 'a673e68f-a276-4cdf-9179-aa404f2f1467',
+      id: '3e1a5257-58a8-4769-970a-2214ef7bf80e',
       name: 'Startup',
       description: 'A plan that scales with your rapidly growing business.',
-      monthlyPrice: '$39.99',
+      monthlyPrice: '$49.99',
       features: [
         'Up to 15 projects',
         'Up to 150 team members',
         'Custom subdomain',
         'Embeddable Feedback Widget',
       ],
+      sortIndex: 1,
       tag: 'Most Popular',
       stripePricingTableId: 'prctbl_1QNQmHCtqipjj4SB8UV3onnl',
       stripePublishableKey:
         'pk_test_51QLq5wCtqipjj4SBEPU29LCPwZUPBXkrpmjhNYCjqBtAMjNiIzf718UNPLPEPbCokgs3ZXe7BV0plqmiiFQLiwkm00WAQxjvwc',
     },
     {
-      id: '3bc752b6-a13d-4ba7-be31-c062200f9351',
+      id: 'dc3f31cf-7d7d-4a54-b3c8-067bb6439fbc',
       name: 'Enterprise',
       description: 'Dedicated support and infrastructure for your company.',
       monthlyPrice: '$174.99',
@@ -48,6 +50,7 @@ export class PaymentsService implements OnModuleInit {
         'Custom hostname',
         'Embeddable Feedback Widget',
       ],
+      sortIndex: 2,
       stripePricingTableId: 'enterprise',
       stripePublishableKey: 'enterprise',
     },

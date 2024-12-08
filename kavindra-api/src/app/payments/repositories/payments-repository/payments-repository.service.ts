@@ -8,7 +8,11 @@ export class PaymentsRepositoryService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async getAllPaymentPlans() {
-    return this.prismaService.paymentPlan.findMany();
+    return this.prismaService.paymentPlan.findMany({
+      orderBy: {
+        sortIndex: 'asc',
+      },
+    });
   }
 
   async updatePaymentPlans(

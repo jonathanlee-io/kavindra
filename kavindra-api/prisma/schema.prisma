@@ -23,7 +23,7 @@ model User {
 model Client {
   id            String      @id @default(uuid())
   displayName   String
-  paymentPlan   PaymentPlan @relation(fields: [paymentPlanId], references: [id])
+  paymentPlan   PaymentPlan @relation(fields: [paymentPlanId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   createdBy     User        @relation(fields: [userId], references: [id], name: "createdByUser")
   members       User[]      @relation(name: "membersOfClient")
   admins        User[]      @relation(name: "adminsOfClient")
@@ -41,6 +41,7 @@ model PaymentPlan {
   monthlyPrice         String
   features             String[]
   tag                  String?
+  sortIndex            Int      @default(0)
   stripePricingTableId String
   stripePublishableKey String
   createdAt            DateTime @default(now())
