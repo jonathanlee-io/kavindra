@@ -15,24 +15,20 @@ export class PaymentsRepositoryService {
     });
   }
 
-  async updatePaymentPlans(
-    toPersist: PaymentPlanDto[],
-    toDelete: PaymentPlanDto[],
-  ) {
+  async updatePaymentPlans(toUpdate: PaymentPlanDto[]) {
     return this.prismaService.$transaction(async (prisma) => {
-      await prisma.paymentPlan.deleteMany({
-        where: {id: {in: toDelete.map((plan) => plan.id)}},
-      });
-
-      for (const paymentPlan of toPersist) {
-        await prisma.paymentPlan.createMany({
-          data: {
+      for (const paymentPlan of toUpdate) {
+        await prisma.paymentPlan.updateMany({
+          where: {
             id: paymentPlan.id,
+          },
+          data: {
             name: paymentPlan.name,
             description: paymentPlan.description,
             monthlyPrice: paymentPlan.monthlyPrice,
             features: paymentPlan.features,
             tag: paymentPlan.tag,
+            sortIndex: paymentPlan.sortIndex,
             stripePricingTableId: paymentPlan.stripePricingTableId,
             stripePublishableKey: paymentPlan.stripePublishableKey,
           },

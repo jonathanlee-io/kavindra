@@ -1,4 +1,5 @@
 import {Injectable, Logger, OnModuleInit} from '@nestjs/common';
+import {isDeepEqual} from 'remeda';
 
 import {PaymentPlanDto} from '../../dto/PaymentPlan.dto';
 import {PaymentsRepositoryService} from '../../repositories/payments-repository/payments-repository.service';
@@ -10,7 +11,7 @@ export class PaymentsService implements OnModuleInit {
       id: '8b556c3b-49e3-4bcc-b968-78be42ab427b',
       name: 'Indie Hacker',
       description: 'The essentials to provide your best work for your clients',
-      monthlyPrice: '$19.99',
+      monthlyPrice: '$24.99',
       features: [
         'Up to 5 projects',
         'Up to 10 team members',
@@ -43,7 +44,7 @@ export class PaymentsService implements OnModuleInit {
       id: 'dc3f31cf-7d7d-4a54-b3c8-067bb6439fbc',
       name: 'Enterprise',
       description: 'Dedicated support and infrastructure for your company.',
-      monthlyPrice: '$174.99',
+      monthlyPrice: '$199.99',
       features: [
         'Unlimited projects',
         'Unlimited team members',
@@ -68,25 +69,12 @@ export class PaymentsService implements OnModuleInit {
   async onModuleInit() {
     this.logger.log('Initializing payment plans');
     const paymentPlans = await this.paymentsRepository.getAllPaymentPlans();
-    const toPersist: PaymentPlanDto[] = [];
-    PaymentsService.paymentPlans.forEach((paymentPlan) => {
-      if (!paymentPlans.map((plan) => plan.id).includes(paymentPlan.id)) {
-        toPersist.push(paymentPlan);
-      }
-    });
-    const toRemove: PaymentPlanDto[] = [];
-    paymentPlans.forEach((paymentPlan) => {
-      if (
-        !PaymentsService.paymentPlans
-          .map((plan) => plan.id)
-          .includes(paymentPlan.id)
-      ) {
-        toRemove.push(paymentPlan);
-      }
-    });
-    this.logger.log(
-      `Inserting ${toPersist.length} payment plans and removing ${toRemove.length} payment plans`,
-    );
-    await this.paymentsRepository.updatePaymentPlans(toPersist, toRemove);
+    if (!isDeepEqual(paymentPlans, PaymentsService.paymentPlans)) {
+      this.logger.log('Payment plans have changed, updating');
+      await this.paymentsRepository.updatePaymentPlans(
+        PaymentsService.paymentPlans,
+      );
+    }
+    this.logger.log(`Updated payment plans`);
   }
 }
