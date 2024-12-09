@@ -25,7 +25,7 @@
     border: solid 1px #333
 }
 
-.js-widget-modal {
+.widget-modal {
   z-index: 10003;
   position: fixed;
   top: 25%;
