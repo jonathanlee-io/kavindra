@@ -17,21 +17,26 @@ export function openModalMenu() {
     modalCloseButton.addEventListener('click', closeModalMenu);
   }, 500);
   const modalReportButton = document.getElementById('js-widget-modal-menu-bug-button');
-  modalReportButton.addEventListener('click', openModalBugReport);
+  modalReportButton.addEventListener('click', (_event) => openInnerModalMenu('js-widget-modal-bug-report', 'js-widget-modal-bug-report-close-button'));
+  const modalFeatureRequestButton = document.getElementById('js-widget-modal-menu-feature-request-button');
+  modalFeatureRequestButton.addEventListener('click', (_event) => openInnerModalMenu('js-widget-modal-feature-request', 'js-widget-modal-feature-request-close-button'));
+  const modalFeatureFeedbackButton = document.getElementById('js-widget-modal-menu-feature-feedback-button');
+  modalFeatureFeedbackButton.addEventListener('click', (_event) => openInnerModalMenu('js-widget-modal-feature-feedback', 'js-widget-modal-feature-feedback-close-button'));
 }
 
-export function closeModalBugReport() {
-  const modal = document.getElementsByClassName('js-widget-modal-bug-report')[0]
-  modal.style.display = 'none';
-  openModalMenu()
-}
-
-export function openModalBugReport() {
+export function openInnerModalMenu(modalClassName, modalCloseButtonId) {
   closeModalMenu();
-  const modal = document.getElementsByClassName('js-widget-modal-bug-report')[0]
+  const modal = document.getElementsByClassName(modalClassName)[0]
   modal.style.display = 'block';
-  const modalCloseButton = document.getElementById('js-widget-modal-bug-report-close-button');
-  modalCloseButton.addEventListener('click', closeModalBugReport);
+  const modalCloseButton = document.getElementById(modalCloseButtonId);
+  modalCloseButton.addEventListener('click', closeInnerModalMenu, false);
+  modalCloseButton.modalClassName = modalClassName;
+}
+
+export function closeInnerModalMenu(event) {
+  const modal = document.getElementsByClassName(event.currentTarget.modalClassName)[0];
+  modal.style.display = 'none';
+  openModalMenu();
 }
 
 export function show(text) {
