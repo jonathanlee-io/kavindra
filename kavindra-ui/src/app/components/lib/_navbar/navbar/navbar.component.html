@@ -13,25 +13,27 @@
     </div>
     <div class="lg:flex lg:flex-1 lg:justify-end">
       <div class="card flex justify-center ml-4">
-        <button (click)="userActionOverlayPanel.toggle($event)" icon="pi pi-ellipsis-v" label="Menu" [iconPos]="'right'" pButton
-                class="p-button-rounded p-button-text text-light-text-primary dark:text-dark-text-primary"></button>
+        <p-button (click)="userActionOverlayPanel.toggle($event)"
+                class="text-light-text-primary dark:text-dark-text-primary">
+          <ChevronDownIcon pButtonIcon />
+        </p-button>
         <p-popover #userActionOverlayPanel>
-          <div class="flex flex-col gap-4 w-[5rem]">
+          <div class="flex flex-col gap-2 w-[8rem]">
             <div class="justify-center items-center text-center">
               <ng-container *ngIf="!userAuthenticationStore.isLoggedIn() && !userAuthenticationStore.isLoading()">
-                <div class="flex py-2">
+                <div class="flex justify-center items-center text-center py-2">
                   <a pButton [routerLink]="rebaseRoutePath(RoutePath.REGISTER)">Register</a>
                 </div>
-                <div class="flex py-2">
+                <div class="flex justify-center items-center text-center py-2">
                   <a pButton [routerLink]="rebaseRoutePath(RoutePath.LOGIN)">Login</a>
                 </div>
               </ng-container>
               <ng-container *ngIf="userAuthenticationStore.isLoggedIn() && !userAuthenticationStore.isLoading()">
-                <div class="flex py-2">
+                <div class="flex justify-center items-center text-center py-2">
                   <button pButton icon="pi pi-sign-out" label="Log Out" (click)="userAuthenticationStore.logout()"></button>
                 </div>
               </ng-container>
-              <div class="py-2 flex flex-col gap-2">
+              <div class="py-2 flex flex-col gap-2 justify-center items-center text-center">
                 <p-toggleswitch class="mt-2" [(ngModel)]="isDarkMode"
                                 (onChange)="userPreferencesStore.toggleDarkMode()"/>
                 <i class="pi text-light-secondary dark:text-light-white mb-0.5 px-2"

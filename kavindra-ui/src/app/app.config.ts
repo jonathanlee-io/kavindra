@@ -1,13 +1,11 @@
 import {DOCUMENT} from '@angular/common';
-import {
-  provideHttpClient,
-  withFetch,
-  withInterceptors,
-} from '@angular/common/http';
+import {provideHttpClient, withFetch, withInterceptors} from '@angular/common/http';
 import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {provideRouter} from '@angular/router';
+import Aura from '@primeng/themes/aura';
 import {ConfirmationService, MessageService} from 'primeng/api';
+import {providePrimeNG} from 'primeng/config';
 import {DialogService} from 'primeng/dynamicdialog';
 
 import {routes} from './app.routes';
@@ -23,6 +21,9 @@ export const appConfig: ApplicationConfig = {
         withFetch(),
         withInterceptors([authTokenInterceptor, ...requestErrorInterceptors]),
     ),
+    providePrimeNG({
+      theme: {preset: Aura},
+    }),
     {provide: Document, useExisting: DOCUMENT},
     MessageService,
     DialogService,

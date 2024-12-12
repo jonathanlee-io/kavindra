@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
 import {DividerModule} from 'primeng/divider';
+import {ChevronDownIcon} from 'primeng/icons';
 import {InputGroupModule} from 'primeng/inputgroup';
 import {InputTextModule} from 'primeng/inputtext';
 import {PopoverModule} from 'primeng/popover';
@@ -30,6 +31,7 @@ import {rebaseRoutePath} from '../../../../util/router/Router.utils';
     InputGroupModule,
     InputTextModule,
     DividerModule,
+    ChevronDownIcon,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
