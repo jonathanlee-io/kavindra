@@ -64,11 +64,5 @@
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.16",
     "typescript": "~5.6.3"
-  },
-  "resolutions": {
-    "@supabase/auth-js": "2.61.0"
-  },
-  "overrides": {
-    "@supabase/auth-js": "2.61.0"
   }
 }
