@@ -3,6 +3,9 @@ import {Component, inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
+import {InputGroupModule} from 'primeng/inputgroup';
+import {InputTextModule} from 'primeng/inputtext';
+import {PopoverModule} from 'primeng/popover';
 import {StyleClassModule} from 'primeng/styleclass';
 import {ToggleSwitchModule} from 'primeng/toggleswitch';
 
@@ -22,6 +25,9 @@ import {rebaseRoutePath} from '../../../../util/router/Router.utils';
     FormsModule,
     ButtonModule,
     StyleClassModule,
+    PopoverModule,
+    InputGroupModule,
+    InputTextModule,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
