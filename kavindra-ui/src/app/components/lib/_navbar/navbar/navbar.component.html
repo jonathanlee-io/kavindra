@@ -12,12 +12,6 @@
       </a>
     </div>
     <div class="lg:flex lg:flex-1 lg:justify-end">
-      <ng-container *ngIf="!userAuthenticationStore.isLoading() && userAuthenticationStore.isLoggedIn()">
-        <button (click)="userAuthenticationStore.logout()"
-                class="rounded-full text-light-text-primary dark:text-dark-black dark:bg-dark-white font-bold px-6 py-3 shadow-lg hover:bg-yellow-400 hover:shadow-xl hover:scale-110 transform transition-transform duration-300 ease-out">
-          Log Out
-        </button>
-      </ng-container>
       <div class="card flex justify-center ml-4">
         <button (click)="userActionOverlayPanel.toggle($event)" icon="pi pi-ellipsis-v" label="Menu" [iconPos]="'right'" pButton
                 class="p-button-rounded p-button-text text-light-primary dark:text-dark-text-primary"></button>
@@ -32,6 +26,11 @@
                   <a pButton [routerLink]="rebaseRoutePath(RoutePath.LOGIN)">Login</a>
                 </div>
               </ng-container>
+              <ng-container *ngIf="userAuthenticationStore.isLoggedIn() && !userAuthenticationStore.isLoading()">
+                <div class="flex py-2">
+                  <button pButton icon="pi pi-sign-out" label="Log Out" (click)="userAuthenticationStore.logout()"></button>
+                </div>
+              </ng-container>
               <div class="mt-2 py-2">
                 <p-toggleswitch class="mt-2" [(ngModel)]="isDarkMode"
                                 (onChange)="userPreferencesStore.toggleDarkMode()"/>
@@ -39,7 +38,7 @@
                    [ngClass]="userPreferencesStore.isDarkMode() ? 'pi-moon' : 'pi-sun'"></i>
                 <span class="font-medium text-surface-900 dark:text-surface-0 block mb-2">Dark Mode</span>
                 <span
-                  class="text-surface-500 dark:text-surface-700">Enable dark mode to get a darker experience.</span>
+                  class="text-surface-500 dark:text-surface-700">{{ getColorModePrompt() }}</span>
               </div>
             </div>
           </div>

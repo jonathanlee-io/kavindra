@@ -38,4 +38,8 @@ export class NavbarComponent {
   protected readonly rebaseRoutePath = rebaseRoutePath;
   protected readonly RoutePath = RoutePath;
   isDarkMode: boolean = this.userPreferencesStore.isDarkMode();
+
+  getColorModePrompt() {
+    return `Enable ${(this.isDarkMode) ? 'light' : 'dark'} mode to get a ${(this.isDarkMode) ? 'lighter' : 'darker'} experience.`;
+  }
 }
