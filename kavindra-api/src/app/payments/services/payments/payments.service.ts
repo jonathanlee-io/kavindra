@@ -19,6 +19,7 @@ export class PaymentsService implements OnModuleInit {
         'Embeddable Feedback Widget',
       ],
       sortIndex: 0,
+      tag: null,
       stripePricingTableId: 'prctbl_1QNQf2Ctqipjj4SBOOWyi4wy',
       stripePublishableKey:
         'pk_test_51QLq5wCtqipjj4SBEPU29LCPwZUPBXkrpmjhNYCjqBtAMjNiIzf718UNPLPEPbCokgs3ZXe7BV0plqmiiFQLiwkm00WAQxjvwc',
@@ -52,6 +53,7 @@ export class PaymentsService implements OnModuleInit {
         'Embeddable Feedback Widget',
       ],
       sortIndex: 2,
+      tag: null,
       stripePricingTableId: 'enterprise',
       stripePublishableKey: 'enterprise',
     },
@@ -69,12 +71,24 @@ export class PaymentsService implements OnModuleInit {
   async onModuleInit() {
     this.logger.log('Initializing payment plans');
     const paymentPlans = await this.paymentsRepository.getAllPaymentPlans();
-    if (!isDeepEqual(paymentPlans, PaymentsService.paymentPlans)) {
-      this.logger.log('Payment plans have changed, updating');
-      await this.paymentsRepository.updatePaymentPlans(
+    if (
+      isDeepEqual(
+        paymentPlans.map((plan) => {
+          delete plan.createdAt;
+          delete plan.updatedAt;
+          return plan;
+        }),
         PaymentsService.paymentPlans,
-      );
+      )
+    ) {
+      this.logger.log('Payment plans are up to date, no change required');
+      return;
     }
+
+    this.logger.log('Payment plans have changed, updating');
+    await this.paymentsRepository.updatePaymentPlans(
+      PaymentsService.paymentPlans,
+    );
     this.logger.log(`Updated payment plans`);
   }
 }
