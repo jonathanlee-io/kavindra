@@ -3,6 +3,7 @@ import {Component, inject} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {ButtonModule} from 'primeng/button';
+import {DividerModule} from 'primeng/divider';
 import {InputGroupModule} from 'primeng/inputgroup';
 import {InputTextModule} from 'primeng/inputtext';
 import {PopoverModule} from 'primeng/popover';
@@ -28,6 +29,7 @@ import {rebaseRoutePath} from '../../../../util/router/Router.utils';
     PopoverModule,
     InputGroupModule,
     InputTextModule,
+    DividerModule,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',

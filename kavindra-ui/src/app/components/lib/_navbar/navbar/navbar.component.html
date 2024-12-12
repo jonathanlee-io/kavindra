@@ -31,7 +31,7 @@
                   <button pButton icon="pi pi-sign-out" label="Log Out" (click)="userAuthenticationStore.logout()"></button>
                 </div>
               </ng-container>
-              <div class="mt-2 py-2">
+              <div class="py-2 flex flex-col gap-2">
                 <p-toggleswitch class="mt-2" [(ngModel)]="isDarkMode"
                                 (onChange)="userPreferencesStore.toggleDarkMode()"/>
                 <i class="pi text-light-secondary dark:text-light-white mb-0.5 px-2"
