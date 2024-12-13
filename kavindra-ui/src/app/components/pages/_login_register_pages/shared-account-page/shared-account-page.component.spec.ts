@@ -54,12 +54,12 @@ describe('SharedAccountPageComponent', () => {
           headingText,
         },
         providers: [
+          ...testProviders,
           provideRouter([]),
           {
             provide: UserAuthenticationStore,
             useValue: mockUserAuthenticationStore,
           },
-          ...testProviders,
         ],
       });
 
