@@ -53,7 +53,7 @@ export function show(params) {
   // convert plain HTML string into DOM elements
   const temporary = document.createElement('div');
   temporary.innerHTML = html;
-  temporary.getElementsByClassName('js-widget-dialog')[0].textContent = `Provide Feedback on ${params.project.name}`;
+  temporary.getElementsByClassName('js-widget-dialog')[0].textContent = 'Provide Feedback';
 
   // append elements to body
   body = document.getElementsByTagName('body')[0];
