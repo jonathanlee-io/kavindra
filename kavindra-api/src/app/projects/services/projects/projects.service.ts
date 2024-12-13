@@ -109,7 +109,7 @@ export class ProjectsService implements OnModuleInit {
 
   async getFeedbackWidgetScript(clientSubdomain: string) {
     if (clientSubdomain === 'www' || clientSubdomain === 'kavindra') {
-      return this.generateWidgetScript(clientSubdomain, {
+      return this.generateWidgetInitScript(clientSubdomain, {
         name: 'Kavindra',
         subdomain: clientSubdomain,
         isBugReportsEnabled: true,
@@ -119,7 +119,7 @@ export class ProjectsService implements OnModuleInit {
     }
     const [project] =
       await this.projectsRepository.findBySubdomain(clientSubdomain);
-    return this.generateWidgetScript(clientSubdomain, {
+    return this.generateWidgetInitScript(clientSubdomain, {
       ...project,
     });
   }
@@ -131,7 +131,7 @@ export class ProjectsService implements OnModuleInit {
     );
   }
 
-  private async generateWidgetScript(
+  private async generateWidgetInitScript(
     clientSubdomain: string,
     returnedProject: unknown,
   ) {
