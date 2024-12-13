@@ -5,7 +5,7 @@ import {provideRouter, RouterModule} from '@angular/router';
 import {ConfirmationService, MessageService} from 'primeng/api';
 
 import {LoginSuccessComponent} from './login-success.component';
-import {RoutePath} from '../../../../app.routes';
+import {RoutePath} from '../../../app.routes';
 
 class MockDocument {
   getElementById() {
