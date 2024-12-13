@@ -30,7 +30,6 @@ describe('SharedAccountPageComponent', () => {
             useValue: mockUserAuthenticationStore,
           },
         ],
-        teardown: {destroyAfterEach: false},
       }).compileComponents();
 
       fixture = TestBed.createComponent(SharedAccountPageComponent);
