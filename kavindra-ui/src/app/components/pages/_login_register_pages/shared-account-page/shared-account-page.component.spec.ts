@@ -44,10 +44,13 @@ describe('SharedAccountPageComponent', () => {
   });
 
   describe('@testing-library Integration Tests', () => {
-    it('should render component with heading text the same as input', async () => {
+    beforeEach(() => {
       mockUserAuthenticationStore = {
         isLoading: jasmine.createSpy('isLoading').and.returnValue(false),
       };
+    });
+
+    it('should render component with heading text the same as input', async () => {
       const headingText = faker.lorem.words();
       await render(SharedAccountPageComponent, {
         inputs: {
