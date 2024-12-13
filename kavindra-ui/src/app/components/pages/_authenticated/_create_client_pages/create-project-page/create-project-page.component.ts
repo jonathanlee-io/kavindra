@@ -1,12 +1,13 @@
 import {NgClass, NgIf, NgSwitch, NgSwitchCase} from '@angular/common';
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {watchState} from '@ngrx/signals';
 import {ButtonModule} from 'primeng/button';
+import {ArrowRightIcon} from 'primeng/icons';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {ToggleSwitchModule} from 'primeng/toggleswitch';
-import {debounceTime, filter, take, tap} from 'rxjs';
+import {debounceTime, filter, Subscription, take, tap} from 'rxjs';
 
 import {ClientStore} from '../../../../../+state/client/client.store';
 import {RoutePath} from '../../../../../app.routes';
@@ -32,12 +33,13 @@ export type SubdomainState = 'INIT' | 'AVAILABLE' | 'UNAVAILABLE' | 'LOADING';
     NgSwitch,
     ToggleSwitchModule,
     ProjectFeaturesSwitchesComponent,
+    ArrowRightIcon,
   ],
   standalone: true,
   templateUrl: './create-project-page.component.html',
   styleUrl: './create-project-page.component.scss',
 })
-export class CreateProjectPageComponent implements OnInit {
+export class CreateProjectPageComponent implements OnInit, OnDestroy {
   protected readonly rebaseRoutePath = rebaseRoutePath;
   protected readonly RoutePath = RoutePath;
   protected readonly clientStore = inject(ClientStore);
@@ -45,6 +47,8 @@ export class CreateProjectPageComponent implements OnInit {
   private readonly pricingPlans = signal<PaymentPlanDto[]>([]);
 
   private readonly paymentsService = inject(PaymentsService);
+
+  private subdomainValueChangesSubscription?: Subscription;
 
   subdomainState: SubdomainState = 'INIT';
 
@@ -60,7 +64,7 @@ export class CreateProjectPageComponent implements OnInit {
     nonNullable: true,
     validators: Validators.compose([
       Validators.required,
-      Validators.pattern(/^[a-zA-Z0-9][a-zA-Z0-9.-]+[a-zA-Z0-9]$/),
+      Validators.pattern(/^[a-z0-9][a-z0-9-_]{0,61}$/),
     ]),
   });
 
@@ -92,7 +96,7 @@ export class CreateProjectPageComponent implements OnInit {
       this.subdomainState = state.isSubdomainAvailable ? 'AVAILABLE' : 'UNAVAILABLE';
     });
 
-    this.subdomainFormControl.valueChanges.pipe(
+    this.subdomainValueChangesSubscription = this.subdomainFormControl.valueChanges.pipe(
         filter((subdomain) => !!subdomain),
         filter(() => this.subdomainFormControl.valid),
         debounceTime(500),
@@ -112,6 +116,10 @@ export class CreateProjectPageComponent implements OnInit {
     ).subscribe();
   }
 
+  ngOnDestroy() {
+    this.subdomainValueChangesSubscription?.unsubscribe();
+  }
+
   doCreateProject() {
     this.clientStore.registerNewClientAndProjectWithPlan(
         this.clientDisplayNameFormControl.value,
@@ -120,5 +128,9 @@ export class CreateProjectPageComponent implements OnInit {
         this.featureRequestsEnabledFormControl.value,
         this.featureFeedbackEnabledFormControl.value,
     );
+  }
+
+  isReadyToContinue(): boolean {
+    return this.subdomainFormControl.valid && this.clientDisplayNameFormControl.valid && this.subdomainState === 'AVAILABLE';
   }
 }
