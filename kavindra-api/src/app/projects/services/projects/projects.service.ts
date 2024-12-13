@@ -108,10 +108,10 @@ export class ProjectsService implements OnModuleInit {
   }
 
   async getFeedbackWidgetScript(clientSubdomain: string) {
-    if (clientSubdomain === 'www') {
+    if (clientSubdomain === 'www' || clientSubdomain === 'kavindra') {
       return this.generateWidgetScript(clientSubdomain, {
         name: 'Kavindra',
-        subdomain: 'www',
+        subdomain: clientSubdomain,
         isBugReportsEnabled: true,
         isFeatureRequestsEnabled: true,
         isFeatureFeedbackEnabled: true,
