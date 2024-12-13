@@ -108,9 +108,33 @@ export class ProjectsService implements OnModuleInit {
   }
 
   async getFeedbackWidgetScript(clientSubdomain: string) {
+    if (clientSubdomain === 'www') {
+      return this.generateWidgetScript(clientSubdomain, {
+        name: 'Kavindra',
+        subdomain: 'www',
+        isBugReportsEnabled: true,
+        isFeatureRequestsEnabled: true,
+        isFeatureFeedbackEnabled: true,
+      });
+    }
     const [project] =
       await this.projectsRepository.findBySubdomain(clientSubdomain);
+    return this.generateWidgetScript(clientSubdomain, {
+      ...project,
+    });
+  }
 
+  async getWidgetScript() {
+    return fs.readFileSync(
+      path.join(__dirname, '../../../../..', 'widget/dist/kavindra-widget.js'),
+      'utf8',
+    );
+  }
+
+  private async generateWidgetScript(
+    clientSubdomain: string,
+    returnedProject: unknown,
+  ) {
     let widgetSrc: string;
     if (
       this.configService.getOrThrow<NodeEnvironment>('NODE_ENV') ===
@@ -130,15 +154,8 @@ export class ProjectsService implements OnModuleInit {
             js = d.createElement(s), fjs = d.getElementsByTagName(s)[0];
             js.id = o; js.src = f; js.async = 1; fjs.parentNode.insertBefore(js, fjs);
         }(window, document, 'script', 'mw', '${widgetSrc}'));
-        mw('init', { project: ${project ? JSON.stringify(project) : null} } );
-        mw('message', 'Feedback');
+        mw('init', { project: ${returnedProject ? JSON.stringify(returnedProject) : null} } );
+        mw('message', { project: ${returnedProject ? JSON.stringify(returnedProject) : null} });
     `;
-  }
-
-  async getWidgetScript() {
-    return fs.readFileSync(
-      path.join(__dirname, '../../../../..', 'widget/dist/kavindra-widget.js'),
-      'utf8',
-    );
   }
 }
