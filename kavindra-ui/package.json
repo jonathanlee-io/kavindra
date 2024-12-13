@@ -44,6 +44,7 @@
     "@angular/cli": "^19.0.5",
     "@angular/compiler-cli": "^19.0.4",
     "@faker-js/faker": "^9.3.0",
+    "@ngneat/spectator": "^19.1.2",
     "@ngrx/eslint-plugin": "^18.1.1",
     "@supabase/supabase-js": "^2.47.6",
     "@testing-library/angular": "^17.3.4",
