@@ -14,7 +14,7 @@
       <ng-container *ngIf="!userAuthenticationStore.isLoading() else loading">
         <div>
           <div class="mt-6 grid grid-cols-2 gap-4">
-            <button [disabled]="userAuthenticationStore.isLoading()" (click)="doGoogleLogin()"
+            <button data-testid="sign-in-with-google-button" [disabled]="userAuthenticationStore.isLoading()" (click)="doGoogleLogin()"
                       class="flex w-full items-center justify-center gap-3 rounded-full  px-4 py-3 text-lg font-bold text-black shadow-md transition-transform transform hover:scale-110 bg-light-primary dark:bg-dark-blue">
               <svg class="h-6 w-6" viewBox="0 0 24 24" aria-hidden="true">
                 <path
@@ -33,7 +33,7 @@
               <span class="light-text-primary dark:text-dark-text-primary">Google</span>
             </button>
 
-            <button [disabled]="userAuthenticationStore.isLoading()" (click)="doGithubLogin()"
+            <button data-testid="sign-in-with-github-button" [disabled]="userAuthenticationStore.isLoading()" (click)="doGithubLogin()"
                       class="flex w-full items-center justify-center gap-3 rounded-full px-4 py-3 text-lg font-bold text-black shadow-md transition-transform transform hover:scale-110 bg-light-primary dark:bg-dark-secondary">
               <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                 <path fill-rule="evenodd"
