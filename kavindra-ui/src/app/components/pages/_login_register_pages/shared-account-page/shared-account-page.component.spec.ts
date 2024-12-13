@@ -16,6 +16,8 @@ describe('SharedAccountPageComponent', () => {
     attemptSupabaseLoginWithGitHub: jasmine.Spy<jasmine.Func>,
   };
 
+  let windowScrollToSpy: jasmine.Spy<jasmine.Func>;
+
   describe('Unit Tests', () => {
     let component: SharedAccountPageComponent;
     let fixture: ComponentFixture<SharedAccountPageComponent>;
@@ -26,6 +28,7 @@ describe('SharedAccountPageComponent', () => {
         attemptSupabaseLoginWithGoogle: jasmine.createSpy('attemptSupabaseLoginWithGoogle').and.resolveTo(null),
         attemptSupabaseLoginWithGitHub: jasmine.createSpy('attemptSupabaseLoginWithGitHub').and.resolveTo(null),
       };
+      windowScrollToSpy = spyOn(window, 'scrollTo');
 
       await TestBed.configureTestingModule({
         imports: [SharedAccountPageComponent],
@@ -56,6 +59,25 @@ describe('SharedAccountPageComponent', () => {
         attemptSupabaseLoginWithGoogle: jasmine.createSpy('attemptSupabaseLoginWithGoogle').and.resolveTo(null),
         attemptSupabaseLoginWithGitHub: jasmine.createSpy('attemptSupabaseLoginWithGitHub').and.resolveTo(null),
       };
+      windowScrollToSpy = spyOn(window, 'scrollTo');
+    });
+
+    it('should scroll to top on init', async () => {
+      await render(SharedAccountPageComponent, {
+        inputs: {
+          headingText: faker.lorem.words(),
+        },
+        providers: [
+          ...testProviders,
+          provideRouter([]),
+          {
+            provide: UserAuthenticationStore,
+            useValue: mockUserAuthenticationStore,
+          },
+        ],
+      });
+
+      expect(windowScrollToSpy).toHaveBeenCalledWith(0, 0);
     });
 
     it('should render component with heading text the same as input', async () => {
@@ -131,6 +153,7 @@ describe('SharedAccountPageComponent', () => {
         attemptSupabaseLoginWithGoogle: jasmine.createSpy('attemptSupabaseLoginWithGoogle').and.resolveTo(null),
         attemptSupabaseLoginWithGitHub: jasmine.createSpy('attemptSupabaseLoginWithGitHub').and.resolveTo(null),
       };
+      windowScrollToSpy = spyOn(window, 'scrollTo');
       spectator = createComponent({
         providers: [{
           provide: UserAuthenticationStore,
@@ -138,6 +161,11 @@ describe('SharedAccountPageComponent', () => {
         }],
       });
       spectator.setInput('headingText', headingText);
+    });
+
+    it('should scroll to top on init', () => {
+      spectator.detectChanges();
+      expect(windowScrollToSpy).toHaveBeenCalledWith(0, 0);
     });
 
     it('should have text same as input', () => {
