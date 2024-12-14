@@ -1,11 +1,5 @@
 import {Injectable} from '@angular/core';
-import {
-  AuthChangeEvent,
-  AuthSession,
-  createClient,
-  Session,
-  SupabaseClient,
-} from '@supabase/supabase-js';
+import {AuthChangeEvent, AuthSession, createClient, Session, SupabaseClient} from '@supabase/supabase-js';
 import {uuid} from '@supabase/supabase-js/dist/main/lib/helpers';
 
 import {environment} from '../../../environments/environment';
@@ -43,21 +37,19 @@ export class SupabaseService {
   }
 
   signInWithGoogle() {
-    const isLocal = window.location.hostname === 'localhost';
     return this._supabaseClient.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${isLocal ? 'http' : 'https'}://${window.location.hostname}${isLocal ? ':4200' : ''}/login-success`,
+        redirectTo: this.getRedirectUrl(),
       },
     });
   }
 
   signInWithGitHub() {
-    const isLocal = window.location.hostname === 'localhost';
     return this._supabaseClient.auth.signInWithOAuth({
       provider: 'github',
       options: {
-        redirectTo: `${isLocal ? 'http' : 'https'}://${window.location.hostname}${isLocal ? ':4200' : ''}/login-success`,
+        redirectTo: this.getRedirectUrl(),
       },
     });
   }
@@ -72,5 +64,11 @@ export class SupabaseService {
         .from(bucketName)
         .upload(`${this.session?.user.id}/${uuid()}`, file);
     return {data, error};
+  }
+
+  private getRedirectUrl(): string {
+    const isLocal = window.location.hostname === 'localhost';
+    const isStaging = /https:\/\/(.*).staging.kavindra.io\/(.*)/.test(window.location.href);
+    return `${isLocal ? 'http' : 'https'}://${(isStaging) ? 'www.staging.kavindra.com' : window.location.hostname}${isLocal ? ':4200' : ''}/login-success`;
   }
 }
