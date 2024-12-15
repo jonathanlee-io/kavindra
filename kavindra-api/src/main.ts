@@ -26,7 +26,7 @@ async function bootstrap() {
           .getOrThrow<string>('FRONT_END_URLS')
           .split(',')
           .includes(requestOrigin) ||
-        /https:\/\/(.*).kavindra.io|https:\/\/(.*).staging.kavindra.io/.test(
+        /https:\/\/(.*).kavindra.io|https:\/\/(.*).kavindra-staging.com/.test(
           requestOrigin,
         )
       ) {
