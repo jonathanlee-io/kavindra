@@ -69,6 +69,8 @@ export class SupabaseService {
   private getRedirectUrl(): string {
     const isLocal = window.location.hostname === 'localhost';
     const isStaging = /https:\/\/(.*).staging.kavindra.io\/(.*)/.test(window.location.href);
-    return `${isLocal ? 'http' : 'https'}://${(isStaging) ? 'www.staging.kavindra.com' : window.location.hostname}${isLocal ? ':4200' : ''}/login-success`;
+    const redirectUrl = `${isLocal ? 'http' : 'https'}://${(isStaging) ? 'www.staging.kavindra.io' : window.location.hostname}${isLocal ? ':4200' : ''}/login-success`;
+    console.log(redirectUrl);
+    return redirectUrl;
   }
 }
