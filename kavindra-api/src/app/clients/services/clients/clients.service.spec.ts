@@ -12,7 +12,6 @@ import {
   createMockAuthUser,
   createMockCreateClientDto,
 } from '../../../../lib/util/tests.helpers.util';
-import {PaymentsService} from '../../../payments/services/payments/payments.service';
 import {CreateClientDto} from '../../dto/CreateClient.dto';
 import {ClientsRepositoryService} from '../../repositories/clients-repository/clients-repository.service';
 
@@ -73,9 +72,7 @@ describe('ClientsService', () => {
 
   it('should create new client', async () => {
     const mockUser = createMockAuthUser();
-    const mockCreateClientDto = createMockCreateClientDto({
-      paymentPlanId: PaymentsService.paymentPlans[0].id,
-    });
+    const mockCreateClientDto = createMockCreateClientDto();
     const clientId = faker.string.uuid();
 
     mockClientsRepository.getClientsWhereUserInvolved.mockResolvedValue([]);

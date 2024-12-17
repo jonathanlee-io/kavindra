@@ -1,3 +1,4 @@
+import {Logger} from '@nestjs/common';
 import {Test, TestingModule} from '@nestjs/testing';
 import {StartedPostgreSqlContainer} from '@testcontainers/postgresql';
 import {Client} from 'pg';
@@ -33,7 +34,13 @@ describe('PaymentsRepositoryService', () => {
     process.env['DATABASE_URL'] = postgresContainer.getConnectionUri();
     const module: TestingModule = await Test.createTestingModule({
       imports: [PrismaModule, PaymentsModule],
-      providers: [PaymentsRepositoryService],
+      providers: [
+        {
+          provide: Logger,
+          useFactory: () => new Logger('test'),
+        },
+        PaymentsRepositoryService,
+      ],
     }).compile();
 
     repository = module.get<PaymentsRepositoryService>(

@@ -7,7 +7,6 @@ import {Client} from 'pg';
 import * as request from 'supertest';
 
 import {AppModule} from '../src/app/app.module';
-import {PaymentsService} from '../src/app/payments/services/payments/payments.service';
 import {e2eTestTimeout} from '../src/lib/constants/testing/integration-testing.constants';
 import {initApp} from '../src/lib/init/init-app';
 import {
@@ -63,9 +62,7 @@ describe('AppController (e2e)', () => {
   });
 
   it('/v1/clients/create [POST]', async () => {
-    const payload = createMockCreateClientDto({
-      paymentPlanId: PaymentsService.paymentPlans[0].id,
-    });
+    const payload = createMockCreateClientDto();
 
     await request(app.getHttpServer())
       .post('/v1/users/authenticated/check-in')
