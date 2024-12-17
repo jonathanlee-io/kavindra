@@ -5,7 +5,7 @@ export const environment = {
   TOAST_DURATION_MS: 5000,
   API_ENVIRONMENT: 'staging',
   SUPABASE_URL: 'https://auth.staging.kavindra.io',
-  SUPABASE_KEY:
+  SUPABASE_PUBLIC_KEY:
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJyb2xlIjogImFub24iLAogICJpc3MiOiAic3VwYWJhc2UiLAogICJpYXQiOiAxNzM0MTM0NDAwLAogICJleHAiOiAxODkxOTAwODAwCn0.pXf-akOzWGRZR8eF4l24D4RBmnwKcjq7qBoiQ-GWGEE',
   FLAGSMITH_CLIENT_SDK_KEY: 'Jw463yjab8T3oiqeDP7uWW',
   FLAGSMITH_API_URL: 'https://flagsmith.staging.kavindra.io/api/v1/',
