@@ -12,7 +12,3 @@ into your site so that you can start collecting feedback from users.
 ```
 
 This will include the widget in the bottom-right corner of your page.
-
-## Further reading
-
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
