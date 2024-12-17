@@ -31,11 +31,10 @@ export const TenantStore = signalStore(
           if (window.location.hostname.toLowerCase().includes('localhost')) {
             return `${scheme}://${window.location.hostname}:${port}/${apiPath}`;
           }
-          return store.customHostname() ?
-          `https://${store.customHostname()}/${apiPath}` :
-            store.apiEnvironment() === 'production' ?
-          `${scheme}://${window.location.hostname.toLowerCase().split('.')[0]}.api.kavindra.io:${port}/${apiPath}` :
-              `${scheme}://${window.location.hostname.toLowerCase().split('.')[0]}.api.kavindra-staging.com:${port}/${apiPath}`;
+          const hostname = window.location.hostname.toLowerCase().split('.');
+          const domain = `${hostname[1]}.${hostname[2]}`;
+          const apiUrl = `${scheme}://${window.location.hostname.toLowerCase().split('.')[0]}.api.${domain}:${port}/${apiPath}`;
+          return store.customHostname() ? `https://${store.customHostname()}/${apiPath}` : apiUrl;
         },
       };
     }),
