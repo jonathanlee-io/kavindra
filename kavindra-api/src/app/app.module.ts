@@ -19,6 +19,7 @@ import {SprintsModule} from './sprints/sprints.module';
 import {UsersModule} from './users/users.module';
 import {AuthModule} from '../lib/auth/auth.module';
 import {SupabaseAuthGuard} from '../lib/auth/supabase/guards/supabase-auth/supabase-auth.guard';
+import { EmbedScriptsModule } from './embed-scripts/embed-scripts.module';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import {SupabaseAuthGuard} from '../lib/auth/supabase/guards/supabase-auth/supab
     UsersModule,
     ProjectsModule,
     PaymentsModule,
+    EmbedScriptsModule,
   ],
   providers: [
     {

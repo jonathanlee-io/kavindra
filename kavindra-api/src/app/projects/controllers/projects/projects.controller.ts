@@ -1,19 +1,8 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Header,
-  HostParam,
-  Param,
-  Post,
-  Put,
-} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post, Put} from '@nestjs/common';
 import {AuthUser} from '@supabase/supabase-js';
 
 import {CurrentUser} from '../../../../lib/auth/supabase/decorators/current-user.decorator';
-import {Public} from '../../../../lib/auth/supabase/decorators/is-public.decorator';
 import {host} from '../../../../lib/config/host.config';
-import {ClientParamDto} from '../../../../lib/dto/ClientParam.dto';
 import {IdParamDto} from '../../../../lib/validation/id.param.dto';
 import {CreateProjectDto} from '../../dto/CreateProject.dto';
 import {UpdateProjectDto} from '../../dto/UpdateProject.dto';
@@ -22,23 +11,6 @@ import {ProjectsService} from '../../services/projects/projects.service';
 @Controller({host})
 export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
-
-  @Public()
-  @Get('feedback-widget-init-script.js')
-  @Header('Content-Type', 'text/javascript')
-  @Header('Cache-Control', 'no-cache, no-store, must-revalidate')
-  async getFeedbackWidgetScript(
-    @HostParam() {client: clientSubdomain}: ClientParamDto,
-  ) {
-    return this.projectsService.getFeedbackWidgetScript(clientSubdomain);
-  }
-
-  @Public()
-  @Get('kavindra-widget.js')
-  @Header('Content-Type', 'text/javascript')
-  async getWidgetScript() {
-    return this.projectsService.getWidgetScript();
-  }
 
   @Post('create')
   async registerNewProject(

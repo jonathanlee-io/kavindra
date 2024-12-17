@@ -144,9 +144,9 @@ export class ProjectsService implements OnModuleInit {
     } else if (
       this.configService.getOrThrow<NodeEnvironment>('NODE_ENV') === 'staging'
     ) {
-      widgetSrc = `https://${clientSubdomain}.staging.api.kavindra.io/v1/projects/kavindra-widget.js`;
+      widgetSrc = `https://${clientSubdomain}.staging.api.kavindra.io/v1/kavindra-widget.js`;
     } else {
-      widgetSrc = `http://${clientSubdomain}.local.api.kavindra.io:3000/v1/projects/kavindra-widget.js`;
+      widgetSrc = `http://${clientSubdomain}.local.api.kavindra.io:3000/v1/kavindra-widget.js`;
     }
     return `
         (function (w,d,s,o,f,js,fjs) {

@@ -18,5 +18,6 @@ import {UsersModule} from '../users/users.module';
     ProjectsService,
     ProjectsRepositoryService,
   ],
+  exports: [ProjectsService],
 })
 export class ProjectsModule {}
