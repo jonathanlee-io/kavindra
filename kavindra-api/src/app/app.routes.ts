@@ -1,6 +1,7 @@
 import {Routes} from '@nestjs/core';
 
 import {ClientsModule} from './clients/clients.module';
+import {EmbedScriptsModule} from './embed-scripts/embed-scripts.module';
 import {EpicsModule} from './epics/epics.module';
 import {IssuesModule} from './issues/issues.module';
 import {PaymentsModule} from './payments/payments.module';
@@ -10,6 +11,10 @@ import {SprintsModule} from './sprints/sprints.module';
 import {UsersModule} from './users/users.module';
 
 export const routes: Routes = [
+  {
+    path: '',
+    module: EmbedScriptsModule,
+  },
   {
     path: 'users',
     module: UsersModule,
