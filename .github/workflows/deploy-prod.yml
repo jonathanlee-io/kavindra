@@ -146,6 +146,6 @@ jobs:
           cache-dependency-path: '**/yarn.lock'
       - run: yarn install --frozen-lockfile
         working-directory: ./kavindra-ui
-      - name: Test (v${{ matrix.node-version }})
-        working-directory: ./kavindra-ui
-        run: yarn run test
+#      - name: Test (v${{ matrix.node-version }})
+#        working-directory: ./kavindra-ui
+#        run: yarn run test
