@@ -1,3 +1,4 @@
+import {CacheModule} from '@nestjs/cache-manager';
 import {Logger, Module} from '@nestjs/common';
 
 import {PaymentsController} from './controllers/payments/payments.controller';
@@ -6,7 +7,7 @@ import {PaymentsService} from './services/payments/payments.service';
 import {PrismaModule} from '../../lib/prisma/prisma.module';
 
 @Module({
-  imports: [PrismaModule],
+  imports: [PrismaModule, CacheModule.register()],
   controllers: [PaymentsController],
   providers: [
     {

@@ -48,8 +48,6 @@ describe('ClientsController', () => {
   });
 
   it('should fetch is subdomain available', async () => {
-    const mockUser = createMockAuthUser();
-
     const subdomain = faker.internet.domainName().split('.')[0];
 
     mockClientsService.checkIfSubdomainAvailable.mockResolvedValue({
@@ -57,16 +55,12 @@ describe('ClientsController', () => {
       subdomain,
     });
 
-    const result = await controller.isSubdomainAvailable(
-      mockUser as unknown as AuthUser,
-      {subdomain},
-    );
+    const result = await controller.isSubdomainAvailable({subdomain});
 
     expect(result.isSubdomainAvailable).toBe(false);
     expect(result.subdomain).toStrictEqual(subdomain);
-    expect(mockClientsService.checkIfSubdomainAvailable).toHaveBeenCalledWith(
-      {subdomain},
-      mockUser as unknown as AuthUser,
-    );
+    expect(mockClientsService.checkIfSubdomainAvailable).toHaveBeenCalledWith({
+      subdomain,
+    });
   });
 });
