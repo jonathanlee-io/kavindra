@@ -10,7 +10,7 @@ export class EmbedScriptsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
   @Public()
-  @Get('feedback-widget-init-script.js')
+  @Get('feedback-widget.js')
   @Header('Content-Type', 'text/javascript')
   @Header('Cache-Control', 'no-cache, no-store, must-revalidate')
   async getFeedbackWidgetScript(
