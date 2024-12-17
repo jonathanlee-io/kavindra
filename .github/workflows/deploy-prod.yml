@@ -71,10 +71,13 @@ jobs:
         working-directory: ./kavindra-api
         run: yarn run test
         env:
-          STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          FRONT_END_URLS: ${{ secrets.FRONT_END_URL }}
+          FRONT_END_URLS: ${{ secrets.FRONT_END_URLS }}
           NODE_ENV: ${{ secrets.NODE_ENV }}
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          STRIPE_API_KEY: ${{ secrets.STRIPE_API_KEY }}
+          STRIPE_WEBHOOK_URL: ${{ secrets.STRIPE_WEBHOOK_URL }}
           STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_PUBLIC_KEY: ${{ secrets.SUPABASE_PUBLIC_KEY }}
@@ -166,14 +169,14 @@ jobs:
         working-directory: ./kavindra-api
         run: railway up --service kavindra-api
         env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_STAGING_TOKEN }}
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_PRODUCTION_TOKEN }}
       - name: Install Frontend Packages
         working-directory: ./kavindra-ui
         run: yarn install --frozen-lockfile
       - name: Deploy Frontend
         run: railway up --service kavindra-ui
         env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_STAGING_TOKEN }}
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_PRODUCTION_TOKEN }}
 
 
   cypress-test:
