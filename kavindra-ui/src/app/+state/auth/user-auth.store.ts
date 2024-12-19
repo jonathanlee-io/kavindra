@@ -3,7 +3,7 @@ import {computed, inject} from '@angular/core';
 import {Router} from '@angular/router';
 import {patchState, signalStore, withComputed, withMethods, withState} from '@ngrx/signals';
 import {MessageService} from 'primeng/api';
-import {take} from 'rxjs';
+import {delay, of, take, tap} from 'rxjs';
 
 import {RoutePath} from '../../app.routes';
 import {AuthService} from '../../services/auth/auth.service';
@@ -31,7 +31,9 @@ export const UserAuthenticationStore = signalStore(
       return {
         userCheckIn: () => {
           if (store.loggedInState() === 'LOGGED_IN') {
-            authService.checkIn().pipe(take(1)).subscribe();
+            of(true).pipe(take(1), delay(1000), tap(() => {
+              authService.checkIn().pipe(take(1)).subscribe();
+            })).subscribe();
           }
         },
       };
