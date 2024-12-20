@@ -12,7 +12,9 @@ export function closeModalMenu() {
 
 export function openModalMenu() {
   const modal = document.getElementsByClassName('js-widget-modal-menu')[0];
+  const modalContent = document.getElementsByClassName('js-widget-modal-menu-content')[0];
   modal.style.display = 'block';
+  modalContent.style.display = 'block';
   const modalCloseButton = document.getElementById('js-widget-modal-menu-close-button');
   setTimeout(() => {
     modalCloseButton.addEventListener('click', closeModalMenu);
