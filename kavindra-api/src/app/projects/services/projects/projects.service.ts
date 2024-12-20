@@ -146,7 +146,7 @@ export class ProjectsService implements OnModuleInit {
     ) {
       widgetSrc = `https://${clientSubdomain}.api.kavindra-staging.com/v1/kavindra-widget.js`;
     } else {
-      widgetSrc = `http://${clientSubdomain}.api.kavindra.io:3000/v1/kavindra-widget.js`;
+      widgetSrc = `http://${clientSubdomain}.api.kavindra-local.com:3000/v1/kavindra-widget.js`;
     }
     return `
         (function (w,d,s,o,f,js,fjs) {
