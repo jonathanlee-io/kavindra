@@ -7,7 +7,7 @@ import {SupabaseService} from '../../services/supabase/supabase.service';
 export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
   const tenantStore = inject(TenantStore);
   const supabaseService = inject(SupabaseService);
-  console.log(req.url);
+  console.log(/(https):\/\/(.*).api.kavindra-staging.com/.test(req.url));
   if (
     /(https):\/\/(.*).api.kavindra.io/.test(req.url) ||
     /(https):\/\/(.*).api.kavindra-staging.com/.test(req.url) ||
