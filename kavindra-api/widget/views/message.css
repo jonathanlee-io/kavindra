@@ -59,3 +59,8 @@
 .margin-top-20 {
   margin-top: 20px;
 }
+
+.grow-hover:hover {
+  transform: scale(1.08);
+  transition: transform 200ms;
+}

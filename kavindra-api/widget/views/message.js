@@ -5,10 +5,6 @@ const elements = [];
 let body;
 let project;
 
-export function closeModalMenuCallback(_event) {
-  closeModalMenu();
-}
-
 export function openModalMenuCallback(_event) {
   openModalMenu();
 }
@@ -42,23 +38,22 @@ export function openModalMenu() {
   }, 300);
   if (project.isBugReportsEnabled) {
     const modalReportButton = document.getElementById('js-widget-modal-menu-bug-button');
-    modalReportButton.addEventListener('click', (_event) => openInnerModalMenu('js-widget-modal-bug-report', 'js-widget-modal-bug-report-close-button'));
+    modalReportButton.addEventListener('click', (_event) => openInnerModalMenu('js-widget-modal-bug-report', 'js-widget-modal-bug-report-cancel-button'));
     modalReportButton.style.display = 'block';
   }
   if (project.isFeatureRequestsEnabled) {
     const modalFeatureRequestButton = document.getElementById('js-widget-modal-menu-feature-request-button');
-    modalFeatureRequestButton.addEventListener('click', (_event) => openInnerModalMenu('js-widget-modal-feature-request', 'js-widget-modal-feature-request-close-button'));
+    modalFeatureRequestButton.addEventListener('click', (_event) => openInnerModalMenu('js-widget-modal-feature-request', 'js-widget-modal-feature-request-cancel-button'));
     modalFeatureRequestButton.style.display = 'block';
   }
   if (project.isFeatureFeedbackEnabled) {
     const modalFeatureFeedbackButton = document.getElementById('js-widget-modal-menu-feature-feedback-button');
-    modalFeatureFeedbackButton.addEventListener('click', (_event) => openInnerModalMenu('js-widget-modal-feature-feedback', 'js-widget-modal-feature-feedback-close-button'));
+    modalFeatureFeedbackButton.addEventListener('click', (_event) => openInnerModalMenu('js-widget-modal-feature-feedback', 'js-widget-modal-feature-feedback-cancel-button'));
     modalFeatureFeedbackButton.style.display = 'block';
   }
 }
 
 export function openInnerModalMenu(modalClassName, modalCloseButtonId) {
-  closeModalMenu();
   const modal = document.getElementsByClassName(modalClassName)[0]
   modal.style.display = 'block';
   const modalCloseButton = document.getElementById(modalCloseButtonId);
