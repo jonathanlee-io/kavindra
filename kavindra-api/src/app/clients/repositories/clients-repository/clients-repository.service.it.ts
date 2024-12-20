@@ -1,4 +1,5 @@
 import {faker} from '@faker-js/faker/locale/en';
+import {CacheModule} from '@nestjs/cache-manager';
 import {Logger} from '@nestjs/common';
 import {Test, TestingModule} from '@nestjs/testing';
 import {AuthUser} from '@supabase/supabase-js';
@@ -41,7 +42,12 @@ describe('ClientsRepositoryService', () => {
   beforeEach(async () => {
     process.env['DATABASE_URL'] = postgresContainer.getConnectionUri();
     const module: TestingModule = await Test.createTestingModule({
-      imports: [PrismaModule, UsersModule, PaymentsModule],
+      imports: [
+        PrismaModule,
+        CacheModule.register(),
+        UsersModule,
+        PaymentsModule,
+      ],
       providers: [
         {
           provide: Logger,
