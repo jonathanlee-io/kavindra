@@ -8,8 +8,9 @@ export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
   const tenantStore = inject(TenantStore);
   const supabaseService = inject(SupabaseService);
   if (
-    /(https):\/\/(.*).kavindra.io/.test(req.url) ||
-    /(http):\/\/localhost:3000/.test(req.url) ||
+    /(https):\/\/(.*).kavindra.io\/(.*)/.test(req.url) ||
+    /(https):\/\/(.*).kavindra-staging.com\/(.*)/.test(req.url) ||
+    /(http):\/\/localhost:3000\/(.*)/.test(req.url) ||
     new RegExp('/(https)://(.*).' + tenantStore.customHostname() + '/').test(
         req.url,
     )
