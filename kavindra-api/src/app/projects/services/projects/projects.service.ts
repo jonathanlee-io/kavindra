@@ -5,7 +5,6 @@ import {
   BadRequestException,
   ForbiddenException,
   Injectable,
-  Logger,
 } from '@nestjs/common';
 import {ConfigService} from '@nestjs/config';
 import {AuthUser} from '@supabase/supabase-js';
@@ -23,7 +22,6 @@ import {ProjectsRepositoryService} from '../../repositories/projects-repository/
 @Injectable()
 export class ProjectsService {
   constructor(
-    private readonly logger: Logger,
     private readonly projectsRepository: ProjectsRepositoryService,
     private readonly clientsService: ClientsService,
     private readonly configService: ConfigService<EnvironmentVariables>,
