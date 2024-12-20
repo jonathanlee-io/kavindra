@@ -7,9 +7,10 @@ import {SupabaseService} from '../../services/supabase/supabase.service';
 export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
   const tenantStore = inject(TenantStore);
   const supabaseService = inject(SupabaseService);
+  console.log(req.url);
   if (
-    /(https):\/\/(.*).api.kavindra.io\/(.*)/.test(req.url) ||
-    /(https):\/\/(.*).api.kavindra-staging.com\/(.*)/.test(req.url) ||
+    /(https):\/\/(.*).api.kavindra.io/.test(req.url) ||
+    /(https):\/\/(.*).api.kavindra-staging.com/.test(req.url) ||
     /(http):\/\/localhost:3000\/(.*)/.test(req.url) ||
     new RegExp('/(https)://(.*).' + tenantStore.customHostname() + '/').test(
         req.url,
