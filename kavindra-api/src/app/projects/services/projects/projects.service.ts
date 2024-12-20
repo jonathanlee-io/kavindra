@@ -1,14 +1,10 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
-import {Cache, CACHE_MANAGER} from '@nestjs/cache-manager';
 import {
   BadRequestException,
   ForbiddenException,
-  Inject,
   Injectable,
-  Logger,
-  OnModuleInit,
 } from '@nestjs/common';
 import {ConfigService} from '@nestjs/config';
 import {AuthUser} from '@supabase/supabase-js';
@@ -24,20 +20,12 @@ import {UpdateProjectDto} from '../../dto/UpdateProject.dto';
 import {ProjectsRepositoryService} from '../../repositories/projects-repository/projects-repository.service';
 
 @Injectable()
-export class ProjectsService implements OnModuleInit {
+export class ProjectsService {
   constructor(
-    private readonly logger: Logger,
-    @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
     private readonly projectsRepository: ProjectsRepositoryService,
     private readonly clientsService: ClientsService,
     private readonly configService: ConfigService<EnvironmentVariables>,
   ) {}
-
-  async onModuleInit() {
-    this.logger.log('Projects service initializing, clearing cache...');
-    await this.cacheManager.reset();
-    this.logger.log('Projects service initialized, cleared cache');
-  }
 
   async createProject(
     currentUser: AuthUser,
@@ -146,7 +134,7 @@ export class ProjectsService implements OnModuleInit {
     ) {
       widgetSrc = `https://${clientSubdomain}.api.kavindra-staging.com/v1/kavindra-widget.js`;
     } else {
-      widgetSrc = `http://${clientSubdomain}.api.kavindra.io:3000/v1/kavindra-widget.js`;
+      widgetSrc = `http://${clientSubdomain}.api.kavindra-local.com:3000/v1/kavindra-widget.js`;
     }
     return `
         (function (w,d,s,o,f,js,fjs) {

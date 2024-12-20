@@ -1,3 +1,4 @@
+import {CacheModule} from '@nestjs/cache-manager';
 import {Logger} from '@nestjs/common';
 import {Test, TestingModule} from '@nestjs/testing';
 import {StartedPostgreSqlContainer} from '@testcontainers/postgresql';
@@ -33,7 +34,7 @@ describe('PaymentsRepositoryService', () => {
   beforeEach(async () => {
     process.env['DATABASE_URL'] = postgresContainer.getConnectionUri();
     const module: TestingModule = await Test.createTestingModule({
-      imports: [PrismaModule, PaymentsModule],
+      imports: [PrismaModule, CacheModule.register(), PaymentsModule],
       providers: [
         {
           provide: Logger,

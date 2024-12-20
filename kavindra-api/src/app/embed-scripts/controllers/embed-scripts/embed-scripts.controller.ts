@@ -1,10 +1,12 @@
 import {Controller, Get, Header, HostParam} from '@nestjs/common';
+import {ApiTags} from '@nestjs/swagger';
 
 import {Public} from '../../../../lib/auth/supabase/decorators/is-public.decorator';
 import {host} from '../../../../lib/config/host.config';
 import {ClientParamDto} from '../../../../lib/dto/ClientParam.dto';
 import {ProjectsService} from '../../../projects/services/projects/projects.service';
 
+@ApiTags('Embed Scripts')
 @Controller({host})
 export class EmbedScriptsController {
   constructor(private readonly projectsService: ProjectsService) {}

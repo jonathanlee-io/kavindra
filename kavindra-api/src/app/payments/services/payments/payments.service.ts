@@ -1,4 +1,5 @@
-import {Injectable, Logger, OnModuleInit} from '@nestjs/common';
+import {Cache, CACHE_MANAGER} from '@nestjs/cache-manager';
+import {Inject, Injectable, Logger, OnModuleInit} from '@nestjs/common';
 import {isDeepEqual} from 'remeda';
 
 import {PaymentPlanDto} from '../../dto/PaymentPlan.dto';
@@ -61,6 +62,7 @@ export class PaymentsService implements OnModuleInit {
 
   constructor(
     private readonly logger: Logger,
+    @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
     private readonly paymentsRepository: PaymentsRepositoryService,
   ) {}
 
@@ -89,6 +91,8 @@ export class PaymentsService implements OnModuleInit {
     await this.paymentsRepository.updatePaymentPlans(
       PaymentsService.paymentPlans,
     );
-    this.logger.log(`Updated payment plans`);
+    this.logger.log(`Updated payment plans, clearing cache`);
+    await this.cacheManager.reset();
+    this.logger.log(`Cleared cache`);
   }
 }
