@@ -23,6 +23,7 @@
     </div>
 
     <app-cancel-continue
+      [isNewClient]="true"
       [cancelRoutePath]="rebaseRoutePath(RoutePath.CREATE_CLIENT_INTRO)"
       [isReadyToContinue]="isReadyToContinue()"
       [clientDisplayNameFormControl]="clientDisplayNameFormControl"
