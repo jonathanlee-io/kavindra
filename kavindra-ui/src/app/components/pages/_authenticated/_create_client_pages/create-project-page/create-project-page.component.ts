@@ -1,4 +1,4 @@
-import {NgClass, NgIf, NgSwitch, NgSwitchCase} from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {RouterLink} from '@angular/router';
@@ -14,6 +14,7 @@ import {RoutePath} from '../../../../../app.routes';
 import {PaymentPlanDto} from '../../../../../dtos/payments/PaymentPlan.dto';
 import {PaymentsService} from '../../../../../services/payments/payments.service';
 import {rebaseRoutePath} from '../../../../../util/router/Router.utils';
+import {CreateProjectComponent} from '../../../../lib/_project/create-project/create-project.component';
 import {
   ProjectFeaturesSwitchesComponent,
 } from '../../../../lib/_project/project-features-switches/project-features-switches.component';
@@ -29,11 +30,10 @@ export type SubdomainState = 'INIT' | 'AVAILABLE' | 'UNAVAILABLE' | 'LOADING';
     ReactiveFormsModule,
     NgIf,
     ProgressSpinnerModule,
-    NgSwitchCase,
-    NgSwitch,
     ToggleSwitchModule,
     ProjectFeaturesSwitchesComponent,
     ArrowRightIcon,
+    CreateProjectComponent,
   ],
   standalone: true,
   templateUrl: './create-project-page.component.html',
