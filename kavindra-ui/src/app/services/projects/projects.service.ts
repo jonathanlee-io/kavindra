@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {inject, Injectable} from '@angular/core';
 
 import {TenantStore} from '../../+state/tenant/tenant.store';
+import {CreateProjectDto} from '../../dtos/projects/CreateProject.dto';
 import {ProjectDto} from '../../dtos/projects/Project.dto';
 
 @Injectable({
@@ -25,5 +26,9 @@ export class ProjectsService {
 
   updateProjectById(projectId: string, project: ProjectDto) {
     return this.httpClient.put<ProjectDto>(this.tenantStore.getFullRequestUrl(`v1/projects/${projectId}`), project);
+  }
+
+  createProjectForExistingClient(clientId: string, project: CreateProjectDto) {
+    return this.httpClient.post<ProjectDto>(this.tenantStore.getFullRequestUrl(`v1/projects/for-client/${clientId}`), project);
   }
 }

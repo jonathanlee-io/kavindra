@@ -2,6 +2,7 @@ import {inject} from '@angular/core';
 import {patchState, signalStore, withMethods, withState} from '@ngrx/signals';
 import {catchError, take, tap, throwError} from 'rxjs';
 
+import {CreateProjectDto} from '../../dtos/projects/CreateProject.dto';
 import {ProjectDto} from '../../dtos/projects/Project.dto';
 import {ProjectsService} from '../../services/projects/projects.service';
 
@@ -78,6 +79,19 @@ export const ProjectStore = signalStore(
                     patchState(store, {projectById: {...updatedProject}, isLoading: false});
                   }),
               ).subscribe();
+        },
+        createProjectForExistingClient: (clientId: string, project: CreateProjectDto) => {
+          patchState(store, {isLoading: true});
+          projectsService.createProjectForExistingClient(clientId, project)
+              .pipe(
+                  take(1),
+                  tap((createdProject) => {
+                    patchState(store, {
+                      isLoading: false,
+                      projectById: {...createdProject},
+                    });
+                  }),
+              );
         },
       };
     }),

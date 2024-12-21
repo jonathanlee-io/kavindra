@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CancelContinueComponent } from './cancel-continue.component';
+import {CancelContinueComponent} from './cancel-continue.component';
 
 describe('CancelContinueComponent', () => {
   let component: CancelContinueComponent;
@@ -8,9 +8,9 @@ describe('CancelContinueComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CancelContinueComponent]
+      imports: [CancelContinueComponent],
     })
-    .compileComponents();
+        .compileComponents();
 
     fixture = TestBed.createComponent(CancelContinueComponent);
     component = fixture.componentInstance;

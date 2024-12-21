@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { OrgDashboardCreateProjectPageComponent } from './org-dashboard-create-project-page.component';
+import {OrgDashboardCreateProjectPageComponent} from './org-dashboard-create-project-page.component';
 
 describe('OrgDashboardCreateProjectPageComponent', () => {
   let component: OrgDashboardCreateProjectPageComponent;
@@ -8,9 +8,9 @@ describe('OrgDashboardCreateProjectPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OrgDashboardCreateProjectPageComponent]
+      imports: [OrgDashboardCreateProjectPageComponent],
     })
-    .compileComponents();
+        .compileComponents();
 
     fixture = TestBed.createComponent(OrgDashboardCreateProjectPageComponent);
     component = fixture.componentInstance;
