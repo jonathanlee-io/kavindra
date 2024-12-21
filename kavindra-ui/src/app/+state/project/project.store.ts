@@ -1,10 +1,13 @@
 import {inject} from '@angular/core';
+import {Router} from '@angular/router';
 import {patchState, signalStore, withMethods, withState} from '@ngrx/signals';
 import {catchError, take, tap, throwError} from 'rxjs';
 
+import {RoutePath} from '../../app.routes';
 import {CreateProjectDto} from '../../dtos/projects/CreateProject.dto';
 import {ProjectDto} from '../../dtos/projects/Project.dto';
 import {ProjectsService} from '../../services/projects/projects.service';
+import {rebaseRoutePathAsString, RouterUtils} from '../../util/router/Router.utils';
 
 export type ProjectState = {
   isLoading: boolean;
@@ -25,6 +28,7 @@ export const ProjectStore = signalStore(
     withState(initialState),
     withMethods((store) => {
       const projectsService = inject(ProjectsService);
+      const router = inject(Router);
       return {
         loadProjectsWhereInvolved: async () => new Promise<ProjectDto[]>((resolve, reject) => {
           patchState(store, {isLoading: true});
@@ -90,8 +94,10 @@ export const ProjectStore = signalStore(
                       isLoading: false,
                       projectById: {...createdProject},
                     });
+                    router.navigate([rebaseRoutePathAsString(RoutePath.CLIENT_DASHBOARD.replace(':clientId', clientId))])
+                        .catch(RouterUtils.navigateCatchErrorCallback);
                   }),
-              );
+              ).subscribe();
         },
       };
     }),

@@ -36,7 +36,11 @@ export class CancelContinueComponent {
   featureFeedbackEnabledFormControl = input.required<FormControl<boolean>>();
 
   doCreateProject() {
-    if (!this.isReadyToContinue() || !this.clientDisplayNameFormControl().valid || !this.subdomainFormControl().valid) {
+    console.log(this.clientDisplayNameFormControl().valid);
+    if (!this.isReadyToContinue() ||
+      (this.clientDisplayNameFormControl().invalid && this.clientDisplayNameFormControl().enabled) ||
+      !this.subdomainFormControl().valid
+    ) {
       return;
     }
     if (this.isNewClient()) {
@@ -56,6 +60,8 @@ export class CancelContinueComponent {
     this.projectStore.createProjectForExistingClient(
         clientId,
         {
+          clientId,
+          name: this.subdomainFormControl().value,
           subdomain: this.subdomainFormControl().value,
           isBugReportsEnabled: this.bugReportsEnabledFormControl().value,
           isFeatureRequestsEnabled: this.featureRequestsEnabledFormControl().value,

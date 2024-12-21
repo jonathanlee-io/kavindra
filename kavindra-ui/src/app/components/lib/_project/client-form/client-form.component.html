@@ -16,7 +16,6 @@
             class="flex items-center rounded-full py-2 px-4 shadow-lg outline outline-2 dark:outline-dark-text-primary focus-within:outline-pink-500">
             <input type="text" name="clientDisplayName" id="clientDisplayName"
                    autocomplete="off"
-                   [disabled]="isReadonly()"
                    [formControl]="clientDisplayNameFormControl()"
                    [ngClass]="{'placeholder-light-error': (clientDisplayNameFormControl().invalid && clientDisplayNameFormControl().dirty), 'text-light-success outline-light-success': clientDisplayNameFormControl().valid}"
                    class="w-full text-lg rounded-full focus:outline-none text-light-text-primary dark:text-light-text-primary"

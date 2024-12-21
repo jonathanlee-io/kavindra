@@ -29,13 +29,12 @@ import {SubdomainState} from '../../_create_client_pages/create-project-page/cre
 })
 export class OrgDashboardCreateProjectPageComponent implements OnDestroy {
   private readonly subdomainValueChangesSubscription: Subscription;
-  private readonly clientDisplayNameValueChangesSubscription: Subscription;
   private readonly route = inject(ActivatedRoute);
-  protected readonly clientStore = inject(ClientStore);
 
+  protected readonly clientStore = inject(ClientStore);
+  protected readonly isReadyToContinue = signal<boolean>(false);
   protected readonly rebaseRoutePath = rebaseRoutePath;
   protected readonly RoutePath = RoutePath;
-  protected readonly isReadyToContinue = signal<boolean>(false);
 
   subdomainState: SubdomainState = 'INIT';
 
@@ -85,7 +84,7 @@ export class OrgDashboardCreateProjectPageComponent implements OnDestroy {
         return;
       }
       this.subdomainState = state.isSubdomainAvailable ? 'AVAILABLE' : 'UNAVAILABLE';
-      this.isReadyToContinue.set(this.subdomainFormControl.valid && this.clientDisplayNameFormControl.valid && this.subdomainState === 'AVAILABLE');
+      this.isReadyToContinue.set(this.subdomainFormControl.valid && this.subdomainState === 'AVAILABLE');
     });
 
     this.route.params.pipe(
@@ -95,8 +94,10 @@ export class OrgDashboardCreateProjectPageComponent implements OnDestroy {
         }),
     ).subscribe();
 
+    this.clientDisplayNameFormControl.disable();
+
     this.subdomainValueChangesSubscription = this.subdomainFormControl.valueChanges.pipe(
-        tap(() => this.isReadyToContinue.set(this.subdomainFormControl.valid && this.clientDisplayNameFormControl.valid && this.subdomainState === 'AVAILABLE')),
+        tap(() => this.isReadyToContinue.set(this.subdomainFormControl.valid && this.subdomainState === 'AVAILABLE')),
         filter((subdomain) => !!subdomain),
         filter(() => this.subdomainFormControl.valid),
         debounceTime(500),
@@ -105,15 +106,10 @@ export class OrgDashboardCreateProjectPageComponent implements OnDestroy {
           this.subdomainState = 'LOADING';
         }),
     ).subscribe();
-
-    this.clientDisplayNameValueChangesSubscription = this.clientDisplayNameFormControl.valueChanges.pipe(
-        tap(() => this.isReadyToContinue.set(this.subdomainFormControl.valid && this.clientDisplayNameFormControl.valid && this.subdomainState === 'AVAILABLE')),
-    ).subscribe();
   }
 
 
   ngOnDestroy() {
     this.subdomainValueChangesSubscription?.unsubscribe();
-    this.clientDisplayNameValueChangesSubscription?.unsubscribe();
   }
 }
