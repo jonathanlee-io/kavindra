@@ -1,10 +1,7 @@
-import {NgClass, NgIf} from '@angular/common';
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
-import {RouterLink} from '@angular/router';
 import {watchState} from '@ngrx/signals';
 import {ButtonModule} from 'primeng/button';
-import {ArrowRightIcon} from 'primeng/icons';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {ToggleSwitchModule} from 'primeng/toggleswitch';
 import {debounceTime, filter, Subscription, take, tap} from 'rxjs';
@@ -14,6 +11,8 @@ import {RoutePath} from '../../../../../app.routes';
 import {PaymentPlanDto} from '../../../../../dtos/payments/PaymentPlan.dto';
 import {PaymentsService} from '../../../../../services/payments/payments.service';
 import {rebaseRoutePath} from '../../../../../util/router/Router.utils';
+import {CancelContinueComponent} from '../../../../lib/_project/cancel-continue/cancel-continue.component';
+import {ClientFormComponent} from '../../../../lib/_project/client-form/client-form.component';
 import {CreateProjectComponent} from '../../../../lib/_project/create-project/create-project.component';
 import {
   ProjectFeaturesSwitchesComponent,
@@ -24,16 +23,14 @@ export type SubdomainState = 'INIT' | 'AVAILABLE' | 'UNAVAILABLE' | 'LOADING';
 @Component({
   selector: 'app-create-project-page',
   imports: [
-    RouterLink,
     ButtonModule,
-    NgClass,
     ReactiveFormsModule,
-    NgIf,
     ProgressSpinnerModule,
     ToggleSwitchModule,
     ProjectFeaturesSwitchesComponent,
-    ArrowRightIcon,
     CreateProjectComponent,
+    CancelContinueComponent,
+    ClientFormComponent,
   ],
   standalone: true,
   templateUrl: './create-project-page.component.html',
@@ -44,11 +41,14 @@ export class CreateProjectPageComponent implements OnInit, OnDestroy {
   protected readonly RoutePath = RoutePath;
   protected readonly clientStore = inject(ClientStore);
 
+  protected readonly isReadyToContinue = signal<boolean>(false);
+
   private readonly pricingPlans = signal<PaymentPlanDto[]>([]);
 
   private readonly paymentsService = inject(PaymentsService);
 
   private subdomainValueChangesSubscription?: Subscription;
+  private clientDisplayNameValueChangesSubscription?: Subscription;
 
   subdomainState: SubdomainState = 'INIT';
 
@@ -94,9 +94,11 @@ export class CreateProjectPageComponent implements OnInit, OnDestroy {
         return;
       }
       this.subdomainState = state.isSubdomainAvailable ? 'AVAILABLE' : 'UNAVAILABLE';
+      this.isReadyToContinue.set(this.subdomainFormControl.valid && this.clientDisplayNameFormControl.valid && this.subdomainState === 'AVAILABLE');
     });
 
     this.subdomainValueChangesSubscription = this.subdomainFormControl.valueChanges.pipe(
+        tap(() => this.isReadyToContinue.set(this.subdomainFormControl.valid && this.clientDisplayNameFormControl.valid && this.subdomainState === 'AVAILABLE')),
         filter((subdomain) => !!subdomain),
         filter(() => this.subdomainFormControl.valid),
         debounceTime(500),
@@ -104,6 +106,10 @@ export class CreateProjectPageComponent implements OnInit, OnDestroy {
           this.clientStore.fetchIsSubdomainAvailable(subdomain!);
           this.subdomainState = 'LOADING';
         }),
+    ).subscribe();
+
+    this.clientDisplayNameValueChangesSubscription = this.clientDisplayNameFormControl.valueChanges.pipe(
+        tap(() => this.isReadyToContinue.set(this.subdomainFormControl.valid && this.clientDisplayNameFormControl.valid && this.subdomainState === 'AVAILABLE')),
     ).subscribe();
   }
 
@@ -118,19 +124,6 @@ export class CreateProjectPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subdomainValueChangesSubscription?.unsubscribe();
-  }
-
-  doCreateProject() {
-    this.clientStore.registerNewClientAndProjectWithPlan(
-        this.clientDisplayNameFormControl.value,
-        this.subdomainFormControl.value,
-        this.bugReportsEnabledFormControl.value,
-        this.featureRequestsEnabledFormControl.value,
-        this.featureFeedbackEnabledFormControl.value,
-    );
-  }
-
-  isReadyToContinue(): boolean {
-    return this.subdomainFormControl.valid && this.clientDisplayNameFormControl.valid && this.subdomainState === 'AVAILABLE';
+    this.clientDisplayNameValueChangesSubscription?.unsubscribe();
   }
 }
