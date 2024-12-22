@@ -1,4 +1,12 @@
-import {Body, Controller, Get, Param, Post, Put} from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import {AuthUser} from '@supabase/supabase-js';
 
 import {CurrentUser} from '../../../../lib/auth/supabase/decorators/current-user.decorator';
@@ -52,5 +60,17 @@ export class ProjectsController {
       projectId,
       updateProjectDto,
     );
+  }
+
+  @Post('for-client/:id')
+  async createProjectForClient(
+    @CurrentUser() currentUser: AuthUser,
+    @Param() {id: clientId}: IdParamDto,
+    @Body() createProjectDto: CreateProjectDto,
+  ) {
+    if (clientId !== createProjectDto.clientId) {
+      throw new BadRequestException('Client ID in URL does not match body');
+    }
+    return this.projectsService.createProject(currentUser, createProjectDto);
   }
 }

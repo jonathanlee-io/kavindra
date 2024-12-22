@@ -13,6 +13,9 @@ import {
   MainDashboardComponent,
 } from './components/pages/_authenticated/_dashboard/main-dashboard/main-dashboard.component';
 import {
+  OrgDashboardCreateProjectPageComponent,
+} from './components/pages/_authenticated/_dashboard/org-dashboard-create-project-page/org-dashboard-create-project-page.component';
+import {
   ProjectDashboardPageComponent,
 } from './components/pages/_authenticated/_dashboard/project-dashboard-page/project-dashboard-page.component';
 import {
@@ -36,9 +39,10 @@ export enum RoutePath {
   LOGIN_SUCCESS = 'login-success',
   /* AUTHENTICATED ROUTES */
   CREATE_CLIENT_INTRO = 'create/client/intro',
-  CREATE_PROJECT = 'create/project',
+  CREATE_PROJECT_INTRO = 'create/first-project',
   SETTINGS_PAGE = 'manage/settings',
   DASHBOARD = 'dashboard',
+  CREATE_PROJECT = 'create/project/:clientId',
   CLIENT_DASHBOARD = 'dashboard/client/:clientId',
   PROJECT_DASHBOARD = 'dashboard/project/:projectId',
 }
@@ -72,7 +76,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: RoutePath.CREATE_PROJECT,
+    path: RoutePath.CREATE_PROJECT_INTRO,
     component: CreateProjectPageComponent,
     canActivate: [authGuard],
   },
@@ -84,6 +88,11 @@ export const routes: Routes = [
   {
     path: RoutePath.DASHBOARD,
     component: MainDashboardComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: RoutePath.CREATE_PROJECT,
+    component: OrgDashboardCreateProjectPageComponent,
     canActivate: [authGuard],
   },
   {

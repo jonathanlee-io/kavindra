@@ -7,7 +7,10 @@
     <ng-template pTemplate="caption">
       <div class="flex items-center justify-between">
         <span class="text-xl font-bold">Projects under Organization</span>
-        <p-button icon="pi pi-refresh" (click)="loadProjectsForClient(clientId())" rounded raised/>
+        <div>
+          <a class="mr-4" pButton pButtonIcon="pi pi-plus" [routerLink]="rebaseRoutePathAsString(RoutePath.CREATE_PROJECT.replace(':clientId', clientId()))">Create Project</a>
+          <p-button icon="pi pi-refresh" (click)="loadProjectsForClient(clientId())" rounded raised/>
+        </div>
       </div>
     </ng-template>
     <ng-template pTemplate="header">

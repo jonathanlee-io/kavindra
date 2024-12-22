@@ -4,7 +4,7 @@
     <div class="space-y-12 animate-fadeinup">
       <app-client-form
         [clientDisplayNameFormControl]="clientDisplayNameFormControl"
-        [isReadonly]="false"
+        [isReadonly]="true"
       />
 
       <app-create-project
@@ -23,8 +23,8 @@
     </div>
 
     <app-cancel-continue
-      [isNewClient]="true"
-      [cancelRoutePath]="rebaseRoutePath(RoutePath.CREATE_CLIENT_INTRO)"
+      [isNewClient]="false"
+      [cancelRoutePath]="rebaseRoutePath(RoutePath.DASHBOARD)"
       [isReadyToContinue]="isReadyToContinue()"
       [clientDisplayNameFormControl]="clientDisplayNameFormControl"
       [subdomainFormControl]="subdomainFormControl"
