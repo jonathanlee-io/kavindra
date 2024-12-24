@@ -8,12 +8,9 @@ import {ThrottlerGuard, ThrottlerModule} from '@nestjs/throttler';
 import {routes} from './app.routes';
 import {ClientsModule} from './clients/clients.module';
 import {EmbedScriptsModule} from './embed-scripts/embed-scripts.module';
-import {EpicsModule} from './epics/epics.module';
 import {IssuesModule} from './issues/issues.module';
 import {PaymentsModule} from './payments/payments.module';
 import {ProjectsModule} from './projects/projects.module';
-import {ReleasesModule} from './releases/releases.module';
-import {SprintsModule} from './sprints/sprints.module';
 import {UsersModule} from './users/users.module';
 import {AuthModule} from '../lib/auth/auth.module';
 import {SupabaseAuthGuard} from '../lib/auth/supabase/guards/supabase-auth/supabase-auth.guard';
@@ -36,10 +33,7 @@ import {SupabaseAuthGuard} from '../lib/auth/supabase/guards/supabase-auth/supab
     }),
     AuthModule,
     IssuesModule,
-    ReleasesModule,
     ClientsModule,
-    EpicsModule,
-    SprintsModule,
     UsersModule,
     ProjectsModule,
     PaymentsModule,
