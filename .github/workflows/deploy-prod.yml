@@ -12,7 +12,7 @@ jobs:
     runs-on: blacksmith-4vcpu-ubuntu-2204
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [22.x]
     name: Lint Backend (v${{ matrix.node-version }})
     steps:
       - name: Checkout
@@ -33,7 +33,7 @@ jobs:
     runs-on: blacksmith-4vcpu-ubuntu-2204
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [22.x]
     name: Build Backend (v${{ matrix.node-version }})
     steps:
       - name: Checkout
@@ -54,7 +54,7 @@ jobs:
     runs-on: blacksmith-4vcpu-ubuntu-2204
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [22.x]
     name: Test Backend (v${{ matrix.node-version }})
     steps:
       - name: Checkout
@@ -88,7 +88,7 @@ jobs:
     runs-on: blacksmith-4vcpu-ubuntu-2204
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [22.x]
     name: Lint Frontend (v${{ matrix.node-version }})
     steps:
       - name: Checkout
@@ -109,7 +109,7 @@ jobs:
     runs-on: blacksmith-4vcpu-ubuntu-2204
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [22.x]
     name: Build Frontend (v${{ matrix.node-version }})
     steps:
       - name: Checkout
@@ -133,7 +133,7 @@ jobs:
     runs-on: blacksmith-4vcpu-ubuntu-2204
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [22.x]
     name: Test Frontend (v${{ matrix.node-version }})
     steps:
       - name: Checkout
