@@ -25,7 +25,7 @@ describe('AppController (e2e)', () => {
 
   let accessToken: string;
 
-  const email = 'test@example.com';
+  const email = faker.internet.email();
   const userId = faker.string.uuid();
 
   beforeAll(async () => {
