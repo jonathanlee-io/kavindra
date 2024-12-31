@@ -16,9 +16,16 @@ export class UsersRepositoryService {
   async createUserFromAuthUser(user: AuthUser) {
     return this.prismaService.user.create({
       data: {
+        email: user.email,
         displayName: user.user_metadata['name'] ?? '',
         supabaseUserId: user['sub'],
       },
+    });
+  }
+
+  async findByEmail(email: string) {
+    return this.prismaService.user.findUnique({
+      where: {email},
     });
   }
 }

@@ -5,6 +5,7 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  Patch,
   Post,
 } from '@nestjs/common';
 import {ApiTags} from '@nestjs/swagger';
@@ -51,5 +52,31 @@ export class ClientsController {
     @Param() {id: clientId}: IdParamDto,
   ) {
     return this.clientsService.getClientById(currentUser, clientId);
+  }
+
+  @Patch(':id/remove-member')
+  async removeMemberFromClientById(
+    @CurrentUser() currentUser: AuthUser,
+    @Param() {id: clientId}: IdParamDto,
+    @Body() {emailToRemove}: {emailToRemove: string},
+  ) {
+    return this.clientsService.removeMemberFromClientById(
+      currentUser,
+      clientId,
+      emailToRemove,
+    );
+  }
+
+  @Patch(':id/add-member')
+  async addMemberToClientById(
+    @CurrentUser() currentUser: AuthUser,
+    @Param() {id: clientId}: IdParamDto,
+    @Body() {emailToAdd}: {emailToAdd: string},
+  ) {
+    return this.clientsService.addMemberFromClientById(
+      currentUser,
+      clientId,
+      emailToAdd,
+    );
   }
 }

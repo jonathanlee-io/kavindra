@@ -168,4 +168,40 @@ export class ClientsRepositoryService {
       },
     });
   }
+
+  async removeMemberFromClientById(clientId: string, emailToRemove: string) {
+    return this.prismaService.client.update({
+      where: {id: clientId},
+      include: {
+        admins: true,
+        members: true,
+        createdBy: true,
+      },
+      data: {
+        members: {
+          disconnect: {
+            email: emailToRemove,
+          },
+        },
+      },
+    });
+  }
+
+  addMemberToClientById(clientId: string, emailToAdd: string) {
+    return this.prismaService.client.update({
+      where: {id: clientId},
+      include: {
+        admins: true,
+        members: true,
+        createdBy: true,
+      },
+      data: {
+        members: {
+          connect: {
+            email: emailToAdd,
+          },
+        },
+      },
+    });
+  }
 }
