@@ -18,5 +18,67 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@kavindra/auth": [
+        "libs/auth/src"
+      ],
+      "@kavindra/auth/*": [
+        "libs/auth/src/*"
+      ],
+      "@kavindra/config": [
+        "libs/config/src"
+      ],
+      "@kavindra/config/*": [
+        "libs/config/src/*"
+      ],
+      "@kavindra/constants": [
+        "libs/constants/src"
+      ],
+      "@kavindra/constants/*": [
+        "libs/constants/src/*"
+      ],
+      "@kavindra/dto": [
+        "libs/dto/src"
+      ],
+      "@kavindra/dto/*": [
+        "libs/dto/src/*"
+      ],
+      "@kavindra/init": [
+        "libs/init/src"
+      ],
+      "@kavindra/init/*": [
+        "libs/init/src/*"
+      ],
+      "@kavindra/prisma": [
+        "libs/prisma/src"
+      ],
+      "@kavindra/prisma/*": [
+        "libs/prisma/src/*"
+      ],
+      "@kavindra/supabase": [
+        "libs/supabase/src"
+      ],
+      "@kavindra/supabase/*": [
+        "libs/supabase/src/*"
+      ],
+      "@kavindra/util": [
+        "libs/util/src"
+      ],
+      "@kavindra/util/*": [
+        "libs/util/src/*"
+      ],
+      "@kavindra/validation": [
+        "libs/validation/src"
+      ],
+      "@kavindra/validation/*": [
+        "libs/validation/src/*"
+      ],
+      "@kavindra/micro": [
+        "libs/micro/src"
+      ],
+      "@kavindra/micro/*": [
+        "libs/micro/src/*"
+      ]
+    }
   }
 }

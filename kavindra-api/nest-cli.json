@@ -1,11 +1,170 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src",
+  "sourceRoot": "apps/kavindra-api/src",
   "compilerOptions": {
     "deleteOutDir": true,
     "assets": [
       "js-widget/**/*"
-    ]
+    ],
+    "webpack": true,
+    "tsConfigPath": "apps/kavindra-api/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/kavindra-api",
+  "projects": {
+    "kavindra-api": {
+      "type": "application",
+      "root": "apps/kavindra-api",
+      "entryFile": "main",
+      "sourceRoot": "apps/kavindra-api/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/kavindra-api/tsconfig.app.json"
+      }
+    },
+    "clients-service": {
+      "type": "application",
+      "root": "apps/clients-service",
+      "entryFile": "main",
+      "sourceRoot": "apps/clients-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/clients-service/tsconfig.app.json"
+      }
+    },
+    "embed-scripts-service": {
+      "type": "application",
+      "root": "apps/embed-scripts-service",
+      "entryFile": "main",
+      "sourceRoot": "apps/embed-scripts-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/embed-scripts-service/tsconfig.app.json"
+      }
+    },
+    "issues-service": {
+      "type": "application",
+      "root": "apps/issues-service",
+      "entryFile": "main",
+      "sourceRoot": "apps/issues-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/issues-service/tsconfig.app.json"
+      }
+    },
+    "payments-service": {
+      "type": "application",
+      "root": "apps/payments-service",
+      "entryFile": "main",
+      "sourceRoot": "apps/payments-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/payments-service/tsconfig.app.json"
+      }
+    },
+    "projects-service": {
+      "type": "application",
+      "root": "apps/projects-service",
+      "entryFile": "main",
+      "sourceRoot": "apps/projects-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/projects-service/tsconfig.app.json"
+      }
+    },
+    "users-service": {
+      "type": "application",
+      "root": "apps/users-service",
+      "entryFile": "main",
+      "sourceRoot": "apps/users-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/users-service/tsconfig.app.json"
+      }
+    },
+    "auth": {
+      "type": "library",
+      "root": "libs/auth",
+      "entryFile": "index",
+      "sourceRoot": "libs/auth/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/auth/tsconfig.lib.json"
+      }
+    },
+    "config": {
+      "type": "library",
+      "root": "libs/config",
+      "entryFile": "index",
+      "sourceRoot": "libs/config/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/config/tsconfig.lib.json"
+      }
+    },
+    "constants": {
+      "type": "library",
+      "root": "libs/constants",
+      "entryFile": "index",
+      "sourceRoot": "libs/constants/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/constants/tsconfig.lib.json"
+      }
+    },
+    "dto": {
+      "type": "library",
+      "root": "libs/dto",
+      "entryFile": "index",
+      "sourceRoot": "libs/dto/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/dto/tsconfig.lib.json"
+      }
+    },
+    "init": {
+      "type": "library",
+      "root": "libs/init",
+      "entryFile": "index",
+      "sourceRoot": "libs/init/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/init/tsconfig.lib.json"
+      }
+    },
+    "prisma": {
+      "type": "library",
+      "root": "libs/prisma",
+      "entryFile": "index",
+      "sourceRoot": "libs/prisma/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/prisma/tsconfig.lib.json"
+      }
+    },
+    "supabase": {
+      "type": "library",
+      "root": "libs/supabase",
+      "entryFile": "index",
+      "sourceRoot": "libs/supabase/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/supabase/tsconfig.lib.json"
+      }
+    },
+    "util": {
+      "type": "library",
+      "root": "libs/util",
+      "entryFile": "index",
+      "sourceRoot": "libs/util/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/util/tsconfig.lib.json"
+      }
+    },
+    "validation": {
+      "type": "library",
+      "root": "libs/validation",
+      "entryFile": "index",
+      "sourceRoot": "libs/validation/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/validation/tsconfig.lib.json"
+      }
+    },
+    "micro": {
+      "type": "library",
+      "root": "libs/micro",
+      "entryFile": "index",
+      "sourceRoot": "libs/micro/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/micro/tsconfig.lib.json"
+      }
+    }
   }
 }
