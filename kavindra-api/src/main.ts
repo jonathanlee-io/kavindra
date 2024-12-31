@@ -8,7 +8,6 @@ import {initApp} from './lib/init/init-app';
 import {runPrismaMigrations} from './lib/util/helpers.util';
 
 async function bootstrap() {
-  const logger = new Logger('Main');
   const app = await NestFactory.create(AppModule);
   const configService =
     app.get<ConfigService<EnvironmentVariables>>(ConfigService);
@@ -44,11 +43,11 @@ async function bootstrap() {
   initApp(app);
 
   const port = 3000;
-  logger.log(
+  Logger.log(
     `Attempting to listen on port ${port} in NODE_ENV: ${configService.getOrThrow<NodeEnvironment>('NODE_ENV')}...`,
   );
   await app.listen(port, () => {
-    logger.log(
+    Logger.log(
       `Listening on port ${port} in NODE_ENV: ${configService.getOrThrow<NodeEnvironment>('NODE_ENV')}...`,
     );
   });
