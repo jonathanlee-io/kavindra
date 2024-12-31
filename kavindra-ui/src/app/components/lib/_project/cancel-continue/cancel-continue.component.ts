@@ -36,7 +36,6 @@ export class CancelContinueComponent {
   featureFeedbackEnabledFormControl = input.required<FormControl<boolean>>();
 
   doCreateProject() {
-    console.log(this.clientDisplayNameFormControl().valid);
     if (!this.isReadyToContinue() ||
       (this.clientDisplayNameFormControl().invalid && this.clientDisplayNameFormControl().enabled) ||
       !this.subdomainFormControl().valid
