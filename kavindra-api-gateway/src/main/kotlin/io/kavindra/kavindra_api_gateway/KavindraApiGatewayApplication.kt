@@ -1,12 +1,13 @@
 package io.kavindra.kavindra_api_gateway
 
+import io.kavindra.kavindra_api_gateway.config.CorsConfigurationProperties
 import io.kavindra.kavindra_api_gateway.config.SupabaseJwtProperties
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-@EnableConfigurationProperties(SupabaseJwtProperties::class)
+@EnableConfigurationProperties(SupabaseJwtProperties::class, CorsConfigurationProperties::class)
 class KavindraApiGatewayApplication
 
 fun main(args: Array<String>) {

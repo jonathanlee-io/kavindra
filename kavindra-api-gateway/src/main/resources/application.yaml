@@ -13,3 +13,6 @@ spring:
 supabase:
   jwt:
     secret: ${SUPABASE_JWT_SECRET}
+kavindra:
+  cors:
+    origin: ${FRONT_END_URL}

@@ -10,11 +10,14 @@ import org.springframework.security.config.web.server.ServerHttpSecurity
 import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder
 import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder
 import org.springframework.security.web.server.SecurityWebFilterChain
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource
 
 @Configuration
 @EnableWebFluxSecurity
 class SecurityConfig(
-  private val supabaseJwtProperties: SupabaseJwtProperties
+  private val supabaseJwtProperties: SupabaseJwtProperties,
+  private val corsConfigurationProperties: CorsConfigurationProperties,
 ) {
 
   @Bean
@@ -41,4 +44,21 @@ class SecurityConfig(
     ).build()
   }
 
+  @Bean
+  fun corsConfigurationSource(): UrlBasedCorsConfigurationSource {
+    val source = UrlBasedCorsConfigurationSource()
+    val config = CorsConfiguration()
+    config.allowCredentials = true
+    config.addAllowedOriginPattern(this.corsConfigurationProperties.origin)
+    config.addAllowedHeader("Authorization")
+    config.addAllowedHeader("Content-Type")
+    config.addAllowedMethod("GET")
+    config.addAllowedMethod("POST")
+    config.addAllowedMethod("PUT")
+    config.addAllowedMethod("PATCH")
+    config.addAllowedMethod("DELETE")
+    config.addAllowedMethod("OPTIONS")
+    source.registerCorsConfiguration("/**", config)
+    return source
+  }
 }
