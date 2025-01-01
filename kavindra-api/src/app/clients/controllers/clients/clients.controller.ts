@@ -12,14 +12,13 @@ import {ApiTags} from '@nestjs/swagger';
 
 import {ApiGatewayRequestHeaders} from '../../../../lib/auth/api-gateway/decorators/api-gateway-request-headers.decorator';
 import {ApiGatewayRequestHeadersDto} from '../../../../lib/auth/api-gateway/domain/ApiGatewayRequestHeaders.dto';
-import {host} from '../../../../lib/config/host.config';
 import {IdParamDto} from '../../../../lib/validation/id.param.dto';
 import {CreateClientDto} from '../../dto/CreateClient.dto';
 import {IsSubdomainAvailableDto} from '../../dto/IsSubdomainAvailable.dto';
 import {ClientsService} from '../../services/clients/clients.service';
 
 @ApiTags('Clients')
-@Controller({host})
+@Controller()
 export class ClientsController {
   constructor(private readonly clientsService: ClientsService) {}
 
@@ -30,8 +29,8 @@ export class ClientsController {
     @Body() createClientDto: CreateClientDto,
   ) {
     return this.clientsService.createClient(
-      requestingUserEmail,
       requestingUserSubjectId,
+      requestingUserEmail,
       createClientDto,
     );
   }

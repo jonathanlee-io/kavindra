@@ -3,7 +3,6 @@ import {ApiTags} from '@nestjs/swagger';
 
 import {ApiGatewayRequestHeaders} from '../../../../lib/auth/api-gateway/decorators/api-gateway-request-headers.decorator';
 import {ApiGatewayRequestHeadersDto} from '../../../../lib/auth/api-gateway/domain/ApiGatewayRequestHeaders.dto';
-import {Public} from '../../../../lib/auth/supabase/decorators/is-public.decorator';
 import {ProjectsService} from '../../../projects/services/projects/projects.service';
 
 @ApiTags('Embed Scripts')
@@ -11,7 +10,6 @@ import {ProjectsService} from '../../../projects/services/projects/projects.serv
 export class EmbedScriptsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
-  @Public()
   @Get('feedback-widget.js')
   @Header('Content-Type', 'text/javascript')
   @Header('Cache-Control', 'no-cache, no-store, must-revalidate')
@@ -22,7 +20,6 @@ export class EmbedScriptsController {
     return this.projectsService.getFeedbackWidgetScript(clientSubdomain);
   }
 
-  @Public()
   @Get('kavindra-widget.js')
   @Header('Content-Type', 'text/javascript')
   async getWidgetScript() {

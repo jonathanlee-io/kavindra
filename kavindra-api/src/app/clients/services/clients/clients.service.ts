@@ -24,8 +24,8 @@ export class ClientsService {
   ) {}
 
   async createClient(
-    requestingUserEmail: string,
     requestingUserSubjectId: string,
+    requestingUserEmail: string,
     {
       clientDisplayName,
       subdomain,
