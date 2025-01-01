@@ -15,10 +15,15 @@ export class PaymentsController {
   // @CacheTTL(oneDayInMilliseconds)
   async getPlans(
     @ApiGatewayRequestHeaders()
-    {requestingUserEmail, requestingUserSubjectId}: ApiGatewayRequestHeadersDto,
+    {
+      requestingUserEmail,
+      requestingUserSubjectId,
+      host,
+    }: ApiGatewayRequestHeadersDto,
   ) {
     Logger.log(requestingUserEmail);
     Logger.log(requestingUserSubjectId);
+    Logger.log(host);
     return this.paymentsService.getPlans();
   }
 }

@@ -10,6 +10,7 @@ export const ApiGatewayRequestHeaders = createParamDecorator(
         request.headers['X-Requesting-User-Email'.toLowerCase()],
       requestingUserSubjectId:
         request.headers['X-Requesting-User-Subject-Id'.toLowerCase()],
+      host: request.host,
     };
   },
 );
