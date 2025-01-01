@@ -5,7 +5,6 @@ import {
   BadRequestException,
   ForbiddenException,
   Injectable,
-  Logger,
 } from '@nestjs/common';
 import {ConfigService} from '@nestjs/config';
 
@@ -100,9 +99,6 @@ export class ProjectsService {
   }
 
   async getFeedbackWidgetScript(clientSubdomain: string) {
-    Logger.log(
-      `Getting feedback widget script for client subdomain: ${clientSubdomain}`,
-    );
     if (clientSubdomain === 'www' || clientSubdomain === 'kavindra') {
       return this.generateWidgetInitScript(clientSubdomain, {
         name: 'Kavindra',
