@@ -5,12 +5,11 @@ import {
   Logger,
 } from '@nestjs/common';
 import {Mocked, TestBed} from '@suites/unit';
-import {AuthUser} from '@supabase/supabase-js';
 
 import {ClientsService} from './clients.service';
 import {
-  createMockAuthUser,
   createMockCreateClientDto,
+  createMockRequestingUser,
 } from '../../../../lib/util/tests.helpers.util';
 import {CreateClientDto} from '../../dto/CreateClient.dto';
 import {ClientsRepositoryService} from '../../repositories/clients-repository/clients-repository.service';
@@ -36,7 +35,7 @@ describe('ClientsService', () => {
   });
 
   it('should throw bad request exception if client subdomain is not available', async () => {
-    const mockUser = createMockAuthUser();
+    const mockUser = createMockRequestingUser();
     const mockCreateClientDto: CreateClientDto = createMockCreateClientDto();
 
     mockClientsRepository.isExistsSubdomain.mockResolvedValue(true);
@@ -44,14 +43,15 @@ describe('ClientsService', () => {
 
     await expect(
       service.createClient(
-        mockUser as unknown as AuthUser,
+        mockUser.userSubjectId,
+        mockUser.email,
         mockCreateClientDto,
       ),
     ).rejects.toThrow(new BadRequestException('Subdomain already exists'));
   });
 
   it('should throw internal server error if any element fails to create', async () => {
-    const mockUser = createMockAuthUser();
+    const mockUser = createMockRequestingUser();
     const mockCreateClientDto = createMockCreateClientDto();
 
     mockClientsRepository.isExistsSubdomain.mockResolvedValue(false);
@@ -64,14 +64,15 @@ describe('ClientsService', () => {
 
     await expect(
       service.createClient(
-        mockUser as unknown as AuthUser,
+        mockUser.userSubjectId,
+        mockUser.email,
         mockCreateClientDto,
       ),
     ).rejects.toThrow(new InternalServerErrorException());
   });
 
   it('should create new client', async () => {
-    const mockUser = createMockAuthUser();
+    const mockUser = createMockRequestingUser();
     const mockCreateClientDto = createMockCreateClientDto();
     const clientId = faker.string.uuid();
 
@@ -85,7 +86,8 @@ describe('ClientsService', () => {
     } as any);
 
     const result = await service.createClient(
-      mockUser as unknown as AuthUser,
+      mockUser.userSubjectId,
+      mockUser.email,
       mockCreateClientDto,
     );
 

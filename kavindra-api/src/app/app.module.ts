@@ -13,7 +13,6 @@ import {PaymentsModule} from './payments/payments.module';
 import {ProjectsModule} from './projects/projects.module';
 import {UsersModule} from './users/users.module';
 import {AuthModule} from '../lib/auth/auth.module';
-import {SupabaseAuthGuard} from '../lib/auth/supabase/guards/supabase-auth/supabase-auth.guard';
 
 @Module({
   imports: [
@@ -43,10 +42,6 @@ import {SupabaseAuthGuard} from '../lib/auth/supabase/guards/supabase-auth/supab
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
-    },
-    {
-      provide: APP_GUARD,
-      useClass: SupabaseAuthGuard,
     },
   ],
 })

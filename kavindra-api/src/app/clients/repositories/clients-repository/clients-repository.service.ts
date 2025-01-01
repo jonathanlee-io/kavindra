@@ -1,7 +1,5 @@
 import {Injectable, InternalServerErrorException} from '@nestjs/common';
-import {AuthUser} from '@supabase/supabase-js';
 
-import {supabaseUserIdKey} from '../../../../lib/constants/auth/supabase-user-id.constants';
 import {PrismaService} from '../../../../lib/prisma/services/prisma.service';
 import {UsersRepositoryService} from '../../../users/repositories/users-repository/users-repository.service';
 
@@ -13,7 +11,7 @@ export class ClientsRepositoryService {
   ) {}
 
   async registerNewClientWithTransaction(
-    currentUser: AuthUser,
+    requestingUserSubjectId: string,
     clientDisplayName: string,
     subdomain: string,
     paymentPlanId: string,
@@ -28,11 +26,11 @@ export class ClientsRepositoryService {
     },
   ) {
     const user = await this.usersRepository.findBySupabaseId(
-      currentUser[supabaseUserIdKey],
+      requestingUserSubjectId,
     );
     if (!user) {
       throw new InternalServerErrorException(
-        `Could not find user with id: ${currentUser[supabaseUserIdKey]}`,
+        `Could not find user with id: ${requestingUserSubjectId}`,
       );
     }
     const [createdClient, createdProject, createdSubdomain] =
@@ -52,12 +50,12 @@ export class ClientsRepositoryService {
             },
             admins: {
               connect: {
-                supabaseUserId: currentUser[supabaseUserIdKey],
+                supabaseUserId: requestingUserSubjectId,
               },
             },
             members: {
               connect: {
-                supabaseUserId: currentUser[supabaseUserIdKey],
+                supabaseUserId: requestingUserSubjectId,
               },
             },
           },
@@ -106,7 +104,7 @@ export class ClientsRepositoryService {
   }
 
   async getClientsWhereUserInvolved(
-    currentUser: AuthUser,
+    requestingUserSubjectId: string,
     {
       isIncludeCreatedBy,
       isIncludeMembers,
@@ -125,14 +123,14 @@ export class ClientsRepositoryService {
           {
             members: {
               some: {
-                supabaseUserId: currentUser[supabaseUserIdKey],
+                supabaseUserId: requestingUserSubjectId,
               },
             },
           },
           {
             admins: {
               some: {
-                supabaseUserId: currentUser[supabaseUserIdKey],
+                supabaseUserId: requestingUserSubjectId,
               },
             },
           },

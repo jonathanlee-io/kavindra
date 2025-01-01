@@ -1,5 +1,4 @@
 import {Injectable} from '@nestjs/common';
-import {AuthUser} from '@supabase/supabase-js';
 
 import {PrismaService} from '../../../../lib/prisma/services/prisma.service';
 
@@ -13,12 +12,15 @@ export class UsersRepositoryService {
     });
   }
 
-  async createUserFromAuthUser(user: AuthUser) {
+  async createUserFromAuthUser(
+    requestingUserSubjectId: string,
+    requestingUserEmail: string,
+  ) {
     return this.prismaService.user.create({
       data: {
-        email: user.email,
-        displayName: user.user_metadata['name'] ?? '',
-        supabaseUserId: user['sub'],
+        email: requestingUserEmail,
+        displayName: requestingUserEmail,
+        supabaseUserId: requestingUserSubjectId,
       },
     });
   }

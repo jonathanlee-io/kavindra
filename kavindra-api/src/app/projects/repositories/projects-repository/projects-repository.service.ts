@@ -1,7 +1,5 @@
 import {Injectable, InternalServerErrorException} from '@nestjs/common';
-import {AuthUser} from '@supabase/supabase-js';
 
-import {supabaseUserIdKey} from '../../../../lib/constants/auth/supabase-user-id.constants';
 import {PrismaService} from '../../../../lib/prisma/services/prisma.service';
 import {UsersRepositoryService} from '../../../users/repositories/users-repository/users-repository.service';
 import {CreateProjectDto} from '../../dto/CreateProject.dto';
@@ -15,7 +13,7 @@ export class ProjectsRepositoryService {
   ) {}
 
   async create(
-    currentUser: AuthUser,
+    requestingUserSubjectId: string,
     {
       clientId,
       name,
@@ -26,11 +24,11 @@ export class ProjectsRepositoryService {
     }: CreateProjectDto,
   ) {
     const user = await this.usersRepository.findBySupabaseId(
-      currentUser[supabaseUserIdKey],
+      requestingUserSubjectId,
     );
     if (!user) {
       throw new InternalServerErrorException(
-        `Could not find user with id: ${currentUser[supabaseUserIdKey]}`,
+        `Could not find user with id: ${requestingUserSubjectId}`,
       );
     }
     const [createdProject, createdSubdomain] =
@@ -79,21 +77,21 @@ export class ProjectsRepositoryService {
     };
   }
 
-  async getProjectsWhereInvolved(currentUser: AuthUser) {
+  async getProjectsWhereInvolved(requestingUserSubjectId: string) {
     const clientsWhereInvolved = await this.prismaService.client.findMany({
       where: {
         OR: [
           {
             members: {
               some: {
-                supabaseUserId: currentUser[supabaseUserIdKey],
+                supabaseUserId: requestingUserSubjectId,
               },
             },
           },
           {
             admins: {
               some: {
-                supabaseUserId: currentUser[supabaseUserIdKey],
+                supabaseUserId: requestingUserSubjectId,
               },
             },
           },

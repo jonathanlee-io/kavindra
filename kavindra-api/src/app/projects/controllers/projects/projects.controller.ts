@@ -7,56 +7,73 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import {AuthUser} from '@supabase/supabase-js';
 
-import {CurrentUser} from '../../../../lib/auth/supabase/decorators/current-user.decorator';
-import {host} from '../../../../lib/config/host.config';
+import {ApiGatewayRequestHeaders} from '../../../../lib/auth/api-gateway/decorators/api-gateway-request-headers.decorator';
+import {ApiGatewayRequestHeadersDto} from '../../../../lib/auth/api-gateway/domain/ApiGatewayRequestHeaders.dto';
 import {IdParamDto} from '../../../../lib/validation/id.param.dto';
 import {CreateProjectDto} from '../../dto/CreateProject.dto';
 import {UpdateProjectDto} from '../../dto/UpdateProject.dto';
 import {ProjectsService} from '../../services/projects/projects.service';
 
-@Controller({host})
+@Controller()
 export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
   @Post('create')
   async registerNewProject(
-    @CurrentUser() currentUser: AuthUser,
+    @ApiGatewayRequestHeaders()
+    {requestingUserSubjectId}: ApiGatewayRequestHeadersDto,
     @Body() createProjectDto: CreateProjectDto,
   ) {
-    return this.projectsService.createProject(currentUser, createProjectDto);
+    return this.projectsService.createProject(
+      requestingUserSubjectId,
+      createProjectDto,
+    );
   }
 
   @Get('where-involved')
-  async getProjectsWhereInvolved(@CurrentUser() currentUser: AuthUser) {
-    return this.projectsService.getProjectsWhereInvolved(currentUser);
+  async getProjectsWhereInvolved(
+    @ApiGatewayRequestHeaders()
+    {requestingUserSubjectId}: ApiGatewayRequestHeadersDto,
+  ) {
+    return this.projectsService.getProjectsWhereInvolved(
+      requestingUserSubjectId,
+    );
   }
 
   @Get('for-client/:id')
   async getProjectsForClient(
-    @CurrentUser() currentUser: AuthUser,
+    @ApiGatewayRequestHeaders()
+    {requestingUserEmail}: ApiGatewayRequestHeadersDto,
     @Param() {id: clientId}: IdParamDto,
   ) {
-    return this.projectsService.getProjectsForClient(currentUser, clientId);
+    return this.projectsService.getProjectsForClient(
+      requestingUserEmail,
+      clientId,
+    );
   }
 
   @Get(':id')
   async getProjectById(
-    @CurrentUser() currentUser: AuthUser,
+    @ApiGatewayRequestHeaders()
+    {requestingUserSubjectId}: ApiGatewayRequestHeadersDto,
     @Param() {id: projectId}: IdParamDto,
   ) {
-    return this.projectsService.getProjectById(currentUser, projectId);
+    return this.projectsService.getProjectById(
+      requestingUserSubjectId,
+      projectId,
+    );
   }
 
   @Put(':id')
   async updateProjectById(
-    @CurrentUser() currentUser: AuthUser,
+    @ApiGatewayRequestHeaders()
+    {requestingUserSubjectId}: ApiGatewayRequestHeadersDto,
     @Param() {id: projectId}: IdParamDto,
     @Body() updateProjectDto: UpdateProjectDto,
   ) {
     return this.projectsService.updateProjectById(
-      currentUser,
+      requestingUserSubjectId,
       projectId,
       updateProjectDto,
     );
@@ -64,13 +81,17 @@ export class ProjectsController {
 
   @Post('for-client/:id')
   async createProjectForClient(
-    @CurrentUser() currentUser: AuthUser,
+    @ApiGatewayRequestHeaders()
+    {requestingUserSubjectId}: ApiGatewayRequestHeadersDto,
     @Param() {id: clientId}: IdParamDto,
     @Body() createProjectDto: CreateProjectDto,
   ) {
     if (clientId !== createProjectDto.clientId) {
       throw new BadRequestException('Client ID in URL does not match body');
     }
-    return this.projectsService.createProject(currentUser, createProjectDto);
+    return this.projectsService.createProject(
+      requestingUserSubjectId,
+      createProjectDto,
+    );
   }
 }

@@ -1,11 +1,11 @@
 import {faker} from '@faker-js/faker/locale/en';
 import {Mocked, TestBed} from '@suites/unit';
-import {AuthUser} from '@supabase/supabase-js';
 
 import {ClientsController} from './clients.controller';
+import {ApiGatewayRequestHeadersDto} from '../../../../lib/auth/api-gateway/domain/ApiGatewayRequestHeaders.dto';
 import {
-  createMockAuthUser,
   createMockCreateClientDto,
+  createMockRequestingUser,
 } from '../../../../lib/util/tests.helpers.util';
 import {ClientsService} from '../../services/clients/clients.service';
 
@@ -26,7 +26,7 @@ describe('ClientsController', () => {
   });
 
   it('should register new client', async () => {
-    const mockUser = createMockAuthUser();
+    const mockUser = createMockRequestingUser();
 
     const mockCreateClientDto = createMockCreateClientDto();
 
@@ -36,13 +36,17 @@ describe('ClientsController', () => {
     });
 
     const result = await controller.registerNewClient(
-      mockUser as unknown as AuthUser,
+      {
+        requestingUserSubjectId: mockUser.userSubjectId,
+        requestingUserEmail: mockUser.email,
+      } as unknown as ApiGatewayRequestHeadersDto,
       mockCreateClientDto,
     );
 
     expect(result.isSuccessful).toBe(true);
     expect(mockClientsService.createClient).toHaveBeenCalledWith(
-      mockUser as unknown as AuthUser,
+      mockUser.userSubjectId,
+      mockUser.email,
       mockCreateClientDto,
     );
   });

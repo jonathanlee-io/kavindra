@@ -9,26 +9,30 @@ import {
   Post,
 } from '@nestjs/common';
 import {ApiTags} from '@nestjs/swagger';
-import {AuthUser} from '@supabase/supabase-js';
 
-import {CurrentUser} from '../../../../lib/auth/supabase/decorators/current-user.decorator';
-import {host} from '../../../../lib/config/host.config';
+import {ApiGatewayRequestHeaders} from '../../../../lib/auth/api-gateway/decorators/api-gateway-request-headers.decorator';
+import {ApiGatewayRequestHeadersDto} from '../../../../lib/auth/api-gateway/domain/ApiGatewayRequestHeaders.dto';
 import {IdParamDto} from '../../../../lib/validation/id.param.dto';
 import {CreateClientDto} from '../../dto/CreateClient.dto';
 import {IsSubdomainAvailableDto} from '../../dto/IsSubdomainAvailable.dto';
 import {ClientsService} from '../../services/clients/clients.service';
 
 @ApiTags('Clients')
-@Controller({host})
+@Controller()
 export class ClientsController {
   constructor(private readonly clientsService: ClientsService) {}
 
   @Post('create')
   async registerNewClient(
-    @CurrentUser() currentUser: AuthUser,
+    @ApiGatewayRequestHeaders()
+    {requestingUserEmail, requestingUserSubjectId}: ApiGatewayRequestHeadersDto,
     @Body() createClientDto: CreateClientDto,
   ) {
-    return this.clientsService.createClient(currentUser, createClientDto);
+    return this.clientsService.createClient(
+      requestingUserSubjectId,
+      requestingUserEmail,
+      createClientDto,
+    );
   }
 
   @Post('is-subdomain-available')
@@ -42,26 +46,31 @@ export class ClientsController {
   }
 
   @Get('where-involved')
-  async getClientsWhereInvolved(@CurrentUser() currentUser: AuthUser) {
-    return this.clientsService.getClientsWhereInvolved(currentUser);
+  async getClientsWhereInvolved(
+    @ApiGatewayRequestHeaders()
+    {requestingUserSubjectId}: ApiGatewayRequestHeadersDto,
+  ) {
+    return this.clientsService.getClientsWhereInvolved(requestingUserSubjectId);
   }
 
   @Get(':id')
   async getClientById(
-    @CurrentUser() currentUser: AuthUser,
+    @ApiGatewayRequestHeaders()
+    {requestingUserSubjectId}: ApiGatewayRequestHeadersDto,
     @Param() {id: clientId}: IdParamDto,
   ) {
-    return this.clientsService.getClientById(currentUser, clientId);
+    return this.clientsService.getClientById(requestingUserSubjectId, clientId);
   }
 
   @Patch(':id/remove-member')
   async removeMemberFromClientById(
-    @CurrentUser() currentUser: AuthUser,
+    @ApiGatewayRequestHeaders()
+    {requestingUserEmail}: ApiGatewayRequestHeadersDto,
     @Param() {id: clientId}: IdParamDto,
     @Body() {emailToRemove}: {emailToRemove: string},
   ) {
     return this.clientsService.removeMemberFromClientById(
-      currentUser,
+      requestingUserEmail,
       clientId,
       emailToRemove,
     );
@@ -69,12 +78,13 @@ export class ClientsController {
 
   @Patch(':id/add-member')
   async addMemberToClientById(
-    @CurrentUser() currentUser: AuthUser,
+    @ApiGatewayRequestHeaders()
+    {requestingUserEmail}: ApiGatewayRequestHeadersDto,
     @Param() {id: clientId}: IdParamDto,
     @Body() {emailToAdd}: {emailToAdd: string},
   ) {
     return this.clientsService.addMemberFromClientById(
-      currentUser,
+      requestingUserEmail,
       clientId,
       emailToAdd,
     );

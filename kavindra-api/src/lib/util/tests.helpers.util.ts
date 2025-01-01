@@ -7,7 +7,6 @@ import {Client} from 'pg';
 
 import {delayedAction, runPrismaMigrations} from './helpers.util';
 import {CreateClientDto} from '../../app/clients/dto/CreateClient.dto';
-import {supabaseUserIdKey} from '../constants/auth/supabase-user-id.constants';
 
 export const initializePostgresTestContainer = async () => {
   const initializedPostgresContainer = await new PostgreSqlContainer().start();
@@ -29,18 +28,12 @@ export const tearDownPostgresTestContainer = async (
   });
 };
 
-export const createMockAuthUser = (overrides?: {
-  supabaseUserId?: string;
+export const createMockRequestingUser = (overrides?: {
+  userSubjectId?: string;
   email?: string;
-  isEmailVerified?: boolean;
-  name?: string;
 }) => ({
-  [supabaseUserIdKey]: overrides?.supabaseUserId ?? faker.string.uuid(),
+  userSubjectId: overrides?.userSubjectId ?? faker.string.uuid(),
   email: overrides?.email ?? faker.internet.email(),
-  email_verified: overrides?.isEmailVerified ?? true,
-  user_metadata: {
-    name: overrides?.name ?? faker.internet.displayName(),
-  },
 });
 
 export const createMockCreateClientDto = (overrides?: {

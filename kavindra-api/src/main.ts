@@ -14,32 +14,6 @@ async function bootstrap() {
 
   await runPrismaMigrations(configService.get<string>('DATABASE_URL'));
 
-  app.enableCors({
-    origin: function (requestOrigin, callback) {
-      if (!requestOrigin) {
-        callback(null, true);
-        return;
-      }
-      if (
-        configService
-          .getOrThrow<string>('FRONT_END_URLS')
-          .split(',')
-          .includes(requestOrigin) ||
-        /https:\/\/(.*).kavindra.io|https:\/\/(.*).kavindra-staging.com/.test(
-          requestOrigin,
-        )
-      ) {
-        callback(null, true);
-        return;
-      } else {
-        callback(new Error('Not allowed by CORS'), false);
-      }
-    },
-    credentials: true,
-    allowedHeaders: ['Authorization', 'Content-Type'],
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  });
-
   initApp(app);
 
   const port = 3000;

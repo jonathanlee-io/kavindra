@@ -1,6 +1,4 @@
-import {faker} from '@faker-js/faker/locale/en';
 import {HttpStatus, INestApplication} from '@nestjs/common';
-import {JwtService} from '@nestjs/jwt';
 import {Test, TestingModule} from '@nestjs/testing';
 import {StartedPostgreSqlContainer} from '@testcontainers/postgresql';
 import {Client} from 'pg';
@@ -10,8 +8,8 @@ import {AppModule} from '../src/app/app.module';
 import {e2eTestTimeout} from '../src/lib/constants/testing/integration-testing.constants';
 import {initApp} from '../src/lib/init/init-app';
 import {
-  createMockAuthUser,
   createMockCreateClientDto,
+  createMockRequestingUser,
   initializePostgresTestContainer,
   tearDownPostgresTestContainer,
 } from '../src/lib/util/tests.helpers.util';
@@ -23,10 +21,7 @@ describe('AppController (e2e)', () => {
   let postgresContainer: StartedPostgreSqlContainer;
   let postgresClient: Client;
 
-  let accessToken: string;
-
-  const email = faker.internet.email();
-  const userId = faker.string.uuid();
+  const mockUser = createMockRequestingUser();
 
   beforeAll(async () => {
     const {initializedPostgresContainer, initializedPostgresClient} =
@@ -51,10 +46,6 @@ describe('AppController (e2e)', () => {
 
     await app.init();
     await app.listen(3000);
-
-    accessToken = app
-      .get<JwtService>(JwtService)
-      .sign(createMockAuthUser({supabaseUserId: userId, email}));
   });
 
   afterEach(async () => {
@@ -69,7 +60,8 @@ describe('AppController (e2e)', () => {
       .send(payload)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .set('Authorization', `Bearer ${accessToken}`)
+      .set('X-Requesting-User-Subject-Id', mockUser.userSubjectId)
+      .set('X-Requesting-User-Email', mockUser.email)
       .expect(HttpStatus.OK)
       .then((response) => {
         console.log(response.body);
@@ -80,7 +72,8 @@ describe('AppController (e2e)', () => {
       .send(payload)
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
-      .set('Authorization', `Bearer ${accessToken}`)
+      .set('X-Requesting-User-Subject-Id', mockUser.userSubjectId)
+      .set('X-Requesting-User-Email', mockUser.email)
       .expect(HttpStatus.CREATED)
       .then((response) => {
         console.log(response.body);

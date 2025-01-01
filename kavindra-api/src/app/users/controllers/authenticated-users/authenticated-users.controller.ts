@@ -1,8 +1,8 @@
 import {Controller, HttpCode, HttpStatus, Post} from '@nestjs/common';
 import {ApiTags} from '@nestjs/swagger';
-import {AuthUser} from '@supabase/supabase-js';
 
-import {CurrentUser} from '../../../../lib/auth/supabase/decorators/current-user.decorator';
+import {ApiGatewayRequestHeaders} from '../../../../lib/auth/api-gateway/decorators/api-gateway-request-headers.decorator';
+import {ApiGatewayRequestHeadersDto} from '../../../../lib/auth/api-gateway/domain/ApiGatewayRequestHeaders.dto';
 import {AuthenticatedUsersService} from '../../services/authenticated-users/authenticated-users.service';
 
 @ApiTags('Users')
@@ -14,7 +14,13 @@ export class AuthenticatedUsersController {
 
   @Post('check-in')
   @HttpCode(HttpStatus.OK)
-  checkIn(@CurrentUser() currentUser: AuthUser) {
-    return this.authenticatedUsersService.checkIn(currentUser);
+  checkIn(
+    @ApiGatewayRequestHeaders()
+    {requestingUserSubjectId, requestingUserEmail}: ApiGatewayRequestHeadersDto,
+  ) {
+    return this.authenticatedUsersService.checkIn(
+      requestingUserSubjectId,
+      requestingUserEmail,
+    );
   }
 }
