@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: kavindra-api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: v1-kavindra-api
+          uri: ${API_V1_BASE_URI}
+          predicates:
+            - Path=/v1/**
+          filters:
+            - SupabaseJwtParser=
+supabase:
+  jwt:
+    secret: ${SUPABASE_JWT_SECRET}
