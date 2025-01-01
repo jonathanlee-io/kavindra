@@ -21,7 +21,12 @@ class SecurityConfig(
   fun securityWebFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
     http.csrf { it.disable() }
     http.oauth2ResourceServer { it.jwt(withDefaults()) }
-    http.authorizeExchange { it.anyExchange().authenticated() }
+    http.authorizeExchange {
+      it.pathMatchers("/v1/payments/plans").permitAll()
+      it.pathMatchers("/v1/feedback-widget.js").permitAll()
+      it.pathMatchers("/v1/kavindra-widget.js").permitAll()
+      it.anyExchange().authenticated()
+    }
     return http.build()
   }
 

@@ -10,9 +10,11 @@ import reactor.core.publisher.Mono
 class SupabaseJwtParserGatewayFilterFactory :
   AbstractGatewayFilterFactory<Any>() {
 
-  val EMAIL_HEADER = "X-Requesting-User-Email"
-  val SUBJECT_ID_HEADER = "X-Requesting-User-Subject-Id"
-  val CLIENT_SUBDOMAIN_HEADER = "X-Requesting-User-Client-Subdomain"
+  companion object {
+    const val EMAIL_HEADER = "X-Requesting-User-Email"
+    const val SUBJECT_ID_HEADER = "X-Requesting-User-Subject-Id"
+    const val CLIENT_SUBDOMAIN_HEADER = "X-Requesting-User-Client-Subdomain"
+  }
 
 
   override fun apply(config: Any?): GatewayFilter {
@@ -46,7 +48,7 @@ class SupabaseJwtParserGatewayFilterFactory :
             val mutatedExchange = exchange.mutate().request(mutatedRequest).build()
             chain.filter(mutatedExchange)
           } else {
-            Mono.error(IllegalArgumentException("User email or ID not found in user_metadata"))
+            chain.filter(exchange)
           }
         }
     }
