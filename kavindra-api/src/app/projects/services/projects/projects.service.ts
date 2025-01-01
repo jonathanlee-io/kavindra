@@ -5,6 +5,7 @@ import {
   BadRequestException,
   ForbiddenException,
   Injectable,
+  Logger,
 } from '@nestjs/common';
 import {ConfigService} from '@nestjs/config';
 
@@ -99,6 +100,9 @@ export class ProjectsService {
   }
 
   async getFeedbackWidgetScript(clientSubdomain: string) {
+    Logger.log(
+      `Getting feedback widget script for client subdomain: ${clientSubdomain}`,
+    );
     if (clientSubdomain === 'www' || clientSubdomain === 'kavindra') {
       return this.generateWidgetInitScript(clientSubdomain, {
         name: 'Kavindra',
@@ -137,7 +141,7 @@ export class ProjectsService {
     ) {
       widgetSrc = `https://${clientSubdomain}.api.kavindra-staging.com/v1/scripts/kavindra-widget.js`;
     } else {
-      widgetSrc = `http://${clientSubdomain}.api.kavindra-local.com:3000/v1/scripts/kavindra-widget.js`;
+      widgetSrc = `http://${clientSubdomain}.api.kavindra-local.com:8080/v1/scripts/kavindra-widget.js`;
     }
     return `
         (function (w,d,s,o,f,js,fjs) {

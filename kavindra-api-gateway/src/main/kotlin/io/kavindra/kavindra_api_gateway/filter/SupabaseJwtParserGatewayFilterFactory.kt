@@ -4,7 +4,6 @@ import org.springframework.cloud.gateway.filter.GatewayFilter
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken
 import org.springframework.stereotype.Component
-import reactor.core.publisher.Mono
 
 @Component
 class SupabaseJwtParserGatewayFilterFactory :
@@ -29,20 +28,15 @@ class SupabaseJwtParserGatewayFilterFactory :
           val tokenAttributes = jwtAuthenticationToken.tokenAttributes
           val subjectId = tokenAttributes?.get("sub") as? String
 
-          val host = exchange.request.uri.host
-          val clientSubdomain = host.split(":").first().split(".").first()
-
           // Mutate the request and add the headers
           if (userEmail != null && subjectId != null) {
             val mutatedRequest = exchange.request.mutate()
               .headers {
                 it.remove(EMAIL_HEADER)
                 it.remove(SUBJECT_ID_HEADER)
-                it.remove(CLIENT_SUBDOMAIN_HEADER)
               }
               .header(EMAIL_HEADER, userEmail)
               .header(SUBJECT_ID_HEADER, subjectId)
-              .header(CLIENT_SUBDOMAIN_HEADER, clientSubdomain)
               .build()
 
             val mutatedExchange = exchange.mutate().request(mutatedRequest).build()
