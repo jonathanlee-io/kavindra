@@ -2,7 +2,6 @@ import {faker} from '@faker-js/faker/locale/en';
 import {CacheModule} from '@nestjs/cache-manager';
 import {Logger} from '@nestjs/common';
 import {Test, TestingModule} from '@nestjs/testing';
-import {AuthUser} from '@supabase/supabase-js';
 import {StartedPostgreSqlContainer} from '@testcontainers/postgresql';
 import {Client} from 'pg';
 
@@ -10,7 +9,6 @@ import {ClientsRepositoryService} from './clients-repository.service';
 import {jestIntegrationTestTimeout} from '../../../../lib/constants/testing/integration-testing.constants';
 import {PrismaModule} from '../../../../lib/prisma/prisma.module';
 import {
-  createMockAuthUser,
   initializePostgresTestContainer,
   tearDownPostgresTestContainer,
 } from '../../../../lib/util/tests.helpers.util';
@@ -72,14 +70,13 @@ describe('ClientsRepositoryService', () => {
   });
 
   it('should create a client', async () => {
-    const mockUserData = createMockAuthUser();
-
     await usersRepository.createUserFromAuthUser(
-      mockUserData as unknown as AuthUser,
+      faker.string.uuid(),
+      faker.internet.email(),
     );
 
     const result = await repository.registerNewClientWithTransaction(
-      mockUserData as unknown as AuthUser,
+      faker.string.uuid(),
       faker.internet.displayName(),
       faker.internet.domainName().split('.')[0],
       PaymentsService.paymentPlans[0].id,

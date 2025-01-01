@@ -1,8 +1,9 @@
-import {Controller, Get, Logger} from '@nestjs/common';
+import {CacheInterceptor} from '@nestjs/cache-manager';
+import {Controller, Get, UseInterceptors} from '@nestjs/common';
+import {CacheTTL} from '@nestjs/common/cache';
 
-import {ApiGatewayRequestHeaders} from '../../../../lib/auth/api-gateway/decorators/api-gateway-request-headers.decorator';
-import {ApiGatewayRequestHeadersDto} from '../../../../lib/auth/api-gateway/domain/ApiGatewayRequestHeaders.dto';
 import {Public} from '../../../../lib/auth/supabase/decorators/is-public.decorator';
+import {oneDayInMilliseconds} from '../../../../lib/constants/time/time.constants';
 import {PaymentsService} from '../../services/payments/payments.service';
 
 @Controller()
@@ -11,19 +12,9 @@ export class PaymentsController {
 
   @Public()
   @Get('plans')
-  // @UseInterceptors(CacheInterceptor)
-  // @CacheTTL(oneDayInMilliseconds)
-  async getPlans(
-    @ApiGatewayRequestHeaders()
-    {
-      requestingUserEmail,
-      requestingUserSubjectId,
-      clientSubdomain,
-    }: ApiGatewayRequestHeadersDto,
-  ) {
-    Logger.log(requestingUserEmail);
-    Logger.log(requestingUserSubjectId);
-    Logger.log(clientSubdomain);
+  @UseInterceptors(CacheInterceptor)
+  @CacheTTL(oneDayInMilliseconds)
+  async getPlans() {
     return this.paymentsService.getPlans();
   }
 }

@@ -1,7 +1,5 @@
 import {Injectable, Logger} from '@nestjs/common';
-import {AuthUser} from '@supabase/supabase-js';
 
-import {supabaseUserIdKey} from '../../../../lib/constants/auth/supabase-user-id.constants';
 import {POSTSuccessDto} from '../../../../lib/dto/POSTSuccess.dto';
 import {UsersRepositoryService} from '../../repositories/users-repository/users-repository.service';
 
@@ -13,16 +11,20 @@ export class AuthenticatedUsersService {
   ) {}
 
   async checkIn(
-    currentUser: AuthUser,
+    requestingUserSubjectId: string,
+    requestingUserEmail: string,
   ): Promise<POSTSuccessDto & {isCreatedNew: boolean}> {
     const existingUser = await this.usersRepository.findBySupabaseId(
-      currentUser[supabaseUserIdKey],
+      requestingUserSubjectId,
     );
     if (existingUser) {
       return {isSuccessful: true, isCreatedNew: false};
     }
-    this.logger.log(`Creating new user for <${currentUser.email}>`);
-    await this.usersRepository.createUserFromAuthUser(currentUser);
+    this.logger.log(`Creating new user for <${requestingUserEmail}>`);
+    await this.usersRepository.createUserFromAuthUser(
+      requestingUserSubjectId,
+      requestingUserEmail,
+    );
     return {isSuccessful: true, isCreatedNew: true};
   }
 }

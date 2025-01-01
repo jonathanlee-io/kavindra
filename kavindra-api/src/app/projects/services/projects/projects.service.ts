@@ -7,13 +7,11 @@ import {
   Injectable,
 } from '@nestjs/common';
 import {ConfigService} from '@nestjs/config';
-import {AuthUser} from '@supabase/supabase-js';
 
 import {
   EnvironmentVariables,
   NodeEnvironment,
 } from '../../../../lib/config/environment';
-import {supabaseUserIdKey} from '../../../../lib/constants/auth/supabase-user-id.constants';
 import {ClientsService} from '../../../clients/services/clients/clients.service';
 import {CreateProjectDto} from '../../dto/CreateProject.dto';
 import {UpdateProjectDto} from '../../dto/UpdateProject.dto';
@@ -28,59 +26,64 @@ export class ProjectsService {
   ) {}
 
   async createProject(
-    currentUser: AuthUser,
+    requestingUserSubjectId: string,
     createProjectDto: CreateProjectDto,
   ) {
     const client = await this.clientsService.getClientById(
-      currentUser,
+      requestingUserSubjectId,
       createProjectDto.clientId,
     );
     if (
       !client.admins
         .map((admin) => admin.supabaseUserId)
-        .includes(currentUser[supabaseUserIdKey])
+        .includes(requestingUserSubjectId)
     ) {
       throw new ForbiddenException();
     }
     if (
       !(
-        await this.clientsService.checkIfSubdomainAvailable(
-          {
-            subdomain: createProjectDto.subdomain,
-          },
-          currentUser,
-        )
+        await this.clientsService.checkIfSubdomainAvailable({
+          subdomain: createProjectDto.subdomain,
+        })
       ).isSubdomainAvailable
     ) {
       return new BadRequestException('Subdomain already exists');
     }
-    return this.projectsRepository.create(currentUser, createProjectDto);
+    return this.projectsRepository.create(
+      requestingUserSubjectId,
+      createProjectDto,
+    );
   }
 
-  async getProjectsWhereInvolved(currentUser: AuthUser) {
-    return this.projectsRepository.getProjectsWhereInvolved(currentUser);
+  async getProjectsWhereInvolved(requestingUserSubjectId: string) {
+    return this.projectsRepository.getProjectsWhereInvolved(
+      requestingUserSubjectId,
+    );
   }
 
-  async getProjectById(currentUser: AuthUser, projectId: string) {
+  async getProjectById(requestingUserSubjectId: string, projectId: string) {
     const project = await this.projectsRepository.findById(projectId);
-    await this.clientsService.getClientById(currentUser, project.clientId); // Will throw not found or forbidden exception
+    await this.clientsService.getClientById(
+      requestingUserSubjectId,
+      project.clientId,
+    ); // Will throw not found or forbidden exception
     return project;
   }
 
   async updateProjectById(
-    currentUser: AuthUser,
+    requestingUserSubjectId: string,
     projectId: string,
     updateProjectDto: UpdateProjectDto,
   ) {
     const project = await this.projectsRepository.findById(projectId);
     const client = await this.clientsService.getClientById(
-      currentUser,
+      requestingUserSubjectId,
       project.clientId,
     ); // Will throw not found or forbidden exception
     if (
       !client.admins
         .map((admin) => admin.supabaseUserId)
-        .includes(currentUser[supabaseUserIdKey])
+        .includes(requestingUserSubjectId)
     ) {
       throw new ForbiddenException();
     }
@@ -90,8 +93,8 @@ export class ProjectsService {
     );
   }
 
-  async getProjectsForClient(currentUser: AuthUser, clientId: string) {
-    await this.clientsService.getClientById(currentUser, clientId); // Will throw not found or forbidden exception
+  async getProjectsForClient(requestingUserEmail: string, clientId: string) {
+    await this.clientsService.getClientById(requestingUserEmail, clientId); // Will throw not found or forbidden exception
     return this.projectsRepository.getProjectsForClient(clientId);
   }
 
