@@ -1,8 +1,8 @@
 import {Controller, Get, Logger} from '@nestjs/common';
 
+import {ApiGatewayRequestHeaders} from '../../../../lib/auth/api-gateway/decorators/api-gateway-request-headers.decorator';
+import {ApiGatewayRequestHeadersDto} from '../../../../lib/auth/api-gateway/domain/ApiGatewayRequestHeaders.dto';
 import {Public} from '../../../../lib/auth/supabase/decorators/is-public.decorator';
-import {RequestingUserEmail} from '../../../../lib/auth/supabase/decorators/requesting-user-email.decorator';
-import {RequestingUserSubjectId} from '../../../../lib/auth/supabase/decorators/requesting-user-subject-id.decorator';
 import {host} from '../../../../lib/config/host.config';
 import {PaymentsService} from '../../services/payments/payments.service';
 
@@ -15,8 +15,8 @@ export class PaymentsController {
   // @UseInterceptors(CacheInterceptor)
   // @CacheTTL(oneDayInMilliseconds)
   async getPlans(
-    @RequestingUserEmail() requestingUserEmail: string,
-    @RequestingUserSubjectId() requestingUserSubjectId: string,
+    @ApiGatewayRequestHeaders()
+    {requestingUserEmail, requestingUserSubjectId}: ApiGatewayRequestHeadersDto,
   ) {
     Logger.log(requestingUserEmail);
     Logger.log(requestingUserSubjectId);
