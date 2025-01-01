@@ -3,7 +3,10 @@ import {Mocked, TestBed} from '@suites/unit';
 
 import {ClientsController} from './clients.controller';
 import {ApiGatewayRequestHeadersDto} from '../../../../lib/auth/api-gateway/domain/ApiGatewayRequestHeaders.dto';
-import {createMockCreateClientDto} from '../../../../lib/util/tests.helpers.util';
+import {
+  createMockCreateClientDto,
+  createMockRequestingUser,
+} from '../../../../lib/util/tests.helpers.util';
 import {ClientsService} from '../../services/clients/clients.service';
 
 describe('ClientsController', () => {
@@ -23,10 +26,7 @@ describe('ClientsController', () => {
   });
 
   it('should register new client', async () => {
-    const mockUser = {
-      requestingUserEmail: faker.internet.email(),
-      requestingUserSubjectId: faker.string.uuid(),
-    };
+    const mockUser = createMockRequestingUser();
 
     const mockCreateClientDto = createMockCreateClientDto();
 
@@ -36,13 +36,17 @@ describe('ClientsController', () => {
     });
 
     const result = await controller.registerNewClient(
-      mockUser as ApiGatewayRequestHeadersDto,
+      {
+        requestingUserSubjectId: mockUser.userSubjectId,
+        requestingUserEmail: mockUser.email,
+      } as unknown as ApiGatewayRequestHeadersDto,
       mockCreateClientDto,
     );
 
     expect(result.isSuccessful).toBe(true);
     expect(mockClientsService.createClient).toHaveBeenCalledWith(
-      mockUser as unknown as ApiGatewayRequestHeadersDto,
+      mockUser.userSubjectId,
+      mockUser.email,
       mockCreateClientDto,
     );
   });
