@@ -1,7 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import {INestApplication} from '@nestjs/common';
+import {Test, TestingModule} from '@nestjs/testing';
 import * as request from 'supertest';
-import { EmbedScriptsServiceModule } from './../src/embed-scripts-service.module';
+
+import {EmbedScriptsServiceModule} from './../src/embed-scripts-service.module';
 
 describe('EmbedScriptsServiceController (e2e)', () => {
   let app: INestApplication;

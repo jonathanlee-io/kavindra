@@ -1,6 +1,7 @@
-import { Module } from '@nestjs/common';
-import { IssuesServiceController } from './issues-service.controller';
-import { IssuesServiceService } from './issues-service.service';
+import {Module} from '@nestjs/common';
+
+import {IssuesServiceController} from './issues-service.controller';
+import {IssuesServiceService} from './issues-service.service';
 
 @Module({
   imports: [],

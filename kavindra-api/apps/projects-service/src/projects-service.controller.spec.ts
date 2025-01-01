@@ -1,6 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { ProjectsServiceController } from './projects-service.controller';
-import { ProjectsServiceService } from './projects-service.service';
+import {Test, TestingModule} from '@nestjs/testing';
+
+import {ProjectsServiceController} from './projects-service.controller';
+import {ProjectsServiceService} from './projects-service.service';
 
 describe('ProjectsServiceController', () => {
   let projectsServiceController: ProjectsServiceController;
@@ -11,7 +12,9 @@ describe('ProjectsServiceController', () => {
       providers: [ProjectsServiceService],
     }).compile();
 
-    projectsServiceController = app.get<ProjectsServiceController>(ProjectsServiceController);
+    projectsServiceController = app.get<ProjectsServiceController>(
+      ProjectsServiceController,
+    );
   });
 
   describe('root', () => {

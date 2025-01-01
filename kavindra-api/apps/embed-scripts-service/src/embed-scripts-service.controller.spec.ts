@@ -1,6 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { EmbedScriptsServiceController } from './embed-scripts-service.controller';
-import { EmbedScriptsServiceService } from './embed-scripts-service.service';
+import {Test, TestingModule} from '@nestjs/testing';
+
+import {EmbedScriptsServiceController} from './embed-scripts-service.controller';
+import {EmbedScriptsServiceService} from './embed-scripts-service.service';
 
 describe('EmbedScriptsServiceController', () => {
   let embedScriptsServiceController: EmbedScriptsServiceController;
@@ -11,7 +12,9 @@ describe('EmbedScriptsServiceController', () => {
       providers: [EmbedScriptsServiceService],
     }).compile();
 
-    embedScriptsServiceController = app.get<EmbedScriptsServiceController>(EmbedScriptsServiceController);
+    embedScriptsServiceController = app.get<EmbedScriptsServiceController>(
+      EmbedScriptsServiceController,
+    );
   });
 
   describe('root', () => {

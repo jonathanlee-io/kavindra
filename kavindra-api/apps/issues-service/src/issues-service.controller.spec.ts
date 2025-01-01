@@ -1,6 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { IssuesServiceController } from './issues-service.controller';
-import { IssuesServiceService } from './issues-service.service';
+import {Test, TestingModule} from '@nestjs/testing';
+
+import {IssuesServiceController} from './issues-service.controller';
+import {IssuesServiceService} from './issues-service.service';
 
 describe('IssuesServiceController', () => {
   let issuesServiceController: IssuesServiceController;
@@ -11,7 +12,9 @@ describe('IssuesServiceController', () => {
       providers: [IssuesServiceService],
     }).compile();
 
-    issuesServiceController = app.get<IssuesServiceController>(IssuesServiceController);
+    issuesServiceController = app.get<IssuesServiceController>(
+      IssuesServiceController,
+    );
   });
 
   describe('root', () => {

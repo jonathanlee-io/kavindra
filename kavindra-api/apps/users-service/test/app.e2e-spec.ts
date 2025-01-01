@@ -1,7 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import {INestApplication} from '@nestjs/common';
+import {Test, TestingModule} from '@nestjs/testing';
 import * as request from 'supertest';
-import { UsersServiceModule } from './../src/users-service.module';
+
+import {UsersServiceModule} from './../src/users-service.module';
 
 describe('UsersServiceController (e2e)', () => {
   let app: INestApplication;

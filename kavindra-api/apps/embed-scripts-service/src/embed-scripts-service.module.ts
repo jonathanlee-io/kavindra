@@ -1,6 +1,7 @@
-import { Module } from '@nestjs/common';
-import { EmbedScriptsServiceController } from './embed-scripts-service.controller';
-import { EmbedScriptsServiceService } from './embed-scripts-service.service';
+import {Module} from '@nestjs/common';
+
+import {EmbedScriptsServiceController} from './embed-scripts-service.controller';
+import {EmbedScriptsServiceService} from './embed-scripts-service.service';
 
 @Module({
   imports: [],
