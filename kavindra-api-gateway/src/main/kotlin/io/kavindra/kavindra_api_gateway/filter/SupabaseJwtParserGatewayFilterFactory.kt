@@ -28,9 +28,6 @@ class SupabaseJwtParserGatewayFilterFactory :
           val tokenAttributes = jwtAuthenticationToken.tokenAttributes
           val subjectId = tokenAttributes?.get("sub") as? String
 
-          val host = exchange.request.uri.host
-          val clientSubdomain = host.split(":").first().split(".").first()
-
           // Mutate the request and add the headers
           if (userEmail != null && subjectId != null) {
             val mutatedRequest = exchange.request.mutate()
