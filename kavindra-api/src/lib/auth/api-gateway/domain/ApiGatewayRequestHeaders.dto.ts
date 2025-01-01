@@ -1,5 +1,5 @@
 export interface ApiGatewayRequestHeadersDto {
   requestingUserEmail: string;
   requestingUserSubjectId: string;
-  host: string;
+  clientSubdomain: string;
 }

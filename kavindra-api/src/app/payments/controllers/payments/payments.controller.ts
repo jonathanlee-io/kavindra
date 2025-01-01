@@ -18,12 +18,12 @@ export class PaymentsController {
     {
       requestingUserEmail,
       requestingUserSubjectId,
-      host,
+      clientSubdomain,
     }: ApiGatewayRequestHeadersDto,
   ) {
     Logger.log(requestingUserEmail);
     Logger.log(requestingUserSubjectId);
-    Logger.log(host);
+    Logger.log(clientSubdomain);
     return this.paymentsService.getPlans();
   }
 }
