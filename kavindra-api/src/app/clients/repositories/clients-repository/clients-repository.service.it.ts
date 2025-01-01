@@ -70,13 +70,15 @@ describe('ClientsRepositoryService', () => {
   });
 
   it('should create a client', async () => {
+    const userSubjectId = faker.string.uuid();
+
     await usersRepository.createUserFromAuthUser(
-      faker.string.uuid(),
+      userSubjectId,
       faker.internet.email(),
     );
 
     const result = await repository.registerNewClientWithTransaction(
-      faker.string.uuid(),
+      userSubjectId,
       faker.internet.displayName(),
       faker.internet.domainName().split('.')[0],
       PaymentsService.paymentPlans[0].id,
