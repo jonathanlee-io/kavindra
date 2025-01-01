@@ -131,13 +131,13 @@ export class ProjectsService {
       this.configService.getOrThrow<NodeEnvironment>('NODE_ENV') ===
       'production'
     ) {
-      widgetSrc = `https://${clientSubdomain}.api.kavindra.io/v1/kavindra-widget.js`;
+      widgetSrc = `https://${clientSubdomain}.api.kavindra.io/v1/scripts/kavindra-widget.js`;
     } else if (
       this.configService.getOrThrow<NodeEnvironment>('NODE_ENV') === 'staging'
     ) {
-      widgetSrc = `https://${clientSubdomain}.api.kavindra-staging.com/v1/kavindra-widget.js`;
+      widgetSrc = `https://${clientSubdomain}.api.kavindra-staging.com/v1/scripts/kavindra-widget.js`;
     } else {
-      widgetSrc = `http://${clientSubdomain}.api.kavindra-local.com:3000/v1/kavindra-widget.js`;
+      widgetSrc = `http://${clientSubdomain}.api.kavindra-local.com:3000/v1/scripts/kavindra-widget.js`;
     }
     return `
         (function (w,d,s,o,f,js,fjs) {

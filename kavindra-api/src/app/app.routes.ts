@@ -9,7 +9,7 @@ import {UsersModule} from './users/users.module';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'scripts',
     module: EmbedScriptsModule,
   },
   {

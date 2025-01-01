@@ -26,8 +26,8 @@ class SecurityConfig(
     http.oauth2ResourceServer { it.jwt(withDefaults()) }
     http.authorizeExchange {
       it.pathMatchers("/v1/payments/plans").permitAll()
-      it.pathMatchers("/v1/feedback-widget.js").permitAll()
-      it.pathMatchers("/v1/kavindra-widget.js").permitAll()
+      it.pathMatchers("/v1/scripts/feedback-widget.js").permitAll()
+      it.pathMatchers("/v1/scripts/kavindra-widget.js").permitAll()
       it.anyExchange().authenticated()
     }
     return http.build()

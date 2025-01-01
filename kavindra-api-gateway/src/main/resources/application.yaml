@@ -4,12 +4,44 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: v1-kavindra-api
+        - id: v1-kavindra-api-clients
           uri: ${API_V1_BASE_URI}
           predicates:
-            - Path=/v1/**
+            - Path=/v1/clients/**
           filters:
             - SupabaseJwtParser=
+        - id: v1-kavindra-api-issues
+          uri: ${API_V1_BASE_URI}
+          predicates:
+            - Path=/v1/issues/**
+          filters:
+            - SupabaseJwtParser=
+        - id: v1-kavindra-api-payments
+          uri: ${API_V1_BASE_URI}
+          predicates:
+            - Path=/v1/payments/**
+          filters:
+            - SupabaseJwtParser=
+        - id: v1-kavindra-api-projects
+          uri: ${API_V1_BASE_URI}
+          predicates:
+            - Path=/v1/projects/**
+          filters:
+            - SupabaseJwtParser=
+        - id: v1-kavindra-api-users
+          uri: ${API_V1_BASE_URI}
+          predicates:
+            - Path=/v1/users/**
+          filters:
+            - SupabaseJwtParser=
+        - id: v1-kavindra-scripts
+          uri: ${API_V1_BASE_URI}
+          predicates:
+            - Path=/v1/scripts/**
+          filters:
+            - SetResponseHeader=Content-Type, text/javascript; charset=utf-8
+  webflux:
+    static-path-pattern: /v1/scripts/**
 supabase:
   jwt:
     secret: ${SUPABASE_JWT_SECRET}
