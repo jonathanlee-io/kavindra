@@ -26,8 +26,6 @@ class ClientSubdomainParserGatewayFilterFactory :
         .header(CLIENT_SUBDOMAIN_HEADER, clientSubdomain)
         .build()
 
-      println(clientSubdomain)
-
       val mutatedExchange = exchange.mutate().request(mutatedRequest).build()
       chain.filter(mutatedExchange)
     }
