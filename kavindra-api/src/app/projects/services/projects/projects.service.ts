@@ -93,8 +93,11 @@ export class ProjectsService {
     );
   }
 
-  async getProjectsForClient(requestingUserEmail: string, clientId: string) {
-    await this.clientsService.getClientById(requestingUserEmail, clientId); // Will throw not found or forbidden exception
+  async getProjectsForClient(
+    requestingUserSubjectId: string,
+    clientId: string,
+  ) {
+    await this.clientsService.getClientById(requestingUserSubjectId, clientId); // Will throw not found or forbidden exception
     return this.projectsRepository.getProjectsForClient(clientId);
   }
 
