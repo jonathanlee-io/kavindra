@@ -44,11 +44,11 @@ export class ProjectsController {
   @Get('for-client/:id')
   async getProjectsForClient(
     @ApiGatewayRequestHeaders()
-    {requestingUserEmail}: ApiGatewayRequestHeadersDto,
+    {requestingUserSubjectId}: ApiGatewayRequestHeadersDto,
     @Param() {id: clientId}: IdParamDto,
   ) {
     return this.projectsService.getProjectsForClient(
-      requestingUserEmail,
+      requestingUserSubjectId,
       clientId,
     );
   }
