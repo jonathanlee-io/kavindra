@@ -11,6 +11,7 @@ spring:
           filters:
             - SupabaseJwtParser=
             - ClientSubdomainParser=
+            - SetResponseHeader=Content-Type, application/json
         - id: v1-kavindra-api-issues
           uri: ${API_V1_BASE_URI}
           predicates:
@@ -18,13 +19,14 @@ spring:
           filters:
             - SupabaseJwtParser=
             - ClientSubdomainParser=
-        - id: v1-kavindra-api-payments
+            - SetResponseHeader=Content-Type, application/json
+        - id: v1-kavindra-api-payments-public
           uri: ${API_V1_BASE_URI}
           predicates:
-            - Path=/v1/payments/**
+            Path=/v1/payments/plans
           filters:
-            - SupabaseJwtParser=
             - ClientSubdomainParser=
+            - SetResponseHeader=Content-Type, application/json
         - id: v1-kavindra-api-projects
           uri: ${API_V1_BASE_URI}
           predicates:
@@ -32,6 +34,7 @@ spring:
           filters:
             - SupabaseJwtParser=
             - ClientSubdomainParser=
+            - SetResponseHeader=Content-Type, application/json
         - id: v1-kavindra-api-users
           uri: ${API_V1_BASE_URI}
           predicates:
@@ -39,6 +42,7 @@ spring:
           filters:
             - SupabaseJwtParser=
             - ClientSubdomainParser=
+            - SetResponseHeader=Content-Type, application/json
         - id: v1-kavindra-scripts
           uri: ${API_V1_BASE_URI}
           predicates:
