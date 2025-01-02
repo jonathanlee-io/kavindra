@@ -14,7 +14,7 @@ export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
     /(http):\/\/localhost:8080\/(.*)/.test(req.url) ||
     new RegExp('/(https)://(.*).' + tenantStore.customHostname() + '/').test(
         req.url,
-    )
+    ) && supabaseService.session?.access_token
   ) {
     return next(
         req.clone({
