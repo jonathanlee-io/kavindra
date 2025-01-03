@@ -1,11 +1,5 @@
 import {computed} from '@angular/core';
-import {
-  patchState,
-  signalStore,
-  withComputed,
-  withMethods,
-  withState,
-} from '@ngrx/signals';
+import {patchState, signalStore, withComputed, withMethods, withState} from '@ngrx/signals';
 
 import {FeatureFlagDto} from '../../dtos/feature-flags/FeatureFlag.dto';
 import {FeatureFlagEnum} from '../../enums/FeatureFlag.enum';
@@ -33,6 +27,9 @@ export const FeatureFlagsStore = signalStore(
             featureFlags: [...featureFlags],
             isLoading: false,
           });
+        },
+        onDisabledFeatureAccessAttempt: (featureFlag: FeatureFlagEnum) => {
+          console.error(`Feature with flag: [${featureFlag}] is disabled. Please contact your administrator to enable this feature. { featureFlag: ${JSON.stringify(featureFlag)} }`);
         },
       };
     }),
