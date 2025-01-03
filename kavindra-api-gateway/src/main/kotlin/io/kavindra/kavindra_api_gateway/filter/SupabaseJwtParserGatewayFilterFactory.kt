@@ -12,9 +12,7 @@ class SupabaseJwtParserGatewayFilterFactory :
   companion object {
     const val EMAIL_HEADER = "X-Requesting-User-Email"
     const val SUBJECT_ID_HEADER = "X-Requesting-User-Subject-Id"
-    const val CLIENT_SUBDOMAIN_HEADER = "X-Requesting-User-Client-Subdomain"
   }
-
 
   override fun apply(config: Any?): GatewayFilter {
     return GatewayFilter { exchange, chain ->
