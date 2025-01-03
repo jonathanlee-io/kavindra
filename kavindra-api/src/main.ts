@@ -12,7 +12,7 @@ async function bootstrap() {
   const configService =
     app.get<ConfigService<EnvironmentVariables>>(ConfigService);
 
-  await runPrismaMigrations(configService.get<string>('DATABASE_URL'));
+  await runPrismaMigrations(configService.getOrThrow<string>('DATABASE_URL'));
 
   initApp(app);
 
