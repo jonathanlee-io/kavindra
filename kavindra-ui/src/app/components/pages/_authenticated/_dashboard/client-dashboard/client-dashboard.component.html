@@ -83,7 +83,7 @@
         <tr>
           <td>{{ clientStore.clientById()?.displayName }}</td>
           <td>{{ member.email }}</td>
-          <td *ngIf="isCurrentUserAdmin()"><button pButton pButtonLabel="Grant Admin Privileges" rounded raised>{{ isUserAdmin(member.email) ? 'Remove' : 'Grant' }} Admin Privileges</button></td>
+          <td *ngIf="isCurrentUserAdmin()"><button pButton rounded raised>{{ isUserAdmin(member.email) ? 'Remove' : 'Grant' }} Admin Privileges</button></td>
           <td>
             <p-button icon="pi pi-trash" rounded raised />
           </td>
@@ -119,7 +119,7 @@
         <tr>
           <td>{{ clientStore.clientById()?.displayName }}</td>
           <td>{{ admin.email }}</td>
-          <td *ngIf="isCurrentUserAdmin()"><button pButton pButtonLabel="Remove Admin Privileges" rounded raised>Remove Admin Privileges</button></td>
+          <td *ngIf="isCurrentUserAdmin()"><button pButton rounded raised>Remove Admin Privileges</button></td>
         </tr>
       </ng-template>
       <ng-template pTemplate="footer">Total
