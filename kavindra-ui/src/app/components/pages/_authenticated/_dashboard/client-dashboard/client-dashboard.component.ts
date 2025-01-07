@@ -7,6 +7,7 @@ import {TableModule} from 'primeng/table';
 import {TagModule} from 'primeng/tag';
 import {Subscription, tap} from 'rxjs';
 
+import {UserAuthenticationStore} from '../../../../../+state/auth/user-auth.store';
 import {ClientStore} from '../../../../../+state/client/client.store';
 import {ProjectStore} from '../../../../../+state/project/project.store';
 import {RoutePath} from '../../../../../app.routes';
@@ -30,6 +31,7 @@ export class ClientDashboardComponent implements OnInit, OnDestroy {
 
   protected readonly projectStore = inject(ProjectStore);
   protected readonly clientStore = inject(ClientStore);
+  private readonly userAuthenticationStore = inject(UserAuthenticationStore);
   protected readonly rebaseRoutePathAsString = rebaseRoutePathAsString;
   protected readonly RoutePath = RoutePath;
 
@@ -53,5 +55,17 @@ export class ClientDashboardComponent implements OnInit, OnDestroy {
   loadProjectsForClient(clientId: string) {
     this.projectStore.loadProjectsForClient(clientId);
     this.clientStore.fetchClientById(clientId);
+  }
+
+  isCurrentUserAdmin() {
+    return this.clientStore.clientById()?.
+        admins.map((admin) => admin.email)
+        .includes(this.userAuthenticationStore.currentUserEmail() ?? '');
+  }
+
+  isUserAdmin(email: string) {
+    return this.clientStore.clientById()?.
+        admins.map((admin) => admin.email)
+        .includes(email);
   }
 }
