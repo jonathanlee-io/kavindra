@@ -83,9 +83,9 @@
         <tr>
           <td>{{ clientStore.clientById()?.displayName }}</td>
           <td>{{ member.email }}</td>
-          <td *ngIf="isCurrentUserAdmin()"><button pButton rounded raised>{{ isUserAdmin(member.email) ? 'Remove' : 'Grant' }} Admin Privileges</button></td>
+          <td *ngIf="isCurrentUserAdmin()"><button (click)="promptToggleAdmin(member)" pButton rounded raised>{{ isUserAdmin(member.email) ? 'Remove' : 'Grant' }} Admin Privileges</button></td>
           <td>
-            <p-button icon="pi pi-trash" rounded raised />
+            <p-button icon="pi pi-trash" (click)="promptRemoveMember(member)" rounded raised />
           </td>
         </tr>
       </ng-template>
@@ -101,9 +101,6 @@
         <div class="flex items-center justify-between">
           <span class="text-xl font-bold">Admins under Organization</span>
           <div>
-            <a class="mr-4" pButton pButtonIcon="pi pi-plus"
-               [routerLink]="rebaseRoutePathAsString(RoutePath.CREATE_PROJECT.replace(':clientId', clientId()))">Invite
-              Member</a>
             <p-button icon="pi pi-refresh" (click)="loadProjectsForClient(clientId())" rounded raised />
           </div>
         </div>

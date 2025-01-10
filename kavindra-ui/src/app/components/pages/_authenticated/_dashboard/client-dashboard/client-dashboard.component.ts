@@ -1,6 +1,7 @@
 import {NgIf} from '@angular/common';
 import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
+import {ConfirmationService} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {TableModule} from 'primeng/table';
@@ -22,12 +23,14 @@ import {rebaseRoutePathAsString} from '../../../../../util/router/Router.utils';
     TableModule,
     TagModule,
     RouterLink,
+
   ],
   templateUrl: './client-dashboard.component.html',
   styleUrl: './client-dashboard.component.scss',
 })
 export class ClientDashboardComponent implements OnInit, OnDestroy {
   private readonly route = inject(ActivatedRoute);
+  private readonly confirmationService = inject(ConfirmationService);
 
   protected readonly projectStore = inject(ProjectStore);
   protected readonly clientStore = inject(ClientStore);
@@ -67,5 +70,27 @@ export class ClientDashboardComponent implements OnInit, OnDestroy {
     return this.clientStore.clientById()?.
         admins.map((admin) => admin.email)
         .includes(email);
+  }
+
+  promptToggleAdmin(member: {email: string, id: string}) {
+    this.confirmationService.confirm({
+      message: `Are you sure you want to ${this.isUserAdmin(member.email) ? 'revoke' : 'grant'} ${member.email} admin privileges?`,
+      acceptButtonStyleClass: 'p-button-danger',
+      acceptIcon: 'pi pi-exclamation-triangle',
+      rejectIcon: 'pi pi-times',
+      closable: false,
+      accept: () => console.log(`${this.isUserAdmin(member.email) ? 'Revoking' : 'Granting'} admin privileges to ${member.email}`),
+    });
+  }
+
+  promptRemoveMember(member: {email: string, id: string}) {
+    this.confirmationService.confirm({
+      message: `Are you sure you want to remove ${member.email} from this organization?`,
+      acceptButtonStyleClass: 'p-button-danger',
+      acceptIcon: 'pi pi-trash',
+      rejectIcon: 'pi pi-times',
+      closable: false,
+      accept: () => console.log(`Removing ${member.email} from organization: ${this.clientStore.clientById()?.displayName}`),
+    });
   }
 }
