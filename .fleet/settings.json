@@ -1,3 +1,4 @@
 {
-    "nodejs.editor.formatOnSave.eslint.mode": "Enabled"
+    "nodejs.editor.formatOnSave.eslint.mode": "Enabled",
+    "editor.formatOnSave": true
 }

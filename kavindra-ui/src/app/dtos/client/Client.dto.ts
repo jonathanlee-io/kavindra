@@ -9,6 +9,12 @@ export interface ClientDto {
   createdBy: {
     supabaseUserId: string;
   };
+  members: {
+    email: string;
+  }[];
+  admins: {
+    email: string;
+  }[];
   createdAt: string;
   updatedAt: string;
 }

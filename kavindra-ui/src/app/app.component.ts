@@ -3,6 +3,7 @@ import {Component, inject, OnInit, signal} from '@angular/core';
 import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {MessageService} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
+import {ConfirmDialog} from 'primeng/confirmdialog';
 import {DialogModule} from 'primeng/dialog';
 import {ToastModule} from 'primeng/toast';
 import {filter, tap} from 'rxjs';
@@ -23,6 +24,7 @@ import {FooterComponent} from './components/lib/footer/footer.component';
     FooterComponent,
     NgIf,
     ToastModule,
+    ConfirmDialog,
   ],
   providers: [MessageService],
   templateUrl: './app.component.html',
