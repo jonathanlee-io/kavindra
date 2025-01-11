@@ -12,7 +12,7 @@ export class PaymentsService implements OnModuleInit {
       id: '8b556c3b-49e3-4bcc-b968-78be42ab427b',
       name: 'Indie Hacker',
       description: 'The essentials to provide your best work for your clients',
-      monthlyPrice: '$24.99',
+      monthlyPrice: '$9.99',
       features: [
         'Up to 5 projects',
         'Up to 10 team members',
@@ -29,7 +29,7 @@ export class PaymentsService implements OnModuleInit {
       id: '3e1a5257-58a8-4769-970a-2214ef7bf80e',
       name: 'Startup',
       description: 'A plan that scales with your rapidly growing business.',
-      monthlyPrice: '$49.99',
+      monthlyPrice: '$29.99',
       features: [
         'Up to 15 projects',
         'Up to 150 team members',
