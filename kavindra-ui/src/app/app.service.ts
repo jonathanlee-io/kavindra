@@ -6,9 +6,7 @@ import {filter, tap} from 'rxjs';
 import {environment} from '../environments/environment';
 import {UserAuthenticationStore} from './+state/auth/user-auth.store';
 import {FeatureFlagsStore} from './+state/feature-flags/feature-flags.store';
-import {UserPreferencesStore} from './+state/user-preferences/user-preferences.store';
 import {FeatureFlagEnum} from './enums/FeatureFlag.enum';
-import {AuthService} from './services/auth/auth.service';
 import {SupabaseService} from './services/supabase/supabase.service';
 
 @Injectable({
@@ -18,10 +16,8 @@ export class AppService {
   private static readonly REFRESH_EVENT_ID = 1;
 
   private readonly userAuthenticationStore = inject(UserAuthenticationStore);
-  private readonly userPreferencesStore = inject(UserPreferencesStore);
   private readonly featureFlagsStore = inject(FeatureFlagsStore);
   private readonly supabaseService = inject(SupabaseService);
-  private readonly authService = inject(AuthService);
 
   pipeAuthRouterEvents(router: Router) {
     router.events
@@ -35,10 +31,6 @@ export class AppService {
               this.userAuthenticationStore.checkLoginOnRefresh();
             }),
             filter(() => this.userAuthenticationStore.isLoggedIn()),
-            tap(() => {
-              // this.notificationsStore.loadNotifications();
-              // this.paymentStore.loadPaymentStatus();
-            }),
         )
         .subscribe();
   }
@@ -50,9 +42,6 @@ export class AppService {
                 (routerEvent): routerEvent is NavigationEnd =>
                   routerEvent instanceof NavigationEnd,
             ),
-            tap((event) => {
-              this.authService.setNextParamInLocalStorageIfNotAnonymous(event.url);
-            }),
         )
         .subscribe();
   }

@@ -37,7 +37,6 @@ export const UserAuthenticationStore = signalStore(
       };
     }),
     withMethods((store) => {
-      const authService = inject(AuthService);
       const router = inject(Router);
       const notificationsStore = inject(NotificationsStore);
       const supabaseService = inject(SupabaseService);
@@ -52,12 +51,6 @@ export const UserAuthenticationStore = signalStore(
           patchState(store, {isDarkMode: !store.isDarkMode()});
         },
         onLoginComplete: async () => {
-          const next = authService.getNextParamFromLocalStorageAndNoReset();
-          if (next) {
-            router
-                .navigateByUrl(next)
-                .catch(RouterUtils.navigateCatchErrorCallback);
-          }
           localStorage.setItem(
               'supabase-session',
               JSON.stringify(supabaseService.session),
@@ -68,8 +61,6 @@ export const UserAuthenticationStore = signalStore(
         logout: async () => {
           patchState(store, {loggedInState: 'LOADING'});
           await supabaseService.signOut();
-          authService.setNextParamInLocalStorageIfNotAnonymous(null);
-          authService.redirectIfNotAnonymous();
           patchState(store, {...initialState});
           router
               .navigate([rebaseRoutePath(RoutePath.LOGIN)])
@@ -96,7 +87,6 @@ export const UserAuthenticationStore = signalStore(
       };
     }),
     withMethods((store) => {
-      const authService = inject(AuthService);
       const supabaseService = inject(SupabaseService);
       return {
         attemptSupabaseLoginWithGoogle: async () => {
@@ -124,9 +114,6 @@ export const UserAuthenticationStore = signalStore(
           if (supabaseService.session !== null) {
             patchState(store, {loggedInState: 'LOGGED_IN'});
           }
-        },
-        onLoginPageVisitedWithNext: (next: string) => {
-          authService.setNextParamInLocalStorageIfNotAnonymous(next);
         },
       };
     }),
