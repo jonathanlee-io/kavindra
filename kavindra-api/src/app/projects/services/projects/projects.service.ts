@@ -102,7 +102,11 @@ export class ProjectsService {
   }
 
   async getFeedbackWidgetScript(clientSubdomain: string) {
-    if (clientSubdomain === 'www' || clientSubdomain === 'kavindra') {
+    if (
+      !clientSubdomain ||
+      clientSubdomain === 'www' ||
+      clientSubdomain === 'kavindra'
+    ) {
       return this.generateWidgetInitScript(clientSubdomain, {
         name: 'Kavindra',
         subdomain: clientSubdomain,
@@ -111,10 +115,10 @@ export class ProjectsService {
         isFeatureFeedbackEnabled: true,
       });
     }
-    const [project] =
+    const projects =
       await this.projectsRepository.findBySubdomain(clientSubdomain);
     return this.generateWidgetInitScript(clientSubdomain, {
-      ...project,
+      ...projects?.[0],
     });
   }
 
