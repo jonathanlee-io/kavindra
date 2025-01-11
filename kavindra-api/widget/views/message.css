@@ -1,3 +1,7 @@
+textarea::placeholder {
+  color: gray !important;
+}
+
 .js-widget-overlay {
     z-index: 10001;
     position: fixed;
