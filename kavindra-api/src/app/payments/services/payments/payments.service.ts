@@ -29,7 +29,7 @@ export class PaymentsService implements OnModuleInit {
       id: '3e1a5257-58a8-4769-970a-2214ef7bf80e',
       name: 'Startup',
       description: 'A plan that scales with your rapidly growing business.',
-      monthlyPrice: '$29.99',
+      monthlyPrice: '$24.99',
       features: [
         'Up to 15 projects',
         'Up to 150 team members',
