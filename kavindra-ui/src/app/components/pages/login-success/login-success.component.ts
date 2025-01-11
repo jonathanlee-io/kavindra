@@ -36,16 +36,14 @@ export class LoginSuccessComponent implements OnInit {
               }
 
               const projectsWhereInvolved = await this.projectStore.loadProjectsWhereInvolved();
-              if (projectsWhereInvolved.length === 0 && !isRedirectedToNext) {
+              if (projectsWhereInvolved.length === 0) {
                 this.router.navigate([rebaseRoutePath(RoutePath.CREATE_CLIENT_INTRO)])
                     .catch(RouterUtils.navigateCatchErrorCallback);
                 return;
               }
 
-              if (!isRedirectedToNext) {
-                this.router.navigate([rebaseRoutePath(RoutePath.DASHBOARD)])
-                    .catch(RouterUtils.navigateCatchErrorCallback);
-              }
+              this.router.navigate([rebaseRoutePath(RoutePath.DASHBOARD)])
+                  .catch(RouterUtils.navigateCatchErrorCallback);
             }),
         )
         .subscribe();
