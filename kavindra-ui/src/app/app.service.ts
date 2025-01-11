@@ -42,6 +42,9 @@ export class AppService {
                 (routerEvent): routerEvent is NavigationEnd =>
                   routerEvent instanceof NavigationEnd,
             ),
+            tap(() => {
+              this.userAuthenticationStore.checkNextParamOnNavigate();
+            }),
         )
         .subscribe();
   }

@@ -1,9 +1,9 @@
 import {DOCUMENT} from '@angular/common';
 import {computed, inject} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {patchState, signalStore, withComputed, withMethods, withState} from '@ngrx/signals';
 import {MessageService} from 'primeng/api';
-import {take} from 'rxjs';
+import {take, tap} from 'rxjs';
 
 import {RoutePath} from '../../app.routes';
 import {AuthService} from '../../services/auth/auth.service';
@@ -28,11 +28,32 @@ export const UserAuthenticationStore = signalStore(
     withState(initialState),
     withMethods((store) => {
       const authService = inject(AuthService);
+      const route = inject(ActivatedRoute);
+      const router = inject(Router);
       return {
         userCheckIn: () => {
           if (store.loggedInState() === 'LOGGED_IN') {
             authService.checkIn().pipe(take(1)).subscribe();
           }
+        },
+        checkNextParamOnNavigate: () => {
+          route.queryParams.pipe(
+              take(1),
+              tap((queryParams) => {
+                if (queryParams[AuthService.NEXT_PARAM_KEY]) {
+                  authService.setNextParamInLocalStorage(queryParams[AuthService.NEXT_PARAM_KEY]);
+                }
+              }),
+          ).subscribe();
+        },
+        redirectToNextIfPresentOrOtherIfNot: async () => {
+          const next = authService.getNextParamFromLocalStorage();
+          if (next) {
+            await router.navigate([decodeURIComponent(next)]);
+            authService.clearNextParamFromLocalStorage();
+            return true;
+          }
+          return false;
         },
       };
     }),
