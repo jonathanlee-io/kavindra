@@ -115,10 +115,10 @@ export class ProjectsService {
         isFeatureFeedbackEnabled: true,
       });
     }
-    const projects =
+    const [project] =
       await this.projectsRepository.findBySubdomain(clientSubdomain);
     return this.generateWidgetInitScript(clientSubdomain, {
-      ...projects?.[0],
+      ...project,
     });
   }
 
