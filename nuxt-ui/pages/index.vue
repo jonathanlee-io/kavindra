@@ -19,8 +19,6 @@ const {data, status} = await useFetch<PricingTier[]>(`${runtimeConfig.public.api
   server: true,
 });
 const pricingTiers: PricingTier[] = data.value as PricingTier[];
-console.log(pricingTiers);
-console.log(status);
 </script>
 
 <template>
