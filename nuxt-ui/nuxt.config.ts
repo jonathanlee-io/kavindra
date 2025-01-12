@@ -11,9 +11,27 @@ export default defineNuxtConfig({
     },
     pageTransition: { name: 'page', mode: 'out-in' }
   },
-  runtimeConfig: {
-    public: {
-      apiUrl: process.env.API_BASE_URL || 'https://www.api.kavindra.io/v1'
+  $production: {
+    runtimeConfig: {
+      public: {
+        apiUrl: 'https://www.api.kavindra.io/v1'
+      }
+    },
+  },
+  $development: {
+    runtimeConfig: {
+      public: {
+        apiUrl: 'http://localhost:8080/v1'
+      }
+    },
+  },
+  $env: {
+    staging: {
+      runtimeConfig: {
+        public: {
+          apiUrl: 'https://www.api.kavindra-staging.com/v1'
+        }
+      },
     }
   }
 })

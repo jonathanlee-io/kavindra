@@ -14,7 +14,9 @@ RUN yarn install --frozen-lockfile
 COPY . .
 
 # Build the Nuxt.js project for production
-RUN yarn run build
+ARG BUILD_ENV="prod"
+
+RUN yarn run build:${BUILD_ENV}
 
 # Stage 2: Serve the application using a lightweight production image
 FROM node:22.11.0-alpine3.20 AS runner

@@ -3,8 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
+    "build:prod": "nuxt build --envName production",
+    "build:staging": "nuxt build --envName staging",
+    "dev": "nuxt dev --envName development",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
