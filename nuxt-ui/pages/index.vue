@@ -1,4 +1,22 @@
 <script setup lang="ts">
+import PricingTier from '~/components/pricing-tier/PricingTier.vue';
+
+interface PricingTier {
+  id: string;
+  name: string;
+  description: string;
+  monthlyPrice: string;
+  features: string[];
+  sortIndex: number;
+  tag: string | null;
+  stripePricingTableId: string;
+  stripePublishableKey: string;
+}
+
+const {data, status} = await useFetch<PricingTier[]>('http://localhost:8080/v1/payments/plans');
+const pricingTiers: PricingTier[] = data.value as PricingTier[];
+console.log(pricingTiers);
+console.log(status);
 </script>
 
 <template>
@@ -85,54 +103,29 @@
           Pricing Plans That Fit Your Needs
         </h2>
         <p class="text-lg text-gray-600 max-w-lg mx-auto">
-          From free to affordable, we support feedback at all scales.
+          Affordable plans designed to grow with your needs.
         </p>
       </div>
-      <div class="grid grid-cols-1 gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto px-6 sm:px-8">
-        <!-- Basic Plan -->
-        <div class="p-6 bg-gray-50 border border-gray-200 rounded-xl shadow hover:shadow-lg hover:scale-105 transition-all duration-300 text-center">
-          <h3 class="text-2xl font-semibold text-gray-800 mb-4">Basic</h3>
-          <p class="text-gray-600 mb-6">Perfect for individuals and small teams.</p>
-          <div class="text-4xl font-bold text-gray-800 mb-6">$4.99 / Month</div>
-          <ul class="text-gray-600 space-y-2 mb-6">
-            <li>✔ Embeddable Feedback Widget</li>
-            <li>✔ Basic Analytics</li>
-            <li>✔ Open Source</li>
-          </ul>
-          <a href="#" class="bg-indigo-600 text-white text-lg font-bold py-3 px-6 rounded-lg shadow hover:bg-indigo-700">
-            Get Started
-          </a>
-        </div>
-
-        <!-- Pro Plan -->
-        <div class="p-6 bg-indigo-600 text-white rounded-xl shadow hover:shadow-lg hover:scale-105 transition-all duration-300 text-center">
-          <h3 class="text-2xl font-semibold mb-4">Pro</h3>
-          <p class="mb-6">Great for growing teams and businesses.</p>
-          <div class="text-4xl font-bold mb-6">$14.99 / Month</div>
-          <ul class="space-y-2 mb-6">
-            <li>✔ Embeddable Feedback Widget</li>
-            <li>✔ Priority Support</li>
-            <li>✔ Integration Tools</li>
-          </ul>
-          <a href="#" class="bg-white text-indigo-600 text-lg font-bold py-3 px-6 rounded-lg shadow hover:bg-gray-100">
-            Try Pro
-          </a>
-        </div>
-
-        <!-- Enterprise Plan -->
-        <div class="p-6 bg-gray-50 border border-gray-200 rounded-xl shadow hover:shadow-lg hover:scale-105 transition-all duration-300 text-center">
-          <h3 class="text-2xl font-semibold text-gray-800 mb-4">Enterprise</h3>
-          <p class="text-gray-600 mb-6">Customized solutions for enterprises.</p>
-          <div class="text-4xl font-bold text-gray-800 mb-6">Contact Us</div>
-          <ul class="text-gray-600 space-y-2 mb-6">
-            <li>✔ Custom Feedback Tools</li>
-            <li>✔ Dedicated Support</li>
-            <li>✔ Scalability Options</li>
-          </ul>
-          <a href="#" class="bg-indigo-600 text-white text-lg font-bold py-3 px-6 rounded-lg shadow hover:bg-indigo-700">
-            Contact Us
-          </a>
-        </div>
+      <div v-if="!pricingTiers" class="text-center">
+        <p class="text-lg text-gray-600 max-w-lg mx-auto">No Pricing Tiers Available</p>
+      </div>
+      <div
+        v-else
+        class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto px-6 sm:px-8"
+      >
+        <PricingTier
+          v-for="pricingTier in pricingTiers"
+          :key="pricingTier.id"
+          :id="pricingTier.id"
+          :name="pricingTier.name"
+          :description="pricingTier.description"
+          :tag="pricingTier.tag"
+          :monthly-price="pricingTier.monthlyPrice"
+          :features="pricingTier.features"
+          :sort-index="pricingTier.sortIndex"
+          :stripe-pricing-table-id="pricingTier.stripePricingTableId"
+          :stripe-publishable-key="pricingTier.stripePublishableKey"
+        />
       </div>
     </section>
   </div>

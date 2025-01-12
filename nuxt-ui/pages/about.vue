@@ -14,13 +14,6 @@
       <p class="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto mb-10">
         Kavindra is all about being <span class="text-indigo-700 font-medium">fun</span>, <span class="text-indigo-700 font-medium">accessible</span>, and <span class="text-indigo-700 font-medium">open-source</span>. Our mission is to make user feedback powerful and affordable while keeping things simple.
       </p>
-      <a
-        href="#features"
-        class="inline-block bg-indigo-600 text-white text-lg font-semibold py-3 px-6 rounded-full shadow-md transition-transform duration-300 hover:bg-indigo-800 hover:scale-105"
-        style="box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.25);"
-      >
-        Learn More
-      </a>
     </div>
 
     <!-- Features Section -->
@@ -83,7 +76,7 @@
         class="inline-block bg-indigo-600 text-white text-lg font-semibold py-3 px-6 rounded-full shadow-lg hover:bg-indigo-800 transition-transform duration-300 transform hover:scale-105"
         style="box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.25);"
       >
-        Get Started for Free!
+        Get Started Today!
       </a>
     </div>
   </section>

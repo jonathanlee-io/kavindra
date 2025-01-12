@@ -13,7 +13,7 @@ const toggleMenu = () => {
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <!-- Logo -->
       <div class="text-2xl font-bold text-white">
-        <a href="/" class="hover:underline">Kavindra</a>
+        <NuxtLink to="/" class="hover:underline">Kavindra</NuxtLink>
       </div>
 
       <!-- Hamburger Menu Button (Hidden on larger screens) -->
@@ -28,7 +28,7 @@ const toggleMenu = () => {
 
       <!-- Links (Visible on larger screens) -->
       <ul
-        class="hidden lg:flex items-center space-x-6 text-lg"
+        class="sm:hidden flex md:flex lg:flex items-center space-x-6 text-lg"
         :class="menuOpen ? 'absolute top-16 left-0 w-full bg-blue-800 py-4 z-10' : ''"
       >
         <li class="text-white">
@@ -36,12 +36,6 @@ const toggleMenu = () => {
             to="/about"
             class="hover:text-blue-300 transition duration-300"
           >About</NuxtLink>
-        </li>
-        <li class="text-white">
-          <a
-            href="#features"
-            class="hover:text-blue-300 transition duration-300"
-          >Features</a>
         </li>
         <li class="text-white">
           <a
