@@ -3,7 +3,6 @@
   import Toggle from '~/components/Ui/Toggle.vue';
 
   const colorMode = useColorMode();
-  console.log(colorMode.preference);
 </script>
 
 <template>
