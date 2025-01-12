@@ -89,7 +89,7 @@
             Welcome to <span class="text-indigo-600 dark:text-indigo-400">Kavindra</span>
           </h1>
           <p
-            class="mx-auto max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-400 sm:text-xl sm:leading-loose"
+            class="mx-auto max-w-2xl text-lg lg:leading-relaxed text-gray-600 dark:text-gray-400 sm:text-xl"
           >
             <span class="font-semibold text-gray-900 dark:text-white">Kavindra</span> is your simple and
             open-source feedback platform, helping users grow while keeping costs low with
