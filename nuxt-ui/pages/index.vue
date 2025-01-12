@@ -15,7 +15,9 @@ interface PricingTier {
   stripePublishableKey: string;
 }
 
-const {data, status} = await useFetch<PricingTier[]>(`${runtimeConfig.public.apiUrl}/payments/plans`);
+const {data, status} = await useFetch<PricingTier[]>(`${runtimeConfig.public.apiUrl}/payments/plans`, {
+  server: true,
+});
 const pricingTiers: PricingTier[] = data.value as PricingTier[];
 console.log(pricingTiers);
 console.log(status);
