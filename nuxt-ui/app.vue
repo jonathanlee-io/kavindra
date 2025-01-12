@@ -20,17 +20,19 @@ useSeoMeta({
   <Navbar class="bg-blue-950">
     <Container class="flex h-14 items-center justify-between border border-b-0">
       <a class="font-semibold dark:text-white">Kavindra</a>
-      <nav class="hidden items-center gap-5 sm:flex">
+      <nav class="items-center gap-5 sm:flex">
         <a
           v-for="l in ['Home', 'About', 'Register', 'Login']"
           :key="l"
-          class="text-sm text-muted-foreground transition-colors hover:text-foreground"
+          class="hidden text-sm text-muted-foreground transition-colors hover:text-foreground"
           :href="`${(l === 'Home') ? '/' : '/' + l.toLowerCase()}`"
         >{{ l }}</a
         >
-        <Toggle @click="$colorMode.preference = (colorMode.preference === 'light') ? 'dark' : 'light'" >
-          <Icon class="text-black dark:text-white" :name="(colorMode.preference === 'light') ? 'lucide:sun' : 'lucide:moon'" size="24" />
-        </Toggle>
+        <div class="flex">
+          <Toggle @click="$colorMode.preference = (colorMode.preference === 'light') ? 'dark' : 'light'" >
+            <Icon class="text-black dark:text-white" :name="(colorMode.preference === 'light') ? 'lucide:sun' : 'lucide:moon'" size="24" />
+          </Toggle>
+        </div>
       </nav>
     </Container>
   </Navbar>
