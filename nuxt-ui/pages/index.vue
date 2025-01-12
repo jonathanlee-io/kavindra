@@ -63,33 +63,42 @@
 
 <template>
   <div
-    class="min-h-screen bg-gradient-to-b from-indigo-50 via-blue-100 to-blue-50 px-6 py-16 dark:bg-gradient-to-b dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 px-4 py-12 sm:px-6 sm:py-16 lg:px-8"
+    class="min-h-screen bg-gradient-to-b from-indigo-50 via-blue-100 to-blue-50 dark:bg-gradient-to-b dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 px-4 py-12 sm:px-6 sm:py-16 lg:px-8"
     style="font-family: &quot;Inter&quot;, &quot;Roboto&quot;, sans-serif"
   >
     <!-- Hero Section -->
     <section class="mb-12 text-center sm:mb-16">
-      <NuxtImg
-        src="/logo.svg"
-        alt="Kavindra Logo"
-        class="mx-auto mb-6"
-        style="filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1))"
-        width="64"
-        height="64"
-      />
-      <h1
-        class="mb-6 text-4xl font-extrabold text-gray-800 drop-shadow-md dark:text-gray-200 sm:mb-8 sm:text-6xl"
+      <div
+        class="relative mx-auto flex h-full w-full max-w-full items-center justify-center overflow-hidden rounded-lg border bg-white px-6 py-12 shadow-lg dark:bg-gray-900 p-20 md:shadow-xl"
       >
-        Welcome to <span class="text-indigo-600 dark:text-indigo-400">Kavindra</span>
-      </h1>
-      <p
-        class="mx-auto max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-400 sm:text-xl sm:leading-loose"
-      >
-        <span class="font-semibold text-gray-900 dark:text-white">Kavindra</span> is your simple and
-        open-source feedback platform, helping users grow while keeping costs low with
-        <span class="underline decoration-indigo-600 decoration-2 dark:decoration-indigo-400"
-          >direct user feedback</span
-        >.
-      </p>
+        <Meteors :number="30" />
+        <p
+          class="z-10 whitespace-pre-wrap text-center text-5xl font-medium tracking-tighter text-black dark:text-white"
+        >
+          <NuxtImg
+            src="/logo.svg"
+            alt="Kavindra Logo"
+            class="mx-auto mb-6"
+            style="filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1))"
+            width="64"
+            height="64"
+          />
+          <h1
+            class="mb-6 text-4xl font-extrabold text-gray-800 drop-shadow-md dark:text-gray-200 sm:mb-8 sm:text-6xl"
+          >
+            Welcome to <span class="text-indigo-600 dark:text-indigo-400">Kavindra</span>
+          </h1>
+          <p
+            class="mx-auto max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-400 sm:text-xl sm:leading-loose"
+          >
+            <span class="font-semibold text-gray-900 dark:text-white">Kavindra</span> is your simple and
+            open-source feedback platform, helping users grow while keeping costs low with
+            <span class="underline decoration-indigo-600 decoration-2 dark:decoration-indigo-400"
+            >direct user feedback</span
+            >.
+          </p>
+        </p>
+      </div>
       <div class="mt-8">
         <a
           href="#pricing"

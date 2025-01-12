@@ -23,12 +23,12 @@
         </Toggle>
       </div>
 
-      <NuxtLink
-        to="/about"
+      <a
+        href="/about"
         class="hidden rounded-lg bg-blue-600 px-5 py-2 text-lg font-bold text-white shadow transition-all duration-300 hover:bg-blue-700 hover:shadow-lg lg:block"
       >
         About
-      </NuxtLink>
+      </a>
     </div>
   </nav>
 </template>
