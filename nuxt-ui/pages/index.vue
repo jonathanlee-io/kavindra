@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const runtimeConfig = useRuntimeConfig()
+
 import PricingTier from '~/components/pricing-tier/PricingTier.vue';
 
 interface PricingTier {
@@ -13,7 +15,7 @@ interface PricingTier {
   stripePublishableKey: string;
 }
 
-const {data, status} = await useFetch<PricingTier[]>('http://localhost:8080/v1/payments/plans');
+const {data, status} = await useFetch<PricingTier[]>(`${runtimeConfig.public.apiUrl}/payments/plans`);
 const pricingTiers: PricingTier[] = data.value as PricingTier[];
 console.log(pricingTiers);
 console.log(status);

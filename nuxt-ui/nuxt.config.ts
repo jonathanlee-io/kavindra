@@ -10,5 +10,10 @@ export default defineNuxtConfig({
       ]
     },
     pageTransition: { name: 'page', mode: 'out-in' }
+  },
+  runtimeConfig: {
+    public: {
+      apiUrl: process.env.API_BASE_URL || 'https://www.api.kavindra.io/v1'
+    }
   }
 })
