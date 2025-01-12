@@ -8,6 +8,7 @@ export default defineNuxtConfig({
       script: [
         { src: 'https://www.api.kavindra.io/v1/scripts/feedback-widget.js' },
       ]
-    }
+    },
+    pageTransition: { name: 'page', mode: 'out-in' }
   }
 })
