@@ -27,7 +27,7 @@ export default defineNuxtConfig({
     app: {
       head: {
         script: [
-          { src: 'https://www.api.kavindra-local.com:8080/v1/scripts/feedback-widget.js' },
+          { src: 'http://www.api.kavindra-local.com:8080/v1/scripts/feedback-widget.js' },
         ]
       },
       pageTransition: { name: 'page', mode: 'out-in' }

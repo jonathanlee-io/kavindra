@@ -17,8 +17,8 @@ useSeoMeta({
 </script>
 
 <style>
-.page-enter-active,
-.page-leave-active {
+.page-enter-active :not(.js-widget-modal-menu),
+.page-leave-active :not(.js-widget-modal-menu) {
   transition: all 0.2s;
 }
 .page-enter-from,

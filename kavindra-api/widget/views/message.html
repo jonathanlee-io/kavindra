@@ -8,7 +8,7 @@
 <div class="js-widget-modal-menu widget-modal items-center justify-center" style="display: none;">
   <div class="js-widget-modal-content z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true"
        style="display: none;">
-    <div style="position: fixed; inset: 0; z-index: 10; width: 100vw; overflow-y: auto;" aria-hidden="true">
+    <div style="position: fixed; inset: 0; z-index: 10; width: 100vw; overflow-y: auto;" aria-hidden="false">
       <div
         style="position: fixed; inset: 0; background-color: rgba(75, 85, 99, 1); display: flex; align-items: center; justify-content: center; z-index: 50;">
         <div
@@ -20,37 +20,101 @@
           <p style="margin-top: 0.5rem; font-size: 0.875rem; text-align: center; color: black;">
             We sincerely appreciate your valuable input to the product.
           </p>
-          <div style="margin-top: 1.25rem; display: grid; gap: 1rem;">
+          <div style="margin-top: 1.25rem; display: grid; gap: 1.5rem; place-items: center;">
 
+            <!-- Bug Button -->
             <button
-              style="display: none; width: 100%; border-radius: 9999px; background-image: linear-gradient(to right, #f59e0b, #ef4444, #ec4899); padding: 0.75rem 1.5rem; font-size: 1rem; font-weight: 700; color: white; box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);"
               id="js-widget-modal-menu-bug-button"
-              class="grow-hover">
+              style="
+      width: 100%;
+      border-radius: 9999px;
+      background: linear-gradient(to right, #10b981, #3b82f6);
+      padding: 0.85rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 200ms, box-shadow 200ms;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);"
+              onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 10px 20px rgba(0, 0, 0, 0.15)';"
+              onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 16px rgba(0, 0, 0, 0.12)';">
               Report a Bug
             </button>
 
+            <!-- Feature Request Button -->
             <button
-              style="display: none; width: 100%; border-radius: 9999px; background-image: linear-gradient(to right, #f59e0b, #ef4444, #ec4899); padding: 0.75rem 1.5rem; font-size: 1rem; font-weight: 700; color: white; box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);"
               id="js-widget-modal-menu-feature-request-button"
-              class="grow-hover">
+              style="
+      width: 100%;
+      border-radius: 9999px;
+      background: linear-gradient(to right, #6366f1, #a78bfa);
+      padding: 0.85rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 200ms, box-shadow 200ms;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);"
+              onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 10px 20px rgba(0, 0, 0, 0.15)';"
+              onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 16px rgba(0, 0, 0, 0.12)';">
               Request a Feature
             </button>
 
+            <!-- Feature Feedback Button -->
             <button
-              style="display: none; width: 100%; border-radius: 9999px; background-image: linear-gradient(to right, #f59e0b, #ef4444, #ec4899); padding: 0.75rem 1.5rem; font-size: 1rem; font-weight: 700; color: white; box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);"
               id="js-widget-modal-menu-feature-feedback-button"
-              class="grow-hover">
+              style="
+      width: 100%;
+      border-radius: 9999px;
+      background: linear-gradient(to right, #ec4899, #f43f5e, #f59e0b);
+      padding: 0.85rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 200ms, box-shadow 200ms;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);"
+              onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 10px 20px rgba(0, 0, 0, 0.15)';"
+              onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 16px rgba(0, 0, 0, 0.12)';">
               Provide Feedback for a Specific Feature
             </button>
 
+            <!-- Close Button -->
             <button
               id="js-widget-modal-menu-close-button"
-              class="grow-hover"
-              style="width: 100%; border-radius: 0.375rem; padding: 0.5rem 1rem; margin-top: 2rem; font-size: 0.875rem; font-weight: 600; background: black; box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); color: white;">
+              style="
+      width: 100%;
+      border-radius: 0.5rem;
+      padding: 0.65rem 1.25rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: black;
+      color: white;
+      cursor: pointer;
+      margin-top: 1rem;
+      text-align: center;
+      transition: transform 200ms, background-color 200ms;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);"
+              onmouseover="this.style.backgroundColor='rgba(0,0,0,0.8)'; this.style.transform='scale(1.05)';"
+              onmouseout="this.style.backgroundColor='black'; this.style.transform='scale(1)';">
               Close
             </button>
-            <p style="margin-top: 0.5rem; font-size: 0.875rem; text-align: center; color: black; font-style: italic;">
-              Powered by <a href="https://www.kavindra.io" target="_blank" rel="noopener noreferrer" style="color: deepskyblue;">Kavindra.io</a>
+
+            <!-- Attribution -->
+            <p style="margin-top: 0.75rem; font-size: 0.875rem; text-align: center; color: #555; font-style: italic;">
+              Powered by
+              <a href="https://www.kavindra.io" target="_blank" rel="noopener noreferrer" style="
+      color: #3b82f6;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 200ms;"
+                 onmouseover="this.style.color='#2563eb';"
+                 onmouseout="this.style.color='#3b82f6';">
+                Kavindra.io
+              </a>
             </p>
           </div>
         </div>
@@ -60,7 +124,7 @@
   <div class="js-widget-modal-bug-report z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true"
        style="display: none;">
     <div style="position: fixed; inset: 0; background-color: rgba(75, 85, 99, 0.75); transition: opacity;"
-         aria-hidden="true"></div>
+         aria-hidden="false"></div>
     <div style="position: fixed; inset: 0; z-index: 10; width: 100vw; overflow-y: auto;">
       <div
         style="position: fixed; inset: 0; background-color: rgba(75, 85, 99, 0.75); display: flex; align-items: center; justify-content: center; z-index: 50;">
@@ -114,7 +178,7 @@
   <div class="js-widget-modal-feature-request z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true"
        style="display: none;">
     <div style="position: fixed; inset: 0; background-color: rgba(75, 85, 99, 0.75); transition: opacity;"
-         aria-hidden="true"></div>
+         aria-hidden="false"></div>
     <div style="position: fixed; inset: 0; z-index: 10; width: 100vw; overflow-y: auto;">
       <div
         style="position: fixed; inset: 0; background-color: rgba(75, 85, 99, 0.75); display: flex; align-items: center; justify-content: center; z-index: 50;">
@@ -128,7 +192,8 @@
             style="width: 100%; max-width: 600px; margin: 2rem auto; padding: 1rem; border-radius: 8px; background-color: #ffffff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column; gap: 1rem;"
           >
             <!-- Form Header -->
-            <h2 style="font-size: 1.5rem; font-weight: 600; text-align: center; color: #333;">Describe the Feature Request</h2>
+            <h2 style="font-size: 1.5rem; font-weight: 600; text-align: center; color: #333;">Describe the Feature
+              Request</h2>
 
             <!-- Input for Bug Description -->
             <textarea
@@ -168,7 +233,7 @@
   <div class="js-widget-modal-feature-feedback z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true"
        style="display: none;">
     <div style="position: fixed; inset: 0; background-color: rgba(75, 85, 99, 0.75); transition: opacity;"
-         aria-hidden="true"></div>
+         aria-hidden="false"></div>
     <div style="position: fixed; inset: 0; z-index: 10; width: 100vw; overflow-y: auto;">
       <div
         style="position: fixed; inset: 0; background-color: rgba(75, 85, 99, 0.75); display: flex; align-items: center; justify-content: center; z-index: 50;">
@@ -182,7 +247,8 @@
             style="width: 100%; max-width: 600px; margin: 2rem auto; padding: 1rem; border-radius: 8px; background-color: #ffffff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column; gap: 1rem;"
           >
             <!-- Form Header -->
-            <h2 style="font-size: 1.5rem; font-weight: 600; text-align: center; color: #333;">Describe your Experience</h2>
+            <h2 style="font-size: 1.5rem; font-weight: 600; text-align: center; color: #333;">Describe your
+              Experience</h2>
 
             <!-- Input for Bug Description -->
             <textarea
