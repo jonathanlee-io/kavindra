@@ -19,7 +19,7 @@ module.exports = {
     node: true,
     jest: true,
   },
-  ignorePatterns: ['.eslintrc.js', 'widget/**/*', 'dist/**/*', 'node_modules/**/*', '**/*.d.ts', 'webpack.config.js', 'postcss.config.js', 'tailwind.config.js'],
+  ignorePatterns: ['.eslintrc.js', 'widget/**/*', 'dist/**/*', 'node_modules/**/*', '**/*.d.ts', 'webpack.config.js', 'postcss.config.js', 'tailwind.config.ts'],
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',

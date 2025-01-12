@@ -1,59 +1,65 @@
 <script setup lang="ts">
-interface PricingTier {
-  id: string;
-  name: string;
-  description: string;
-  monthlyPrice: string;
-  features: string[];
-  sortIndex: number;
-  tag: string | null;
-  stripePricingTableId: string;
-  stripePublishableKey: string;
-}
+  interface PricingTier {
+    id: string;
+    name: string;
+    description: string;
+    monthlyPrice: string;
+    features: string[];
+    sortIndex: number;
+    tag: string | null;
+    stripePricingTableId: string;
+    stripePublishableKey: string;
+  }
 
-defineProps<PricingTier>();
+  defineProps<PricingTier>();
 </script>
 
 <template>
   <div
-    class="relative p-8 bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-xl hover:scale-105 transition-transform duration-300 text-center">
+    class="relative rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800"
+  >
     <!-- Tag (if present) -->
     <span
       v-if="tag"
-      class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-indigo-600 text-white text-sm font-semibold py-1 px-4 rounded-full shadow-lg"
+      class="absolute -top-4 left-1/2 -translate-x-1/2 transform rounded-full bg-indigo-600 px-4 py-1 text-sm font-semibold text-white shadow-lg dark:bg-indigo-500"
     >
       {{ tag }}
     </span>
 
     <!-- Plan Name -->
-    <h3 class="text-3xl font-bold text-gray-800 mb-4">{{ name }}</h3>
+    <h3 class="mb-4 text-3xl font-bold text-gray-800 dark:text-gray-100">
+      {{ name }}
+    </h3>
 
     <!-- Description -->
-    <p class="text-gray-600 mb-6">{{ description }}</p>
+    <p class="mb-6 text-gray-600 dark:text-gray-400">
+      {{ description }}
+    </p>
 
     <!-- Pricing -->
-    <div class="text-5xl font-extrabold text-gray-800 mb-4">
-      <span class="text-indigo-600">{{ monthlyPrice }}</span>
-      <span class="text-lg font-medium text-gray-600"> / Month</span>
+    <div class="mb-4 text-5xl font-extrabold text-gray-800 dark:text-gray-100">
+      <span class="text-indigo-600 dark:text-indigo-400">
+        {{ monthlyPrice }}
+      </span>
+      <span class="text-lg font-medium text-gray-600 dark:text-gray-400"> / Month </span>
     </div>
 
     <!-- Features -->
-    <ul class="text-gray-600 space-y-3 mb-6">
+    <ul class="mb-6 space-y-3 text-gray-600 dark:text-gray-400">
       <li v-for="(feature, index) in features" :key="index">
-        <span class="text-green-600 font-bold">✔</span> {{ feature }}
+        <span class="font-bold text-green-600 dark:text-green-400">✔</span>
+        {{ feature }}
       </li>
     </ul>
 
     <!-- Call-to-Action Button -->
     <NuxtLink
       :to="`/get-started/${id}`"
-      class="bg-indigo-600 text-white text-lg font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-indigo-700 transition-all duration-300"
+      class="rounded-lg bg-indigo-600 px-8 py-3 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600"
     >
       Get Started
     </NuxtLink>
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

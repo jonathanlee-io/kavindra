@@ -1,82 +1,102 @@
 <script setup lang="ts">
+  import GitHubStarPrompt from "~/components/landing-page/GitHubStarPrompt.vue";
 </script>
 
 <template>
-  <section class="bg-gradient-to-b from-indigo-50 via-blue-100 to-blue-50 min-h-screen py-16 px-6" style="font-family: 'Trebuchet MS', 'Helvetica', sans-serif;">
+  <section
+    class="min-h-screen bg-gradient-to-b from-indigo-50 via-blue-100 to-blue-50 px-6 py-16"
+    style="font-family: &quot;Trebuchet MS&quot;, &quot;Helvetica&quot;, sans-serif"
+  >
     <!-- Hero Section -->
-    <div class="text-center px-6">
-      <h1
-        class="text-4xl sm:text-5xl font-bold text-gray-800 mb-6"
-      >
+    <div class="px-6 text-center">
+      <NuxtImg src="/logo.svg" alt="Kavindra Logo" class="mx-auto mb-6" width="64" height="64" />
+      <h1 class="mb-6 text-4xl font-bold text-gray-800 sm:text-5xl">
         Welcome to <span class="text-indigo-600">Kavindra</span>
       </h1>
-      <p class="text-md sm:text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-        Empowering businesses with <span class="text-indigo-600 font-semibold">affordable</span> and <span class="text-indigo-600 font-semibold">scalable</span> feedback solutions. At Kavindra, we strive to make user feedback a strategic advantage for your success.
+      <p class="text-md mx-auto mb-8 max-w-2xl text-gray-600 sm:text-lg">
+        Empowering businesses with <span class="font-semibold text-indigo-600">affordable</span> and
+        <span class="font-semibold text-indigo-600">scalable</span> feedback solutions. At Kavindra,
+        we strive to make user feedback a strategic advantage for your success.
       </p>
     </div>
 
     <!-- Features Section -->
-    <div id="features" class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mt-16 px-4">
+    <div
+      id="features"
+      class="mx-auto mt-16 grid max-w-7xl grid-cols-1 gap-12 px-4 sm:grid-cols-2 lg:grid-cols-4"
+    >
       <!-- Feature Block -->
-      <div class="p-8 bg-white rounded-xl shadow-lg hover:shadow-2xl transform transition-transform duration-300 hover:scale-105">
-        <div class="text-indigo-700 text-5xl mb-6 mx-auto">
+      <div
+        class="transform rounded-xl bg-white p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+      >
+        <div class="mx-auto mb-6 text-5xl text-indigo-700">
           <Icon name="mdi:account-supervisor" />
         </div>
-        <h2 class="text-xl font-bold text-indigo-700 mb-2">Community-Driven</h2>
-        <p class="text-gray-600 text-sm sm:text-base">
-          We grow together with ideas and feedback from the community. It’s your platform, shaped by your needs.
+        <h2 class="mb-2 text-xl font-bold text-indigo-700">Community-Driven</h2>
+        <p class="text-sm text-gray-600 sm:text-base">
+          We grow together with ideas and feedback from the community. It’s your platform, shaped by
+          your needs.
         </p>
       </div>
 
       <!-- Feature Block -->
-      <div class="p-8 bg-white rounded-xl shadow-lg hover:shadow-2xl transform transition-transform duration-300 hover:scale-105">
-        <div class="text-indigo-700 text-5xl mb-6 mx-auto">
+      <div
+        class="transform rounded-xl bg-white p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+      >
+        <div class="mx-auto mb-6 text-5xl text-indigo-700">
           <Icon name="mdi:cash-multiple" />
         </div>
-        <h2 class="text-xl font-bold text-indigo-700 mb-2">Cost-Effective</h2>
-        <p class="text-gray-600 text-sm sm:text-base">
+        <h2 class="mb-2 text-xl font-bold text-indigo-700">Cost-Effective</h2>
+        <p class="text-sm text-gray-600 sm:text-base">
           Delivering top-notch solutions at a fraction of the cost. No excess, just focus on value.
         </p>
       </div>
 
       <!-- Feature Block -->
-      <div class="p-8 bg-white rounded-xl shadow-lg hover:shadow-2xl transform transition-transform duration-300 hover:scale-105">
-        <div class="text-indigo-700 text-5xl mb-6 mx-auto">
+      <div
+        class="transform rounded-xl bg-white p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+      >
+        <div class="mx-auto mb-6 text-5xl text-indigo-700">
           <Icon name="mdi:silverware-clean" />
         </div>
-        <h2 class="text-xl font-bold text-indigo-700 mb-2">Clean Design</h2>
-        <p class="text-gray-600 text-sm sm:text-base">
+        <h2 class="mb-2 text-xl font-bold text-indigo-700">Clean Design</h2>
+        <p class="text-sm text-gray-600 sm:text-base">
           Designed to be intuitive and light, making the feedback process seamless and enjoyable.
         </p>
       </div>
 
       <!-- Feature Block -->
-      <div class="p-8 bg-white rounded-xl shadow-lg hover:shadow-2xl transform transition-transform duration-300 hover:scale-105">
-        <div class="text-indigo-700 text-5xl mb-6 mx-auto">
+      <div
+        class="transform rounded-xl bg-white p-8 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+      >
+        <div class="mx-auto mb-6 text-5xl text-indigo-700">
           <Icon name="mdi:image-filter-center-focus-strong-outline" />
         </div>
-        <h2 class="text-xl font-bold text-indigo-700 mb-2">Actionable Insights</h2>
-        <p class="text-gray-600 text-sm sm:text-base">
-          Leverage targeted feedback to uncover actionable insights and drive growth for your business.
+        <h2 class="mb-2 text-xl font-bold text-indigo-700">Actionable Insights</h2>
+        <p class="text-sm text-gray-600 sm:text-base">
+          Leverage targeted feedback to uncover actionable insights and drive growth for your
+          business.
         </p>
       </div>
     </div>
 
     <!-- Call-to-Action Section -->
-    <div class="text-center py-16 bg-white rounded-lg shadow-lg mt-16 mx-6 sm:mx-12 md:mx-32">
-      <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-6">
+    <div class="mx-6 mt-16 rounded-lg bg-white py-16 text-center shadow-lg sm:mx-12 md:mx-32">
+      <h2 class="mb-6 text-3xl font-extrabold text-gray-800 sm:text-4xl">
         Ready to Boost Your Growth?
       </h2>
-      <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
-        Join a thriving community of businesses and creators who use Kavindra to simplify feedback processes and drive results. Let's grow together!
+      <p class="mx-auto mb-8 max-w-3xl text-lg text-gray-600">
+        Join a thriving community of businesses and creators who use Kavindra to simplify feedback
+        processes and drive results. Let's grow together!
       </p>
       <a
         href="#get-started"
-        class="inline-block bg-indigo-600 text-white text-lg font-semibold py-3 px-6 rounded-full shadow-lg hover:bg-indigo-800 transition-transform duration-300 transform hover:scale-105"
-        style="box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.25);"
+        class="inline-block transform rounded-full bg-indigo-600 px-6 py-3 text-lg font-semibold text-white shadow-lg transition-transform duration-300 hover:scale-105 hover:bg-indigo-800"
+        style="box-shadow: 2px 4px 16px rgba(0, 0, 0, 0.25)"
       >
         Get Started Today!
       </a>
     </div>
   </section>
+  <GitHubStarPrompt />
 </template>

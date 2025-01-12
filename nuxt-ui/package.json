@@ -11,15 +11,27 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/icon": "1.10.3",
-    "@nuxtjs/tailwindcss": "6.12.2",
+    "@nuxt/fonts": "^0.10.3",
+    "@nuxt/icon": "^1.10.3",
+    "@nuxt/image": "1.9.0",
+    "@nuxtjs/color-mode": "^3.5.2",
+    "@nuxtjs/tailwindcss": "^6.12.2",
+    "@tailwindcss/forms": "^0.5.10",
+    "@vueuse/nuxt": "^12.4.0",
     "nuxt": "^3.15.1",
     "pinia": "^2.3.0",
+    "radix-vue": "^1.9.12",
+    "tailwind-variants": "^0.3.0",
+    "tailwindcss-animate": "^1.0.7",
     "vue": "latest",
     "vue-router": "latest"
   },
   "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.0",
     "@iconify-json/mdi": "^1.2.2",
-    "@pinia/nuxt": "^0.9.0"
+    "@pinia/nuxt": "^0.9.0",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "typescript": "^5.7.3"
   }
 }
