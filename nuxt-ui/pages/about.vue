@@ -21,8 +21,8 @@
     <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
       <!-- Feature Block -->
       <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:scale-105">
-        <div class="text-4xl mb-4 text-yellow-400">
-          <span class="material-icons">thumb_up</span>
+        <div class="text-4xl mb-4 text-indigo-600">
+          <Icon name="mdi:account-supervisor" />
         </div>
         <h2 class="text-xl font-bold text-indigo-600 mb-2">Community-Driven</h2>
         <p class="text-gray-700">
@@ -33,8 +33,8 @@
 
       <!-- Feature Block -->
       <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:scale-105">
-        <div class="text-4xl mb-4 text-pink-400">
-          <span class="material-icons">attach_money</span>
+        <div class="text-4xl mb-4 text-indigo-600">
+          <Icon name="mdi:cash-multiple" />
         </div>
         <h2 class="text-xl font-bold text-indigo-600 mb-2">Low-Cost Solution</h2>
         <p class="text-gray-700">
@@ -44,8 +44,8 @@
 
       <!-- Feature Block -->
       <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:scale-105">
-        <div class="text-4xl mb-4 text-green-400">
-          <span class="material-icons">eco</span>
+        <div class="text-4xl mb-4 text-indigo-600">
+          <Icon name="mdi:silverware-clean" />
         </div>
         <h2 class="text-xl font-bold text-indigo-600 mb-2">Clean Design</h2>
         <p class="text-gray-700">
@@ -55,8 +55,8 @@
 
       <!-- Feature Block -->
       <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:scale-105">
-        <div class="text-4xl mb-4 text-blue-400">
-          <span class="material-icons">feedback</span>
+        <div class="text-4xl mb-4 text-indigo-600">
+          <Icon name="mdi:image-filter-center-focus-strong-outline" />
         </div>
         <h2 class="text-xl font-bold text-indigo-600 mb-2">Focused Feedback</h2>
         <p class="text-gray-700">

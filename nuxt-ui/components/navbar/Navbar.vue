@@ -32,10 +32,10 @@ const toggleMenu = () => {
         :class="menuOpen ? 'absolute top-16 left-0 w-full bg-blue-800 py-4 z-10' : ''"
       >
         <li class="text-white">
-          <a
-            href="#about"
+          <NuxtLink
+            to="/about"
             class="hover:text-blue-300 transition duration-300"
-          >About</a>
+          >About</NuxtLink>
         </li>
         <li class="text-white">
           <a

@@ -2,131 +2,134 @@
 </script>
 
 <template>
-  <div class="bg-gray-50 min-h-screen py-12 px-4 sm:py-16 sm:px-6 lg:px-8" style="font-family: 'Inter', 'Helvetica', sans-serif;">
+  <div class="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen py-12 px-4 sm:py-16 sm:px-6 lg:px-8" style="font-family: 'Inter', 'Roboto', sans-serif;">
     <!-- Hero Section -->
-    <section class="text-center mb-10 sm:mb-12">
-      <h1 class="text-3xl sm:text-5xl font-extrabold text-gray-800 mb-4 sm:mb-6">
-        Welcome to Kavindra
+    <section class="text-center mb-12 sm:mb-16">
+      <h1 class="text-4xl sm:text-6xl font-extrabold text-gray-800 mb-6 sm:mb-8 drop-shadow-md">
+        Welcome to <span class="text-indigo-600">Kavindra</span>
       </h1>
-      <p class="text-base sm:text-lg text-gray-600 max-w-xl mx-auto">
-        <span class="text-gray-800 font-bold">Kavindra</span> is your simple and open-source feedback platform, helping users grow while keeping costs low with <span class="underline decoration-gray-600">direct user feedback</span>.
+      <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed sm:leading-loose">
+        <span class="font-semibold text-gray-900">Kavindra</span> is your simple and open-source feedback platform, helping users grow while keeping costs low with
+        <span class="underline decoration-indigo-600 decoration-2">direct user feedback</span>.
       </p>
-      <div class="mt-6 sm:mt-8">
-        <a href="#pricing" class="bg-indigo-600 text-white text-base sm:text-lg font-semibold py-3 px-5 sm:py-3 sm:px-6 rounded-lg shadow hover:shadow-md hover:bg-indigo-700 transition duration-300">
+      <div class="mt-8">
+        <a
+          href="#pricing"
+          class="bg-indigo-600 text-white text-lg sm:text-xl font-semibold py-3 px-6 sm:py-4 sm:px-8 rounded-full shadow-lg hover:bg-indigo-700 hover:shadow-xl transition-all duration-300">
           View Pricing Plans
         </a>
       </div>
     </section>
 
     <!-- Features Section -->
-    <section class="max-w-5xl mx-auto grid grid-cols-1 gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-2">
-      <!-- Existing Feature Items -->
-      <div class="p-5 bg-white border border-gray-200 rounded-lg shadow hover:shadow-md transition duration-300">
-        <div class="text-3xl text-indigo-600 mb-4">
-          <Icon name="mdi:account-supervisor" />
-        </div>
-        <h2 class="text-lg font-bold text-gray-800 mb-2">Community-Driven</h2>
-        <p class="text-gray-600 text-sm">
-          Built by the community, for the community. Your suggestions make the platform better.
+    <section class="relative bg-white py-12 sm:py-16 rounded-xl shadow-lg max-w-7xl mx-auto px-6 sm:px-12 lg:px-16">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
+          Why Choose <span class="text-indigo-600">Kavindra</span>?
+        </h2>
+        <p class="text-lg text-gray-600 max-w-xl mx-auto">
+          Discover what makes our platform unique and suitable for every need.
         </p>
       </div>
-
-      <!-- Add New Features Here -->
-
-      <!-- Feature: Open Source Advantage -->
-      <div class="p-5 bg-white border border-gray-200 rounded-lg shadow hover:shadow-md transition duration-300">
-        <div class="text-3xl text-green-600 mb-4">
-          <Icon name="mdi:github" />
+      <div class="grid grid-cols-1 gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <!-- Feature Item -->
+        <div class="p-6 bg-gray-50 border border-gray-200 rounded-lg shadow hover:shadow-lg hover:-translate-y-2 transition-all duration-300">
+          <div class="text-4xl text-indigo-600 mb-4">
+            <Icon name="mdi:account-supervisor" />
+          </div>
+          <h2 class="text-xl font-semibold text-gray-800 mb-2">Community-Driven</h2>
+          <p class="text-gray-600 text-sm">
+            Built by the community, for the community. Your suggestions make the platform better.
+          </p>
         </div>
-        <h2 class="text-lg font-bold text-gray-800 mb-2">Open-Source Benefit</h2>
-        <p class="text-gray-600 text-sm">
-          Transparent, flexible, and trusted. Our open-source platform ensures freedom to contribute while giving you full control.
-        </p>
-      </div>
 
-      <!-- Feature: Incredibly Simple -->
-      <div class="p-5 bg-white border border-gray-200 rounded-lg shadow hover:shadow-md transition duration-300">
-        <div class="text-3xl text-blue-600 mb-4">
-          <Icon name="mdi:hand-peace" />
+        <!-- Feature: Open Source Advantage -->
+        <div class="p-6 bg-gray-50 border border-gray-200 rounded-lg shadow hover:shadow-lg hover:-translate-y-2 transition-all duration-300">
+          <div class="text-4xl text-green-500 mb-4">
+            <Icon name="mdi:github" />
+          </div>
+          <h2 class="text-xl font-semibold text-gray-800 mb-2">Open-Source Benefit</h2>
+          <p class="text-gray-600 text-sm">
+            Transparent, flexible, and trusted. Our open-source platform ensures freedom to contribute while giving you full control.
+          </p>
         </div>
-        <h2 class="text-lg font-bold text-gray-800 mb-2">Simple to Use</h2>
-        <p class="text-gray-600 text-sm">
-          Say goodbye to complexity. Our intuitive design ensures a seamless experience for all users, no matter their skill level.
-        </p>
-      </div>
 
-      <!-- Feature: Affordable yet Powerful -->
-      <div class="p-5 bg-white border border-gray-200 rounded-lg shadow hover:shadow-md transition duration-300">
-        <div class="text-3xl text-yellow-600 mb-4">
-          <Icon name="mdi:cash-multiple" />
+        <!-- Feature: Incredibly Simple -->
+        <div class="p-6 bg-gray-50 border border-gray-200 rounded-lg shadow hover:shadow-lg hover:-translate-y-2 transition-all duration-300">
+          <div class="text-4xl text-blue-500 mb-4">
+            <Icon name="mdi:hand-peace" />
+          </div>
+          <h2 class="text-xl font-semibold text-gray-800 mb-2">Simple to Use</h2>
+          <p class="text-gray-600 text-sm">
+            Say goodbye to complexity. Our intuitive design ensures a seamless experience for all users, no matter their skill level.
+          </p>
         </div>
-        <h2 class="text-lg font-bold text-gray-800 mb-2">Affordable for All</h2>
-        <p class="text-gray-600 text-sm">
-          Exceptional features at a fraction of the cost. Experience premium tools without breaking the bank.
-        </p>
+
+        <!-- Feature: Affordable yet Powerful -->
+        <div class="p-6 bg-gray-50 border border-gray-200 rounded-lg shadow hover:shadow-lg hover:-translate-y-2 transition-all duration-300">
+          <div class="text-4xl text-yellow-500 mb-4">
+            <Icon name="mdi:cash-multiple" />
+          </div>
+          <h2 class="text-xl font-semibold text-gray-800 mb-2">Affordable for All</h2>
+          <p class="text-gray-600 text-sm">
+            Exceptional features at a fraction of the cost. Experience premium tools without breaking the bank.
+          </p>
+        </div>
       </div>
     </section>
 
     <!-- Pricing Table Section -->
-    <section id="pricing" class="bg-white py-12 sm:py-16">
-      <div class="text-center mb-10">
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-4">
+    <section id="pricing" class="py-16 bg-gradient-to-br from-white to-indigo-50 rounded-t-xl max-w-7xl mx-auto mt-16">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
           Pricing Plans That Fit Your Needs
         </h2>
-        <p class="text-base sm:text-lg text-gray-600 max-w-lg mx-auto">
-          From free to affordable, we’re here to support feedback at all scales.
+        <p class="text-lg text-gray-600 max-w-lg mx-auto">
+          From free to affordable, we support feedback at all scales.
         </p>
       </div>
-
-      <div class="max-w-4xl mx-auto grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="grid grid-cols-1 gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto px-6 sm:px-8">
         <!-- Basic Plan -->
-        <div class="p-5 bg-gray-50 border border-gray-200 rounded-lg shadow hover:shadow-md transition duration-300 text-center">
-          <h3 class="text-xl font-bold text-gray-800 mb-4">Basic</h3>
-          <p class="text-sm text-gray-600 mb-4">
-            Perfect for individuals and small teams.
-          </p>
-          <div class="text-3xl font-extrabold text-gray-800 mb-4">$0</div>
-          <ul class="text-sm text-gray-600 space-y-1 mb-4">
-            <li>✔ Feedback Forms</li>
+        <div class="p-6 bg-gray-50 border border-gray-200 rounded-xl shadow hover:shadow-lg hover:scale-105 transition-all duration-300 text-center">
+          <h3 class="text-2xl font-semibold text-gray-800 mb-4">Basic</h3>
+          <p class="text-gray-600 mb-6">Perfect for individuals and small teams.</p>
+          <div class="text-4xl font-bold text-gray-800 mb-6">$4.99 / Month</div>
+          <ul class="text-gray-600 space-y-2 mb-6">
+            <li>✔ Embeddable Feedback Widget</li>
             <li>✔ Basic Analytics</li>
             <li>✔ Open Source</li>
           </ul>
-          <a href="#" class="bg-indigo-600 text-white text-base font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg shadow hover:bg-indigo-700">
+          <a href="#" class="bg-indigo-600 text-white text-lg font-bold py-3 px-6 rounded-lg shadow hover:bg-indigo-700">
             Get Started
           </a>
         </div>
 
-        <!-- Repeat Pricing Plan Cards -->
         <!-- Pro Plan -->
-        <div class="p-5 bg-indigo-600 text-white rounded-lg shadow hover:shadow-md transition duration-300 text-center">
-          <h3 class="text-xl font-bold mb-4">Pro</h3>
-          <p class="text-sm mb-4">
-            Great for growing teams and businesses.
-          </p>
-          <div class="text-3xl font-extrabold mb-4">$9</div>
-          <ul class="text-sm space-y-1 mb-4">
-            <li>✔ Advanced Analytics</li>
+        <div class="p-6 bg-indigo-600 text-white rounded-xl shadow hover:shadow-lg hover:scale-105 transition-all duration-300 text-center">
+          <h3 class="text-2xl font-semibold mb-4">Pro</h3>
+          <p class="mb-6">Great for growing teams and businesses.</p>
+          <div class="text-4xl font-bold mb-6">$14.99 / Month</div>
+          <ul class="space-y-2 mb-6">
+            <li>✔ Embeddable Feedback Widget</li>
             <li>✔ Priority Support</li>
             <li>✔ Integration Tools</li>
           </ul>
-          <a href="#" class="bg-white text-indigo-600 font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg hover:bg-gray-100">
+          <a href="#" class="bg-white text-indigo-600 text-lg font-bold py-3 px-6 rounded-lg shadow hover:bg-gray-100">
             Try Pro
           </a>
         </div>
 
         <!-- Enterprise Plan -->
-        <div class="p-5 bg-gray-50 border border-gray-200 rounded-lg shadow hover:shadow-md transition duration-300 text-center">
-          <h3 class="text-xl font-bold text-gray-800 mb-4">Enterprise</h3>
-          <p class="text-sm text-gray-600 mb-4">
-            Customized solutions for enterprises.
-          </p>
-          <div class="text-3xl font-extrabold text-gray-800 mb-4">Contact Us</div>
-          <ul class="text-sm text-gray-600 space-y-1 mb-4">
+        <div class="p-6 bg-gray-50 border border-gray-200 rounded-xl shadow hover:shadow-lg hover:scale-105 transition-all duration-300 text-center">
+          <h3 class="text-2xl font-semibold text-gray-800 mb-4">Enterprise</h3>
+          <p class="text-gray-600 mb-6">Customized solutions for enterprises.</p>
+          <div class="text-4xl font-bold text-gray-800 mb-6">Contact Us</div>
+          <ul class="text-gray-600 space-y-2 mb-6">
             <li>✔ Custom Feedback Tools</li>
             <li>✔ Dedicated Support</li>
             <li>✔ Scalability Options</li>
           </ul>
-          <a href="#" class="bg-indigo-600 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg hover:bg-indigo-700">
+          <a href="#" class="bg-indigo-600 text-white text-lg font-bold py-3 px-6 rounded-lg shadow hover:bg-indigo-700">
             Contact Us
           </a>
         </div>
