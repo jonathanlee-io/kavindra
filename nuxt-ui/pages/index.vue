@@ -1,7 +1,8 @@
 <script setup lang="ts">
-const runtimeConfig = useRuntimeConfig()
+import Feature from '~/components/landing-page/Feature.vue';
+import PricingTier from '~/components/landing-page/pricing-tier/PricingTier.vue';
 
-import PricingTier from '~/components/pricing-tier/PricingTier.vue';
+const runtimeConfig = useRuntimeConfig()
 
 interface PricingTier {
   id: string;
@@ -14,6 +15,40 @@ interface PricingTier {
   stripePricingTableId: string;
   stripePublishableKey: string;
 }
+
+interface Feature {
+  icon: string;
+  title: string;
+  description: string;
+  colorClass: string;
+}
+
+const features: Feature[] = [
+  {
+    icon: 'mdi:account-supervisor',
+    title: 'Community-Driven',
+    description: 'Built by the community, for the community. Your suggestions make the platform better.',
+    colorClass: 'text-indigo-600',
+  },
+  {
+    icon: 'mdi:github',
+    title: 'Open-Source Benefit',
+    description: 'Transparent, flexible, and trusted. Our open-source platform ensures freedom to contribute while giving you full control.',
+    colorClass: 'text-green-500',
+  },
+  {
+    icon: 'mdi:hand-peace',
+    title: 'Simple to Use',
+    description: 'Say goodbye to complexity. Our intuitive design ensures a seamless experience for all users, no matter their skill level.',
+    colorClass: 'text-blue-500',
+  },
+  {
+    icon: 'mdi:cash-multiple',
+    title: 'Affordable for All',
+    description: 'Exceptional features at a fraction of the cost. Experience premium tools without breaking the bank.',
+    colorClass: 'text-yellow-500',
+  },
+]
 
 const {data} = await useFetch<PricingTier[]>(`${runtimeConfig.public.apiUrl}/payments/plans`, {
   server: true,
@@ -52,49 +87,13 @@ const pricingTiers: PricingTier[] = data.value as PricingTier[];
         </p>
       </div>
       <div class="grid grid-cols-1 gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        <!-- Feature Item -->
-        <div class="p-6 bg-gray-50 border border-gray-200 rounded-lg shadow hover:shadow-lg hover:-translate-y-2 transition-all duration-300">
-          <div class="text-4xl text-indigo-600 mb-4">
-            <Icon name="mdi:account-supervisor" />
-          </div>
-          <h2 class="text-xl font-semibold text-gray-800 mb-2">Community-Driven</h2>
-          <p class="text-gray-600 text-sm">
-            Built by the community, for the community. Your suggestions make the platform better.
-          </p>
-        </div>
-
-        <!-- Feature: Open Source Advantage -->
-        <div class="p-6 bg-gray-50 border border-gray-200 rounded-lg shadow hover:shadow-lg hover:-translate-y-2 transition-all duration-300">
-          <div class="text-4xl text-green-500 mb-4">
-            <Icon name="mdi:github" />
-          </div>
-          <h2 class="text-xl font-semibold text-gray-800 mb-2">Open-Source Benefit</h2>
-          <p class="text-gray-600 text-sm">
-            Transparent, flexible, and trusted. Our open-source platform ensures freedom to contribute while giving you full control.
-          </p>
-        </div>
-
-        <!-- Feature: Incredibly Simple -->
-        <div class="p-6 bg-gray-50 border border-gray-200 rounded-lg shadow hover:shadow-lg hover:-translate-y-2 transition-all duration-300">
-          <div class="text-4xl text-blue-500 mb-4">
-            <Icon name="mdi:hand-peace" />
-          </div>
-          <h2 class="text-xl font-semibold text-gray-800 mb-2">Simple to Use</h2>
-          <p class="text-gray-600 text-sm">
-            Say goodbye to complexity. Our intuitive design ensures a seamless experience for all users, no matter their skill level.
-          </p>
-        </div>
-
-        <!-- Feature: Affordable yet Powerful -->
-        <div class="p-6 bg-gray-50 border border-gray-200 rounded-lg shadow hover:shadow-lg hover:-translate-y-2 transition-all duration-300">
-          <div class="text-4xl text-yellow-500 mb-4">
-            <Icon name="mdi:cash-multiple" />
-          </div>
-          <h2 class="text-xl font-semibold text-gray-800 mb-2">Affordable for All</h2>
-          <p class="text-gray-600 text-sm">
-            Exceptional features at a fraction of the cost. Experience premium tools without breaking the bank.
-          </p>
-        </div>
+        <Feature
+          v-for="feature in features"
+          :title="feature.title"
+          :icon="feature.icon"
+          :description="feature.description"
+          :color-class="feature.colorClass"
+        />
       </div>
     </section>
 
