@@ -128,5 +128,23 @@ console.log(status);
         />
       </div>
     </section>
+    <!-- GitHub Star Section -->
+    <section class="text-center py-12 sm:py-16 bg-gray-50 border-t border-gray-200 mt-16">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">
+          Love Kavindra? 💜
+        </h2>
+        <p class="text-lg text-gray-600 mb-6">
+          Help us grow by giving our open-source project a star on GitHub and joining our journey to improve user feedback!
+        </p>
+        <a
+          href="https://github.com/jonathanlee-io/kavindra"
+          target="_blank"
+          class="inline-block bg-indigo-600 text-white font-semibold text-lg sm:text-xl py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-indigo-700"
+        >
+          ⭐ Star on GitHub
+        </a>
+      </div>
+    </section>
   </div>
 </template>

@@ -4,15 +4,14 @@
 <template>
   <section class="bg-gradient-to-b from-indigo-50 via-blue-100 to-blue-50 min-h-screen py-16 px-6" style="font-family: 'Trebuchet MS', 'Helvetica', sans-serif;">
     <!-- Hero Section -->
-    <div class="text-center px-4">
+    <div class="text-center px-6">
       <h1
-        class="text-5xl sm:text-6xl font-extrabold text-indigo-700 mb-6"
-        style="text-shadow: 2px 2px 10px rgba(255, 204, 0, 0.6);"
+        class="text-4xl sm:text-5xl font-bold text-gray-800 mb-6"
       >
-        Welcome to <span class="text-yellow-500">Kavindra</span>!
+        Welcome to <span class="text-indigo-600">Kavindra</span>
       </h1>
-      <p class="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto mb-10">
-        Kavindra is all about being <span class="text-indigo-700 font-medium">fun</span>, <span class="text-indigo-700 font-medium">accessible</span>, and <span class="text-indigo-700 font-medium">open-source</span>. Our mission is to make user feedback powerful and affordable while keeping things simple.
+      <p class="text-md sm:text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+        Empowering businesses with <span class="text-indigo-600 font-semibold">affordable</span> and <span class="text-indigo-600 font-semibold">scalable</span> feedback solutions. At Kavindra, we strive to make user feedback a strategic advantage for your success.
       </p>
     </div>
 

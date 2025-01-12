@@ -37,12 +37,6 @@ const toggleMenu = () => {
             class="hover:text-blue-300 transition duration-300"
           >About</NuxtLink>
         </li>
-        <li class="text-white">
-          <a
-            href="#contact"
-            class="hover:text-blue-300 transition duration-300"
-          >Contact</a>
-        </li>
       </ul>
 
       <!-- Call-to-Action Button -->
