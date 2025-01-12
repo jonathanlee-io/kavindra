@@ -2,7 +2,7 @@
 
 <template>
   <section
-    class="mt-16 border-t border-gray-200 bg-gray-50 py-12 text-center dark:border-gray-700 dark:bg-gray-800 sm:py-16"
+    class="border-t border-gray-200 bg-gray-50 py-12 text-center dark:border-gray-700 dark:bg-gray-800 sm:py-16"
   >
     <div class="mx-auto max-w-3xl">
       <h2 class="mb-4 text-2xl font-bold text-gray-800 dark:text-gray-100 sm:text-3xl">
