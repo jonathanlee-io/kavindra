@@ -16,7 +16,7 @@ async function bootstrap() {
 
   initApp(app);
 
-  const port = 3000;
+  const port = 8000;
   Logger.log(
     `Attempting to listen on port ${port} in NODE_ENV: ${configService.getOrThrow<NodeEnvironment>('NODE_ENV')}...`,
   );
