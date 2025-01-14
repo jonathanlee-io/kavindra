@@ -22,8 +22,8 @@ export default defineNuxtConfig({
     app: {
       head: {
         script: [
-          { src: 'https://www.api.kavindra.io/v1/scripts/feedback-widget.js' },
-          { src: 'https://plausible.io/js/script.file-downloads.outbound-links.pageview-props.revenue.tagged-events.js', async: true, 'data-domain': 'kavindra.io'}
+          { src: 'https://www.api.kavindra.io/v1/scripts/feedback-widget.js', async: true },
+          { src: 'https://plausible.io/js/script.file-downloads.outbound-links.pageview-props.revenue.tagged-events.js', async: true, 'data-domain': 'kavindra.io' },
         ],
       },
       pageTransition: { name: "page", mode: "out-in" },
