@@ -1,5 +1,6 @@
-import { Module } from '@nestjs/common';
-import { MicroservicesService } from './microservices.service';
+import {Module} from '@nestjs/common';
+
+import {MicroservicesService} from './microservices.service';
 
 @Module({
   providers: [MicroservicesService],

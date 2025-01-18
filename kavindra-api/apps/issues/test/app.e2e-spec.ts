@@ -1,7 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import {INestApplication} from '@nestjs/common';
+import {Test, TestingModule} from '@nestjs/testing';
 import * as request from 'supertest';
-import { IssuesModule } from './../src/issues.module';
+
+import {IssuesModule} from './../src/issues.module';
 
 describe('IssuesController (e2e)', () => {
   let app: INestApplication;

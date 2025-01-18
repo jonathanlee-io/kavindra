@@ -1,5 +1,6 @@
-import { NestFactory } from '@nestjs/core';
-import { EmbedScriptsModule } from './embed-scripts.module';
+import {NestFactory} from '@nestjs/core';
+
+import {EmbedScriptsModule} from './embed-scripts.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(EmbedScriptsModule);

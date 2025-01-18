@@ -1,6 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { AdminApiController } from './admin-api.controller';
-import { AdminApiService } from './admin-api.service';
+import {Test, TestingModule} from '@nestjs/testing';
+
+import {AdminApiController} from './admin-api.controller';
+import {AdminApiService} from './admin-api.service';
 
 describe('AdminApiController', () => {
   let adminApiController: AdminApiController;
