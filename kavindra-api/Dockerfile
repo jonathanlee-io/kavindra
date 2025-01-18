@@ -37,15 +37,15 @@ FROM --platform=linux/amd64 node:22.11.0-alpine3.20 AS production
 
 WORKDIR /
 
+ARG SERVICE="kavindra-api"
+ENV SERVICE_NAME ${SERVICE}
+
 COPY --chown=node:node --from=build /usr/src/app/package.json ./package.json
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/prisma ./prisma
-COPY --chown=node:node --from=build /usr/src/app/dist ./dist
+COPY --chown=node:node --from=build /usr/src/app/dist/apps/${SERVICE_NAME} ./dist/apps/${SERVICE_NAME}
 COPY --chown=node:node --from=build /usr/src/app/widget/dist ./widget/dist
 
 EXPOSE 8000
-
-ARG SERVICE="kavindra-api"
-ENV SERVICE_NAME ${SERVICE}
 
 CMD yarn run start:prod:${SERVICE_NAME}
