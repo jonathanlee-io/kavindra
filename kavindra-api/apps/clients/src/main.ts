@@ -9,7 +9,7 @@ async function bootstrap() {
   const app = await createRabbitMqConsumerMicroservice(
     ClientsModule,
     [...process.env.RABBITMQ_URLS.split(',')],
-    'clients',
+    'CLIENTS',
   );
   await app.listen();
 }

@@ -43,6 +43,9 @@ COPY --chown=node:node --from=build /usr/src/app/prisma ./prisma
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 COPY --chown=node:node --from=build /usr/src/app/widget/dist ./widget/dist
 
-EXPOSE 3000
+EXPOSE 8000
 
-CMD [ "yarn", "run", "start:prod" ]
+ARG SERVICE="kavindra-api"
+ENV SERVICE_NAME ${SERVICE}
+
+CMD yarn run start:prod:${SERVICE_NAME}
