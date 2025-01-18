@@ -6,7 +6,7 @@
   "private": true,
   "license": "LGPL-3.0-or-later",
   "scripts": {
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "widget:build": "npx webpack --config webpack.config.js",
     "widget:build:release": "npx webpack --config webpack.config.js --env.prod",

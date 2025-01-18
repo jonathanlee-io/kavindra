@@ -18,5 +18,67 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@app/auth": [
+        "libs/auth/src"
+      ],
+      "@app/auth/*": [
+        "libs/auth/src/*"
+      ],
+      "@app/config": [
+        "libs/config/src"
+      ],
+      "@app/config/*": [
+        "libs/config/src/*"
+      ],
+      "@app/constants": [
+        "libs/constants/src"
+      ],
+      "@app/constants/*": [
+        "libs/constants/src/*"
+      ],
+      "@app/dto": [
+        "libs/dto/src"
+      ],
+      "@app/dto/*": [
+        "libs/dto/src/*"
+      ],
+      "@app/init": [
+        "libs/init/src"
+      ],
+      "@app/init/*": [
+        "libs/init/src/*"
+      ],
+      "@app/prisma": [
+        "libs/prisma/src"
+      ],
+      "@app/prisma/*": [
+        "libs/prisma/src/*"
+      ],
+      "@app/supabase": [
+        "libs/supabase/src"
+      ],
+      "@app/supabase/*": [
+        "libs/supabase/src/*"
+      ],
+      "@app/util": [
+        "libs/util/src"
+      ],
+      "@app/util/*": [
+        "libs/util/src/*"
+      ],
+      "@app/validation": [
+        "libs/validation/src"
+      ],
+      "@app/validation/*": [
+        "libs/validation/src/*"
+      ],
+      "@app/microservices": [
+        "libs/microservices/src"
+      ],
+      "@app/microservices/*": [
+        "libs/microservices/src/*"
+      ]
+    }
   }
 }
