@@ -1,4 +1,4 @@
-import {NodeEnvironment} from '../config/environment';
+import {NodeEnvironment} from '@app/config';
 
 export const getUrlFromNodeEnv = (
   nodeEnv: NodeEnvironment,

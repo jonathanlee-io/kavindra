@@ -1,6 +1,5 @@
+import {ApiGatewayRequestHeadersDto} from '@app/auth/ApiGatewayRequestHeaders.dto';
 import {createParamDecorator, ExecutionContext} from '@nestjs/common';
-
-import {ApiGatewayRequestHeadersDto} from '../domain/ApiGatewayRequestHeaders.dto';
 
 export const ApiGatewayRequestHeaders = createParamDecorator(
   (_data: unknown, context: ExecutionContext) => {

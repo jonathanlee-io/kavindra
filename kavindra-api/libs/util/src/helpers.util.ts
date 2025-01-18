@@ -1,6 +1,6 @@
 import {execSync} from 'node:child_process';
 
-import {defaultIntegrationTestContainerStopDelay} from '../constants/testing/integration-testing.constants';
+import {defaultIntegrationTestContainerStopDelay} from '@app/constants';
 
 export const delayedAction = async (
   callback: () => Promise<void>,

@@ -1,3 +1,5 @@
+import {ApiGatewayRequestHeaders, ApiGatewayRequestHeadersDto} from '@app/auth';
+import {IdParamDto} from '@app/validation';
 import {
   BadRequestException,
   Body,
@@ -8,9 +10,6 @@ import {
   Put,
 } from '@nestjs/common';
 
-import {ApiGatewayRequestHeaders} from '../../../../lib/auth/api-gateway/decorators/api-gateway-request-headers.decorator';
-import {ApiGatewayRequestHeadersDto} from '../../../../lib/auth/api-gateway/domain/ApiGatewayRequestHeaders.dto';
-import {IdParamDto} from '../../../../lib/validation/id.param.dto';
 import {CreateProjectDto} from '../../dto/CreateProject.dto';
 import {UpdateProjectDto} from '../../dto/UpdateProject.dto';
 import {ProjectsService} from '../../services/projects/projects.service';

@@ -1,9 +1,17 @@
-import {NestFactory} from '@nestjs/core';
+import {createRabbitMqConsumerMicroservice} from '@app/microservices/micro.utils';
+import {configDotenv} from 'dotenv';
 
 import {EmbedScriptsModule} from './embed-scripts.module';
 
+configDotenv();
+
 async function bootstrap() {
-  const app = await NestFactory.create(EmbedScriptsModule);
-  await app.listen(process.env.port ?? 3000);
+  const app = await createRabbitMqConsumerMicroservice(
+    EmbedScriptsModule,
+    [...process.env.RABBITMQ_URLS.split(',')],
+    'EMBED_SCRIPTS',
+  );
+  await app.listen();
 }
-bootstrap();
+
+bootstrap().catch((err) => console.error(err));

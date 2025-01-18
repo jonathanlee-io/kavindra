@@ -1,11 +1,11 @@
+import {EnvironmentVariables, NodeEnvironment} from '@app/config';
+import {initApp} from '@app/init';
+import {runPrismaMigrations} from '@app/util';
 import {Logger} from '@nestjs/common';
 import {ConfigService} from '@nestjs/config';
 import {NestFactory} from '@nestjs/core';
 
 import {AppModule} from './app/app.module';
-import {EnvironmentVariables, NodeEnvironment} from './lib/config/environment';
-import {initApp} from './lib/init/init-app';
-import {runPrismaMigrations} from './lib/util/helpers.util';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

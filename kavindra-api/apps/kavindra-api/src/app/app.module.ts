@@ -1,3 +1,4 @@
+import {RabbitmqModule} from '@app/microservices/rabbitmq/rabbitmq.module';
 import {CacheModule} from '@nestjs/cache-manager';
 import {Module} from '@nestjs/common';
 import {ConfigModule} from '@nestjs/config';
@@ -6,13 +7,6 @@ import {EventEmitterModule} from '@nestjs/event-emitter';
 import {ThrottlerGuard, ThrottlerModule} from '@nestjs/throttler';
 
 import {routes} from './app.routes';
-import {ClientsModule} from './clients/clients.module';
-import {EmbedScriptsModule} from './embed-scripts/embed-scripts.module';
-import {IssuesModule} from './issues/issues.module';
-import {PaymentsModule} from './payments/payments.module';
-import {ProjectsModule} from './projects/projects.module';
-import {UsersModule} from './users/users.module';
-import {AuthModule} from '../lib/auth/auth.module';
 
 @Module({
   imports: [
@@ -30,13 +24,12 @@ import {AuthModule} from '../lib/auth/auth.module';
     CacheModule.register({
       isGlobal: true,
     }),
-    AuthModule,
-    IssuesModule,
-    ClientsModule,
-    UsersModule,
-    ProjectsModule,
-    PaymentsModule,
-    EmbedScriptsModule,
+    RabbitmqModule.register({serviceName: 'CLIENTS'}),
+    RabbitmqModule.register({serviceName: 'EMBED_SCRIPTS'}),
+    RabbitmqModule.register({serviceName: 'ISSUES'}),
+    RabbitmqModule.register({serviceName: 'PAYMENTS'}),
+    RabbitmqModule.register({serviceName: 'PROJECTS'}),
+    RabbitmqModule.register({serviceName: 'USERS'}),
   ],
   providers: [
     {

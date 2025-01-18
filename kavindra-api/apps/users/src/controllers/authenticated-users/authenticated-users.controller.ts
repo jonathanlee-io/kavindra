@@ -1,8 +1,7 @@
+import {ApiGatewayRequestHeaders, ApiGatewayRequestHeadersDto} from '@app/auth';
 import {Controller, HttpCode, HttpStatus, Post} from '@nestjs/common';
 import {ApiTags} from '@nestjs/swagger';
 
-import {ApiGatewayRequestHeaders} from '../../../../lib/auth/api-gateway/decorators/api-gateway-request-headers.decorator';
-import {ApiGatewayRequestHeadersDto} from '../../../../lib/auth/api-gateway/domain/ApiGatewayRequestHeaders.dto';
 import {AuthenticatedUsersService} from '../../services/authenticated-users/authenticated-users.service';
 
 @ApiTags('Users')

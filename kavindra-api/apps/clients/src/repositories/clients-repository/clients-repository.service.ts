@@ -1,13 +1,11 @@
+import {PrismaService} from '@app/prisma';
 import {Injectable, InternalServerErrorException} from '@nestjs/common';
-
-import {PrismaService} from '../../../../lib/prisma/services/prisma.service';
-import {UsersRepositoryService} from '../../../users/repositories/users-repository/users-repository.service';
 
 @Injectable()
 export class ClientsRepositoryService {
   constructor(
     private readonly prismaService: PrismaService,
-    private readonly usersRepository: UsersRepositoryService,
+    // private readonly usersRepository: UsersRepositoryService,
   ) {}
 
   async registerNewClientWithTransaction(
@@ -25,9 +23,10 @@ export class ClientsRepositoryService {
       isFeatureFeedbackEnabled: boolean;
     },
   ) {
-    const user = await this.usersRepository.findBySupabaseId(
-      requestingUserSubjectId,
-    );
+    // const user = await this.usersRepository.findBySupabaseId(
+    //   requestingUserSubjectId,
+    // );
+    const user = {id: '12345'};
     if (!user) {
       throw new InternalServerErrorException(
         `Could not find user with id: ${requestingUserSubjectId}`,

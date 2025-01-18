@@ -1,3 +1,5 @@
+import {ApiGatewayRequestHeaders, ApiGatewayRequestHeadersDto} from '@app/auth';
+import {IdParamDto} from '@app/validation';
 import {
   Body,
   Controller,
@@ -10,9 +12,6 @@ import {
 } from '@nestjs/common';
 import {ApiTags} from '@nestjs/swagger';
 
-import {ApiGatewayRequestHeaders} from '../../../../lib/auth/api-gateway/decorators/api-gateway-request-headers.decorator';
-import {ApiGatewayRequestHeadersDto} from '../../../../lib/auth/api-gateway/domain/ApiGatewayRequestHeaders.dto';
-import {IdParamDto} from '../../../../lib/validation/id.param.dto';
 import {CreateClientDto} from '../../dto/CreateClient.dto';
 import {IsSubdomainAvailableDto} from '../../dto/IsSubdomainAvailable.dto';
 import {ClientsService} from '../../services/clients/clients.service';

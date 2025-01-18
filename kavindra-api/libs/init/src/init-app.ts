@@ -1,13 +1,6 @@
-import {
-  INestApplication,
-  Logger,
-  ValidationPipe,
-  VersioningType,
-} from '@nestjs/common';
+import {INestApplication, ValidationPipe, VersioningType} from '@nestjs/common';
 import {DocumentBuilder, SwaggerModule} from '@nestjs/swagger';
 import helmet from 'helmet';
-
-import {LoggingInterceptor} from '../../app/_shared/interceptors/logging/logging.interceptor';
 
 export const initApp = (app: INestApplication) => {
   app.use(helmet.crossOriginResourcePolicy({policy: 'cross-origin'}));
@@ -19,8 +12,8 @@ export const initApp = (app: INestApplication) => {
     }),
   );
 
-  const loggingInterceptorLogger = new Logger(LoggingInterceptor.name);
-  app.useGlobalInterceptors(new LoggingInterceptor(loggingInterceptorLogger));
+  // const loggingInterceptorLogger = new Logger(LoggingInterceptor.name);
+  // app.useGlobalInterceptors(new LoggingInterceptor(loggingInterceptorLogger));
 
   app.enableVersioning({
     type: VersioningType.URI,

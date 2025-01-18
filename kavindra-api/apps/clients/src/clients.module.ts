@@ -1,3 +1,4 @@
+import {PrismaModule} from '@app/prisma';
 import {Logger, Module} from '@nestjs/common';
 
 import {ClientsController} from './controllers/clients/clients.controller';
@@ -5,7 +6,7 @@ import {ClientsRepositoryService} from './repositories/clients-repository/client
 import {ClientsService} from './services/clients/clients.service';
 
 @Module({
-  imports: [],
+  imports: [PrismaModule],
   controllers: [ClientsController],
   providers: [
     {

@@ -1,3 +1,5 @@
+import {reservedSubdomains} from '@app/constants';
+import {POSTSuccessDto} from '@app/dto';
 import {
   BadRequestException,
   ForbiddenException,
@@ -7,10 +9,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 
-import {reservedSubdomains} from '../../../../lib/constants/subdomains/reserved-subdomains.constants';
-import {POSTSuccessDto} from '../../../../lib/dto/POSTSuccess.dto';
-import {PaymentsService} from '../../../payments/services/payments/payments.service';
-import {UsersRepositoryService} from '../../../users/repositories/users-repository/users-repository.service';
 import {CreateClientDto} from '../../dto/CreateClient.dto';
 import {IsSubdomainAvailableDto} from '../../dto/IsSubdomainAvailable.dto';
 import {ClientsRepositoryService} from '../../repositories/clients-repository/clients-repository.service';
@@ -19,7 +17,7 @@ import {ClientsRepositoryService} from '../../repositories/clients-repository/cl
 export class ClientsService {
   constructor(
     private readonly clientsRepository: ClientsRepositoryService,
-    private readonly usersRepository: UsersRepositoryService,
+    // private readonly usersRepository: UsersRepositoryService,
     private readonly logger: Logger,
   ) {}
 
@@ -47,7 +45,8 @@ export class ClientsService {
         requestingUserSubjectId,
         clientDisplayName,
         subdomain,
-        PaymentsService.paymentPlans[0].id,
+        '12345',
+        // PaymentsService.paymentPlans[0].id,
         {
           isBugReportsEnabled,
           isFeatureRequestsEnabled,
@@ -143,7 +142,8 @@ export class ClientsService {
         `Member with email: ${emailToAdd} already exists`,
       );
     }
-    const userToAdd = await this.usersRepository.findByEmail(emailToAdd);
+    const userToAdd = {email: emailToAdd};
+    // const userToAdd = await this.usersRepository.findByEmail(emailToAdd);
     if (!userToAdd) {
       throw new BadRequestException(
         `Could not find user with email: ${emailToAdd}`,

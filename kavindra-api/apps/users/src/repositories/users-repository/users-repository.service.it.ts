@@ -1,14 +1,14 @@
+import {jestIntegrationTestTimeout} from '@app/constants';
+import {PrismaModule} from '@app/prisma';
+import {
+  initializePostgresTestContainer,
+  tearDownPostgresTestContainer,
+} from '@app/util';
 import {Test, TestingModule} from '@nestjs/testing';
 import {StartedPostgreSqlContainer} from '@testcontainers/postgresql';
 import {Client} from 'pg';
 
 import {UsersRepositoryService} from './users-repository.service';
-import {jestIntegrationTestTimeout} from '../../../../lib/constants/testing/integration-testing.constants';
-import {PrismaModule} from '../../../../lib/prisma/prisma.module';
-import {
-  initializePostgresTestContainer,
-  tearDownPostgresTestContainer,
-} from '../../../../lib/util/tests.helpers.util';
 
 describe('UsersRepositoryService', () => {
   jest.setTimeout(jestIntegrationTestTimeout);

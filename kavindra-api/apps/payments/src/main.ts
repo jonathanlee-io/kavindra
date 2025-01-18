@@ -1,9 +1,17 @@
-import {NestFactory} from '@nestjs/core';
+import {createRabbitMqConsumerMicroservice} from '@app/microservices/micro.utils';
+import {configDotenv} from 'dotenv';
 
 import {PaymentsModule} from './payments.module';
 
+configDotenv();
+
 async function bootstrap() {
-  const app = await NestFactory.create(PaymentsModule);
-  await app.listen(process.env.port ?? 3000);
+  const app = await createRabbitMqConsumerMicroservice(
+    PaymentsModule,
+    [...process.env.RABBITMQ_URLS.split(',')],
+    'PAYMENTS',
+  );
+  await app.listen();
 }
-bootstrap();
+
+bootstrap().catch((err) => console.error(err));

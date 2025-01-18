@@ -1,18 +1,10 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
-import {
-  BadRequestException,
-  ForbiddenException,
-  Injectable,
-} from '@nestjs/common';
+import {EnvironmentVariables, NodeEnvironment} from '@app/config';
+import {ForbiddenException, Injectable} from '@nestjs/common';
 import {ConfigService} from '@nestjs/config';
 
-import {
-  EnvironmentVariables,
-  NodeEnvironment,
-} from '../../../../lib/config/environment';
-import {ClientsService} from '../../../clients/services/clients/clients.service';
 import {CreateProjectDto} from '../../dto/CreateProject.dto';
 import {UpdateProjectDto} from '../../dto/UpdateProject.dto';
 import {ProjectsRepositoryService} from '../../repositories/projects-repository/projects-repository.service';
@@ -21,7 +13,7 @@ import {ProjectsRepositoryService} from '../../repositories/projects-repository/
 export class ProjectsService {
   constructor(
     private readonly projectsRepository: ProjectsRepositoryService,
-    private readonly clientsService: ClientsService,
+    // private readonly clientsService: ClientsService,
     private readonly configService: ConfigService<EnvironmentVariables>,
   ) {}
 
@@ -29,10 +21,11 @@ export class ProjectsService {
     requestingUserSubjectId: string,
     createProjectDto: CreateProjectDto,
   ) {
-    const client = await this.clientsService.getClientById(
-      requestingUserSubjectId,
-      createProjectDto.clientId,
-    );
+    const client = {admins: []};
+    // const client = await this.clientsService.getClientById(
+    //   requestingUserSubjectId,
+    //   createProjectDto.clientId,
+    // );
     if (
       !client.admins
         .map((admin) => admin.supabaseUserId)
@@ -40,15 +33,15 @@ export class ProjectsService {
     ) {
       throw new ForbiddenException();
     }
-    if (
-      !(
-        await this.clientsService.checkIfSubdomainAvailable({
-          subdomain: createProjectDto.subdomain,
-        })
-      ).isSubdomainAvailable
-    ) {
-      return new BadRequestException('Subdomain already exists');
-    }
+    // if (
+    //   !(
+    //     await this.clientsService.checkIfSubdomainAvailable({
+    //       subdomain: createProjectDto.subdomain,
+    //     })
+    //   ).isSubdomainAvailable
+    // ) {
+    //   return new BadRequestException('Subdomain already exists');
+    // }
     return this.projectsRepository.create(
       requestingUserSubjectId,
       createProjectDto,
@@ -63,10 +56,10 @@ export class ProjectsService {
 
   async getProjectById(requestingUserSubjectId: string, projectId: string) {
     const project = await this.projectsRepository.findById(projectId);
-    await this.clientsService.getClientById(
-      requestingUserSubjectId,
-      project.clientId,
-    ); // Will throw not found or forbidden exception
+    // await this.clientsService.getClientById(
+    //   requestingUserSubjectId,
+    //   project.clientId,
+    // ); // Will throw not found or forbidden exception
     return project;
   }
 
@@ -75,11 +68,12 @@ export class ProjectsService {
     projectId: string,
     updateProjectDto: UpdateProjectDto,
   ) {
-    const project = await this.projectsRepository.findById(projectId);
-    const client = await this.clientsService.getClientById(
-      requestingUserSubjectId,
-      project.clientId,
-    ); // Will throw not found or forbidden exception
+    // const project = await this.projectsRepository.findById(projectId);
+    const client = {admins: []};
+    // const client = await this.clientsService.getClientById(
+    //   requestingUserSubjectId,
+    //   project.clientId,
+    // ); // Will throw not found or forbidden exception
     if (
       !client.admins
         .map((admin) => admin.supabaseUserId)
@@ -97,7 +91,7 @@ export class ProjectsService {
     requestingUserSubjectId: string,
     clientId: string,
   ) {
-    await this.clientsService.getClientById(requestingUserSubjectId, clientId); // Will throw not found or forbidden exception
+    // await this.clientsService.getClientById(requestingUserSubjectId, clientId); // Will throw not found or forbidden exception
     return this.projectsRepository.getProjectsForClient(clientId);
   }
 

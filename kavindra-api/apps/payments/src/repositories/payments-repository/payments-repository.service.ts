@@ -1,6 +1,6 @@
+import {PrismaService} from '@app/prisma';
 import {Injectable, Logger} from '@nestjs/common';
 
-import {PrismaService} from '../../../../lib/prisma/services/prisma.service';
 import {PaymentPlanDto} from '../../dto/PaymentPlan.dto';
 
 @Injectable()

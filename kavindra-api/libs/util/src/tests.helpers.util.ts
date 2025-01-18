@@ -6,7 +6,7 @@ import {
 import {Client} from 'pg';
 
 import {delayedAction, runPrismaMigrations} from './helpers.util';
-import {CreateClientDto} from '../../app/clients/dto/CreateClient.dto';
+import {CreateClientDto} from '../../../apps/clients/src/dto/CreateClient.dto';
 
 export const initializePostgresTestContainer = async () => {
   const initializedPostgresContainer = await new PostgreSqlContainer().start();

@@ -1,8 +1,8 @@
+import {oneDayInMilliseconds} from '@app/constants';
 import {CacheInterceptor} from '@nestjs/cache-manager';
 import {Controller, Get, UseInterceptors} from '@nestjs/common';
 import {CacheTTL} from '@nestjs/common/cache';
 
-import {oneDayInMilliseconds} from '../../../../lib/constants/time/time.constants';
 import {PaymentsService} from '../../services/payments/payments.service';
 
 @Controller()

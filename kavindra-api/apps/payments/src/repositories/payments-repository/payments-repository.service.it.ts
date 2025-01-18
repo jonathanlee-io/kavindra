@@ -1,3 +1,9 @@
+import {jestIntegrationTestTimeout} from '@app/constants';
+import {PrismaModule} from '@app/prisma';
+import {
+  initializePostgresTestContainer,
+  tearDownPostgresTestContainer,
+} from '@app/util';
 import {CacheModule} from '@nestjs/cache-manager';
 import {Logger} from '@nestjs/common';
 import {Test, TestingModule} from '@nestjs/testing';
@@ -5,12 +11,6 @@ import {StartedPostgreSqlContainer} from '@testcontainers/postgresql';
 import {Client} from 'pg';
 
 import {PaymentsRepositoryService} from './payments-repository.service';
-import {jestIntegrationTestTimeout} from '../../../../lib/constants/testing/integration-testing.constants';
-import {PrismaModule} from '../../../../lib/prisma/prisma.module';
-import {
-  initializePostgresTestContainer,
-  tearDownPostgresTestContainer,
-} from '../../../../lib/util/tests.helpers.util';
 import {PaymentsModule} from '../../payments.module';
 
 describe('PaymentsRepositoryService', () => {

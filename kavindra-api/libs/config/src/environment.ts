@@ -14,4 +14,5 @@ export type EnvironmentVariables = {
   SUPABASE_JWT_SECRET: string;
   SUPABASE_SECRET_KEY: string;
   RESEND_API_KEY: string;
+  RABBITMQ_URLS: string;
 };

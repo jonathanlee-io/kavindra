@@ -1,3 +1,4 @@
+import {PrismaModule} from '@app/prisma';
 import {Logger, Module} from '@nestjs/common';
 
 import {AuthenticatedUsersController} from './controllers/authenticated-users/authenticated-users.controller';
@@ -5,7 +6,7 @@ import {UsersRepositoryService} from './repositories/users-repository/users-repo
 import {AuthenticatedUsersService} from './services/authenticated-users/authenticated-users.service';
 
 @Module({
-  imports: [],
+  imports: [PrismaModule],
   controllers: [AuthenticatedUsersController],
   providers: [
     {

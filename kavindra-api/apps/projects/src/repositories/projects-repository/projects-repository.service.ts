@@ -1,7 +1,6 @@
+import {PrismaService} from '@app/prisma';
 import {Injectable, InternalServerErrorException} from '@nestjs/common';
 
-import {PrismaService} from '../../../../lib/prisma/services/prisma.service';
-import {UsersRepositoryService} from '../../../users/repositories/users-repository/users-repository.service';
 import {CreateProjectDto} from '../../dto/CreateProject.dto';
 import {UpdateProjectDto} from '../../dto/UpdateProject.dto';
 
@@ -9,7 +8,7 @@ import {UpdateProjectDto} from '../../dto/UpdateProject.dto';
 export class ProjectsRepositoryService {
   constructor(
     private readonly prismaService: PrismaService,
-    private readonly usersRepository: UsersRepositoryService,
+    // private readonly usersRepository: UsersRepositoryService,
   ) {}
 
   async create(
@@ -23,9 +22,10 @@ export class ProjectsRepositoryService {
       isFeatureFeedbackEnabled,
     }: CreateProjectDto,
   ) {
-    const user = await this.usersRepository.findBySupabaseId(
-      requestingUserSubjectId,
-    );
+    const user = {email: '<EMAIL>', id: '12345'};
+    // const user = await this.usersRepository.findBySupabaseId(
+    //   requestingUserSubjectId,
+    // );
     if (!user) {
       throw new InternalServerErrorException(
         `Could not find user with id: ${requestingUserSubjectId}`,
