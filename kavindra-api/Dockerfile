@@ -18,6 +18,9 @@ WORKDIR /usr/src/app
 COPY --chown=node:node package.json ./
 COPY --chown=node:node yarn.lock ./
 COPY --chown=node:node prisma/ ./prisma
+COPY --chown=node:node apps/ ./apps
+COPY --chown=node:node libs/ ./libs
+COPY --chown=node:node widget/ ./widget
 
 COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
 
