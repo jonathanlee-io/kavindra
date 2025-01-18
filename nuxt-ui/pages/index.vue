@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import Feature from "~/components/landing-page/Feature.vue";
   import GitHubStarPrompt from "~/components/landing-page/GitHubStarPrompt.vue";
-  import PricingTier from "~/components/landing-page/pricing-tier/PricingTier.vue";
+  import PricingTier from "~/components/landing-page/PricingTier.vue";
 
   const runtimeConfig = useRuntimeConfig();
 
@@ -64,7 +64,7 @@
 <template>
   <div
     class="min-h-screen bg-gradient-to-b from-indigo-50 via-blue-100 to-blue-50 dark:bg-gradient-to-b dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 px-4 py-12 sm:px-6 sm:py-16 lg:px-8"
-    style="font-family: &quot;Inter&quot;, &quot;Roboto&quot;, sans-serif"
+    style="font-family: 'Roboto', sans-serif"
   >
     <!-- Hero Section -->
     <section class="mb-12 text-center sm:mb-16">
@@ -89,13 +89,9 @@
             Welcome to <span class="text-indigo-600 dark:text-indigo-400">Kavindra</span>
           </h1>
           <p
-            class="mx-auto max-w-2xl text-lg lg:leading-relaxed text-gray-600 dark:text-gray-400 sm:text-xl"
-          >
-            <span class="font-semibold text-gray-900 dark:text-white">Kavindra</span> is your simple and
-            open-source feedback platform, helping users grow while keeping costs low with
-            <span class="underline decoration-indigo-600 decoration-2 dark:decoration-indigo-400"
-            >direct user feedback</span
-            >.
+            class="mx-auto max-w-2xl text-lg sm:text-xl lg:text-2xl lg:leading-relaxed text-gray-700 dark:text-gray-300"
+            style="line-height: 1.75; letter-spacing: 0.02em; padding: 1rem;color: #4a5568;">
+            <span class="font-semibold text-gray-900 dark:text-white">Kavindra</span> is a simple and open-source feedback platform, helping users grow while keeping costs low with <span class="underline decoration-indigo-600 decoration-2 dark:decoration-indigo-400">direct user feedback</span>.
           </p>
         </p>
       </div>
