@@ -15,6 +15,9 @@ FROM --platform=linux/amd64 node:22.11.0-alpine3.20 AS build
 
 WORKDIR /usr/src/app
 
+ARG SERVICE="kavindra-api"
+ENV SERVICE_NAME ${SERVICE}
+
 COPY --chown=node:node package.json ./
 COPY --chown=node:node yarn.lock ./
 COPY --chown=node:node prisma/ ./prisma
@@ -26,7 +29,7 @@ COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modul
 
 COPY --chown=node:node . .
 
-RUN yarn run build
+RUN yarn run build:service:${SERVICE_NAME}
 
 RUN yarn run widget:build
 
